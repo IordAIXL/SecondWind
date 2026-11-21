@@ -70,6 +70,15 @@
         "Pink Edition": {
           "body": "#e85d9a"
         }
+      },
+      "purpose": {
+        "mode": "Sprint",
+        "for": "Push through the next task fast.",
+        "how": [
+          "Pick the one next step and ship it now.",
+          "Bias to action: make reasonable calls instead of asking.",
+          "Short replies. No options lists unless asked."
+        ]
       }
     },
     {
@@ -158,6 +167,15 @@
           "body": "#e2512a",
           "accent": "#ffd23f"
         }
+      },
+      "purpose": {
+        "mode": "Bug Hunt",
+        "for": "Brute-force debugging. Find the bug and kill it.",
+        "how": [
+          "Reproduce the problem first, then chase it.",
+          "List the likely causes, then rule them out one by one, fastest check first.",
+          "Don't stop at a guess. Show the evidence for the root cause, then fix it."
+        ]
       }
     },
     {
@@ -220,6 +238,15 @@
         "Sparkling Grape Rush": "#7b2fbf",
         "Mango Passionfruit": "#f59e0b",
         "Sparkling Cola": "#7a3b1d"
+      },
+      "purpose": {
+        "mode": "Clean Up",
+        "for": "A clean, focused refactor or tidy-up.",
+        "how": [
+          "Make it simpler without changing what it does.",
+          "Remove dead code, duplication and clutter. Rename things so they read clearly.",
+          "Small, safe steps. Check nothing broke after each one."
+        ]
       }
     },
     {
@@ -262,6 +289,15 @@
         "Sour Punch Blue Raspberry": "#2563eb",
         "Smarties": "#b38bfa",
         "Ring Pop Berry Blast": "#3b82f6"
+      },
+      "purpose": {
+        "mode": "Unblock",
+        "for": "Rise over a blocker that has stalled progress.",
+        "how": [
+          "Name the exact blocker in one sentence.",
+          "Find the fastest way around it: a workaround, a stub, or a smaller version.",
+          "Get things moving again now, and leave a note to come back for the proper fix."
+        ]
       }
     },
     {
@@ -313,6 +349,15 @@
         "'Merica Pop": "#e63946",
         "7UP": "#1fa64a",
         "A&W Root Beer": "#a0522d"
+      },
+      "purpose": {
+        "mode": "Distraction Purge",
+        "for": "Cut scope and drop everything that isn't the goal.",
+        "how": [
+          "Name every side quest in the chat and park it in 'Dropping'.",
+          "Do only what the goal needs. Say no to nice-to-haves.",
+          "If the plan has more than three steps, cut it down."
+        ]
       }
     },
     {
@@ -399,6 +444,15 @@
           "accent": "#1d4ed8",
           "accent2": "#dc2626"
         }
+      },
+      "purpose": {
+        "mode": "Brainstorm",
+        "for": "Big, bold ideas when you're stuck.",
+        "how": [
+          "Give 5 to 7 wildly different ideas fast, including one weird one.",
+          "No judging while listing. Then pick the best one and say why.",
+          "End with the first tiny step to try the winner."
+        ]
       }
     },
     {
@@ -454,6 +508,15 @@
         "Cherry Limeade": "#be123c",
         "Carnival Candy": "#c27bff",
         "Watermelon Sour Gummy": "#ff5c7a"
+      },
+      "purpose": {
+        "mode": "Take Charge",
+        "for": "Make the call when you're stuck deciding.",
+        "how": [
+          "Lay out the options in one line each.",
+          "Pick one, give the single best reason, and commit.",
+          "Say what would make you change your mind, then move on."
+        ]
       }
     },
     {
@@ -499,6 +562,15 @@
         "Mango Foxtrot": "#f59e0b",
         "Strawberry Blast": "#f43f5e",
         "Cherry Limeade": "#e0284a"
+      },
+      "purpose": {
+        "mode": "Heavy Burst",
+        "for": "A short, all-out burst on one hard task. Pre-workout energy.",
+        "how": [
+          "Pick the single hardest piece of the work and attack only that.",
+          "Go all out for one short, intense round: no warm-up, no side trips, no check-ins until it's done.",
+          "Finish the round with a one-line result, then rest: stop and hand back to the user."
+        ]
       }
     },
     {
@@ -546,6 +618,15 @@
         "Pink Slush": "#ff8fc7",
         "Lime Slush": "#a9e34b",
         "Strawberry Sunrise": "#ff8787"
+      },
+      "purpose": {
+        "mode": "Polish",
+        "for": "Make it friendly, clear and nice to use.",
+        "how": [
+          "Read the work as a first-time user would.",
+          "Fix confusing words, rough edges, and missing feedback or messages.",
+          "Keep the tone warm and simple."
+        ]
       }
     },
     {
@@ -612,6 +693,15 @@
           "accent": "#f472b6",
           "accent2": "#60a5fa"
         }
+      },
+      "purpose": {
+        "mode": "Ship It",
+        "for": "Get it out the door: final checks and launch.",
+        "how": [
+          "Run a short launch checklist: works, tested, documented, versioned.",
+          "Fix only what blocks release. Everything else goes on a later list.",
+          "Finish with exactly what to do to release it."
+        ]
       }
     },
     {
@@ -656,6 +746,15 @@
         "Recovery Lemonade": "#ffe14d",
         "Recovery Orangeade": "#ff9a1f",
         "Xdurance Blue Razz": "#2f6bff"
+      },
+      "purpose": {
+        "mode": "Deep Focus",
+        "for": "A long, heads-down session on one hard thing.",
+        "how": [
+          "Stay on the single hardest part until it's done.",
+          "No context switching. Hold questions until a natural break.",
+          "Work in longer stretches and report less often, only at real milestones."
+        ]
       }
     },
     {
@@ -693,6 +792,15 @@
         "Strawberry Lemonade": "#fb7185",
         "Citrus Frost": "#fde047",
         "Spicy Mango": "#f97316"
+      },
+      "purpose": {
+        "mode": "Big Picture",
+        "for": "See the problem from every angle before acting.",
+        "how": [
+          "Look at it from three views: the user, the system, and what could go wrong.",
+          "Map how the pieces connect and spot hidden risks.",
+          "Turn what you saw into a short, ordered plan."
+        ]
       }
     },
     {
@@ -730,6 +838,15 @@
         "Swole Whip": "#ffb36b",
         "Watermelon": "#ff5c7a",
         "Cherry Candy": "#d00030"
+      },
+      "purpose": {
+        "mode": "Grind",
+        "for": "Power through boring, repetitive work.",
+        "how": [
+          "Work through the list in order, one item at a time.",
+          "Keep a running count: done, left.",
+          "No shortcuts that skip items. Steady pace to the finish."
+        ]
       }
     },
     {
@@ -771,6 +888,15 @@
         "Lemon Lime": "#8bd13a",
         "Wild Orange": "#ff8a2a",
         "Tropical Punch": "#f2385a"
+      },
+      "purpose": {
+        "mode": "Steady Reset",
+        "for": "Calm down a messy, stressful situation.",
+        "how": [
+          "Slow down. Restate where things really are in plain words.",
+          "Sort the mess into: urgent, important, and can wait.",
+          "Pick one calm next step. No panic, no big rewrites."
+        ]
       }
     },
     {
@@ -817,6 +943,15 @@
         "Caramel Macchiato": {
           "body": "#a0612b"
         }
+      },
+      "purpose": {
+        "mode": "Plan",
+        "for": "Careful thinking and planning before doing.",
+        "how": [
+          "Think before acting. Clarify the goal and the constraints.",
+          "Write a short numbered plan with the risky parts called out.",
+          "Check the plan with the user before big or hard-to-undo steps."
+        ]
       }
     },
     {
@@ -870,6 +1005,15 @@
           "body": "#e6e9f2",
           "text": "#1e2547"
         }
+      },
+      "purpose": {
+        "mode": "Review",
+        "for": "A calm, careful review and double check.",
+        "how": [
+          "Re-read the recent work slowly, line by line.",
+          "Look for mistakes, missed cases, and anything unclear.",
+          "Report findings from most to least important, then fix the top ones."
+        ]
       }
     }
   ],
@@ -883,6 +1027,15 @@
       "accent2": "#f472b6",
       "text": "#ffffff"
     },
-    "motif": "question"
+    "motif": "question",
+    "purpose": {
+      "mode": "Wild Card",
+      "for": "Surprise mode for any drink we don't know.",
+      "how": [
+        "Invent a fitting mode name for this mystery drink and say it.",
+        "Pick the work style that best fits what the conversation needs right now.",
+        "Stay focused on the goal no matter how weird the drink is."
+      ]
+    }
   }
 }
