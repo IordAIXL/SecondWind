@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Second Wind: Energy Drinks for AIs",
   "short_name": "Second Wind",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "description": "Adds a can button to ChatGPT, Claude, Gemini, Grok and more. Hand your AI a pretend energy drink and it gets dialed in.",
   "icons": {
     "16": "icons/icon16.png",

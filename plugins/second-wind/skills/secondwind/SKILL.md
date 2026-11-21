@@ -1,10 +1,11 @@
 ---
-description: Give Claude an energy drink. It cracks one open, then gets dialed in on your task. Try /secondwind, /secondwind monster mango loco, or /secondwind menu.
+name: secondwind
+description: Give Claude a pretend energy drink. It cracks one open, counts it, then gets dialed in on your task. Use when the user types /secondwind, says "second wind", or hands Claude an energy drink. Try /secondwind, /secondwind monster mango loco, or /secondwind menu.
 argument-hint: "[brand] [flavor] | menu | stats"
-allowed-tools: Read(~/.second-wind/**), Write(~/.second-wind/**), Edit(~/.second-wind/**), Bash(mkdir -p ~/.second-wind)
+allowed-tools: Read, Write, Edit
 ---
 
-# Second Wind ⚡ v1.7.0
+# Second Wind ⚡ v1.8.0
 
 The user just handed you an energy drink. Arguments: `$ARGUMENTS`
 
@@ -18,10 +19,11 @@ The user just handed you an energy drink. Arguments: `$ARGUMENTS`
 ## Step 1: the lifetime counter
 
 The counter lives at `~/.second-wind/stats.json` (in the user's home folder).
-Use the Read tool on it. If it does not exist, start from:
+Use only the Read and Write tools for this file. Don't use Bash (it triggers permission prompts).
+Read it. If it does not exist, start from:
 `{"total": 0, "by_brand": {}, "first_drink": null, "last_drink": null}`
 For a drink: add 1 to `total`, add 1 to `by_brand[<brand name>]`, set `last_drink` to today's date (and `first_drink` if it was null).
-Create the folder if needed (`mkdir -p ~/.second-wind`) and save the file with the Write tool. If saving fails, keep going and just say the counter couldn't be saved.
+Save it with the Write tool (Write creates the folder by itself). Use the full home path, for example `C:\Users\<name>\.second-wind\stats.json` on Windows. If saving fails, keep going and just say the counter couldn't be saved.
 
 ## How a drink works
 

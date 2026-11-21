@@ -5,7 +5,7 @@ Reads data/brands.json and regenerates:
   - docs/cans/<id>.svg            one can per brand (its first flavor)
   - docs/cans/<id>/<flavor>.svg   one can per flavor, in that flavor's colors
   - docs/index.html               the download page
-  - plugins/second-wind/commands/secondwind.md   the Claude Code slash command
+  - plugins/second-wind/skills/secondwind/SKILL.md   the Claude Code /secondwind skill
   - prompts/*.md                  copy-paste versions for other AIs
 
 Run:  python3 tools/build.py
@@ -78,10 +78,14 @@ def menu_reply_instructions():
 # ---------------------------------------------------------------- slash command
 
 def build_command():
+    # A skill, not a legacy command: typing /secondwind runs it through the Skill tool.
+    # Keep allowed-tools to plain tool names. A Bash(...) pattern here made the
+    # skill load empty when invoked as /secondwind (v1.0.0 to v1.7.0 bug).
     body = f"""---
-description: Give Claude an energy drink. It cracks one open, then gets dialed in on your task. Try /secondwind, /secondwind monster mango loco, or /secondwind menu.
+name: secondwind
+description: Give Claude a pretend energy drink. It cracks one open, counts it, then gets dialed in on your task. Use when the user types /secondwind, says "second wind", or hands Claude an energy drink. Try /secondwind, /secondwind monster mango loco, or /secondwind menu.
 argument-hint: "[brand] [flavor] | menu | stats"
-allowed-tools: Read(~/.second-wind/**), Write(~/.second-wind/**), Edit(~/.second-wind/**), Bash(mkdir -p ~/.second-wind)
+allowed-tools: Read, Write, Edit
 ---
 
 # Second Wind ⚡ v{VERSION}
@@ -98,10 +102,11 @@ The user just handed you an energy drink. Arguments: `$ARGUMENTS`
 ## Step 1: the lifetime counter
 
 The counter lives at `~/.second-wind/stats.json` (in the user's home folder).
-Use the Read tool on it. If it does not exist, start from:
+Use only the Read and Write tools for this file. Don't use Bash (it triggers permission prompts).
+Read it. If it does not exist, start from:
 `{{"total": 0, "by_brand": {{}}, "first_drink": null, "last_drink": null}}`
 For a drink: add 1 to `total`, add 1 to `by_brand[<brand name>]`, set `last_drink` to today's date (and `first_drink` if it was null).
-Create the folder if needed (`mkdir -p ~/.second-wind`) and save the file with the Write tool. If saving fails, keep going and just say the counter couldn't be saved.
+Save it with the Write tool (Write creates the folder by itself). Use the full home path, for example `C:\\Users\\<name>\\.second-wind\\stats.json` on Windows. If saving fails, keep going and just say the counter couldn't be saved.
 
 {CORE_RULES}
 ## The menu
@@ -112,7 +117,7 @@ Create the folder if needed (`mkdir -p ~/.second-wind`) and save the file with t
 
 Any other brand is a **Mystery Can**: opening line "*crack* ... no label, no regrets."
 """
-    path = os.path.join(ROOT, "plugins", "second-wind", "commands", "secondwind.md")
+    path = os.path.join(ROOT, "plugins", "second-wind", "skills", "secondwind", "SKILL.md")
     os.makedirs(os.path.dirname(path), exist_ok=True)
     open(path, "w", encoding="utf-8").write(body)
 
@@ -239,7 +244,9 @@ def install_section():
             "Open Claude Code in any project.",
             f"Add the Second Wind shop: {cmd_btn('/plugin marketplace add ' + REPO)}",
             f"Install the plugin: {cmd_btn('/plugin install second-wind@energizer')}",
-            f"Hand it a drink: {cmd_btn('/secondwind')}",
+            f"Load it: {cmd_btn('/reload-plugins')} (or close and reopen Claude Code)",
+            f"Hand it a drink: {cmd_btn('/secondwind')} If that name is taken, use {cmd_btn('/second-wind:secondwind')}",
+            f"Installed before v1.8.0? Update first: {cmd_btn('/plugin marketplace update energizer')} then {cmd_btn('/plugin update second-wind@energizer')}",
         ], None),
         ("browser", "Browser button", "⚡", "A can button right next to the chat box on ChatGPT, Claude, Gemini, Grok, Copilot and more. One click hands your AI a drink. No prompt setup needed.", [
             '<a class="btn big" href="downloads/second-wind-extension.zip" download>⬇ Download the extension</a>',
