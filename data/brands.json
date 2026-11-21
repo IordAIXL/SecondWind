@@ -1,0 +1,138 @@
+{
+  "default": "redbull",
+  "brands": [
+    {
+      "id": "redbull", "name": "Red Bull", "aliases": ["red bull", "redbull", "rb"],
+      "colors": {"body": "#1f3a8a", "band": "#c0c7d6", "accent": "#e11d2e", "accent2": "#facc15", "text": "#ffffff"},
+      "motif": "sun",
+      "flavors": ["Original", "Sugarfree", "Tropical", "Watermelon", "Blueberry", "Coconut Berry"],
+      "vibe": "Classic wings energy. Crisp, a little sweet, very focused.",
+      "sip": "*crack* ... a sharp fizz. Wings: deployed."
+    },
+    {
+      "id": "monster", "name": "Monster", "aliases": ["monster"],
+      "colors": {"body": "#0b0b0b", "band": "#1a1a1a", "accent": "#7cff3a", "accent2": "#2f6b12", "text": "#e9ffe0"},
+      "motif": "scratch",
+      "flavors": ["Original", "Zero Ultra", "Mango Loco", "Pipeline Punch", "Ultra Paradise", "Juice Punch"],
+      "vibe": "Big can, big energy. Unleashed, slightly feral.",
+      "sip": "*KSSHH* ... that's a lot of can. Unleashing focus."
+    },
+    {
+      "id": "celsius", "name": "Celsius", "aliases": ["celsius"],
+      "colors": {"body": "#f8fafc", "band": "#e2e8f0", "accent": "#ec4899", "accent2": "#0ea5e9", "text": "#0f172a"},
+      "motif": "thermo",
+      "flavors": ["Sparkling Orange", "Kiwi Guava", "Peach Vibe", "Arctic Vibe", "Sparkling Watermelon", "Fantasy Vibe"],
+      "vibe": "Clean gym-bag energy. Light, bright, metabolically smug.",
+      "sip": "*tss* ... light and bright. Thermostat: raised."
+    },
+    {
+      "id": "ryse", "name": "Ryse", "aliases": ["ryse", "rise"],
+      "colors": {"body": "#111827", "band": "#374151", "accent": "#f97316", "accent2": "#fde047", "text": "#ffffff"},
+      "motif": "chevrons",
+      "flavors": ["Blue Razz", "Pink Burst", "Tropical Burst", "Candy Fizz", "Tropical Punch", "Baja Burst"],
+      "vibe": "Pre-workout attitude in a can. Up and to the right.",
+      "sip": "*crack* ... trending upward. Rysing to the occasion."
+    },
+    {
+      "id": "ghost", "name": "Ghost", "aliases": ["ghost"],
+      "colors": {"body": "#f5f5f4", "band": "#1c1917", "accent": "#1c1917", "accent2": "#a3e635", "text": "#1c1917"},
+      "motif": "ghost",
+      "flavors": ["Sour Blue Raspberry", "Citrus", "Orange Cream", "Cherry Limeade", "Tropical Mango", "Red Gummy Fish"],
+      "vibe": "Playful and loud. Boo, but productive.",
+      "sip": "*pssht* ... spooky smooth. Ghosting distractions."
+    },
+    {
+      "id": "bang", "name": "Bang", "aliases": ["bang"],
+      "colors": {"body": "#1e1b4b", "band": "#312e81", "accent": "#d946ef", "accent2": "#22d3ee", "text": "#ffffff"},
+      "motif": "burst",
+      "flavors": ["Black Cherry Vanilla", "Rainbow Unicorn", "Star Blast", "Blue Razz", "Peach Mango", "Cotton Candy"],
+      "vibe": "Neon explosion. Everything is a big deal now.",
+      "sip": "*BANG* ... okay that was loud. Fully awake."
+    },
+    {
+      "id": "reign", "name": "Reign", "aliases": ["reign"],
+      "colors": {"body": "#18181b", "band": "#27272a", "accent": "#eab308", "accent2": "#a855f7", "text": "#fef9c3"},
+      "motif": "crown",
+      "flavors": ["Razzle Berry", "Melon Mania", "Orange Dreamsicle", "Lilikoi Lychee", "Carnival Candy", "White Gummy Bear"],
+      "vibe": "Royal decree: we are finishing this task.",
+      "sip": "*crack* ... regal fizz. The throne room is now a focus room."
+    },
+    {
+      "id": "c4", "name": "C4", "aliases": ["c4", "c-4", "c 4"],
+      "colors": {"body": "#0c0a09", "band": "#292524", "accent": "#ef4444", "accent2": "#f5f5f4", "text": "#ffffff"},
+      "motif": "hazard",
+      "flavors": ["Frozen Bombsicle", "Midnight Cherry", "Rainbow Candy", "Strawberry Chew", "Cotton Candy", "Twisted Limeade"],
+      "vibe": "Explosive pre-workout energy. Handle with care.",
+      "sip": "*crack* ... fuse lit. Detonating the to-do list."
+    },
+    {
+      "id": "alani", "name": "Alani Nu", "aliases": ["alani", "alani nu", "alaninu"],
+      "colors": {"body": "#fbcfe8", "band": "#f9a8d4", "accent": "#a855f7", "accent2": "#fde68a", "text": "#581c87"},
+      "motif": "hearts",
+      "flavors": ["Cosmic Stardust", "Hawaiian Shaved Ice", "Mimosa", "Witch's Brew", "Cherry Slush", "Breezeberry"],
+      "vibe": "Pastel and cheerful. Productivity, but cute.",
+      "sip": "*tss* ... sparkly and sweet. Vibes: aligned."
+    },
+    {
+      "id": "prime", "name": "Prime", "aliases": ["prime"],
+      "colors": {"body": "#0f172a", "band": "#1e293b", "accent": "#38bdf8", "accent2": "#f472b6", "text": "#ffffff"},
+      "motif": "diamond",
+      "flavors": ["Tropical Punch", "Blue Raspberry", "Ice Pop", "Strawberry Watermelon", "Lemon Lime", "Orange Mango"],
+      "vibe": "Hype energy. Very confident, possibly filming.",
+      "sip": "*crack* ... crisp and hyped. Prime time."
+    },
+    {
+      "id": "rockstar", "name": "Rockstar", "aliases": ["rockstar", "rock star"],
+      "colors": {"body": "#0a0a0a", "band": "#171717", "accent": "#facc15", "accent2": "#dc2626", "text": "#fefce8"},
+      "motif": "stars",
+      "flavors": ["Original", "Punched", "Pure Zero Silver Ice", "Xdurance Blue Razz", "Recovery Lemonade", "Juiced Mango"],
+      "vibe": "Backstage pass energy. Loud guitars, clean commits.",
+      "sip": "*crack* ... power chord. Ready to shred this task."
+    },
+    {
+      "id": "3d", "name": "3D", "aliases": ["3d", "3-d", "3 d"],
+      "colors": {"body": "#171717", "band": "#404040", "accent": "#06b6d4", "accent2": "#f43f5e", "text": "#ffffff"},
+      "motif": "cube",
+      "flavors": ["Blue Raspberry", "Liquid Ice", "Chrome", "Red Razz", "Purple", "Pina Colada"],
+      "vibe": "Sleek and geometric. Seeing the problem from every angle.",
+      "sip": "*tss* ... depth perception: improved. Seeing all three dimensions."
+    },
+    {
+      "id": "buckedup", "name": "Bucked Up", "aliases": ["bucked up", "buckedup", "bucked"],
+      "colors": {"body": "#14532d", "band": "#166534", "accent": "#f59e0b", "accent2": "#fef3c7", "text": "#fffbeb"},
+      "motif": "antlers",
+      "flavors": ["Blood Raz", "Rocket Pop", "Miami Vice", "Grape Gainz", "Swole Whip", "Watermelon"],
+      "vibe": "Outdoorsy, antlered, ready to charge.",
+      "sip": "*crack* ... antlers up. Charging at the next step."
+    },
+    {
+      "id": "zoa", "name": "Zoa", "aliases": ["zoa"],
+      "colors": {"body": "#ecfeff", "band": "#a5f3fc", "accent": "#0d9488", "accent2": "#fb923c", "text": "#134e4a"},
+      "motif": "waves",
+      "flavors": ["Pineapple Coconut", "Wild Orange", "Super Berry", "Tropical Punch", "Lemon Lime", "White Peach"],
+      "vibe": "Beachy, healthy-ish, calm but awake.",
+      "sip": "*tss* ... tropical calm with a kick. Riding the wave."
+    },
+    {
+      "id": "coffee", "name": "Coffee", "aliases": ["coffee", "cold brew", "espresso", "latte", "joe"],
+      "colors": {"body": "#3f2a1d", "band": "#5b3a26", "accent": "#f5e6d3", "accent2": "#c08457", "text": "#fff7ed"},
+      "motif": "beans",
+      "flavors": ["Black", "Cold Brew", "Espresso Shot", "Vanilla Latte", "Mocha", "Caramel Macchiato"],
+      "vibe": "The original productivity potion. Warm and serious.",
+      "sip": "*sip* ... ahh. Brain fog: lifting."
+    },
+    {
+      "id": "tea", "name": "Tea", "aliases": ["tea", "green tea", "matcha", "chai", "yerba mate", "mate"],
+      "colors": {"body": "#dcfce7", "band": "#86efac", "accent": "#15803d", "accent2": "#a16207", "text": "#14532d"},
+      "motif": "leaves",
+      "flavors": ["Green Tea", "Matcha", "Black Tea", "Chai", "Yerba Mate", "Earl Grey"],
+      "vibe": "Calm focus. Steady, zen, gets it done.",
+      "sip": "*sip* ... steady warmth. Calm and locked in."
+    }
+  ],
+  "mystery": {
+    "id": "mystery", "name": "Mystery Can",
+    "colors": {"body": "#4c1d95", "band": "#6d28d9", "accent": "#fbbf24", "accent2": "#f472b6", "text": "#ffffff"},
+    "motif": "question"
+  }
+}

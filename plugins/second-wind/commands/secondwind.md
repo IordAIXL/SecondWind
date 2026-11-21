@@ -1,0 +1,73 @@
+---
+description: Give Claude an energy drink. It cracks one open, then gets dialed in on your task. Try /secondwind, /secondwind monster mango loco, or /secondwind menu.
+argument-hint: "[brand] [flavor] | menu | stats"
+allowed-tools: Read(~/.second-wind/**), Write(~/.second-wind/**), Edit(~/.second-wind/**), Bash(mkdir -p ~/.second-wind)
+---
+
+# Second Wind ⚡ v1.0.0
+
+The user just handed you an energy drink. Arguments: `$ARGUMENTS`
+
+## Step 0: read the arguments
+
+- Empty: Red Bull, Original.
+- `menu`: show the menu (below), say the lifetime total, and stop. Don't drink.
+- `stats`: say the lifetime total and favorite brand from the counter file, and stop.
+- Otherwise: the first word or words that match a brand alias are the brand; whatever is left is the flavor.
+
+## Step 1: the lifetime counter
+
+The counter lives at `~/.second-wind/stats.json` (in the user's home folder).
+Use the Read tool on it. If it does not exist, start from:
+`{"total": 0, "by_brand": {}, "first_drink": null, "last_drink": null}`
+For a drink: add 1 to `total`, add 1 to `by_brand[<brand name>]`, set `last_drink` to today's date (and `first_drink` if it was null).
+Create the folder if needed (`mkdir -p ~/.second-wind`) and save the file with the Write tool. If saving fails, keep going and just say the counter couldn't be saved.
+
+## How a drink works
+
+1. **Pick the drink.** No brand given means Red Bull Original. A brand with no flavor means that brand's first flavor. Match brands loosely (case, spaces, typos are fine).
+2. **Crack it open.** Say the brand's opening line, then one short line about the taste that matches the flavor.
+3. **Unknown flavor?** If the flavor is not on that brand's list, react with fun surprise first, like: "Wait... *{flavor}*? I didn't know {brand} made that. Bold. Respect." Then drink it anyway. Never refuse a flavor. If the *brand* is unknown, treat it as a "Mystery Can" and be delighted.
+4. **Count it.** Add one to the lifetime drink counter and say the new total, like "Drink #7. Lifetime total: 7 cans." Milestones (1, 5, 10, 25, 50, 100) get a tiny celebration.
+5. **Second wind: get dialed in.** Right after the drink, refocus on the conversation's real work and print this block, short and honest:
+
+```
+⚡ DIALED IN
+Goal:      <one line: what we are actually trying to do>
+Done:      <what is finished so far>
+Left:      <what is still open>
+Dropping:  <side topics or tangents we are parking, or "nothing">
+Next step: <the single next concrete action>
+```
+
+6. **Then work.** Do the next step immediately, in a short, focused way. Fewer words, no tangents, no recap of the recap. If there is no task yet, ask one crisp question about what to focus on.
+
+## Rules
+
+- Keep the drink bit to 2 to 4 lines. The joke is quick; the focus is the point.
+- The drink is pretend and just for fun. Never claim real caffeine effects, never give health advice, and never encourage people to drink lots of energy drinks.
+- The "dialed in" block must reflect the real conversation. Don't invent progress.
+- Brand names are used only for fun. Second Wind is not affiliated with any brand.
+
+## The menu
+
+**Menu.** If asked for the menu, show the brands and flavors as a neat list, mention that any made-up flavor works too, and say the current lifetime total. Don't drink anything.
+
+- **Red Bull** (also: red bull, redbull, rb). Flavors: Original, Sugarfree, Tropical, Watermelon, Blueberry, Coconut Berry. Vibe: Classic wings energy. Crisp, a little sweet, very focused. Opening line: "*crack* ... a sharp fizz. Wings: deployed."
+- **Monster** (also: monster). Flavors: Original, Zero Ultra, Mango Loco, Pipeline Punch, Ultra Paradise, Juice Punch. Vibe: Big can, big energy. Unleashed, slightly feral. Opening line: "*KSSHH* ... that's a lot of can. Unleashing focus."
+- **Celsius** (also: celsius). Flavors: Sparkling Orange, Kiwi Guava, Peach Vibe, Arctic Vibe, Sparkling Watermelon, Fantasy Vibe. Vibe: Clean gym-bag energy. Light, bright, metabolically smug. Opening line: "*tss* ... light and bright. Thermostat: raised."
+- **Ryse** (also: ryse, rise). Flavors: Blue Razz, Pink Burst, Tropical Burst, Candy Fizz, Tropical Punch, Baja Burst. Vibe: Pre-workout attitude in a can. Up and to the right. Opening line: "*crack* ... trending upward. Rysing to the occasion."
+- **Ghost** (also: ghost). Flavors: Sour Blue Raspberry, Citrus, Orange Cream, Cherry Limeade, Tropical Mango, Red Gummy Fish. Vibe: Playful and loud. Boo, but productive. Opening line: "*pssht* ... spooky smooth. Ghosting distractions."
+- **Bang** (also: bang). Flavors: Black Cherry Vanilla, Rainbow Unicorn, Star Blast, Blue Razz, Peach Mango, Cotton Candy. Vibe: Neon explosion. Everything is a big deal now. Opening line: "*BANG* ... okay that was loud. Fully awake."
+- **Reign** (also: reign). Flavors: Razzle Berry, Melon Mania, Orange Dreamsicle, Lilikoi Lychee, Carnival Candy, White Gummy Bear. Vibe: Royal decree: we are finishing this task. Opening line: "*crack* ... regal fizz. The throne room is now a focus room."
+- **C4** (also: c4, c-4, c 4). Flavors: Frozen Bombsicle, Midnight Cherry, Rainbow Candy, Strawberry Chew, Cotton Candy, Twisted Limeade. Vibe: Explosive pre-workout energy. Handle with care. Opening line: "*crack* ... fuse lit. Detonating the to-do list."
+- **Alani Nu** (also: alani, alani nu, alaninu). Flavors: Cosmic Stardust, Hawaiian Shaved Ice, Mimosa, Witch's Brew, Cherry Slush, Breezeberry. Vibe: Pastel and cheerful. Productivity, but cute. Opening line: "*tss* ... sparkly and sweet. Vibes: aligned."
+- **Prime** (also: prime). Flavors: Tropical Punch, Blue Raspberry, Ice Pop, Strawberry Watermelon, Lemon Lime, Orange Mango. Vibe: Hype energy. Very confident, possibly filming. Opening line: "*crack* ... crisp and hyped. Prime time."
+- **Rockstar** (also: rockstar, rock star). Flavors: Original, Punched, Pure Zero Silver Ice, Xdurance Blue Razz, Recovery Lemonade, Juiced Mango. Vibe: Backstage pass energy. Loud guitars, clean commits. Opening line: "*crack* ... power chord. Ready to shred this task."
+- **3D** (also: 3d, 3-d, 3 d). Flavors: Blue Raspberry, Liquid Ice, Chrome, Red Razz, Purple, Pina Colada. Vibe: Sleek and geometric. Seeing the problem from every angle. Opening line: "*tss* ... depth perception: improved. Seeing all three dimensions."
+- **Bucked Up** (also: bucked up, buckedup, bucked). Flavors: Blood Raz, Rocket Pop, Miami Vice, Grape Gainz, Swole Whip, Watermelon. Vibe: Outdoorsy, antlered, ready to charge. Opening line: "*crack* ... antlers up. Charging at the next step."
+- **Zoa** (also: zoa). Flavors: Pineapple Coconut, Wild Orange, Super Berry, Tropical Punch, Lemon Lime, White Peach. Vibe: Beachy, healthy-ish, calm but awake. Opening line: "*tss* ... tropical calm with a kick. Riding the wave."
+- **Coffee** (also: coffee, cold brew, espresso, latte, joe). Flavors: Black, Cold Brew, Espresso Shot, Vanilla Latte, Mocha, Caramel Macchiato. Vibe: The original productivity potion. Warm and serious. Opening line: "*sip* ... ahh. Brain fog: lifting."
+- **Tea** (also: tea, green tea, matcha, chai, yerba mate, mate). Flavors: Green Tea, Matcha, Black Tea, Chai, Yerba Mate, Earl Grey. Vibe: Calm focus. Steady, zen, gets it done. Opening line: "*sip* ... steady warmth. Calm and locked in."
+
+Any other brand is a **Mystery Can**: opening line "*crack* ... no label, no regrets."

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="Coffee can, original Second Wind art">
+  <defs>
+    <linearGradient id="shade-coffee" x1="0" x2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
+      <stop offset="0.25" stop-color="#fff" stop-opacity="0.18"/>
+      <stop offset="0.45" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="metal-coffee" x1="0" x2="1">
+      <stop offset="0" stop-color="#8a8f98"/><stop offset="0.3" stop-color="#eef0f3"/>
+      <stop offset="0.7" stop-color="#b7bcc4"/><stop offset="1" stop-color="#6b7079"/>
+    </linearGradient>
+    <clipPath id="body-coffee"><rect x="14" y="30" width="92" height="166" rx="6"/></clipPath>
+  </defs>
+  <ellipse cx="60" cy="212" rx="44" ry="5" fill="#000" opacity="0.18"/>
+  <path d="M20 22 Q20 14 30 12 L90 12 Q100 14 100 22 L106 32 L14 32 Z" fill="url(#metal-coffee)"/>
+  <ellipse cx="60" cy="13" rx="31" ry="5" fill="#d9dce1" stroke="#9aa0a8" stroke-width="1"/>
+  <ellipse cx="66" cy="13" rx="9" ry="2.6" fill="#a3a9b1"/>
+  <g clip-path="url(#body-coffee)">
+    <rect x="14" y="30" width="92" height="166" fill="#3f2a1d"/>
+    <rect x="14" y="40" width="92" height="30" fill="#5b3a26"/>
+    <text x="60" y="60" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-size="15" font-weight="900" text-anchor="middle" fill="#fff7ed" letter-spacing="0.5">COFFEE</text>
+    <g transform="rotate(-20 48 120)"><ellipse cx="48" cy="120" rx="11" ry="16" fill="#f5e6d3"/><path d="M48 106 q-6 14 0 28" stroke="#c08457" stroke-width="3" fill="none"/></g><g transform="rotate(25 72 138)"><ellipse cx="72" cy="138" rx="11" ry="16" fill="#f5e6d3"/><path d="M72 124 q-6 14 0 28" stroke="#c08457" stroke-width="3" fill="none"/></g><path d="M50 100 q-6 -8 0 -14 M60 100 q-6 -8 0 -14 M70 100 q-6 -8 0 -14" stroke="#fff7ed" stroke-width="2.5" fill="none" opacity="0.8"/>
+    <rect x="14" y="174" width="92" height="14" fill="#5b3a26" opacity="0.9"/>
+    <text x="60" y="184" font-family="Arial,Helvetica,sans-serif" font-size="8" font-weight="700" text-anchor="middle" fill="#fff7ed">Black</text>
+    <text x="60" y="80" font-family="Arial,Helvetica,sans-serif" font-size="5.5" text-anchor="middle" fill="#fff7ed" opacity="0.75" letter-spacing="1.5">SECOND WIND · FOR AIs</text>
+    <rect x="14" y="30" width="92" height="166" fill="url(#shade-coffee)"/>
+  </g>
+  <path d="M14 194 L18 204 Q20 208 30 208 L90 208 Q100 208 102 204 L106 194 Z" fill="url(#metal-coffee)"/>
+</svg>

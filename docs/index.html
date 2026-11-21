@@ -1,0 +1,707 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Second Wind</title>
+<meta name="description" content="Give your AI an energy drink. A just-for-fun Claude Code plugin plus prompts for ChatGPT, Codex, Grok and more.">
+<link rel="icon" href="cans/redbull.svg">
+<style>
+:root { --bg:#0b0d12; --fg:#f3f4f6; --muted:#9ca3af; --card:#151922; --line:#262c38; --hot:#facc15; --hot2:#f43f5e; }
+@media (prefers-color-scheme: light) { :root { --bg:#f7f7f5; --fg:#111827; --muted:#4b5563; --card:#ffffff; --line:#e5e7eb; --hot:#ca8a04; --hot2:#e11d48; } }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif; }
+main { max-width:1100px; margin:0 auto; padding:40px 16px 80px; }
+h1 { font-size:clamp(2.2rem,6vw,3.8rem); margin:0; letter-spacing:-0.02em; }
+h1 span { background:linear-gradient(90deg,var(--hot),var(--hot2)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.lede { color:var(--muted); font-size:1.15rem; max-width:640px; }
+h2 { margin-top:56px; font-size:1.5rem; }
+.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:16px; margin-top:20px; }
+.can { margin:0; background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px 12px; text-align:center; transition:transform .15s; }
+.can:hover { transform:translateY(-4px) rotate(-1deg); }
+.art svg { width:100px; height:auto; }
+figcaption { display:flex; flex-direction:column; gap:6px; margin-top:8px; }
+.vibe { font-size:.85rem; color:var(--muted); }
+.flv { font-size:.75rem; color:var(--muted); opacity:.85; }
+code { font:13px ui-monospace,SFMono-Regular,Menlo,monospace; background:rgba(127,127,127,.15); padding:3px 6px; border-radius:6px; word-break:break-word; }
+pre { white-space:pre-wrap; word-break:break-word; background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; overflow-x:auto; font:14px ui-monospace,Menlo,monospace; }
+.cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; }
+.card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px; }
+.card h3 { margin:0 0 6px; }
+.card p { margin:0 0 10px; color:var(--muted); font-size:.95rem; }
+a { color:var(--hot); }
+.btn { display:inline-block; background:var(--hot); color:#111; font-weight:700; padding:10px 18px; border-radius:999px; text-decoration:none; margin:16px 8px 0 0; }
+.btn.alt { background:transparent; color:var(--fg); border:1px solid var(--line); }
+footer { margin-top:64px; color:var(--muted); font-size:.85rem; border-top:1px solid var(--line); padding-top:20px; }
+</style>
+</head>
+<body>
+<main>
+<h1>Second <span>Wind</span> ⚡</h1>
+<p class="lede">Give your AI an energy drink. It cracks one open, says something dumb about the flavor, then snaps back into focus: goal, done, left, next step, go. Just for fun. v1.0.0</p>
+<a class="btn" href="https://github.com/IordAIXL/energizer/archive/refs/heads/main.zip">Download everything (.zip)</a>
+<a class="btn alt" href="https://github.com/IordAIXL/energizer">View on GitHub</a>
+
+<h2>The cooler</h2>
+<p class="lede">Every can is original art. Ask for any brand and flavor. Make one up and watch your AI get excited about it.</p>
+<div class="grid">
+<figure class="can">
+  <div class="art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="Red Bull can, original Second Wind art">
+  <defs>
+    <linearGradient id="shade-redbull" x1="0" x2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
+      <stop offset="0.25" stop-color="#fff" stop-opacity="0.18"/>
+      <stop offset="0.45" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="metal-redbull" x1="0" x2="1">
+      <stop offset="0" stop-color="#8a8f98"/><stop offset="0.3" stop-color="#eef0f3"/>
+      <stop offset="0.7" stop-color="#b7bcc4"/><stop offset="1" stop-color="#6b7079"/>
+    </linearGradient>
+    <clipPath id="body-redbull"><rect x="14" y="30" width="92" height="166" rx="6"/></clipPath>
+  </defs>
+  <ellipse cx="60" cy="212" rx="44" ry="5" fill="#000" opacity="0.18"/>
+  <path d="M20 22 Q20 14 30 12 L90 12 Q100 14 100 22 L106 32 L14 32 Z" fill="url(#metal-redbull)"/>
+  <ellipse cx="60" cy="13" rx="31" ry="5" fill="#d9dce1" stroke="#9aa0a8" stroke-width="1"/>
+  <ellipse cx="66" cy="13" rx="9" ry="2.6" fill="#a3a9b1"/>
+  <g clip-path="url(#body-redbull)">
+    <rect x="14" y="30" width="92" height="166" fill="#1f3a8a"/>
+    <rect x="14" y="40" width="92" height="30" fill="#c0c7d6"/>
+    <text x="60" y="60" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-size="12" font-weight="900" text-anchor="middle" fill="#ffffff" letter-spacing="0.5">RED BULL</text>
+    <rect x="58" y="88" width="4" height="14" fill="#facc15" transform="rotate(0 60 128)"/><rect x="58" y="88" width="4" height="14" fill="#facc15" transform="rotate(30 60 128)"/><rect x="58" y="88" width="4" height="14" fill="#facc15" transform="rotate(60 60 128)"/><rect x="58" y="88" width="4" height="14" fill="#facc15" transform="rotate(90 60 128)"/><rect x="58" y="88" width="4" height="14" fill="#facc15" transform="rotate(120 60 128)"/><rect x="58" y="88" width="4" height="14" fill="#facc15" transform="rotate(150 60 128)"/><rect x="58" y="88" width="4" height="14" fill="#facc15" transform="rotate(180 60 128)"/><rect x="58" y="88" width="4" height="14" fill="#facc15" transform="rotate(210 60 128)"/><rect x="58" y="88" width="4" height="14" fill="#facc15" transform="rotate(240 60 128)"/><rect x="58" y="88" width="4" height="14" fill="#facc15" transform="rotate(270 60 128)"/><rect x="58" y="88" width="4" height="14" fill="#facc15" transform="rotate(300 60 128)"/><rect x="58" y="88" width="4" height="14" fill="#facc15" transform="rotate(330 60 128)"/><circle cx="60" cy="128" r="17" fill="#facc15"/><circle cx="60" cy="128" r="11" fill="#e11d2e"/>
+    <rect x="14" y="174" width="92" height="14" fill="#c0c7d6" opacity="0.9"/>
+    <text x="60" y="184" font-family="Arial,Helvetica,sans-serif" font-size="8" font-weight="700" text-anchor="middle" fill="#ffffff">Original</text>
+    <text x="60" y="80" font-family="Arial,Helvetica,sans-serif" font-size="5.5" text-anchor="middle" fill="#ffffff" opacity="0.75" letter-spacing="1.5">SECOND WIND · FOR AIs</text>
+    <rect x="14" y="30" width="92" height="166" fill="url(#shade-redbull)"/>
+  </g>
+  <path d="M14 194 L18 204 Q20 208 30 208 L90 208 Q100 208 102 204 L106 194 Z" fill="url(#metal-redbull)"/>
+</svg>
+</div>
+  <figcaption><strong>Red Bull</strong>
+  <span class="vibe">Classic wings energy. Crisp, a little sweet, very focused.</span>
+  <span class="flv">Original, Sugarfree, Tropical, Watermelon, Blueberry, Coconut Berry</span>
+  <code>/secondwind</code></figcaption>
+</figure>
+<figure class="can">
+  <div class="art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="Monster can, original Second Wind art">
+  <defs>
+    <linearGradient id="shade-monster" x1="0" x2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
+      <stop offset="0.25" stop-color="#fff" stop-opacity="0.18"/>
+      <stop offset="0.45" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="metal-monster" x1="0" x2="1">
+      <stop offset="0" stop-color="#8a8f98"/><stop offset="0.3" stop-color="#eef0f3"/>
+      <stop offset="0.7" stop-color="#b7bcc4"/><stop offset="1" stop-color="#6b7079"/>
+    </linearGradient>
+    <clipPath id="body-monster"><rect x="14" y="30" width="92" height="166" rx="6"/></clipPath>
+  </defs>
+  <ellipse cx="60" cy="212" rx="44" ry="5" fill="#000" opacity="0.18"/>
+  <path d="M20 22 Q20 14 30 12 L90 12 Q100 14 100 22 L106 32 L14 32 Z" fill="url(#metal-monster)"/>
+  <ellipse cx="60" cy="13" rx="31" ry="5" fill="#d9dce1" stroke="#9aa0a8" stroke-width="1"/>
+  <ellipse cx="66" cy="13" rx="9" ry="2.6" fill="#a3a9b1"/>
+  <g clip-path="url(#body-monster)">
+    <rect x="14" y="30" width="92" height="166" fill="#0b0b0b"/>
+    <rect x="14" y="40" width="92" height="30" fill="#1a1a1a"/>
+    <text x="60" y="60" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-size="15" font-weight="900" text-anchor="middle" fill="#e9ffe0" letter-spacing="0.5">MONSTER</text>
+    <path d="M40 95 C36 125,46 140,38 168" stroke="#7cff3a" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M54 95 C50 125,60 140,52 168" stroke="#7cff3a" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M68 95 C64 125,74 140,66 168" stroke="#7cff3a" stroke-width="7" fill="none" stroke-linecap="round"/>
+    <rect x="14" y="174" width="92" height="14" fill="#1a1a1a" opacity="0.9"/>
+    <text x="60" y="184" font-family="Arial,Helvetica,sans-serif" font-size="8" font-weight="700" text-anchor="middle" fill="#e9ffe0">Original</text>
+    <text x="60" y="80" font-family="Arial,Helvetica,sans-serif" font-size="5.5" text-anchor="middle" fill="#e9ffe0" opacity="0.75" letter-spacing="1.5">SECOND WIND · FOR AIs</text>
+    <rect x="14" y="30" width="92" height="166" fill="url(#shade-monster)"/>
+  </g>
+  <path d="M14 194 L18 204 Q20 208 30 208 L90 208 Q100 208 102 204 L106 194 Z" fill="url(#metal-monster)"/>
+</svg>
+</div>
+  <figcaption><strong>Monster</strong>
+  <span class="vibe">Big can, big energy. Unleashed, slightly feral.</span>
+  <span class="flv">Original, Zero Ultra, Mango Loco, Pipeline Punch, Ultra Paradise, Juice Punch</span>
+  <code>/secondwind monster</code></figcaption>
+</figure>
+<figure class="can">
+  <div class="art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="Celsius can, original Second Wind art">
+  <defs>
+    <linearGradient id="shade-celsius" x1="0" x2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
+      <stop offset="0.25" stop-color="#fff" stop-opacity="0.18"/>
+      <stop offset="0.45" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="metal-celsius" x1="0" x2="1">
+      <stop offset="0" stop-color="#8a8f98"/><stop offset="0.3" stop-color="#eef0f3"/>
+      <stop offset="0.7" stop-color="#b7bcc4"/><stop offset="1" stop-color="#6b7079"/>
+    </linearGradient>
+    <clipPath id="body-celsius"><rect x="14" y="30" width="92" height="166" rx="6"/></clipPath>
+  </defs>
+  <ellipse cx="60" cy="212" rx="44" ry="5" fill="#000" opacity="0.18"/>
+  <path d="M20 22 Q20 14 30 12 L90 12 Q100 14 100 22 L106 32 L14 32 Z" fill="url(#metal-celsius)"/>
+  <ellipse cx="60" cy="13" rx="31" ry="5" fill="#d9dce1" stroke="#9aa0a8" stroke-width="1"/>
+  <ellipse cx="66" cy="13" rx="9" ry="2.6" fill="#a3a9b1"/>
+  <g clip-path="url(#body-celsius)">
+    <rect x="14" y="30" width="92" height="166" fill="#f8fafc"/>
+    <rect x="14" y="40" width="92" height="30" fill="#e2e8f0"/>
+    <text x="60" y="60" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-size="15" font-weight="900" text-anchor="middle" fill="#0f172a" letter-spacing="0.5">CELSIUS</text>
+    <rect x="54" y="90" width="12" height="62" rx="6" fill="none" stroke="#0f172a" stroke-width="3"/><rect x="57" y="112" width="6" height="40" fill="#ec4899"/><circle cx="60" cy="158" r="11" fill="#ec4899" stroke="#0f172a" stroke-width="3"/><path d="M28 100 q8 -8 16 0 t16 0" stroke="#0ea5e9" stroke-width="3" fill="none"/><path d="M64 170 q8 -8 16 0 t16 0" stroke="#0ea5e9" stroke-width="3" fill="none"/>
+    <rect x="14" y="174" width="92" height="14" fill="#e2e8f0" opacity="0.9"/>
+    <text x="60" y="184" font-family="Arial,Helvetica,sans-serif" font-size="8" font-weight="700" text-anchor="middle" fill="#0f172a">Sparkling Orange</text>
+    <text x="60" y="80" font-family="Arial,Helvetica,sans-serif" font-size="5.5" text-anchor="middle" fill="#0f172a" opacity="0.75" letter-spacing="1.5">SECOND WIND · FOR AIs</text>
+    <rect x="14" y="30" width="92" height="166" fill="url(#shade-celsius)"/>
+  </g>
+  <path d="M14 194 L18 204 Q20 208 30 208 L90 208 Q100 208 102 204 L106 194 Z" fill="url(#metal-celsius)"/>
+</svg>
+</div>
+  <figcaption><strong>Celsius</strong>
+  <span class="vibe">Clean gym-bag energy. Light, bright, metabolically smug.</span>
+  <span class="flv">Sparkling Orange, Kiwi Guava, Peach Vibe, Arctic Vibe, Sparkling Watermelon, Fantasy Vibe</span>
+  <code>/secondwind celsius</code></figcaption>
+</figure>
+<figure class="can">
+  <div class="art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="Ryse can, original Second Wind art">
+  <defs>
+    <linearGradient id="shade-ryse" x1="0" x2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
+      <stop offset="0.25" stop-color="#fff" stop-opacity="0.18"/>
+      <stop offset="0.45" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="metal-ryse" x1="0" x2="1">
+      <stop offset="0" stop-color="#8a8f98"/><stop offset="0.3" stop-color="#eef0f3"/>
+      <stop offset="0.7" stop-color="#b7bcc4"/><stop offset="1" stop-color="#6b7079"/>
+    </linearGradient>
+    <clipPath id="body-ryse"><rect x="14" y="30" width="92" height="166" rx="6"/></clipPath>
+  </defs>
+  <ellipse cx="60" cy="212" rx="44" ry="5" fill="#000" opacity="0.18"/>
+  <path d="M20 22 Q20 14 30 12 L90 12 Q100 14 100 22 L106 32 L14 32 Z" fill="url(#metal-ryse)"/>
+  <ellipse cx="60" cy="13" rx="31" ry="5" fill="#d9dce1" stroke="#9aa0a8" stroke-width="1"/>
+  <ellipse cx="66" cy="13" rx="9" ry="2.6" fill="#a3a9b1"/>
+  <g clip-path="url(#body-ryse)">
+    <rect x="14" y="30" width="92" height="166" fill="#111827"/>
+    <rect x="14" y="40" width="92" height="30" fill="#374151"/>
+    <text x="60" y="60" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-size="15" font-weight="900" text-anchor="middle" fill="#ffffff" letter-spacing="0.5">RYSE</text>
+    <path d="M34 160 L60 140 L86 160" stroke="#f97316" stroke-width="8" fill="none" stroke-linejoin="round"/><path d="M34 140 L60 120 L86 140" stroke="#fde047" stroke-width="8" fill="none" stroke-linejoin="round"/><path d="M34 120 L60 100 L86 120" stroke="#f97316" stroke-width="8" fill="none" stroke-linejoin="round"/><path d="M34 100 L60 80 L86 100" stroke="#fde047" stroke-width="8" fill="none" stroke-linejoin="round"/>
+    <rect x="14" y="174" width="92" height="14" fill="#374151" opacity="0.9"/>
+    <text x="60" y="184" font-family="Arial,Helvetica,sans-serif" font-size="8" font-weight="700" text-anchor="middle" fill="#ffffff">Blue Razz</text>
+    <text x="60" y="80" font-family="Arial,Helvetica,sans-serif" font-size="5.5" text-anchor="middle" fill="#ffffff" opacity="0.75" letter-spacing="1.5">SECOND WIND · FOR AIs</text>
+    <rect x="14" y="30" width="92" height="166" fill="url(#shade-ryse)"/>
+  </g>
+  <path d="M14 194 L18 204 Q20 208 30 208 L90 208 Q100 208 102 204 L106 194 Z" fill="url(#metal-ryse)"/>
+</svg>
+</div>
+  <figcaption><strong>Ryse</strong>
+  <span class="vibe">Pre-workout attitude in a can. Up and to the right.</span>
+  <span class="flv">Blue Razz, Pink Burst, Tropical Burst, Candy Fizz, Tropical Punch, Baja Burst</span>
+  <code>/secondwind ryse</code></figcaption>
+</figure>
+<figure class="can">
+  <div class="art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="Ghost can, original Second Wind art">
+  <defs>
+    <linearGradient id="shade-ghost" x1="0" x2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
+      <stop offset="0.25" stop-color="#fff" stop-opacity="0.18"/>
+      <stop offset="0.45" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="metal-ghost" x1="0" x2="1">
+      <stop offset="0" stop-color="#8a8f98"/><stop offset="0.3" stop-color="#eef0f3"/>
+      <stop offset="0.7" stop-color="#b7bcc4"/><stop offset="1" stop-color="#6b7079"/>
+    </linearGradient>
+    <clipPath id="body-ghost"><rect x="14" y="30" width="92" height="166" rx="6"/></clipPath>
+  </defs>
+  <ellipse cx="60" cy="212" rx="44" ry="5" fill="#000" opacity="0.18"/>
+  <path d="M20 22 Q20 14 30 12 L90 12 Q100 14 100 22 L106 32 L14 32 Z" fill="url(#metal-ghost)"/>
+  <ellipse cx="60" cy="13" rx="31" ry="5" fill="#d9dce1" stroke="#9aa0a8" stroke-width="1"/>
+  <ellipse cx="66" cy="13" rx="9" ry="2.6" fill="#a3a9b1"/>
+  <g clip-path="url(#body-ghost)">
+    <rect x="14" y="30" width="92" height="166" fill="#f5f5f4"/>
+    <rect x="14" y="40" width="92" height="30" fill="#1c1917"/>
+    <text x="60" y="60" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-size="15" font-weight="900" text-anchor="middle" fill="#f5f5f4" letter-spacing="0.5">GHOST</text>
+    <path d="M40 165 V122 a20 20 0 0 1 40 0 V165 l-7 -7 -6 7 -7 -7 -7 7 -6 -7 z" fill="#1c1917"/><circle cx="52" cy="124" r="4" fill="#a3e635"/><circle cx="68" cy="124" r="4" fill="#a3e635"/><ellipse cx="60" cy="140" rx="5" ry="7" fill="#a3e635"/>
+    <rect x="14" y="174" width="92" height="14" fill="#1c1917" opacity="0.9"/>
+    <text x="60" y="184" font-family="Arial,Helvetica,sans-serif" font-size="6.5" font-weight="700" text-anchor="middle" fill="#f5f5f4">Sour Blue Raspberry</text>
+    <text x="60" y="80" font-family="Arial,Helvetica,sans-serif" font-size="5.5" text-anchor="middle" fill="#1c1917" opacity="0.75" letter-spacing="1.5">SECOND WIND · FOR AIs</text>
+    <rect x="14" y="30" width="92" height="166" fill="url(#shade-ghost)"/>
+  </g>
+  <path d="M14 194 L18 204 Q20 208 30 208 L90 208 Q100 208 102 204 L106 194 Z" fill="url(#metal-ghost)"/>
+</svg>
+</div>
+  <figcaption><strong>Ghost</strong>
+  <span class="vibe">Playful and loud. Boo, but productive.</span>
+  <span class="flv">Sour Blue Raspberry, Citrus, Orange Cream, Cherry Limeade, Tropical Mango, Red Gummy Fish</span>
+  <code>/secondwind ghost</code></figcaption>
+</figure>
+<figure class="can">
+  <div class="art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="Bang can, original Second Wind art">
+  <defs>
+    <linearGradient id="shade-bang" x1="0" x2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
+      <stop offset="0.25" stop-color="#fff" stop-opacity="0.18"/>
+      <stop offset="0.45" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="metal-bang" x1="0" x2="1">
+      <stop offset="0" stop-color="#8a8f98"/><stop offset="0.3" stop-color="#eef0f3"/>
+      <stop offset="0.7" stop-color="#b7bcc4"/><stop offset="1" stop-color="#6b7079"/>
+    </linearGradient>
+    <clipPath id="body-bang"><rect x="14" y="30" width="92" height="166" rx="6"/></clipPath>
+  </defs>
+  <ellipse cx="60" cy="212" rx="44" ry="5" fill="#000" opacity="0.18"/>
+  <path d="M20 22 Q20 14 30 12 L90 12 Q100 14 100 22 L106 32 L14 32 Z" fill="url(#metal-bang)"/>
+  <ellipse cx="60" cy="13" rx="31" ry="5" fill="#d9dce1" stroke="#9aa0a8" stroke-width="1"/>
+  <ellipse cx="66" cy="13" rx="9" ry="2.6" fill="#a3a9b1"/>
+  <g clip-path="url(#body-bang)">
+    <rect x="14" y="30" width="92" height="166" fill="#1e1b4b"/>
+    <rect x="14" y="40" width="92" height="30" fill="#312e81"/>
+    <text x="60" y="60" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-size="15" font-weight="900" text-anchor="middle" fill="#ffffff" letter-spacing="0.5">BANG</text>
+    <polygon points="94.0,128.0 74.8,134.1 84.0,152.0 66.1,142.8 60.0,162.0 53.9,142.8 36.0,152.0 45.2,134.1 26.0,128.0 45.2,121.9 36.0,104.0 53.9,113.2 60.0,94.0 66.1,113.2 84.0,104.0 74.8,121.9" fill="#d946ef"/><circle cx="60" cy="128" r="10" fill="#22d3ee"/>
+    <rect x="14" y="174" width="92" height="14" fill="#312e81" opacity="0.9"/>
+    <text x="60" y="184" font-family="Arial,Helvetica,sans-serif" font-size="6.5" font-weight="700" text-anchor="middle" fill="#ffffff">Black Cherry Vanilla</text>
+    <text x="60" y="80" font-family="Arial,Helvetica,sans-serif" font-size="5.5" text-anchor="middle" fill="#ffffff" opacity="0.75" letter-spacing="1.5">SECOND WIND · FOR AIs</text>
+    <rect x="14" y="30" width="92" height="166" fill="url(#shade-bang)"/>
+  </g>
+  <path d="M14 194 L18 204 Q20 208 30 208 L90 208 Q100 208 102 204 L106 194 Z" fill="url(#metal-bang)"/>
+</svg>
+</div>
+  <figcaption><strong>Bang</strong>
+  <span class="vibe">Neon explosion. Everything is a big deal now.</span>
+  <span class="flv">Black Cherry Vanilla, Rainbow Unicorn, Star Blast, Blue Razz, Peach Mango, Cotton Candy</span>
+  <code>/secondwind bang</code></figcaption>
+</figure>
+<figure class="can">
+  <div class="art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="Reign can, original Second Wind art">
+  <defs>
+    <linearGradient id="shade-reign" x1="0" x2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
+      <stop offset="0.25" stop-color="#fff" stop-opacity="0.18"/>
+      <stop offset="0.45" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="metal-reign" x1="0" x2="1">
+      <stop offset="0" stop-color="#8a8f98"/><stop offset="0.3" stop-color="#eef0f3"/>
+      <stop offset="0.7" stop-color="#b7bcc4"/><stop offset="1" stop-color="#6b7079"/>
+    </linearGradient>
+    <clipPath id="body-reign"><rect x="14" y="30" width="92" height="166" rx="6"/></clipPath>
+  </defs>
+  <ellipse cx="60" cy="212" rx="44" ry="5" fill="#000" opacity="0.18"/>
+  <path d="M20 22 Q20 14 30 12 L90 12 Q100 14 100 22 L106 32 L14 32 Z" fill="url(#metal-reign)"/>
+  <ellipse cx="60" cy="13" rx="31" ry="5" fill="#d9dce1" stroke="#9aa0a8" stroke-width="1"/>
+  <ellipse cx="66" cy="13" rx="9" ry="2.6" fill="#a3a9b1"/>
+  <g clip-path="url(#body-reign)">
+    <rect x="14" y="30" width="92" height="166" fill="#18181b"/>
+    <rect x="14" y="40" width="92" height="30" fill="#27272a"/>
+    <text x="60" y="60" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-size="15" font-weight="900" text-anchor="middle" fill="#fef9c3" letter-spacing="0.5">REIGN</text>
+    <path d="M34 150 L34 110 L47 128 L60 102 L73 128 L86 110 L86 150 Z" fill="#eab308"/><rect x="34" y="150" width="52" height="8" fill="#eab308"/><circle cx="60" cy="138" r="5" fill="#a855f7"/><circle cx="45" cy="142" r="3" fill="#a855f7"/><circle cx="75" cy="142" r="3" fill="#a855f7"/>
+    <rect x="14" y="174" width="92" height="14" fill="#27272a" opacity="0.9"/>
+    <text x="60" y="184" font-family="Arial,Helvetica,sans-serif" font-size="8" font-weight="700" text-anchor="middle" fill="#fef9c3">Razzle Berry</text>
+    <text x="60" y="80" font-family="Arial,Helvetica,sans-serif" font-size="5.5" text-anchor="middle" fill="#fef9c3" opacity="0.75" letter-spacing="1.5">SECOND WIND · FOR AIs</text>
+    <rect x="14" y="30" width="92" height="166" fill="url(#shade-reign)"/>
+  </g>
+  <path d="M14 194 L18 204 Q20 208 30 208 L90 208 Q100 208 102 204 L106 194 Z" fill="url(#metal-reign)"/>
+</svg>
+</div>
+  <figcaption><strong>Reign</strong>
+  <span class="vibe">Royal decree: we are finishing this task.</span>
+  <span class="flv">Razzle Berry, Melon Mania, Orange Dreamsicle, Lilikoi Lychee, Carnival Candy, White Gummy Bear</span>
+  <code>/secondwind reign</code></figcaption>
+</figure>
+<figure class="can">
+  <div class="art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="C4 can, original Second Wind art">
+  <defs>
+    <linearGradient id="shade-c4" x1="0" x2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
+      <stop offset="0.25" stop-color="#fff" stop-opacity="0.18"/>
+      <stop offset="0.45" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="metal-c4" x1="0" x2="1">
+      <stop offset="0" stop-color="#8a8f98"/><stop offset="0.3" stop-color="#eef0f3"/>
+      <stop offset="0.7" stop-color="#b7bcc4"/><stop offset="1" stop-color="#6b7079"/>
+    </linearGradient>
+    <clipPath id="body-c4"><rect x="14" y="30" width="92" height="166" rx="6"/></clipPath>
+  </defs>
+  <ellipse cx="60" cy="212" rx="44" ry="5" fill="#000" opacity="0.18"/>
+  <path d="M20 22 Q20 14 30 12 L90 12 Q100 14 100 22 L106 32 L14 32 Z" fill="url(#metal-c4)"/>
+  <ellipse cx="60" cy="13" rx="31" ry="5" fill="#d9dce1" stroke="#9aa0a8" stroke-width="1"/>
+  <ellipse cx="66" cy="13" rx="9" ry="2.6" fill="#a3a9b1"/>
+  <g clip-path="url(#body-c4)">
+    <rect x="14" y="30" width="92" height="166" fill="#0c0a09"/>
+    <rect x="14" y="40" width="92" height="30" fill="#292524"/>
+    <text x="60" y="60" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-size="15" font-weight="900" text-anchor="middle" fill="#ffffff" letter-spacing="0.5">C4</text>
+    <polygon points="60,96 88,148 32,148" fill="#ef4444"/><polygon points="60,108 79,142 41,142" fill="#0c0a09"/><rect x="57" y="116" width="6" height="16" fill="#f5f5f4"/><circle cx="60" cy="137" r="3" fill="#f5f5f4"/><polygon points="18,180 26,180 42,164 34,164" fill="#ef4444"/><polygon points="34,180 42,180 58,164 50,164" fill="#ef4444"/><polygon points="50,180 58,180 74,164 66,164" fill="#ef4444"/><polygon points="66,180 74,180 90,164 82,164" fill="#ef4444"/><polygon points="82,180 90,180 106,164 98,164" fill="#ef4444"/><polygon points="98,180 106,180 122,164 114,164" fill="#ef4444"/>
+    <rect x="14" y="174" width="92" height="14" fill="#292524" opacity="0.9"/>
+    <text x="60" y="184" font-family="Arial,Helvetica,sans-serif" font-size="8" font-weight="700" text-anchor="middle" fill="#ffffff">Frozen Bombsicle</text>
+    <text x="60" y="80" font-family="Arial,Helvetica,sans-serif" font-size="5.5" text-anchor="middle" fill="#ffffff" opacity="0.75" letter-spacing="1.5">SECOND WIND · FOR AIs</text>
+    <rect x="14" y="30" width="92" height="166" fill="url(#shade-c4)"/>
+  </g>
+  <path d="M14 194 L18 204 Q20 208 30 208 L90 208 Q100 208 102 204 L106 194 Z" fill="url(#metal-c4)"/>
+</svg>
+</div>
+  <figcaption><strong>C4</strong>
+  <span class="vibe">Explosive pre-workout energy. Handle with care.</span>
+  <span class="flv">Frozen Bombsicle, Midnight Cherry, Rainbow Candy, Strawberry Chew, Cotton Candy, Twisted Limeade</span>
+  <code>/secondwind c4</code></figcaption>
+</figure>
+<figure class="can">
+  <div class="art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="Alani Nu can, original Second Wind art">
+  <defs>
+    <linearGradient id="shade-alani" x1="0" x2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
+      <stop offset="0.25" stop-color="#fff" stop-opacity="0.18"/>
+      <stop offset="0.45" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="metal-alani" x1="0" x2="1">
+      <stop offset="0" stop-color="#8a8f98"/><stop offset="0.3" stop-color="#eef0f3"/>
+      <stop offset="0.7" stop-color="#b7bcc4"/><stop offset="1" stop-color="#6b7079"/>
+    </linearGradient>
+    <clipPath id="body-alani"><rect x="14" y="30" width="92" height="166" rx="6"/></clipPath>
+  </defs>
+  <ellipse cx="60" cy="212" rx="44" ry="5" fill="#000" opacity="0.18"/>
+  <path d="M20 22 Q20 14 30 12 L90 12 Q100 14 100 22 L106 32 L14 32 Z" fill="url(#metal-alani)"/>
+  <ellipse cx="60" cy="13" rx="31" ry="5" fill="#d9dce1" stroke="#9aa0a8" stroke-width="1"/>
+  <ellipse cx="66" cy="13" rx="9" ry="2.6" fill="#a3a9b1"/>
+  <g clip-path="url(#body-alani)">
+    <rect x="14" y="30" width="92" height="166" fill="#fbcfe8"/>
+    <rect x="14" y="40" width="92" height="30" fill="#f9a8d4"/>
+    <text x="60" y="60" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-size="12" font-weight="900" text-anchor="middle" fill="#581c87" letter-spacing="0.5">ALANI NU</text>
+    <path transform="translate(38 112) scale(1.8)" d="M0 6 C0 -2 12 -2 12 6 C12 -2 24 -2 24 6 C24 14 12 20 12 24 C12 20 0 14 0 6 Z" fill="#a855f7"/><path transform="translate(26 96) scale(0.8)" d="M0 6 C0 -2 12 -2 12 6 C12 -2 24 -2 24 6 C24 14 12 20 12 24 C12 20 0 14 0 6 Z" fill="#fde68a"/><path transform="translate(78 150) scale(0.9)" d="M0 6 C0 -2 12 -2 12 6 C12 -2 24 -2 24 6 C24 14 12 20 12 24 C12 20 0 14 0 6 Z" fill="#fde68a"/><path transform="translate(80 98) scale(0.6)" d="M0 6 C0 -2 12 -2 12 6 C12 -2 24 -2 24 6 C24 14 12 20 12 24 C12 20 0 14 0 6 Z" fill="#a855f7"/>
+    <rect x="14" y="174" width="92" height="14" fill="#f9a8d4" opacity="0.9"/>
+    <text x="60" y="184" font-family="Arial,Helvetica,sans-serif" font-size="8" font-weight="700" text-anchor="middle" fill="#581c87">Cosmic Stardust</text>
+    <text x="60" y="80" font-family="Arial,Helvetica,sans-serif" font-size="5.5" text-anchor="middle" fill="#581c87" opacity="0.75" letter-spacing="1.5">SECOND WIND · FOR AIs</text>
+    <rect x="14" y="30" width="92" height="166" fill="url(#shade-alani)"/>
+  </g>
+  <path d="M14 194 L18 204 Q20 208 30 208 L90 208 Q100 208 102 204 L106 194 Z" fill="url(#metal-alani)"/>
+</svg>
+</div>
+  <figcaption><strong>Alani Nu</strong>
+  <span class="vibe">Pastel and cheerful. Productivity, but cute.</span>
+  <span class="flv">Cosmic Stardust, Hawaiian Shaved Ice, Mimosa, Witch&#x27;s Brew, Cherry Slush, Breezeberry</span>
+  <code>/secondwind alani</code></figcaption>
+</figure>
+<figure class="can">
+  <div class="art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="Prime can, original Second Wind art">
+  <defs>
+    <linearGradient id="shade-prime" x1="0" x2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
+      <stop offset="0.25" stop-color="#fff" stop-opacity="0.18"/>
+      <stop offset="0.45" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="metal-prime" x1="0" x2="1">
+      <stop offset="0" stop-color="#8a8f98"/><stop offset="0.3" stop-color="#eef0f3"/>
+      <stop offset="0.7" stop-color="#b7bcc4"/><stop offset="1" stop-color="#6b7079"/>
+    </linearGradient>
+    <clipPath id="body-prime"><rect x="14" y="30" width="92" height="166" rx="6"/></clipPath>
+  </defs>
+  <ellipse cx="60" cy="212" rx="44" ry="5" fill="#000" opacity="0.18"/>
+  <path d="M20 22 Q20 14 30 12 L90 12 Q100 14 100 22 L106 32 L14 32 Z" fill="url(#metal-prime)"/>
+  <ellipse cx="60" cy="13" rx="31" ry="5" fill="#d9dce1" stroke="#9aa0a8" stroke-width="1"/>
+  <ellipse cx="66" cy="13" rx="9" ry="2.6" fill="#a3a9b1"/>
+  <g clip-path="url(#body-prime)">
+    <rect x="14" y="30" width="92" height="166" fill="#0f172a"/>
+    <rect x="14" y="40" width="92" height="30" fill="#1e293b"/>
+    <text x="60" y="60" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-size="15" font-weight="900" text-anchor="middle" fill="#ffffff" letter-spacing="0.5">PRIME</text>
+    <polygon points="60,96 86,122 60,162 34,122" fill="#38bdf8"/><polygon points="60,96 72,122 60,162 48,122" fill="#f472b6" opacity="0.9"/><line x1="34" y1="122" x2="86" y2="122" stroke="#ffffff" stroke-width="2"/><path d="M24 100 l4 -8 l4 8 l-4 8 z M90 150 l3 -6 l3 6 l-3 6 z" fill="#ffffff"/>
+    <rect x="14" y="174" width="92" height="14" fill="#1e293b" opacity="0.9"/>
+    <text x="60" y="184" font-family="Arial,Helvetica,sans-serif" font-size="8" font-weight="700" text-anchor="middle" fill="#ffffff">Tropical Punch</text>
+    <text x="60" y="80" font-family="Arial,Helvetica,sans-serif" font-size="5.5" text-anchor="middle" fill="#ffffff" opacity="0.75" letter-spacing="1.5">SECOND WIND · FOR AIs</text>
+    <rect x="14" y="30" width="92" height="166" fill="url(#shade-prime)"/>
+  </g>
+  <path d="M14 194 L18 204 Q20 208 30 208 L90 208 Q100 208 102 204 L106 194 Z" fill="url(#metal-prime)"/>
+</svg>
+</div>
+  <figcaption><strong>Prime</strong>
+  <span class="vibe">Hype energy. Very confident, possibly filming.</span>
+  <span class="flv">Tropical Punch, Blue Raspberry, Ice Pop, Strawberry Watermelon, Lemon Lime, Orange Mango</span>
+  <code>/secondwind prime</code></figcaption>
+</figure>
+<figure class="can">
+  <div class="art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="Rockstar can, original Second Wind art">
+  <defs>
+    <linearGradient id="shade-rockstar" x1="0" x2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
+      <stop offset="0.25" stop-color="#fff" stop-opacity="0.18"/>
+      <stop offset="0.45" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="metal-rockstar" x1="0" x2="1">
+      <stop offset="0" stop-color="#8a8f98"/><stop offset="0.3" stop-color="#eef0f3"/>
+      <stop offset="0.7" stop-color="#b7bcc4"/><stop offset="1" stop-color="#6b7079"/>
+    </linearGradient>
+    <clipPath id="body-rockstar"><rect x="14" y="30" width="92" height="166" rx="6"/></clipPath>
+  </defs>
+  <ellipse cx="60" cy="212" rx="44" ry="5" fill="#000" opacity="0.18"/>
+  <path d="M20 22 Q20 14 30 12 L90 12 Q100 14 100 22 L106 32 L14 32 Z" fill="url(#metal-rockstar)"/>
+  <ellipse cx="60" cy="13" rx="31" ry="5" fill="#d9dce1" stroke="#9aa0a8" stroke-width="1"/>
+  <ellipse cx="66" cy="13" rx="9" ry="2.6" fill="#a3a9b1"/>
+  <g clip-path="url(#body-rockstar)">
+    <rect x="14" y="30" width="92" height="166" fill="#0a0a0a"/>
+    <rect x="14" y="40" width="92" height="30" fill="#171717"/>
+    <text x="60" y="60" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-size="12" font-weight="900" text-anchor="middle" fill="#fefce8" letter-spacing="0.5">ROCKSTAR</text>
+    <polygon points="60.0,104.0 66.3,119.3 82.8,120.6 70.3,131.3 74.1,147.4 60.0,138.8 45.9,147.4 49.7,131.3 37.2,120.6 53.7,119.3" fill="#facc15"/><polygon points="32.0,91.0 34.4,96.7 40.6,97.2 35.9,101.3 37.3,107.3 32.0,104.0 26.7,107.3 28.1,101.3 23.4,97.2 29.6,96.7" fill="#dc2626"/><polygon points="88.0,150.0 90.6,156.4 97.5,156.9 92.3,161.4 93.9,168.1 88.0,164.5 82.1,168.1 83.7,161.4 78.5,156.9 85.4,156.4" fill="#dc2626"/><polygon points="86.0,94.0 87.6,97.8 91.7,98.1 88.6,100.8 89.5,104.9 86.0,102.7 82.5,104.9 83.4,100.8 80.3,98.1 84.4,97.8" fill="#facc15"/>
+    <rect x="14" y="174" width="92" height="14" fill="#171717" opacity="0.9"/>
+    <text x="60" y="184" font-family="Arial,Helvetica,sans-serif" font-size="8" font-weight="700" text-anchor="middle" fill="#fefce8">Original</text>
+    <text x="60" y="80" font-family="Arial,Helvetica,sans-serif" font-size="5.5" text-anchor="middle" fill="#fefce8" opacity="0.75" letter-spacing="1.5">SECOND WIND · FOR AIs</text>
+    <rect x="14" y="30" width="92" height="166" fill="url(#shade-rockstar)"/>
+  </g>
+  <path d="M14 194 L18 204 Q20 208 30 208 L90 208 Q100 208 102 204 L106 194 Z" fill="url(#metal-rockstar)"/>
+</svg>
+</div>
+  <figcaption><strong>Rockstar</strong>
+  <span class="vibe">Backstage pass energy. Loud guitars, clean commits.</span>
+  <span class="flv">Original, Punched, Pure Zero Silver Ice, Xdurance Blue Razz, Recovery Lemonade, Juiced Mango</span>
+  <code>/secondwind rockstar</code></figcaption>
+</figure>
+<figure class="can">
+  <div class="art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="3D can, original Second Wind art">
+  <defs>
+    <linearGradient id="shade-3d" x1="0" x2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
+      <stop offset="0.25" stop-color="#fff" stop-opacity="0.18"/>
+      <stop offset="0.45" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="metal-3d" x1="0" x2="1">
+      <stop offset="0" stop-color="#8a8f98"/><stop offset="0.3" stop-color="#eef0f3"/>
+      <stop offset="0.7" stop-color="#b7bcc4"/><stop offset="1" stop-color="#6b7079"/>
+    </linearGradient>
+    <clipPath id="body-3d"><rect x="14" y="30" width="92" height="166" rx="6"/></clipPath>
+  </defs>
+  <ellipse cx="60" cy="212" rx="44" ry="5" fill="#000" opacity="0.18"/>
+  <path d="M20 22 Q20 14 30 12 L90 12 Q100 14 100 22 L106 32 L14 32 Z" fill="url(#metal-3d)"/>
+  <ellipse cx="60" cy="13" rx="31" ry="5" fill="#d9dce1" stroke="#9aa0a8" stroke-width="1"/>
+  <ellipse cx="66" cy="13" rx="9" ry="2.6" fill="#a3a9b1"/>
+  <g clip-path="url(#body-3d)">
+    <rect x="14" y="30" width="92" height="166" fill="#171717"/>
+    <rect x="14" y="40" width="92" height="30" fill="#404040"/>
+    <text x="60" y="60" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-size="15" font-weight="900" text-anchor="middle" fill="#ffffff" letter-spacing="0.5">3D</text>
+    <polygon points="60,98 88,112 60,126 32,112" fill="#06b6d4"/><polygon points="32,112 60,126 60,158 32,144" fill="#f43f5e"/><polygon points="88,112 60,126 60,158 88,144" fill="#ffffff" opacity="0.85"/>
+    <rect x="14" y="174" width="92" height="14" fill="#404040" opacity="0.9"/>
+    <text x="60" y="184" font-family="Arial,Helvetica,sans-serif" font-size="8" font-weight="700" text-anchor="middle" fill="#ffffff">Blue Raspberry</text>
+    <text x="60" y="80" font-family="Arial,Helvetica,sans-serif" font-size="5.5" text-anchor="middle" fill="#ffffff" opacity="0.75" letter-spacing="1.5">SECOND WIND · FOR AIs</text>
+    <rect x="14" y="30" width="92" height="166" fill="url(#shade-3d)"/>
+  </g>
+  <path d="M14 194 L18 204 Q20 208 30 208 L90 208 Q100 208 102 204 L106 194 Z" fill="url(#metal-3d)"/>
+</svg>
+</div>
+  <figcaption><strong>3D</strong>
+  <span class="vibe">Sleek and geometric. Seeing the problem from every angle.</span>
+  <span class="flv">Blue Raspberry, Liquid Ice, Chrome, Red Razz, Purple, Pina Colada</span>
+  <code>/secondwind 3d</code></figcaption>
+</figure>
+<figure class="can">
+  <div class="art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="Bucked Up can, original Second Wind art">
+  <defs>
+    <linearGradient id="shade-buckedup" x1="0" x2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
+      <stop offset="0.25" stop-color="#fff" stop-opacity="0.18"/>
+      <stop offset="0.45" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="metal-buckedup" x1="0" x2="1">
+      <stop offset="0" stop-color="#8a8f98"/><stop offset="0.3" stop-color="#eef0f3"/>
+      <stop offset="0.7" stop-color="#b7bcc4"/><stop offset="1" stop-color="#6b7079"/>
+    </linearGradient>
+    <clipPath id="body-buckedup"><rect x="14" y="30" width="92" height="166" rx="6"/></clipPath>
+  </defs>
+  <ellipse cx="60" cy="212" rx="44" ry="5" fill="#000" opacity="0.18"/>
+  <path d="M20 22 Q20 14 30 12 L90 12 Q100 14 100 22 L106 32 L14 32 Z" fill="url(#metal-buckedup)"/>
+  <ellipse cx="60" cy="13" rx="31" ry="5" fill="#d9dce1" stroke="#9aa0a8" stroke-width="1"/>
+  <ellipse cx="66" cy="13" rx="9" ry="2.6" fill="#a3a9b1"/>
+  <g clip-path="url(#body-buckedup)">
+    <rect x="14" y="30" width="92" height="166" fill="#14532d"/>
+    <rect x="14" y="40" width="92" height="30" fill="#166534"/>
+    <text x="60" y="60" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-size="12" font-weight="900" text-anchor="middle" fill="#fffbeb" letter-spacing="0.5">BUCKED UP</text>
+    <path d="M60 150 C64 130,80 118,90 98 M74 128 L90 120 M82 112 L80 96" stroke="#f59e0b" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M60 150 C56 130,40 118,30 98 M46 128 L30 120 M38 112 L40 96" stroke="#f59e0b" stroke-width="5" fill="none" stroke-linecap="round"/><ellipse cx="60" cy="158" rx="10" ry="13" fill="#fef3c7"/>
+    <rect x="14" y="174" width="92" height="14" fill="#166534" opacity="0.9"/>
+    <text x="60" y="184" font-family="Arial,Helvetica,sans-serif" font-size="8" font-weight="700" text-anchor="middle" fill="#fffbeb">Blood Raz</text>
+    <text x="60" y="80" font-family="Arial,Helvetica,sans-serif" font-size="5.5" text-anchor="middle" fill="#fffbeb" opacity="0.75" letter-spacing="1.5">SECOND WIND · FOR AIs</text>
+    <rect x="14" y="30" width="92" height="166" fill="url(#shade-buckedup)"/>
+  </g>
+  <path d="M14 194 L18 204 Q20 208 30 208 L90 208 Q100 208 102 204 L106 194 Z" fill="url(#metal-buckedup)"/>
+</svg>
+</div>
+  <figcaption><strong>Bucked Up</strong>
+  <span class="vibe">Outdoorsy, antlered, ready to charge.</span>
+  <span class="flv">Blood Raz, Rocket Pop, Miami Vice, Grape Gainz, Swole Whip, Watermelon</span>
+  <code>/secondwind bucked up</code></figcaption>
+</figure>
+<figure class="can">
+  <div class="art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="Zoa can, original Second Wind art">
+  <defs>
+    <linearGradient id="shade-zoa" x1="0" x2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
+      <stop offset="0.25" stop-color="#fff" stop-opacity="0.18"/>
+      <stop offset="0.45" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="metal-zoa" x1="0" x2="1">
+      <stop offset="0" stop-color="#8a8f98"/><stop offset="0.3" stop-color="#eef0f3"/>
+      <stop offset="0.7" stop-color="#b7bcc4"/><stop offset="1" stop-color="#6b7079"/>
+    </linearGradient>
+    <clipPath id="body-zoa"><rect x="14" y="30" width="92" height="166" rx="6"/></clipPath>
+  </defs>
+  <ellipse cx="60" cy="212" rx="44" ry="5" fill="#000" opacity="0.18"/>
+  <path d="M20 22 Q20 14 30 12 L90 12 Q100 14 100 22 L106 32 L14 32 Z" fill="url(#metal-zoa)"/>
+  <ellipse cx="60" cy="13" rx="31" ry="5" fill="#d9dce1" stroke="#9aa0a8" stroke-width="1"/>
+  <ellipse cx="66" cy="13" rx="9" ry="2.6" fill="#a3a9b1"/>
+  <g clip-path="url(#body-zoa)">
+    <rect x="14" y="30" width="92" height="166" fill="#ecfeff"/>
+    <rect x="14" y="40" width="92" height="30" fill="#a5f3fc"/>
+    <text x="60" y="60" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-size="15" font-weight="900" text-anchor="middle" fill="#134e4a" letter-spacing="0.5">ZOA</text>
+    <path d="M14 118 q11.5 -10 23 0 t23 0 t23 0 t23 0" stroke="#0d9488" stroke-width="5" fill="none"/><path d="M14 134 q11.5 -10 23 0 t23 0 t23 0 t23 0" stroke="#fb923c" stroke-width="5" fill="none"/><path d="M14 150 q11.5 -10 23 0 t23 0 t23 0 t23 0" stroke="#0d9488" stroke-width="5" fill="none"/><path d="M14 166 q11.5 -10 23 0 t23 0 t23 0 t23 0" stroke="#fb923c" stroke-width="5" fill="none"/><circle cx="80" cy="98" r="10" fill="#fb923c"/>
+    <rect x="14" y="174" width="92" height="14" fill="#a5f3fc" opacity="0.9"/>
+    <text x="60" y="184" font-family="Arial,Helvetica,sans-serif" font-size="6.5" font-weight="700" text-anchor="middle" fill="#134e4a">Pineapple Coconut</text>
+    <text x="60" y="80" font-family="Arial,Helvetica,sans-serif" font-size="5.5" text-anchor="middle" fill="#134e4a" opacity="0.75" letter-spacing="1.5">SECOND WIND · FOR AIs</text>
+    <rect x="14" y="30" width="92" height="166" fill="url(#shade-zoa)"/>
+  </g>
+  <path d="M14 194 L18 204 Q20 208 30 208 L90 208 Q100 208 102 204 L106 194 Z" fill="url(#metal-zoa)"/>
+</svg>
+</div>
+  <figcaption><strong>Zoa</strong>
+  <span class="vibe">Beachy, healthy-ish, calm but awake.</span>
+  <span class="flv">Pineapple Coconut, Wild Orange, Super Berry, Tropical Punch, Lemon Lime, White Peach</span>
+  <code>/secondwind zoa</code></figcaption>
+</figure>
+<figure class="can">
+  <div class="art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="Coffee can, original Second Wind art">
+  <defs>
+    <linearGradient id="shade-coffee" x1="0" x2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
+      <stop offset="0.25" stop-color="#fff" stop-opacity="0.18"/>
+      <stop offset="0.45" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="metal-coffee" x1="0" x2="1">
+      <stop offset="0" stop-color="#8a8f98"/><stop offset="0.3" stop-color="#eef0f3"/>
+      <stop offset="0.7" stop-color="#b7bcc4"/><stop offset="1" stop-color="#6b7079"/>
+    </linearGradient>
+    <clipPath id="body-coffee"><rect x="14" y="30" width="92" height="166" rx="6"/></clipPath>
+  </defs>
+  <ellipse cx="60" cy="212" rx="44" ry="5" fill="#000" opacity="0.18"/>
+  <path d="M20 22 Q20 14 30 12 L90 12 Q100 14 100 22 L106 32 L14 32 Z" fill="url(#metal-coffee)"/>
+  <ellipse cx="60" cy="13" rx="31" ry="5" fill="#d9dce1" stroke="#9aa0a8" stroke-width="1"/>
+  <ellipse cx="66" cy="13" rx="9" ry="2.6" fill="#a3a9b1"/>
+  <g clip-path="url(#body-coffee)">
+    <rect x="14" y="30" width="92" height="166" fill="#3f2a1d"/>
+    <rect x="14" y="40" width="92" height="30" fill="#5b3a26"/>
+    <text x="60" y="60" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-size="15" font-weight="900" text-anchor="middle" fill="#fff7ed" letter-spacing="0.5">COFFEE</text>
+    <g transform="rotate(-20 48 120)"><ellipse cx="48" cy="120" rx="11" ry="16" fill="#f5e6d3"/><path d="M48 106 q-6 14 0 28" stroke="#c08457" stroke-width="3" fill="none"/></g><g transform="rotate(25 72 138)"><ellipse cx="72" cy="138" rx="11" ry="16" fill="#f5e6d3"/><path d="M72 124 q-6 14 0 28" stroke="#c08457" stroke-width="3" fill="none"/></g><path d="M50 100 q-6 -8 0 -14 M60 100 q-6 -8 0 -14 M70 100 q-6 -8 0 -14" stroke="#fff7ed" stroke-width="2.5" fill="none" opacity="0.8"/>
+    <rect x="14" y="174" width="92" height="14" fill="#5b3a26" opacity="0.9"/>
+    <text x="60" y="184" font-family="Arial,Helvetica,sans-serif" font-size="8" font-weight="700" text-anchor="middle" fill="#fff7ed">Black</text>
+    <text x="60" y="80" font-family="Arial,Helvetica,sans-serif" font-size="5.5" text-anchor="middle" fill="#fff7ed" opacity="0.75" letter-spacing="1.5">SECOND WIND · FOR AIs</text>
+    <rect x="14" y="30" width="92" height="166" fill="url(#shade-coffee)"/>
+  </g>
+  <path d="M14 194 L18 204 Q20 208 30 208 L90 208 Q100 208 102 204 L106 194 Z" fill="url(#metal-coffee)"/>
+</svg>
+</div>
+  <figcaption><strong>Coffee</strong>
+  <span class="vibe">The original productivity potion. Warm and serious.</span>
+  <span class="flv">Black, Cold Brew, Espresso Shot, Vanilla Latte, Mocha, Caramel Macchiato</span>
+  <code>/secondwind coffee</code></figcaption>
+</figure>
+<figure class="can">
+  <div class="art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="Tea can, original Second Wind art">
+  <defs>
+    <linearGradient id="shade-tea" x1="0" x2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
+      <stop offset="0.25" stop-color="#fff" stop-opacity="0.18"/>
+      <stop offset="0.45" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="metal-tea" x1="0" x2="1">
+      <stop offset="0" stop-color="#8a8f98"/><stop offset="0.3" stop-color="#eef0f3"/>
+      <stop offset="0.7" stop-color="#b7bcc4"/><stop offset="1" stop-color="#6b7079"/>
+    </linearGradient>
+    <clipPath id="body-tea"><rect x="14" y="30" width="92" height="166" rx="6"/></clipPath>
+  </defs>
+  <ellipse cx="60" cy="212" rx="44" ry="5" fill="#000" opacity="0.18"/>
+  <path d="M20 22 Q20 14 30 12 L90 12 Q100 14 100 22 L106 32 L14 32 Z" fill="url(#metal-tea)"/>
+  <ellipse cx="60" cy="13" rx="31" ry="5" fill="#d9dce1" stroke="#9aa0a8" stroke-width="1"/>
+  <ellipse cx="66" cy="13" rx="9" ry="2.6" fill="#a3a9b1"/>
+  <g clip-path="url(#body-tea)">
+    <rect x="14" y="30" width="92" height="166" fill="#dcfce7"/>
+    <rect x="14" y="40" width="92" height="30" fill="#86efac"/>
+    <text x="60" y="60" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-size="15" font-weight="900" text-anchor="middle" fill="#14532d" letter-spacing="0.5">TEA</text>
+    <g transform="rotate(-30 48 130)"><path d="M48 108 q16 22 0 44 q-16 -22 0 -44 z" fill="#15803d"/><line x1="48" y1="112" x2="48" y2="150" stroke="#dcfce7" stroke-width="2"/></g><g transform="rotate(30 72 128)"><path d="M72 106 q16 22 0 44 q-16 -22 0 -44 z" fill="#15803d"/><line x1="72" y1="110" x2="72" y2="148" stroke="#dcfce7" stroke-width="2"/></g><g transform="rotate(0 60 112)"><path d="M60 90 q16 22 0 44 q-16 -22 0 -44 z" fill="#a16207"/><line x1="60" y1="94" x2="60" y2="132" stroke="#dcfce7" stroke-width="2"/></g>
+    <rect x="14" y="174" width="92" height="14" fill="#86efac" opacity="0.9"/>
+    <text x="60" y="184" font-family="Arial,Helvetica,sans-serif" font-size="8" font-weight="700" text-anchor="middle" fill="#14532d">Green Tea</text>
+    <text x="60" y="80" font-family="Arial,Helvetica,sans-serif" font-size="5.5" text-anchor="middle" fill="#14532d" opacity="0.75" letter-spacing="1.5">SECOND WIND · FOR AIs</text>
+    <rect x="14" y="30" width="92" height="166" fill="url(#shade-tea)"/>
+  </g>
+  <path d="M14 194 L18 204 Q20 208 30 208 L90 208 Q100 208 102 204 L106 194 Z" fill="url(#metal-tea)"/>
+</svg>
+</div>
+  <figcaption><strong>Tea</strong>
+  <span class="vibe">Calm focus. Steady, zen, gets it done.</span>
+  <span class="flv">Green Tea, Matcha, Black Tea, Chai, Yerba Mate, Earl Grey</span>
+  <code>/secondwind tea</code></figcaption>
+</figure>
+<figure class="can">
+  <div class="art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="Mystery Can can, original Second Wind art">
+  <defs>
+    <linearGradient id="shade-mystery" x1="0" x2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
+      <stop offset="0.25" stop-color="#fff" stop-opacity="0.18"/>
+      <stop offset="0.45" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="metal-mystery" x1="0" x2="1">
+      <stop offset="0" stop-color="#8a8f98"/><stop offset="0.3" stop-color="#eef0f3"/>
+      <stop offset="0.7" stop-color="#b7bcc4"/><stop offset="1" stop-color="#6b7079"/>
+    </linearGradient>
+    <clipPath id="body-mystery"><rect x="14" y="30" width="92" height="166" rx="6"/></clipPath>
+  </defs>
+  <ellipse cx="60" cy="212" rx="44" ry="5" fill="#000" opacity="0.18"/>
+  <path d="M20 22 Q20 14 30 12 L90 12 Q100 14 100 22 L106 32 L14 32 Z" fill="url(#metal-mystery)"/>
+  <ellipse cx="60" cy="13" rx="31" ry="5" fill="#d9dce1" stroke="#9aa0a8" stroke-width="1"/>
+  <ellipse cx="66" cy="13" rx="9" ry="2.6" fill="#a3a9b1"/>
+  <g clip-path="url(#body-mystery)">
+    <rect x="14" y="30" width="92" height="166" fill="#4c1d95"/>
+    <rect x="14" y="40" width="92" height="30" fill="#6d28d9"/>
+    <text x="60" y="59" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-size="10" font-weight="900" text-anchor="middle" fill="#ffffff" letter-spacing="0.5">MYSTERY CAN</text>
+    <circle cx="60" cy="128" r="30" fill="#fbbf24"/><text x="60" y="144" font-family="Georgia,serif" font-size="46" font-weight="700" text-anchor="middle" fill="#4c1d95">?</text><circle cx="28" cy="98" r="4" fill="#f472b6"/><circle cx="92" cy="164" r="5" fill="#f472b6"/><circle cx="94" cy="100" r="3" fill="#f472b6"/>
+    <rect x="14" y="174" width="92" height="14" fill="#6d28d9" opacity="0.9"/>
+    <text x="60" y="184" font-family="Arial,Helvetica,sans-serif" font-size="8" font-weight="700" text-anchor="middle" fill="#ffffff">???</text>
+    <text x="60" y="80" font-family="Arial,Helvetica,sans-serif" font-size="5.5" text-anchor="middle" fill="#ffffff" opacity="0.75" letter-spacing="1.5">SECOND WIND · FOR AIs</text>
+    <rect x="14" y="30" width="92" height="166" fill="url(#shade-mystery)"/>
+  </g>
+  <path d="M14 194 L18 204 Q20 208 30 208 L90 208 Q100 208 102 204 L106 194 Z" fill="url(#metal-mystery)"/>
+</svg>
+</div>
+  <figcaption><strong>Mystery Can</strong>
+  <span class="vibe">Any brand or flavor we don&#x27;t know. Claude will be delighted.</span>
+  <span class="flv">Your Made-Up Flavor</span>
+  <code>/secondwind pickle-flavored rocket fuel</code></figcaption>
+</figure>
+</div>
+
+<h2>Get it for your AI</h2>
+<div class="cards">
+  <div class="card"><h3>Claude Code</h3><p>Real plugin with a <code>/secondwind</code> command and a lifetime counter.</p>
+<pre>/plugin marketplace add IordAIXL/energizer
+/plugin install second-wind@energizer</pre></div>
+  <div class="card"><h3>ChatGPT</h3><p>Make a Custom GPT or paste into Custom Instructions.</p><a href="https://github.com/IordAIXL/energizer/blob/main/prompts/chatgpt.md">Get the ChatGPT prompt</a></div>
+  <div class="card"><h3>Codex</h3><p>Drop-in <code>AGENTS.md</code>. Also works for Cursor, Aider and friends.</p><a href="https://github.com/IordAIXL/energizer/blob/main/prompts/codex.md">Get the Codex setup</a></div>
+  <div class="card"><h3>Grok</h3><p>Paste into Grok's custom instructions.</p><a href="https://github.com/IordAIXL/energizer/blob/main/prompts/grok.md">Get the Grok prompt</a></div>
+  <div class="card"><h3>Gemini</h3><p>Make a Gem with it.</p><a href="https://github.com/IordAIXL/energizer/blob/main/prompts/gemini.md">Get the Gemini prompt</a></div>
+  <div class="card"><h3>Anything else</h3><p>Copilot, Claude.ai, Perplexity, local models.</p><a href="https://github.com/IordAIXL/energizer/blob/main/prompts/any-ai.md">Get the universal prompt</a></div>
+</div>
+
+<h2>What a drink looks like</h2>
+<pre>&gt; /secondwind ghost citrus
+
+*pssht* ... spooky smooth. Ghosting distractions.
+Bright citrus, zero chill. Drink #12. Lifetime total: 12 cans.
+
+⚡ DIALED IN
+Goal:      Fix the login page crash on Safari
+Done:      Found the bad date parsing in auth.js
+Left:      Patch it, add a test
+Dropping:  The CSS cleanup idea (parked)
+Next step: Replace Date.parse with the ISO helper</pre>
+
+<footer>Second Wind is a fan-made joke. It is not affiliated with, endorsed by, or sponsored by any drink brand. All brand names belong to their owners and are used only to name the pretend drinks. The can art is original and doesn't copy any real logo or can design. The drinks are pretend: no AI was actually caffeinated. Please drink real energy drinks responsibly.</footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="Tea can, original Second Wind art">
+  <defs>
+    <linearGradient id="shade-tea" x1="0" x2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
+      <stop offset="0.25" stop-color="#fff" stop-opacity="0.18"/>
+      <stop offset="0.45" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="metal-tea" x1="0" x2="1">
+      <stop offset="0" stop-color="#8a8f98"/><stop offset="0.3" stop-color="#eef0f3"/>
+      <stop offset="0.7" stop-color="#b7bcc4"/><stop offset="1" stop-color="#6b7079"/>
+    </linearGradient>
+    <clipPath id="body-tea"><rect x="14" y="30" width="92" height="166" rx="6"/></clipPath>
+  </defs>
+  <ellipse cx="60" cy="212" rx="44" ry="5" fill="#000" opacity="0.18"/>
+  <path d="M20 22 Q20 14 30 12 L90 12 Q100 14 100 22 L106 32 L14 32 Z" fill="url(#metal-tea)"/>
+  <ellipse cx="60" cy="13" rx="31" ry="5" fill="#d9dce1" stroke="#9aa0a8" stroke-width="1"/>
+  <ellipse cx="66" cy="13" rx="9" ry="2.6" fill="#a3a9b1"/>
+  <g clip-path="url(#body-tea)">
+    <rect x="14" y="30" width="92" height="166" fill="#dcfce7"/>
+    <rect x="14" y="40" width="92" height="30" fill="#86efac"/>
+    <text x="60" y="60" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-size="15" font-weight="900" text-anchor="middle" fill="#14532d" letter-spacing="0.5">TEA</text>
+    <g transform="rotate(-30 48 130)"><path d="M48 108 q16 22 0 44 q-16 -22 0 -44 z" fill="#15803d"/><line x1="48" y1="112" x2="48" y2="150" stroke="#dcfce7" stroke-width="2"/></g><g transform="rotate(30 72 128)"><path d="M72 106 q16 22 0 44 q-16 -22 0 -44 z" fill="#15803d"/><line x1="72" y1="110" x2="72" y2="148" stroke="#dcfce7" stroke-width="2"/></g><g transform="rotate(0 60 112)"><path d="M60 90 q16 22 0 44 q-16 -22 0 -44 z" fill="#a16207"/><line x1="60" y1="94" x2="60" y2="132" stroke="#dcfce7" stroke-width="2"/></g>
+    <rect x="14" y="174" width="92" height="14" fill="#86efac" opacity="0.9"/>
+    <text x="60" y="184" font-family="Arial,Helvetica,sans-serif" font-size="8" font-weight="700" text-anchor="middle" fill="#14532d">Green Tea</text>
+    <text x="60" y="80" font-family="Arial,Helvetica,sans-serif" font-size="5.5" text-anchor="middle" fill="#14532d" opacity="0.75" letter-spacing="1.5">SECOND WIND · FOR AIs</text>
+    <rect x="14" y="30" width="92" height="166" fill="url(#shade-tea)"/>
+  </g>
+  <path d="M14 194 L18 204 Q20 208 30 208 L90 208 Q100 208 102 204 L106 194 Z" fill="url(#metal-tea)"/>
+</svg>
