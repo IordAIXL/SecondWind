@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.2 (2026-11-21)
+
+- Desktop helper: can now be started with right-click SecondWind.ps1 > "Run with PowerShell" (it hides its own console window), for PCs where the .bat file is hidden or removed.
+- Clearer start steps: Windows may show "Start Second Wind.bat" as just "Start Second Wind" with a gear icon.
+
 ## 2.0.1 (2026-11-21)
 
 - Browser button zip now has manifest.json right at the top, so the folder Windows makes when you unzip is the one to pick in "Load unpacked". Before, picking the outer folder gave "Manifest file is missing".

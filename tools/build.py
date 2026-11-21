@@ -277,7 +277,7 @@ def install_section():
         ("desktop", "Desktop apps", "▣", "For the ChatGPT, Claude and Copilot desktop apps on Windows. A floating can you can drag anywhere, plus hotkeys. Nothing to install.", [
             '<a class="btn big" href="downloads/second-wind-desktop.zip" download>⬇ Download for Windows</a>',
             'Unzip it somewhere you\'ll keep it, like Documents.',
-            'Double-click <b>Start Second Wind.bat</b>. If Windows says it protected your PC, click <b>More info</b>, then <b>Run anyway</b>.',
+            'Open the <b>Second Wind</b> folder and double-click <b>Start Second Wind</b> (the one with the gear icon). If Windows says it protected your PC, click <b>More info</b>, then <b>Run anyway</b>. No such file? Right-click <b>SecondWind.ps1</b> and pick <b>Run with PowerShell</b>.',
             'A can floats on your screen and sits in your tray. Drag it anywhere.',
             'Click into your AI app\'s chat box, then click the can (or press <b>Ctrl+Alt+D</b>) and pick a drink. <b>Ctrl+Alt+U</b> hands over your usual instantly.',
             'Right-click any flavor to star it or make it your usual.',

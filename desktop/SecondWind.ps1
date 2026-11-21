@@ -37,6 +37,7 @@ public static class SWNative {
     [DllImport("user32.dll")] public static extern bool RegisterHotKey(IntPtr h, int id, uint mods, uint vk);
     [DllImport("user32.dll")] public static extern bool UnregisterHotKey(IntPtr h, int id);
     [DllImport("user32.dll")] public static extern bool SetProcessDPIAware();
+    [DllImport("kernel32.dll")] public static extern IntPtr GetConsoleWindow();
 
     public static uint PidOf(IntPtr h) { uint pid; GetWindowThreadProcessId(h, out pid); return pid; }
     public static string ClassOf(IntPtr h) { var sb = new StringBuilder(256); GetClassName(h, sb, 256); return sb.ToString(); }
@@ -68,6 +69,8 @@ public class SWHotkeys : NativeWindow {
 }
 "@
 
+# Hide the black console window (matters when started with right-click > "Run with PowerShell").
+try { $cw = [SWNative]::GetConsoleWindow(); if ($cw -ne [IntPtr]::Zero) { [void][SWNative]::ShowWindow($cw, 0) } } catch { }
 [void][SWNative]::SetProcessDPIAware()
 [System.Windows.Forms.Application]::EnableVisualStyles()
 
