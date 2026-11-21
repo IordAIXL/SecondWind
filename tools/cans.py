@@ -129,6 +129,17 @@ def vtext(x, y, s, size, fill, family=BLACK, weight=900, fit=None, rot=-90, extr
 
 # ------------------------------------------------------------------ brands
 
+def shade(hexc, f):
+    """Darken (f < 1) or lighten (f > 1) a hex color."""
+    h = hexc.lstrip("#")
+    rgb = [int(h[i:i + 2], 16) for i in (0, 2, 4)]
+    if f < 1:
+        rgb = [int(v * f) for v in rgb]
+    else:
+        rgb = [int(v + (255 - v) * (f - 1)) for v in rgb]
+    return "#" + "".join(f"{max(0, min(255, v)):02x}" for v in rgb)
+
+
 def ART_redbull(g):
     c = g.c
     s = c["band"]
@@ -223,40 +234,57 @@ def ART_celsius(g):
 def ART_ryse(g):
     c = g.c
     a = c["accent"]
-    out = [f'<rect x="{g.x}" y="{g.t}" width="{g.w}" height="{g.h}" fill="{c["body"]}"/>',
-           f'<linearGradient id="ry-{slug(g.flavor)}" x1="0" y1="1" x2="0" y2="0">'
-           f'<stop offset="0" stop-color="{a}"/><stop offset="1" stop-color="{a}" stop-opacity="0"/></linearGradient>',
-           f'<rect x="{g.x}" y="{g.y(0.35)}" width="{g.w}" height="{g.h * 0.65:.1f}" fill="url(#ry-{slug(g.flavor)})"/>']
-    # up arrows
-    for i in range(3):
-        yy = g.y(0.62) - i * 14
-        out.append(f'<path d="M{g.cx - 24} {yy + 12} L{g.cx} {yy - 4} L{g.cx + 24} {yy + 12}" stroke="{c["text"]}" '
-                   f'stroke-width="5" fill="none" stroke-linejoin="miter" opacity="{0.9 - i * 0.25:.2f}"/>')
-    out.append(text(g.cx, g.y(0.16), "RYSE", 22, c["text"], WIDE, 900, fit=g.w - 20, extra='force font-style="italic"'))
-    out.append(text(g.cx, g.y(0.22), "FUEL", 7, a, WIDE, 900, extra='letter-spacing="4"'))
-    out.append(f'<rect x="{g.x + 10}" y="{g.y(0.74)}" width="{g.w - 20}" height="25" rx="3" fill="{c["body"]}" opacity="0.85"/>')
-    out.append(flavor_text(g, g.y(0.74) + 8, 6, c["text"], SANS, 900, maxlen=14, width=g.w - 26))
-    out.append(text(g.cx, g.y(0.94), "ZERO SUGAR · 200MG", 4, c["text"], SANS, 700))
+    dark = shade(a, 0.45)
+    fg = ink(a)
+    gid = f"ry-{slug(g.flavor)}"
+    out = [f'<linearGradient id="{gid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{shade(a, 1.15)}"/>'
+           f'<stop offset="1" stop-color="{shade(a, 0.8)}"/></linearGradient>',
+           f'<rect x="{g.x}" y="{g.t}" width="{g.w}" height="{g.h}" fill="url(#{gid})"/>',
+           # dark diagonal sweep behind the lettering
+           f'<polygon points="{g.x},{g.y(0.30)} {g.r},{g.y(0.12)} {g.r},{g.y(0.62)} {g.x},{g.y(0.86)}" fill="{dark}" opacity="0.9"/>',
+           # top logo: up-triangle mark + RYSE
+           f'<polygon points="{g.cx - 22},{g.y(0.105)} {g.cx - 15},{g.y(0.04)} {g.cx - 8},{g.y(0.105)}" fill="{fg}"/>',
+           text(g.cx + 7, g.y(0.105), "RYSE", 13, fg, WIDE, 900, fit=34, extra='force letter-spacing="1"')]
+    # giant FUEL running up the can
+    out.append(vtext(g.cx + 1, g.y(0.5), "FUEL", 44, "#fff", WIDE, 900, fit=g.h * 0.52,
+                     extra=f'stroke="#111" stroke-width="2" paint-order="stroke" force font-style="italic"'))
+    # speed lines
+    for i in range(4):
+        y0 = g.y(0.22) + i * 9
+        out.append(f'<line x1="{g.r - 14}" y1="{y0}" x2="{g.r - 4}" y2="{y0 - 5}" stroke="#fff" stroke-width="1.6" opacity="0.7"/>')
+    nl = len(flavor_lines(g.flavor.upper(), 13))
+    out.append(f'<rect x="{g.x + 8}" y="{g.y(0.78)}" width="{g.w - 16}" height="{8 + nl * 7.5}" rx="2" fill="#111"/>')
+    out.append(flavor_text(g, g.y(0.78) + 9, 6, "#fff", WIDE, 900, maxlen=13, width=g.w - 24))
+    if nl < 3:
+        out.append(text(g.cx, g.y(0.945), "ZERO SUGAR · 200MG CAFFEINE", 3.6, fg, SANS, 800, fit=g.w - 14))
     return "".join(out)
 
 
 def ART_ghost(g):
     c = g.c
-    body = c["accent"]
-    ink = c["text"]
-    out = [f'<rect x="{g.x}" y="{g.t}" width="{g.w}" height="{g.h}" fill="{body}"/>',
-           f'<rect x="{g.x}" y="{g.y(0.06)}" width="{g.w}" height="22" fill="{ink}"/>',
-           text(g.cx, g.y(0.06) + 17, "GHOST", 18, body, WIDE, 900, fit=g.w - 18, extra="force"),
-           text(g.cx, g.y(0.22), "ENERGY", 7, ink, WIDE, 900, extra='letter-spacing="5"')]
-    gx, gy = g.cx, g.y(0.5)
-    out.append(f'<path d="M{gx - 22} {gy + 26} V{gy - 4} a22 22 0 0 1 44 0 V{gy + 26} '
-               f'l-7.3 -6 -7.3 6 -7.3 -6 -7.3 6 -7.3 -6 z" fill="#fff" stroke="{ink}" stroke-width="3"/>')
-    out.append(f'<ellipse cx="{gx - 8}" cy="{gy - 2}" rx="4" ry="6" fill="{ink}"/>'
-               f'<ellipse cx="{gx + 8}" cy="{gy - 2}" rx="4" ry="6" fill="{ink}"/>')
-    nl = len(flavor_lines(g.flavor.upper(), 14))
-    bh = 8 + nl * 8
-    out.append(f'<rect x="{g.x}" y="{g.y(0.75)}" width="{g.w}" height="{bh}" fill="#fff"/>')
-    out.append(flavor_text(g, g.y(0.75) + 10, 6.5, ink, WIDE, 900, maxlen=14))
+    a = c["accent"]
+    fg = ink(a, "#111111", "#ffffff")
+    out = [f'<rect x="{g.x}" y="{g.t}" width="{g.w}" height="{g.h}" fill="{a}"/>']
+    # faint repeating ghost pattern
+    for row in range(8):
+        for col in range(4):
+            gx = g.x + 6 + col * 24 + (row % 2) * 12
+            gy = g.t + 10 + row * 25
+            out.append(f'<path d="M{gx - 4} {gy + 5} V{gy} a4 4 0 0 1 8 0 V{gy + 5} l-2 -1.5 -2 1.5 -2 -1.5 z" fill="{fg}" opacity="0.08"/>')
+    # top: ghost badge + wordmark
+    bx, by = g.cx, g.y(0.095)
+    out.append(f'<circle cx="{bx}" cy="{by}" r="12.5" fill="#111"/>'
+               f'<path d="M{bx - 8} {by + 9} V{by - 1} a8 8 0 0 1 16 0 V{by + 9} l-2.7 -2.4 -2.6 2.4 -2.7 -2.4 -2.7 2.4 -2.6 -2.4 z" fill="#fff"/>'
+               f'<ellipse cx="{bx - 3}" cy="{by - 1}" rx="1.6" ry="2.4" fill="#111"/>'
+               f'<ellipse cx="{bx + 3}" cy="{by - 1}" rx="1.6" ry="2.4" fill="#111"/>')
+    out.append(text(g.cx, g.y(0.275), "GHOST", 14, "#111", WIDE, 900, fit=g.w - 26, extra="force"))
+    # giant ENERGY running up the can
+    out.append(vtext(g.cx, g.y(0.575), "ENERGY", 30, "#fff", WIDE, 900, fit=g.h * 0.44,
+                     extra='stroke="#111" stroke-width="2.4" paint-order="stroke" force'))
+    nl = len(flavor_lines(g.flavor.upper(), 13))
+    bh = 9 + nl * 8
+    out.append(f'<rect x="{g.x + 6}" y="{g.y(0.82)}" width="{g.w - 12}" height="{bh}" rx="3" fill="#111"/>')
+    out.append(flavor_text(g, g.y(0.82) + 10, 6.5, a if ink(a) == "#111111" else "#fff", WIDE, 900, maxlen=13, width=g.w - 20))
     return "".join(out)
 
 
@@ -284,17 +312,20 @@ def ART_bang(g):
 def ART_reign(g):
     c = g.c
     a = c["accent"]
-    out = [f'<rect x="{g.x}" y="{g.t}" width="{g.w}" height="{g.h}" fill="{c["body"]}"/>',
-           f'<rect x="{g.x + 6}" y="{g.t}" width="7" height="{g.h}" fill="{a}"/>',
-           f'<rect x="{g.r - 13}" y="{g.t}" width="7" height="{g.h}" fill="{a}"/>',
-           f'<rect x="{g.x + 15}" y="{g.t}" width="2" height="{g.h}" fill="{a}" opacity="0.6"/>',
-           f'<rect x="{g.r - 17}" y="{g.t}" width="2" height="{g.h}" fill="{a}" opacity="0.6"/>']
-    cy = g.y(0.13)
-    out.append(f'<path d="M{g.cx - 16} {cy + 8} L{g.cx - 16} {cy - 6} L{g.cx - 8} {cy + 1} L{g.cx} {cy - 10} '
-               f'L{g.cx + 8} {cy + 1} L{g.cx + 16} {cy - 6} L{g.cx + 16} {cy + 8} Z" fill="{a}"/>')
-    out.append(vtext(g.cx + 9, g.y(0.5), "REIGN", 26, c["text"], WIDE, 900, fit=g.h * 0.48, extra="force"))
-    out.append(text(g.cx, g.y(0.84), "TOTAL BODY FUEL", 4.2, a, SANS, 800, extra='letter-spacing="1"'))
-    out.append(flavor_text(g, g.y(0.91), 5.5, c["text"], SANS, 900, maxlen=14, width=g.w - 40))
+    gid = f"re-{slug(g.flavor)}"
+    out = [f'<linearGradient id="{gid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{a}"/>'
+           f'<stop offset="0.6" stop-color="{shade(a, 0.7)}"/><stop offset="1" stop-color="{shade(a, 0.25)}"/></linearGradient>',
+           f'<rect x="{g.x}" y="{g.t}" width="{g.w}" height="{g.h}" fill="url(#{gid})"/>',
+           f'<rect x="{g.x + 5}" y="{g.t}" width="2" height="{g.h}" fill="#111" opacity="0.5"/>',
+           f'<rect x="{g.r - 7}" y="{g.t}" width="2" height="{g.h}" fill="#111" opacity="0.5"/>']
+    cy = g.y(0.11)
+    out.append(f'<path d="M{g.cx - 15} {cy + 8} L{g.cx - 15} {cy - 6} L{g.cx - 7.5} {cy + 1} L{g.cx} {cy - 10} '
+               f'L{g.cx + 7.5} {cy + 1} L{g.cx + 15} {cy - 6} L{g.cx + 15} {cy + 8} Z" fill="#111"/>'
+               f'<rect x="{g.cx - 15}" y="{cy + 10}" width="30" height="3" fill="#111"/>')
+    out.append(vtext(g.cx + 9, g.y(0.52), "REIGN", 30, "#fff", WIDE, 900, fit=g.h * 0.5,
+                     extra='stroke="#111" stroke-width="2" paint-order="stroke" force'))
+    out.append(text(g.cx, g.y(0.84), "TOTAL BODY FUEL", 4.4, "#fff", SANS, 800, extra='letter-spacing="1"'))
+    out.append(flavor_text(g, g.y(0.9), 6, "#fff", WIDE, 900, maxlen=14, width=g.w - 20))
     return "".join(out)
 
 
@@ -391,27 +422,23 @@ def ART_3d(g):
 def ART_buckedup(g):
     c = g.c
     a = c["accent"]
-    out = [f'<rect x="{g.x}" y="{g.t}" width="{g.w}" height="{g.h}" fill="{c["body"]}"/>']
-    # camo blobs
-    blobs = [(0.15, 0.1, 14, 8), (0.7, 0.05, 12, 7), (0.4, 0.3, 16, 9), (0.9, 0.35, 10, 8), (0.1, 0.5, 12, 10),
-             (0.6, 0.6, 15, 8), (0.25, 0.8, 13, 9), (0.85, 0.85, 12, 7), (0.5, 0.95, 14, 6)]
-    for i, (fx, fy, rx, ry) in enumerate(blobs):
-        col = c["band"] if i % 2 else "#0b2e17"
-        out.append(f'<ellipse cx="{g.x + g.w * fx:.1f}" cy="{g.y(fy):.1f}" rx="{rx}" ry="{ry}" fill="{col}" '
-                   f'transform="rotate({(i * 37) % 60 - 30} {g.x + g.w * fx:.1f} {g.y(fy):.1f})"/>')
-    # antlers
+    fg = ink(a)
+    out = [f'<rect x="{g.x}" y="{g.t}" width="{g.w}" height="{g.h}" fill="{a}"/>',
+           f'<rect x="{g.x}" y="{g.y(0.40)}" width="{g.w}" height="{g.h * 0.30:.1f}" fill="#111"/>']
+    # deer head with antlers
+    x, y = g.cx, g.y(0.25)
     def side(s):
-        x = g.cx
-        y = g.y(0.38)
-        return (f'<path d="M{x + s * 4} {y} C{x + s * 10} {y - 14},{x + s * 22} {y - 18},{x + s * 30} {y - 34} '
-                f'M{x + s * 15} {y - 14} L{x + s * 28} {y - 16} M{x + s * 22} {y - 22} L{x + s * 18} {y - 34} '
-                f'M{x + s * 26} {y - 28} L{x + s * 36} {y - 30}" stroke="{a}" stroke-width="4" fill="none" stroke-linecap="round"/>')
+        return (f'<path d="M{x + s * 5} {y - 4} C{x + s * 9} {y - 14},{x + s * 18} {y - 18},{x + s * 24} {y - 32} '
+                f'M{x + s * 13} {y - 14} L{x + s * 24} {y - 16} M{x + s * 19} {y - 22} L{x + s * 15} {y - 33} '
+                f'M{x + s * 22} {y - 28} L{x + s * 31} {y - 29}" stroke="#111" stroke-width="3.6" fill="none" stroke-linecap="round"/>')
     out.append(side(1) + side(-1))
-    out.append(f'<rect x="{g.x}" y="{g.y(0.44)}" width="{g.w}" height="34" fill="{c["accent2"]}"/>')
-    out.append(text(g.cx, g.y(0.44) + 15, "BUCKED", 13, c["body"], WIDE, 900, fit=g.w - 16, extra="force"))
-    out.append(text(g.cx, g.y(0.44) + 29, "UP", 13, a, WIDE, 900))
-    out.append(f'<rect x="{g.x + 8}" y="{g.y(0.74)}" width="{g.w - 16}" height="22" rx="2" fill="{a}"/>')
-    out.append(flavor_text(g, g.y(0.74) + 9, 6, ink(a), WIDE, 900, maxlen=13, width=g.w - 22))
+    out.append(f'<path d="M{x - 7} {y - 6} Q{x} {y - 10} {x + 7} {y - 6} L{x + 4} {y + 10} Q{x} {y + 14} {x - 4} {y + 10} Z" fill="#111"/>'
+               f'<path d="M{x - 7} {y - 5} l-6 -3 3 6 z M{x + 7} {y - 5} l6 -3 -3 6 z" fill="#111"/>')
+    out.append(text(g.cx, g.y(0.40) + 20, "BUCKED", 15, "#fff", WIDE, 900, fit=g.w - 14, extra="force"))
+    out.append(text(g.cx, g.y(0.40) + 38, "UP", 17, a, WIDE, 900))
+    out.append(text(g.cx, g.y(0.40) + 48, "ENERGY", 5, "#fff", SANS, 800, extra='letter-spacing="3"'))
+    out.append(flavor_text(g, g.y(0.80), 6.5, fg, WIDE, 900, maxlen=13, width=g.w - 16))
+    out.append(text(g.cx, g.y(0.95), "300MG CAFFEINE · ZERO SUGAR", 3.4, fg, SANS, 800, fit=g.w - 14))
     return "".join(out)
 
 

@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.3.0 (2026-11-21)
+
+- Can audit against the real brands. Redid four cans that didn't look right:
+  - Ryse: full flavor-colored can, big slanted FUEL lettering, logo at the top.
+  - Ghost: flavor-colored can with the ghost badge, GHOST wordmark and big ENERGY lettering.
+  - Reign: flavor-colored can (was black), crown on top, big REIGN lettering.
+  - Bucked Up: flavor-colored can with a deer head and a black name band (was camo).
+
 ## 1.2.0 (2026-11-21)
 
 - More realistic cans: shiny aluminum shading and highlights, curved can bodies, real tops with rims and pull tabs, tapered bottoms and a soft floor shadow.
