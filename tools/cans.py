@@ -146,7 +146,7 @@ def ART_redbull(g):
     emblem = (f'<ellipse cx="{g.cx}" cy="{sy}" rx="{hw - 2:.1f}" ry="36" fill="{s}"/>'
               f'<circle cx="{g.cx}" cy="{sy - 10}" r="13" fill="{c["accent2"]}"/>'
               # two charging bulls, abstract
-              + bull(g.cx - 14, sy - 6, 1, c["accent"]) + bull(g.cx + 14, sy - 6, -1, c["accent"]) +
+              + bull(g.cx - 10.5, sy - 6, 1, c["accent"]) + bull(g.cx + 10.5, sy - 6, -1, c["accent"]) +
               text(g.cx, sy + 18, g.name, 13, c["accent"], SANS, 900, fit=hw * 2 - 10,
                    extra='font-style="italic" letter-spacing="-0.5"') +
               text(g.cx, sy + 27, "ENERGY DRINK", 5.5, "#1f3a8a", SANS, 800, fit=hw * 2 - 16))
@@ -154,40 +154,44 @@ def ART_redbull(g):
         text(g.cx, g.y(0.12), g.flavor.upper() if len(g.flavor) < 14 else g.flavor.upper(), 6.5, c["text"], SANS, 900,
              fit=g.w - 8) + text(g.cx, g.y(0.17), "EDITION" if g.flavor not in ("Sugarfree", "Zero") else "", 4.5,
                                    c["text"], SANS, 700))
-    return "".join(tiles) + emblem + ed + text(g.cx, g.y(0.93), "VITALIZES BODY AND MIND", 3.6, c["text"], SANS, 700, fit=g.w - 10)
+    return "".join(tiles) + emblem + ed
 
 
 def bull(x, y, d, col):
-    # a stylized charging bull silhouette facing the center
-    return (f'<g transform="translate({x} {y}) scale({d} 1)">'
-            f'<path d="M-10 4 Q-11 -2 -6 -4 L2 -5 Q6 -8 9 -6 L12 -9 L11 -4 Q13 -2 11 1 L8 2 L7 7 L5 7 L4 3 '
-            f'L-4 4 L-5 8 L-7 8 L-7 4 Z" fill="{col}"/></g>')
+    # a charging bull silhouette: head down, horns forward, facing the center
+    return (f'<g transform="translate({x} {y}) scale({d * 0.72:.2f} 0.72)">'
+            f'<path d="M-14 1 C-15 -4 -10 -7 -4 -6 L3 -7.5 C7 -8.5 9 -6.5 10 -3.5 L13.5 -0.5 L15 3 L12 3.4 '
+            f'L10 1.6 L8.2 2.6 L8.6 7.5 L6.4 7.5 L5.6 3.4 L-5.5 3.4 L-7.5 8 L-9.7 8 L-9.6 3 '
+            f'C-11 3.4 -13 5 -15.5 7.5 C-14 4.5 -13.5 3 -14 1 Z" fill="{col}"/>'
+            f'<path d="M10.5 -3 q3.5 -3.2 6.5 -1.6" stroke="{col}" stroke-width="1.2" fill="none" stroke-linecap="round"/>'
+            f'</g>')
 
 
 def ART_monster(g):
     c = g.c
     a = c["accent"]
     out = [f'<rect x="{g.x}" y="{g.t}" width="{g.w}" height="{g.h}" fill="{c["body"]}"/>']
-    # three ragged claw marks
-    top, bot = g.y(0.08), g.y(0.62)
-    for i, dx in enumerate((-20, 0, 20)):
-        x = g.cx + dx
-        pts = []
-        n = 9
+    # three ragged claw marks: wide and torn at the top, sharp at the bottom
+    import random
+    rnd = random.Random(7)
+    top, bot = g.y(0.05), g.y(0.64)
+    for i, dx in enumerate((-21, 0, 21)):
+        x0 = g.cx + dx
+        n = 16
+        right, left = [], []
         for k in range(n + 1):
-            yy = top + (bot - top) * k / n
-            wob = (3 if k % 2 else -2) + (i - 1) * 0.6
-            wdt = 6.5 - abs(k - n / 2) * 0.55
-            pts.append((x + wob + wdt, yy))
-        left = []
-        for k in range(n, -1, -1):
-            yy = top + (bot - top) * k / n
-            wob = (3 if k % 2 else -2) + (i - 1) * 0.6
-            wdt = 6.5 - abs(k - n / 2) * 0.55
-            jag = 1.8 if k % 3 == 0 else 0
-            left.append((x + wob - wdt - jag, yy))
-        poly = " ".join(f"{px:.1f},{py:.1f}" for px, py in pts + left)
+            f = k / n
+            yy = top + (bot - top) * f + (i - 1) * 2
+            half = 7.5 * (1 - f) ** 0.7 + 0.4
+            drift = math.sin(f * 7 + i) * 2.2 + (i - 1) * f * 3
+            right.append((x0 + drift + half + rnd.uniform(-1.6, 1.6) * (k % 2), yy))
+            left.append((x0 + drift - half - rnd.uniform(0, 2.2) * ((k + 1) % 2), yy))
+        poly = " ".join(f"{px:.1f},{py:.1f}" for px, py in right + left[::-1])
         out.append(f'<polygon points="{poly}" fill="{a}"/>')
+        # torn specks
+        for _ in range(3):
+            out.append(f'<circle cx="{x0 + rnd.uniform(-9, 9):.1f}" cy="{top + rnd.uniform(-2, 30):.1f}" '
+                       f'r="{rnd.uniform(0.5, 1.3):.1f}" fill="{a}"/>')
     out.append(text(g.cx, g.y(0.72), "MONSTER", 13, c["text"], BLACK, 900, fit=g.w - 16,
                     extra='letter-spacing="1" force'))
     out.append(text(g.cx, g.y(0.78), "ENERGY", 6, a if ink(a) != ink(c["body"]) else c["text"], BLACK, 900, fit=34, extra='force'))
@@ -249,8 +253,10 @@ def ART_ghost(g):
                f'l-7.3 -6 -7.3 6 -7.3 -6 -7.3 6 -7.3 -6 z" fill="#fff" stroke="{ink}" stroke-width="3"/>')
     out.append(f'<ellipse cx="{gx - 8}" cy="{gy - 2}" rx="4" ry="6" fill="{ink}"/>'
                f'<ellipse cx="{gx + 8}" cy="{gy - 2}" rx="4" ry="6" fill="{ink}"/>')
-    out.append(f'<rect x="{g.x}" y="{g.y(0.75)}" width="{g.w}" height="30" fill="#fff"/>')
-    out.append(flavor_text(g, g.y(0.75) + 9, 6.5, ink, WIDE, 900, maxlen=14))
+    nl = len(flavor_lines(g.flavor.upper(), 14))
+    bh = 8 + nl * 8
+    out.append(f'<rect x="{g.x}" y="{g.y(0.75)}" width="{g.w}" height="{bh}" fill="#fff"/>')
+    out.append(flavor_text(g, g.y(0.75) + 10, 6.5, ink, WIDE, 900, maxlen=14))
     return "".join(out)
 
 
@@ -492,40 +498,88 @@ def ART_generic(g):
 
 # ------------------------------------------------------------------ shell
 
+SIZE_LABEL = {
+    "tall": "16 FL OZ (473 mL)", "sleek": "12 FL OZ (355 mL)",
+    "slim": "8.4 FL OZ (250 mL)", "stubby": "11 FL OZ (325 mL)",
+}
+
+
 def can_svg(brand, flavor=None):
     bid = brand["id"]
     flavor = flavor or brand.get("flavors", ["???"])[0]
     shape = BRAND_SHAPE.get(bid, "tall")
     g = G(brand, flavor, shape)
     art = globals().get(f"ART_{bid}", ART_generic)(g)
-    x, r, cx, lid, t, b = g.x, g.r, g.cx, g.lid, g.t, g.b
-    lrx = g.w / 2 - 6
-    label = f"{brand['name']} {flavor} can, Second Wind art"
+    x, r, cx, lid, t, b, w = g.x, g.r, g.cx, g.lid, g.t, g.b, g.w
     u = f"{bid}-{slug(flavor)}"
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="{esc(label)}">
+    rx = w / 2
+    ry = round(max(3.0, w * 0.075), 1)  # perspective: we look down at the can a little
+    trx = rx - 6                        # lid radius (the neck is narrower than the body)
+    tcy = lid + 3                       # lid center
+    lry = round(ry * 0.9, 1)
+    tw = round(trx * 0.55, 1)           # pull tab width
+    label = f"{brand['name']} {flavor} can, Second Wind art"
+    size_col = ink(g.c["body"])
+    body_path = f"M{x} {t} A{rx} {ry} 0 0 0 {r} {t} L{r} {b} A{rx} {ry} 0 0 1 {x} {b} Z"
+    H = round(g.h + ry * 2, 1)
+    ty = round(t - ry, 1)
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="{esc(label)}">
   <defs>
     <linearGradient id="shade-{u}" x1="0" x2="1">
-      <stop offset="0" stop-color="#000" stop-opacity="0.38"/>
-      <stop offset="0.18" stop-color="#fff" stop-opacity="0.22"/>
-      <stop offset="0.32" stop-color="#fff" stop-opacity="0"/>
-      <stop offset="0.75" stop-color="#000" stop-opacity="0.05"/>
-      <stop offset="1" stop-color="#000" stop-opacity="0.45"/>
+      <stop offset="0" stop-color="#000" stop-opacity="0.55"/>
+      <stop offset="0.07" stop-color="#000" stop-opacity="0.22"/>
+      <stop offset="0.17" stop-color="#fff" stop-opacity="0.10"/>
+      <stop offset="0.23" stop-color="#fff" stop-opacity="0.45"/>
+      <stop offset="0.29" stop-color="#fff" stop-opacity="0.08"/>
+      <stop offset="0.42" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="0.70" stop-color="#000" stop-opacity="0.08"/>
+      <stop offset="0.84" stop-color="#000" stop-opacity="0.28"/>
+      <stop offset="0.91" stop-color="#fff" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.62"/>
+    </linearGradient>
+    <linearGradient id="vshade-{u}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0.28"/>
+      <stop offset="0.05" stop-color="#000" stop-opacity="0"/>
+      <stop offset="0.94" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.32"/>
     </linearGradient>
     <linearGradient id="metal-{u}" x1="0" x2="1">
-      <stop offset="0" stop-color="#7c818a"/><stop offset="0.3" stop-color="#f1f3f5"/>
-      <stop offset="0.65" stop-color="#b9bec6"/><stop offset="1" stop-color="#5f646d"/>
+      <stop offset="0" stop-color="#5d626b"/><stop offset="0.12" stop-color="#9aa0a8"/>
+      <stop offset="0.24" stop-color="#ffffff"/><stop offset="0.36" stop-color="#c5cad1"/>
+      <stop offset="0.62" stop-color="#e3e6ea"/><stop offset="0.86" stop-color="#8d939b"/>
+      <stop offset="1" stop-color="#4b5058"/>
     </linearGradient>
-    <clipPath id="body-{u}"><rect x="{x}" y="{t}" width="{g.w}" height="{g.h}"/></clipPath>
+    <linearGradient id="lid-{u}" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f4f6f8"/><stop offset="0.5" stop-color="#bfc4cb"/>
+      <stop offset="1" stop-color="#8e949c"/>
+    </linearGradient>
+    <linearGradient id="well-{u}" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#9ea4ac"/><stop offset="0.55" stop-color="#d9dde2"/>
+      <stop offset="1" stop-color="#eef0f3"/>
+    </linearGradient>
+    <radialGradient id="floor-{u}"><stop offset="0" stop-color="#000" stop-opacity="0.4"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+    <clipPath id="body-{u}"><path d="{body_path}"/></clipPath>
   </defs>
-  <ellipse cx="{cx}" cy="{b + 14}" rx="{g.w / 2 + 2}" ry="4" fill="#000" opacity="0.2"/>
-  <path d="M{x + 6} {lid + 2} L{r - 6} {lid + 2} L{r} {t} L{x} {t} Z" fill="url(#metal-{u})"/>
-  <ellipse cx="{cx}" cy="{lid + 2}" rx="{lrx}" ry="4" fill="#dfe2e6" stroke="#8f959d" stroke-width="1"/>
-  <ellipse cx="{cx}" cy="{lid + 2}" rx="{lrx - 3}" ry="2.6" fill="none" stroke="#b3b8bf" stroke-width="0.8"/>
-  <path d="M{cx - 3} {lid + 0.5} h10 a2.2 2.2 0 0 1 0 4.4 h-10 z" fill="#a6abb3" stroke="#8a9098" stroke-width="0.6"/>
+  <ellipse cx="{cx}" cy="{b + 9}" rx="{rx + 8}" ry="{ry + 3}" fill="url(#floor-{u})"/>
+  <path d="M{x} {b} A{rx} {ry} 0 0 0 {r} {b} L{r - 5} {b + 7} A{rx - 5} {lry} 0 0 1 {x + 5} {b + 7} Z" fill="url(#metal-{u})"/>
+  <path d="M{x + 5} {b + 7} A{rx - 5} {lry} 0 0 0 {r - 5} {b + 7}" stroke="#3f444b" stroke-width="0.8" fill="none" opacity="0.6"/>
+  <path d="M{x} {t} C{x} {t - 5},{x + 5} {tcy + 6},{x + 6} {tcy} L{r - 6} {tcy} C{r - 5} {tcy + 6},{r} {t - 5},{r} {t} A{rx} {ry} 0 0 1 {x} {t} Z" fill="url(#metal-{u})"/>
+  <path d="M{x + 2} {t - 3} A{rx - 2} {ry} 0 0 0 {r - 2} {t - 3}" stroke="#fff" stroke-width="0.6" fill="none" opacity="0.5"/>
   <g clip-path="url(#body-{u})">
     {art}
-    <rect x="{x}" y="{t}" width="{g.w}" height="{g.h}" fill="url(#shade-{u})"/>
+    <text x="{cx}" y="{b - 2.5}" font-family="{SANS}" font-size="3.1" font-weight="700" text-anchor="middle" fill="{size_col}" opacity="0.75">{SIZE_LABEL[shape]}</text>
+    <rect x="{x}" y="{ty}" width="{w}" height="{H}" fill="url(#vshade-{u})"/>
+    <rect x="{x}" y="{ty}" width="{w}" height="{H}" fill="url(#shade-{u})"/>
+    <rect x="{x + w * 0.205:.1f}" y="{ty}" width="{w * 0.025:.1f}" height="{H}" fill="#fff" opacity="0.3"/>
   </g>
-  <path d="M{x} {b} L{r} {b} L{r - 5} {b + 9} Q{cx} {b + 13} {x + 5} {b + 9} Z" fill="url(#metal-{u})"/>
+  <path d="{body_path}" fill="none" stroke="#000" stroke-opacity="0.25" stroke-width="0.5"/>
+  <ellipse cx="{cx}" cy="{tcy}" rx="{trx}" ry="{lry}" fill="url(#lid-{u})" stroke="#6e747c" stroke-width="0.7"/>
+  <ellipse cx="{cx}" cy="{tcy + 0.4}" rx="{trx - 2.2:.1f}" ry="{lry - 1.3:.1f}" fill="url(#well-{u})" stroke="#8a9098" stroke-width="0.5"/>
+  <path d="M{cx - tw * 0.45:.1f} {tcy + lry * 0.3:.1f} q{tw * 0.45:.1f} {lry * 0.55:.1f} {tw * 0.9:.1f} 0 l-{tw * 0.12:.1f} -{lry * 0.35:.1f} h-{tw * 0.66:.1f} z" fill="#a9aeb5" stroke="#7c828a" stroke-width="0.4"/>
+  <path d="M{cx - tw / 2:.1f} {tcy - lry * 0.38:.1f} h{tw} a{lry * 0.38:.1f} {lry * 0.38:.1f} 0 0 1 0 {lry * 0.76:.1f} h-{tw} a{lry * 0.38:.1f} {lry * 0.38:.1f} 0 0 1 0 -{lry * 0.76:.1f} z" fill="#d6dade" stroke="#737981" stroke-width="0.5"/>
+  <ellipse cx="{cx - tw * 0.22:.1f}" cy="{tcy}" rx="{tw * 0.17:.1f}" ry="{lry * 0.18:.1f}" fill="#7f858d"/>
+  <circle cx="{cx + tw * 0.2:.1f}" cy="{tcy}" r="{lry * 0.15:.1f}" fill="#9097a0" stroke="#6b717a" stroke-width="0.3"/>
+  <path d="M{cx - trx + 1.5:.1f} {tcy - 0.4} A{trx - 1.5:.1f} {lry - 0.6:.1f} 0 0 1 {cx + trx - 1.5:.1f} {tcy - 0.4}" stroke="#fff" stroke-width="0.7" fill="none" opacity="0.8"/>
 </svg>
-'''
+"""
