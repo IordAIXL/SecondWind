@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.0 (2026-11-21)
+
+- More realistic cans: shiny aluminum shading and highlights, curved can bodies, real tops with rims and pull tabs, tapered bottoms and a soft floor shadow.
+- Every can now shows its real size (16 FL OZ, 12 FL OZ, 8.4 FL OZ or 11 FL OZ).
+- Closer brand detail: torn claw marks on Monster, charging bulls on Red Bull.
+
 ## 1.1.0 (2026-11-21)
 
 - New can art for every brand, styled after each real can: colors, layout and look.

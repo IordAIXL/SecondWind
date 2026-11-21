@@ -1,26 +1,59 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="Coffee Black can, Second Wind art">
   <defs>
     <linearGradient id="shade-coffee-black" x1="0" x2="1">
-      <stop offset="0" stop-color="#000" stop-opacity="0.38"/>
-      <stop offset="0.18" stop-color="#fff" stop-opacity="0.22"/>
-      <stop offset="0.32" stop-color="#fff" stop-opacity="0"/>
-      <stop offset="0.75" stop-color="#000" stop-opacity="0.05"/>
-      <stop offset="1" stop-color="#000" stop-opacity="0.45"/>
+      <stop offset="0" stop-color="#000" stop-opacity="0.55"/>
+      <stop offset="0.07" stop-color="#000" stop-opacity="0.22"/>
+      <stop offset="0.17" stop-color="#fff" stop-opacity="0.10"/>
+      <stop offset="0.23" stop-color="#fff" stop-opacity="0.45"/>
+      <stop offset="0.29" stop-color="#fff" stop-opacity="0.08"/>
+      <stop offset="0.42" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="0.70" stop-color="#000" stop-opacity="0.08"/>
+      <stop offset="0.84" stop-color="#000" stop-opacity="0.28"/>
+      <stop offset="0.91" stop-color="#fff" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.62"/>
+    </linearGradient>
+    <linearGradient id="vshade-coffee-black" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0.28"/>
+      <stop offset="0.05" stop-color="#000" stop-opacity="0"/>
+      <stop offset="0.94" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.32"/>
     </linearGradient>
     <linearGradient id="metal-coffee-black" x1="0" x2="1">
-      <stop offset="0" stop-color="#7c818a"/><stop offset="0.3" stop-color="#f1f3f5"/>
-      <stop offset="0.65" stop-color="#b9bec6"/><stop offset="1" stop-color="#5f646d"/>
+      <stop offset="0" stop-color="#5d626b"/><stop offset="0.12" stop-color="#9aa0a8"/>
+      <stop offset="0.24" stop-color="#ffffff"/><stop offset="0.36" stop-color="#c5cad1"/>
+      <stop offset="0.62" stop-color="#e3e6ea"/><stop offset="0.86" stop-color="#8d939b"/>
+      <stop offset="1" stop-color="#4b5058"/>
     </linearGradient>
-    <clipPath id="body-coffee-black"><rect x="22" y="82" width="76" height="114"/></clipPath>
+    <linearGradient id="lid-coffee-black" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f4f6f8"/><stop offset="0.5" stop-color="#bfc4cb"/>
+      <stop offset="1" stop-color="#8e949c"/>
+    </linearGradient>
+    <linearGradient id="well-coffee-black" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#9ea4ac"/><stop offset="0.55" stop-color="#d9dde2"/>
+      <stop offset="1" stop-color="#eef0f3"/>
+    </linearGradient>
+    <radialGradient id="floor-coffee-black"><stop offset="0" stop-color="#000" stop-opacity="0.4"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+    <clipPath id="body-coffee-black"><path d="M22 82 A38.0 5.7 0 0 0 98 82 L98 196 A38.0 5.7 0 0 1 22 196 Z"/></clipPath>
   </defs>
-  <ellipse cx="60.0" cy="210" rx="40.0" ry="4" fill="#000" opacity="0.2"/>
-  <path d="M28 72 L92 72 L98 82 L22 82 Z" fill="url(#metal-coffee-black)"/>
-  <ellipse cx="60.0" cy="72" rx="32.0" ry="4" fill="#dfe2e6" stroke="#8f959d" stroke-width="1"/>
-  <ellipse cx="60.0" cy="72" rx="29.0" ry="2.6" fill="none" stroke="#b3b8bf" stroke-width="0.8"/>
-  <path d="M57.0 70.5 h10 a2.2 2.2 0 0 1 0 4.4 h-10 z" fill="#a6abb3" stroke="#8a9098" stroke-width="0.6"/>
+  <ellipse cx="60.0" cy="205" rx="46.0" ry="8.7" fill="url(#floor-coffee-black)"/>
+  <path d="M22 196 A38.0 5.7 0 0 0 98 196 L93 203 A33.0 5.1 0 0 1 27 203 Z" fill="url(#metal-coffee-black)"/>
+  <path d="M27 203 A33.0 5.1 0 0 0 93 203" stroke="#3f444b" stroke-width="0.8" fill="none" opacity="0.6"/>
+  <path d="M22 82 C22 77,27 79,28 73 L92 73 C93 79,98 77,98 82 A38.0 5.7 0 0 1 22 82 Z" fill="url(#metal-coffee-black)"/>
+  <path d="M24 79 A36.0 5.7 0 0 0 96 79" stroke="#fff" stroke-width="0.6" fill="none" opacity="0.5"/>
   <g clip-path="url(#body-coffee-black)">
     <rect x="22" y="82" width="76" height="114" fill="#2a1b12"/><g transform="rotate(0 28 88)"><ellipse cx="28" cy="88" rx="3" ry="4.5" fill="#5b3a26"/><path d="M28 84 q-1.5 4 0 8" stroke="#2a1b12" stroke-width="0.8" fill="none"/></g><g transform="rotate(47 51 105)"><ellipse cx="51" cy="105" rx="3" ry="4.5" fill="#5b3a26"/><path d="M51 101 q-1.5 4 0 8" stroke="#2a1b12" stroke-width="0.8" fill="none"/></g><g transform="rotate(94 74 122)"><ellipse cx="74" cy="122" rx="3" ry="4.5" fill="#5b3a26"/><path d="M74 118 q-1.5 4 0 8" stroke="#2a1b12" stroke-width="0.8" fill="none"/></g><g transform="rotate(141 29 139)"><ellipse cx="29" cy="139" rx="3" ry="4.5" fill="#5b3a26"/><path d="M29 135 q-1.5 4 0 8" stroke="#2a1b12" stroke-width="0.8" fill="none"/></g><g transform="rotate(8 52 156)"><ellipse cx="52" cy="156" rx="3" ry="4.5" fill="#5b3a26"/><path d="M52 152 q-1.5 4 0 8" stroke="#2a1b12" stroke-width="0.8" fill="none"/></g><g transform="rotate(55 75 173)"><ellipse cx="75" cy="173" rx="3" ry="4.5" fill="#5b3a26"/><path d="M75 169 q-1.5 4 0 8" stroke="#2a1b12" stroke-width="0.8" fill="none"/></g><g transform="rotate(102 30 190)"><ellipse cx="30" cy="190" rx="3" ry="4.5" fill="#5b3a26"/><path d="M30 186 q-1.5 4 0 8" stroke="#2a1b12" stroke-width="0.8" fill="none"/></g><g transform="rotate(149 53 103)"><ellipse cx="53" cy="103" rx="3" ry="4.5" fill="#5b3a26"/><path d="M53 99 q-1.5 4 0 8" stroke="#2a1b12" stroke-width="0.8" fill="none"/></g><g transform="rotate(16 76 120)"><ellipse cx="76" cy="120" rx="3" ry="4.5" fill="#5b3a26"/><path d="M76 116 q-1.5 4 0 8" stroke="#2a1b12" stroke-width="0.8" fill="none"/></g><g transform="rotate(63 31 137)"><ellipse cx="31" cy="137" rx="3" ry="4.5" fill="#5b3a26"/><path d="M31 133 q-1.5 4 0 8" stroke="#2a1b12" stroke-width="0.8" fill="none"/></g><g transform="rotate(110 54 154)"><ellipse cx="54" cy="154" rx="3" ry="4.5" fill="#5b3a26"/><path d="M54 150 q-1.5 4 0 8" stroke="#2a1b12" stroke-width="0.8" fill="none"/></g><g transform="rotate(157 77 171)"><ellipse cx="77" cy="171" rx="3" ry="4.5" fill="#5b3a26"/><path d="M77 167 q-1.5 4 0 8" stroke="#2a1b12" stroke-width="0.8" fill="none"/></g><g transform="rotate(24 32 188)"><ellipse cx="32" cy="188" rx="3" ry="4.5" fill="#5b3a26"/><path d="M32 184 q-1.5 4 0 8" stroke="#2a1b12" stroke-width="0.8" fill="none"/></g><g transform="rotate(71 55 101)"><ellipse cx="55" cy="101" rx="3" ry="4.5" fill="#5b3a26"/><path d="M55 97 q-1.5 4 0 8" stroke="#2a1b12" stroke-width="0.8" fill="none"/></g><rect x="30" y="102.52" width="60" height="70.7" rx="3" fill="#f5e6d3"/><text x="60.0" y="120.8" font-family="Georgia,'Times New Roman',serif" font-size="11" font-weight="700" text-anchor="middle" fill="#2a1b12" textLength="52.0" lengthAdjust="spacingAndGlyphs" >COLD BREW</text><line x1="38" y1="126.46000000000001" x2="82" y2="126.46000000000001" stroke="#c08457" stroke-width="1"/><text x="60.0" y="141.3" font-family="Georgia,'Times New Roman',serif" font-size="8" font-weight="700" text-anchor="middle" fill="#c08457" >Black</text><text x="60.0" y="166.4" font-family="'Helvetica Neue',Arial,Inter,sans-serif" font-size="4" font-weight="700" text-anchor="middle" fill="#2a1b12" letter-spacing="0.5">SMALL BATCH · STRONG</text>
-    <rect x="22" y="82" width="76" height="114" fill="url(#shade-coffee-black)"/>
+    <text x="60.0" y="193.5" font-family="'Helvetica Neue',Arial,Inter,sans-serif" font-size="3.1" font-weight="700" text-anchor="middle" fill="#ffffff" opacity="0.75">11 FL OZ (325 mL)</text>
+    <rect x="22" y="76.3" width="76" height="125.4" fill="url(#vshade-coffee-black)"/>
+    <rect x="22" y="76.3" width="76" height="125.4" fill="url(#shade-coffee-black)"/>
+    <rect x="37.6" y="76.3" width="1.9" height="125.4" fill="#fff" opacity="0.3"/>
   </g>
-  <path d="M22 196 L98 196 L93 205 Q60.0 209 27 205 Z" fill="url(#metal-coffee-black)"/>
+  <path d="M22 82 A38.0 5.7 0 0 0 98 82 L98 196 A38.0 5.7 0 0 1 22 196 Z" fill="none" stroke="#000" stroke-opacity="0.25" stroke-width="0.5"/>
+  <ellipse cx="60.0" cy="73" rx="32.0" ry="5.1" fill="url(#lid-coffee-black)" stroke="#6e747c" stroke-width="0.7"/>
+  <ellipse cx="60.0" cy="73.4" rx="29.8" ry="3.8" fill="url(#well-coffee-black)" stroke="#8a9098" stroke-width="0.5"/>
+  <path d="M52.1 74.5 q7.9 2.8 15.8 0 l-2.1 -1.8 h-11.6 z" fill="#a9aeb5" stroke="#7c828a" stroke-width="0.4"/>
+  <path d="M51.2 71.1 h17.6 a1.9 1.9 0 0 1 0 3.9 h-17.6 a1.9 1.9 0 0 1 0 -3.9 z" fill="#d6dade" stroke="#737981" stroke-width="0.5"/>
+  <ellipse cx="56.1" cy="73" rx="3.0" ry="0.9" fill="#7f858d"/>
+  <circle cx="63.5" cy="73" r="0.8" fill="#9097a0" stroke="#6b717a" stroke-width="0.3"/>
+  <path d="M29.5 72.6 A30.5 4.5 0 0 1 90.5 72.6" stroke="#fff" stroke-width="0.7" fill="none" opacity="0.8"/>
 </svg>

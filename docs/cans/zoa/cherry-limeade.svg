@@ -1,26 +1,59 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="Zoa Cherry Limeade can, Second Wind art">
   <defs>
     <linearGradient id="shade-zoa-cherry-limeade" x1="0" x2="1">
-      <stop offset="0" stop-color="#000" stop-opacity="0.38"/>
-      <stop offset="0.18" stop-color="#fff" stop-opacity="0.22"/>
-      <stop offset="0.32" stop-color="#fff" stop-opacity="0"/>
-      <stop offset="0.75" stop-color="#000" stop-opacity="0.05"/>
-      <stop offset="1" stop-color="#000" stop-opacity="0.45"/>
+      <stop offset="0" stop-color="#000" stop-opacity="0.55"/>
+      <stop offset="0.07" stop-color="#000" stop-opacity="0.22"/>
+      <stop offset="0.17" stop-color="#fff" stop-opacity="0.10"/>
+      <stop offset="0.23" stop-color="#fff" stop-opacity="0.45"/>
+      <stop offset="0.29" stop-color="#fff" stop-opacity="0.08"/>
+      <stop offset="0.42" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="0.70" stop-color="#000" stop-opacity="0.08"/>
+      <stop offset="0.84" stop-color="#000" stop-opacity="0.28"/>
+      <stop offset="0.91" stop-color="#fff" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.62"/>
+    </linearGradient>
+    <linearGradient id="vshade-zoa-cherry-limeade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0.28"/>
+      <stop offset="0.05" stop-color="#000" stop-opacity="0"/>
+      <stop offset="0.94" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.32"/>
     </linearGradient>
     <linearGradient id="metal-zoa-cherry-limeade" x1="0" x2="1">
-      <stop offset="0" stop-color="#7c818a"/><stop offset="0.3" stop-color="#f1f3f5"/>
-      <stop offset="0.65" stop-color="#b9bec6"/><stop offset="1" stop-color="#5f646d"/>
+      <stop offset="0" stop-color="#5d626b"/><stop offset="0.12" stop-color="#9aa0a8"/>
+      <stop offset="0.24" stop-color="#ffffff"/><stop offset="0.36" stop-color="#c5cad1"/>
+      <stop offset="0.62" stop-color="#e3e6ea"/><stop offset="0.86" stop-color="#8d939b"/>
+      <stop offset="1" stop-color="#4b5058"/>
     </linearGradient>
-    <clipPath id="body-zoa-cherry-limeade"><rect x="31" y="34" width="58" height="164"/></clipPath>
+    <linearGradient id="lid-zoa-cherry-limeade" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f4f6f8"/><stop offset="0.5" stop-color="#bfc4cb"/>
+      <stop offset="1" stop-color="#8e949c"/>
+    </linearGradient>
+    <linearGradient id="well-zoa-cherry-limeade" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#9ea4ac"/><stop offset="0.55" stop-color="#d9dde2"/>
+      <stop offset="1" stop-color="#eef0f3"/>
+    </linearGradient>
+    <radialGradient id="floor-zoa-cherry-limeade"><stop offset="0" stop-color="#000" stop-opacity="0.4"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+    <clipPath id="body-zoa-cherry-limeade"><path d="M31 34 A29.0 4.3 0 0 0 89 34 L89 198 A29.0 4.3 0 0 1 31 198 Z"/></clipPath>
   </defs>
-  <ellipse cx="60.0" cy="212" rx="31.0" ry="4" fill="#000" opacity="0.2"/>
-  <path d="M37 24 L83 24 L89 34 L31 34 Z" fill="url(#metal-zoa-cherry-limeade)"/>
-  <ellipse cx="60.0" cy="24" rx="23.0" ry="4" fill="#dfe2e6" stroke="#8f959d" stroke-width="1"/>
-  <ellipse cx="60.0" cy="24" rx="20.0" ry="2.6" fill="none" stroke="#b3b8bf" stroke-width="0.8"/>
-  <path d="M57.0 22.5 h10 a2.2 2.2 0 0 1 0 4.4 h-10 z" fill="#a6abb3" stroke="#8a9098" stroke-width="0.6"/>
+  <ellipse cx="60.0" cy="207" rx="37.0" ry="7.3" fill="url(#floor-zoa-cherry-limeade)"/>
+  <path d="M31 198 A29.0 4.3 0 0 0 89 198 L84 205 A24.0 3.9 0 0 1 36 205 Z" fill="url(#metal-zoa-cherry-limeade)"/>
+  <path d="M36 205 A24.0 3.9 0 0 0 84 205" stroke="#3f444b" stroke-width="0.8" fill="none" opacity="0.6"/>
+  <path d="M31 34 C31 29,36 31,37 25 L83 25 C84 31,89 29,89 34 A29.0 4.3 0 0 1 31 34 Z" fill="url(#metal-zoa-cherry-limeade)"/>
+  <path d="M33 31 A27.0 4.3 0 0 0 87 31" stroke="#fff" stroke-width="0.6" fill="none" opacity="0.5"/>
   <g clip-path="url(#body-zoa-cherry-limeade)">
     <linearGradient id="zo-cherry-limeade" x1="0" y1="0" x2="0" y2="1"><stop offset="0.25" stop-color="#ecfeff"/><stop offset="1" stop-color="#c8102e"/></linearGradient><rect x="31" y="34" width="58" height="164" fill="url(#zo-cherry-limeade)"/><g transform="translate(57.0 109.4) rotate(-90)"><text x="0.0" y="0.0" font-family="'Arial Black','Inter Black','Helvetica Neue',Arial,sans-serif" font-size="30" font-weight="900" text-anchor="middle" fill="#134e4a" textLength="65.6" lengthAdjust="spacingAndGlyphs" >ZOA</text></g><g transform="translate(67.0 109.4) rotate(-90)"><text x="0.0" y="0.0" font-family="'Helvetica Neue',Arial,Inter,sans-serif" font-size="6" font-weight="800" text-anchor="middle" fill="#134e4a" letter-spacing="3">ENERGY</text></g><path d="M31 155.36 q8.5 -5 17 0 t17 0 t17 0 t17 0" stroke="#fff" stroke-width="2" fill="none" opacity="0.7"/><path d="M31 161.36 q8.5 -5 17 0 t17 0 t17 0 t17 0" stroke="#fff" stroke-width="2" fill="none" opacity="0.7"/><path d="M31 167.36 q8.5 -5 17 0 t17 0 t17 0 t17 0" stroke="#fff" stroke-width="2" fill="none" opacity="0.7"/><text x="81.0" y="58.6" font-family="'Helvetica Neue',Arial,Inter,sans-serif" font-size="4.5" font-weight="800" text-anchor="end" fill="#134e4a" >PLANT</text><text x="81.0" y="65.2" font-family="'Helvetica Neue',Arial,Inter,sans-serif" font-size="4.5" font-weight="800" text-anchor="end" fill="#134e4a" >POWERED</text><text x="60.0" y="181.6" font-family="'Helvetica Neue',Arial,Inter,sans-serif" font-size="6" font-weight="900" text-anchor="middle" fill="#ffffff" textLength="48.0" lengthAdjust="spacingAndGlyphs" >CHERRY LIMEADE</text>
-    <rect x="31" y="34" width="58" height="164" fill="url(#shade-zoa-cherry-limeade)"/>
+    <text x="60.0" y="195.5" font-family="'Helvetica Neue',Arial,Inter,sans-serif" font-size="3.1" font-weight="700" text-anchor="middle" fill="#111111" opacity="0.75">12 FL OZ (355 mL)</text>
+    <rect x="31" y="29.7" width="58" height="172.6" fill="url(#vshade-zoa-cherry-limeade)"/>
+    <rect x="31" y="29.7" width="58" height="172.6" fill="url(#shade-zoa-cherry-limeade)"/>
+    <rect x="42.9" y="29.7" width="1.5" height="172.6" fill="#fff" opacity="0.3"/>
   </g>
-  <path d="M31 198 L89 198 L84 207 Q60.0 211 36 207 Z" fill="url(#metal-zoa-cherry-limeade)"/>
+  <path d="M31 34 A29.0 4.3 0 0 0 89 34 L89 198 A29.0 4.3 0 0 1 31 198 Z" fill="none" stroke="#000" stroke-opacity="0.25" stroke-width="0.5"/>
+  <ellipse cx="60.0" cy="25" rx="23.0" ry="3.9" fill="url(#lid-zoa-cherry-limeade)" stroke="#6e747c" stroke-width="0.7"/>
+  <ellipse cx="60.0" cy="25.4" rx="20.8" ry="2.6" fill="url(#well-zoa-cherry-limeade)" stroke="#8a9098" stroke-width="0.5"/>
+  <path d="M54.3 26.2 q5.7 2.1 11.4 0 l-1.5 -1.4 h-8.4 z" fill="#a9aeb5" stroke="#7c828a" stroke-width="0.4"/>
+  <path d="M53.6 23.5 h12.7 a1.5 1.5 0 0 1 0 3.0 h-12.7 a1.5 1.5 0 0 1 0 -3.0 z" fill="#d6dade" stroke="#737981" stroke-width="0.5"/>
+  <ellipse cx="57.2" cy="25" rx="2.2" ry="0.7" fill="#7f858d"/>
+  <circle cx="62.5" cy="25" r="0.6" fill="#9097a0" stroke="#6b717a" stroke-width="0.3"/>
+  <path d="M38.5 24.6 A21.5 3.3 0 0 1 81.5 24.6" stroke="#fff" stroke-width="0.7" fill="none" opacity="0.8"/>
 </svg>

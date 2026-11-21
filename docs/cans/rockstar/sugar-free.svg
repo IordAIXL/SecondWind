@@ -1,26 +1,59 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="Rockstar Sugar Free can, Second Wind art">
   <defs>
     <linearGradient id="shade-rockstar-sugar-free" x1="0" x2="1">
-      <stop offset="0" stop-color="#000" stop-opacity="0.38"/>
-      <stop offset="0.18" stop-color="#fff" stop-opacity="0.22"/>
-      <stop offset="0.32" stop-color="#fff" stop-opacity="0"/>
-      <stop offset="0.75" stop-color="#000" stop-opacity="0.05"/>
-      <stop offset="1" stop-color="#000" stop-opacity="0.45"/>
+      <stop offset="0" stop-color="#000" stop-opacity="0.55"/>
+      <stop offset="0.07" stop-color="#000" stop-opacity="0.22"/>
+      <stop offset="0.17" stop-color="#fff" stop-opacity="0.10"/>
+      <stop offset="0.23" stop-color="#fff" stop-opacity="0.45"/>
+      <stop offset="0.29" stop-color="#fff" stop-opacity="0.08"/>
+      <stop offset="0.42" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="0.70" stop-color="#000" stop-opacity="0.08"/>
+      <stop offset="0.84" stop-color="#000" stop-opacity="0.28"/>
+      <stop offset="0.91" stop-color="#fff" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.62"/>
+    </linearGradient>
+    <linearGradient id="vshade-rockstar-sugar-free" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0.28"/>
+      <stop offset="0.05" stop-color="#000" stop-opacity="0"/>
+      <stop offset="0.94" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.32"/>
     </linearGradient>
     <linearGradient id="metal-rockstar-sugar-free" x1="0" x2="1">
-      <stop offset="0" stop-color="#7c818a"/><stop offset="0.3" stop-color="#f1f3f5"/>
-      <stop offset="0.65" stop-color="#b9bec6"/><stop offset="1" stop-color="#5f646d"/>
+      <stop offset="0" stop-color="#5d626b"/><stop offset="0.12" stop-color="#9aa0a8"/>
+      <stop offset="0.24" stop-color="#ffffff"/><stop offset="0.36" stop-color="#c5cad1"/>
+      <stop offset="0.62" stop-color="#e3e6ea"/><stop offset="0.86" stop-color="#8d939b"/>
+      <stop offset="1" stop-color="#4b5058"/>
     </linearGradient>
-    <clipPath id="body-rockstar-sugar-free"><rect x="16" y="18" width="88" height="180"/></clipPath>
+    <linearGradient id="lid-rockstar-sugar-free" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f4f6f8"/><stop offset="0.5" stop-color="#bfc4cb"/>
+      <stop offset="1" stop-color="#8e949c"/>
+    </linearGradient>
+    <linearGradient id="well-rockstar-sugar-free" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#9ea4ac"/><stop offset="0.55" stop-color="#d9dde2"/>
+      <stop offset="1" stop-color="#eef0f3"/>
+    </linearGradient>
+    <radialGradient id="floor-rockstar-sugar-free"><stop offset="0" stop-color="#000" stop-opacity="0.4"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+    <clipPath id="body-rockstar-sugar-free"><path d="M16 18 A44.0 6.6 0 0 0 104 18 L104 198 A44.0 6.6 0 0 1 16 198 Z"/></clipPath>
   </defs>
-  <ellipse cx="60.0" cy="212" rx="46.0" ry="4" fill="#000" opacity="0.2"/>
-  <path d="M22 8 L98 8 L104 18 L16 18 Z" fill="url(#metal-rockstar-sugar-free)"/>
-  <ellipse cx="60.0" cy="8" rx="38.0" ry="4" fill="#dfe2e6" stroke="#8f959d" stroke-width="1"/>
-  <ellipse cx="60.0" cy="8" rx="35.0" ry="2.6" fill="none" stroke="#b3b8bf" stroke-width="0.8"/>
-  <path d="M57.0 6.5 h10 a2.2 2.2 0 0 1 0 4.4 h-10 z" fill="#a6abb3" stroke="#8a9098" stroke-width="0.6"/>
+  <ellipse cx="60.0" cy="207" rx="52.0" ry="9.6" fill="url(#floor-rockstar-sugar-free)"/>
+  <path d="M16 198 A44.0 6.6 0 0 0 104 198 L99 205 A39.0 5.9 0 0 1 21 205 Z" fill="url(#metal-rockstar-sugar-free)"/>
+  <path d="M21 205 A39.0 5.9 0 0 0 99 205" stroke="#3f444b" stroke-width="0.8" fill="none" opacity="0.6"/>
+  <path d="M16 18 C16 13,21 15,22 9 L98 9 C99 15,104 13,104 18 A44.0 6.6 0 0 1 16 18 Z" fill="url(#metal-rockstar-sugar-free)"/>
+  <path d="M18 15 A42.0 6.6 0 0 0 102 15" stroke="#fff" stroke-width="0.6" fill="none" opacity="0.5"/>
   <g clip-path="url(#body-rockstar-sugar-free)">
     <rect x="16" y="18" width="88" height="180" fill="#0a0a0a"/><rect x="20" y="18" width="3" height="180" fill="#9aa3ad"/><rect x="97" y="18" width="3" height="180" fill="#9aa3ad"/><rect x="26" y="18" width="3" height="180" fill="#dc2626"/><rect x="91" y="18" width="3" height="180" fill="#dc2626"/><polygon points="60.0,56.8 66.4,74.0 84.7,74.8 70.4,86.2 75.3,103.8 60.0,93.7 44.7,103.8 49.6,86.2 35.3,74.8 53.6,74.0" fill="#9aa3ad"/><polygon points="60.0,67.8 63.7,77.7 74.3,78.2 66.0,84.7 68.8,94.9 60.0,89.1 51.2,94.9 54.0,84.7 45.7,78.2 56.3,77.7" fill="#0a0a0a"/><text x="60.0" y="136.8" font-family="'Arial Black','Inter Black','Helvetica Neue',Arial,sans-serif" font-size="13" font-weight="900" text-anchor="middle" fill="#fefce8" textLength="58.0" lengthAdjust="spacingAndGlyphs"  font-style="italic">ROCKSTAR</text><text x="60.0" y="147.6" font-family="'Helvetica Neue',Arial,Inter,sans-serif" font-size="5" font-weight="900" text-anchor="middle" fill="#9aa3ad" letter-spacing="1.5">ENERGY DRINK</text><text x="60.0" y="169.2" font-family="'Helvetica Neue',Arial,Inter,sans-serif" font-size="6" font-weight="900" text-anchor="middle" fill="#fefce8" >SUGAR FREE</text>
-    <rect x="16" y="18" width="88" height="180" fill="url(#shade-rockstar-sugar-free)"/>
+    <text x="60.0" y="195.5" font-family="'Helvetica Neue',Arial,Inter,sans-serif" font-size="3.1" font-weight="700" text-anchor="middle" fill="#ffffff" opacity="0.75">16 FL OZ (473 mL)</text>
+    <rect x="16" y="11.4" width="88" height="193.2" fill="url(#vshade-rockstar-sugar-free)"/>
+    <rect x="16" y="11.4" width="88" height="193.2" fill="url(#shade-rockstar-sugar-free)"/>
+    <rect x="34.0" y="11.4" width="2.2" height="193.2" fill="#fff" opacity="0.3"/>
   </g>
-  <path d="M16 198 L104 198 L99 207 Q60.0 211 21 207 Z" fill="url(#metal-rockstar-sugar-free)"/>
+  <path d="M16 18 A44.0 6.6 0 0 0 104 18 L104 198 A44.0 6.6 0 0 1 16 198 Z" fill="none" stroke="#000" stroke-opacity="0.25" stroke-width="0.5"/>
+  <ellipse cx="60.0" cy="9" rx="38.0" ry="5.9" fill="url(#lid-rockstar-sugar-free)" stroke="#6e747c" stroke-width="0.7"/>
+  <ellipse cx="60.0" cy="9.4" rx="35.8" ry="4.6" fill="url(#well-rockstar-sugar-free)" stroke="#8a9098" stroke-width="0.5"/>
+  <path d="M50.6 10.8 q9.4 3.2 18.8 0 l-2.5 -2.1 h-13.8 z" fill="#a9aeb5" stroke="#7c828a" stroke-width="0.4"/>
+  <path d="M49.5 6.8 h20.9 a2.2 2.2 0 0 1 0 4.5 h-20.9 a2.2 2.2 0 0 1 0 -4.5 z" fill="#d6dade" stroke="#737981" stroke-width="0.5"/>
+  <ellipse cx="55.4" cy="9" rx="3.6" ry="1.1" fill="#7f858d"/>
+  <circle cx="64.2" cy="9" r="0.9" fill="#9097a0" stroke="#6b717a" stroke-width="0.3"/>
+  <path d="M23.5 8.6 A36.5 5.3 0 0 1 96.5 8.6" stroke="#fff" stroke-width="0.7" fill="none" opacity="0.8"/>
 </svg>
