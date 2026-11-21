@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="Zoa Frosted Grape can, Second Wind art">
+  <defs>
+    <linearGradient id="shade-zoa-frosted-grape" x1="0" x2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0.38"/>
+      <stop offset="0.18" stop-color="#fff" stop-opacity="0.22"/>
+      <stop offset="0.32" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="0.75" stop-color="#000" stop-opacity="0.05"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.45"/>
+    </linearGradient>
+    <linearGradient id="metal-zoa-frosted-grape" x1="0" x2="1">
+      <stop offset="0" stop-color="#7c818a"/><stop offset="0.3" stop-color="#f1f3f5"/>
+      <stop offset="0.65" stop-color="#b9bec6"/><stop offset="1" stop-color="#5f646d"/>
+    </linearGradient>
+    <clipPath id="body-zoa-frosted-grape"><rect x="31" y="34" width="58" height="164"/></clipPath>
+  </defs>
+  <ellipse cx="60.0" cy="212" rx="31.0" ry="4" fill="#000" opacity="0.2"/>
+  <path d="M37 24 L83 24 L89 34 L31 34 Z" fill="url(#metal-zoa-frosted-grape)"/>
+  <ellipse cx="60.0" cy="24" rx="23.0" ry="4" fill="#dfe2e6" stroke="#8f959d" stroke-width="1"/>
+  <ellipse cx="60.0" cy="24" rx="20.0" ry="2.6" fill="none" stroke="#b3b8bf" stroke-width="0.8"/>
+  <path d="M57.0 22.5 h10 a2.2 2.2 0 0 1 0 4.4 h-10 z" fill="#a6abb3" stroke="#8a9098" stroke-width="0.6"/>
+  <g clip-path="url(#body-zoa-frosted-grape)">
+    <linearGradient id="zo-frosted-grape" x1="0" y1="0" x2="0" y2="1"><stop offset="0.25" stop-color="#ecfeff"/><stop offset="1" stop-color="#7b4fd6"/></linearGradient><rect x="31" y="34" width="58" height="164" fill="url(#zo-frosted-grape)"/><g transform="translate(57.0 109.4) rotate(-90)"><text x="0.0" y="0.0" font-family="'Arial Black','Inter Black','Helvetica Neue',Arial,sans-serif" font-size="30" font-weight="900" text-anchor="middle" fill="#134e4a" textLength="65.6" lengthAdjust="spacingAndGlyphs" >ZOA</text></g><g transform="translate(67.0 109.4) rotate(-90)"><text x="0.0" y="0.0" font-family="'Helvetica Neue',Arial,Inter,sans-serif" font-size="6" font-weight="800" text-anchor="middle" fill="#134e4a" letter-spacing="3">ENERGY</text></g><path d="M31 155.36 q8.5 -5 17 0 t17 0 t17 0 t17 0" stroke="#fff" stroke-width="2" fill="none" opacity="0.7"/><path d="M31 161.36 q8.5 -5 17 0 t17 0 t17 0 t17 0" stroke="#fff" stroke-width="2" fill="none" opacity="0.7"/><path d="M31 167.36 q8.5 -5 17 0 t17 0 t17 0 t17 0" stroke="#fff" stroke-width="2" fill="none" opacity="0.7"/><text x="81.0" y="58.6" font-family="'Helvetica Neue',Arial,Inter,sans-serif" font-size="4.5" font-weight="800" text-anchor="end" fill="#134e4a" >PLANT</text><text x="81.0" y="65.2" font-family="'Helvetica Neue',Arial,Inter,sans-serif" font-size="4.5" font-weight="800" text-anchor="end" fill="#134e4a" >POWERED</text><text x="60.0" y="181.6" font-family="'Helvetica Neue',Arial,Inter,sans-serif" font-size="6" font-weight="900" text-anchor="middle" fill="#ffffff" >FROSTED GRAPE</text>
+    <rect x="31" y="34" width="58" height="164" fill="url(#shade-zoa-frosted-grape)"/>
+  </g>
+  <path d="M31 198 L89 198 L84 207 Q60.0 211 36 207 Z" fill="url(#metal-zoa-frosted-grape)"/>
+</svg>

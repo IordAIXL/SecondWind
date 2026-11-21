@@ -78,7 +78,7 @@ That rebuilds the can art, the download page, the Claude Code command and all th
 
 ## Disclaimer
 
-Second Wind is a fan-made joke. It is **not affiliated with, endorsed by, or sponsored by** Red Bull, Monster, Celsius, Ryse, Ghost, Bang, Reign, C4, Alani Nu, Prime, Rockstar, 3D, Bucked Up, Zoa, or any other brand. Brand names belong to their owners and are used only to name the pretend drinks. All can art here is original and does not copy any real logo or can design.
+Second Wind is a fan-made joke. It is **not affiliated with, endorsed by, or sponsored by** Red Bull, Monster, Celsius, Ryse, Ghost, Bang, Reign, C4, Alani Nu, Prime, Rockstar, 3D, Bucked Up, Zoa, or any other brand. Brand names belong to their owners and are used only to name the pretend drinks. The can art is hand-drawn fan art inspired by each brand's real cans. It uses no official logo files or images, and it can be swapped out any time in `tools/cans.py`.
 
 The drinks are pretend. No AI was actually caffeinated. Please drink real energy drinks responsibly.
 

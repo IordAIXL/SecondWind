@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="Ryse Baja Burst can, Second Wind art">
+  <defs>
+    <linearGradient id="shade-ryse-baja-burst" x1="0" x2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0.38"/>
+      <stop offset="0.18" stop-color="#fff" stop-opacity="0.22"/>
+      <stop offset="0.32" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="0.75" stop-color="#000" stop-opacity="0.05"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.45"/>
+    </linearGradient>
+    <linearGradient id="metal-ryse-baja-burst" x1="0" x2="1">
+      <stop offset="0" stop-color="#7c818a"/><stop offset="0.3" stop-color="#f1f3f5"/>
+      <stop offset="0.65" stop-color="#b9bec6"/><stop offset="1" stop-color="#5f646d"/>
+    </linearGradient>
+    <clipPath id="body-ryse-baja-burst"><rect x="16" y="18" width="88" height="180"/></clipPath>
+  </defs>
+  <ellipse cx="60.0" cy="212" rx="46.0" ry="4" fill="#000" opacity="0.2"/>
+  <path d="M22 8 L98 8 L104 18 L16 18 Z" fill="url(#metal-ryse-baja-burst)"/>
+  <ellipse cx="60.0" cy="8" rx="38.0" ry="4" fill="#dfe2e6" stroke="#8f959d" stroke-width="1"/>
+  <ellipse cx="60.0" cy="8" rx="35.0" ry="2.6" fill="none" stroke="#b3b8bf" stroke-width="0.8"/>
+  <path d="M57.0 6.5 h10 a2.2 2.2 0 0 1 0 4.4 h-10 z" fill="#a6abb3" stroke="#8a9098" stroke-width="0.6"/>
+  <g clip-path="url(#body-ryse-baja-burst)">
+    <rect x="16" y="18" width="88" height="180" fill="#111827"/><linearGradient id="ry-baja-burst" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#14b8a6"/><stop offset="1" stop-color="#14b8a6" stop-opacity="0"/></linearGradient><rect x="16" y="81.0" width="88" height="117.0" fill="url(#ry-baja-burst)"/><path d="M36.0 141.6 L60.0 125.6 L84.0 141.6" stroke="#ffffff" stroke-width="5" fill="none" stroke-linejoin="miter" opacity="0.90"/><path d="M36.0 127.6 L60.0 111.6 L84.0 127.6" stroke="#ffffff" stroke-width="5" fill="none" stroke-linejoin="miter" opacity="0.65"/><path d="M36.0 113.6 L60.0 97.6 L84.0 113.6" stroke="#ffffff" stroke-width="5" fill="none" stroke-linejoin="miter" opacity="0.40"/><text x="60.0" y="46.8" font-family="'Arial Black','Inter Black','Helvetica Neue',Arial,sans-serif" font-size="22" font-weight="900" text-anchor="middle" fill="#ffffff" textLength="68.0" lengthAdjust="spacingAndGlyphs"  font-style="italic">RYSE</text><text x="60.0" y="57.6" font-family="'Arial Black','Inter Black','Helvetica Neue',Arial,sans-serif" font-size="7" font-weight="900" text-anchor="middle" fill="#14b8a6" letter-spacing="4">FUEL</text><rect x="26" y="151.2" width="68" height="25" rx="3" fill="#111827" opacity="0.85"/><text x="60.0" y="159.2" font-family="'Helvetica Neue',Arial,Inter,sans-serif" font-size="6" font-weight="900" text-anchor="middle" fill="#ffffff" >BAJA BURST</text><text x="60.0" y="187.2" font-family="'Helvetica Neue',Arial,Inter,sans-serif" font-size="4" font-weight="700" text-anchor="middle" fill="#ffffff" >ZERO SUGAR · 200MG</text>
+    <rect x="16" y="18" width="88" height="180" fill="url(#shade-ryse-baja-burst)"/>
+  </g>
+  <path d="M16 198 L104 198 L99 207 Q60.0 211 21 207 Z" fill="url(#metal-ryse-baja-burst)"/>
+</svg>

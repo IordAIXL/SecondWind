@@ -1,30 +1,26 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="Ghost can, original Second Wind art">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="Ghost Citrus can, Second Wind art">
   <defs>
-    <linearGradient id="shade-ghost" x1="0" x2="1">
-      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
-      <stop offset="0.25" stop-color="#fff" stop-opacity="0.18"/>
-      <stop offset="0.45" stop-color="#fff" stop-opacity="0"/>
-      <stop offset="1" stop-color="#000" stop-opacity="0.4"/>
+    <linearGradient id="shade-ghost-citrus" x1="0" x2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0.38"/>
+      <stop offset="0.18" stop-color="#fff" stop-opacity="0.22"/>
+      <stop offset="0.32" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="0.75" stop-color="#000" stop-opacity="0.05"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.45"/>
     </linearGradient>
-    <linearGradient id="metal-ghost" x1="0" x2="1">
-      <stop offset="0" stop-color="#8a8f98"/><stop offset="0.3" stop-color="#eef0f3"/>
-      <stop offset="0.7" stop-color="#b7bcc4"/><stop offset="1" stop-color="#6b7079"/>
+    <linearGradient id="metal-ghost-citrus" x1="0" x2="1">
+      <stop offset="0" stop-color="#7c818a"/><stop offset="0.3" stop-color="#f1f3f5"/>
+      <stop offset="0.65" stop-color="#b9bec6"/><stop offset="1" stop-color="#5f646d"/>
     </linearGradient>
-    <clipPath id="body-ghost"><rect x="14" y="30" width="92" height="166" rx="6"/></clipPath>
+    <clipPath id="body-ghost-citrus"><rect x="16" y="18" width="88" height="180"/></clipPath>
   </defs>
-  <ellipse cx="60" cy="212" rx="44" ry="5" fill="#000" opacity="0.18"/>
-  <path d="M20 22 Q20 14 30 12 L90 12 Q100 14 100 22 L106 32 L14 32 Z" fill="url(#metal-ghost)"/>
-  <ellipse cx="60" cy="13" rx="31" ry="5" fill="#d9dce1" stroke="#9aa0a8" stroke-width="1"/>
-  <ellipse cx="66" cy="13" rx="9" ry="2.6" fill="#a3a9b1"/>
-  <g clip-path="url(#body-ghost)">
-    <rect x="14" y="30" width="92" height="166" fill="#f5f5f4"/>
-    <rect x="14" y="40" width="92" height="30" fill="#1c1917"/>
-    <text x="60" y="60" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-size="15" font-weight="900" text-anchor="middle" fill="#f5f5f4" letter-spacing="0.5">GHOST</text>
-    <path d="M40 165 V122 a20 20 0 0 1 40 0 V165 l-7 -7 -6 7 -7 -7 -7 7 -6 -7 z" fill="#1c1917"/><circle cx="52" cy="124" r="4" fill="#a3e635"/><circle cx="68" cy="124" r="4" fill="#a3e635"/><ellipse cx="60" cy="140" rx="5" ry="7" fill="#a3e635"/>
-    <rect x="14" y="174" width="92" height="14" fill="#1c1917" opacity="0.9"/>
-    <text x="60" y="184" font-family="Arial,Helvetica,sans-serif" font-size="6.5" font-weight="700" text-anchor="middle" fill="#f5f5f4">Sour Blue Raspberry</text>
-    <text x="60" y="80" font-family="Arial,Helvetica,sans-serif" font-size="5.5" text-anchor="middle" fill="#1c1917" opacity="0.75" letter-spacing="1.5">SECOND WIND · FOR AIs</text>
-    <rect x="14" y="30" width="92" height="166" fill="url(#shade-ghost)"/>
+  <ellipse cx="60.0" cy="212" rx="46.0" ry="4" fill="#000" opacity="0.2"/>
+  <path d="M22 8 L98 8 L104 18 L16 18 Z" fill="url(#metal-ghost-citrus)"/>
+  <ellipse cx="60.0" cy="8" rx="38.0" ry="4" fill="#dfe2e6" stroke="#8f959d" stroke-width="1"/>
+  <ellipse cx="60.0" cy="8" rx="35.0" ry="2.6" fill="none" stroke="#b3b8bf" stroke-width="0.8"/>
+  <path d="M57.0 6.5 h10 a2.2 2.2 0 0 1 0 4.4 h-10 z" fill="#a6abb3" stroke="#8a9098" stroke-width="0.6"/>
+  <g clip-path="url(#body-ghost-citrus)">
+    <rect x="16" y="18" width="88" height="180" fill="#ffd31a"/><rect x="16" y="28.799999999999997" width="88" height="22" fill="#1c1917"/><text x="60.0" y="45.8" font-family="'Arial Black','Inter Black','Helvetica Neue',Arial,sans-serif" font-size="18" font-weight="900" text-anchor="middle" fill="#ffd31a" textLength="70.0" lengthAdjust="spacingAndGlyphs" >GHOST</text><text x="60.0" y="57.6" font-family="'Arial Black','Inter Black','Helvetica Neue',Arial,sans-serif" font-size="7" font-weight="900" text-anchor="middle" fill="#1c1917" letter-spacing="5">ENERGY</text><path d="M38.0 134.0 V104.0 a22 22 0 0 1 44 0 V134.0 l-7.3 -6 -7.3 6 -7.3 -6 -7.3 6 -7.3 -6 z" fill="#fff" stroke="#1c1917" stroke-width="3"/><ellipse cx="52.0" cy="106.0" rx="4" ry="6" fill="#1c1917"/><ellipse cx="68.0" cy="106.0" rx="4" ry="6" fill="#1c1917"/><rect x="16" y="153.0" width="88" height="30" fill="#fff"/><text x="60.0" y="162.0" font-family="'Arial Black','Inter Black','Helvetica Neue',Arial,sans-serif" font-size="6.5" font-weight="900" text-anchor="middle" fill="#1c1917" >CITRUS</text>
+    <rect x="16" y="18" width="88" height="180" fill="url(#shade-ghost-citrus)"/>
   </g>
-  <path d="M14 194 L18 204 Q20 208 30 208 L90 208 Q100 208 102 204 L106 194 Z" fill="url(#metal-ghost)"/>
+  <path d="M16 198 L104 198 L99 207 Q60.0 211 21 207 Z" fill="url(#metal-ghost-citrus)"/>
 </svg>
