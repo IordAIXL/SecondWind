@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.9.0 (2026-11-21)
+
+- Every drink now has its own purpose and work style. The AI announces the mode, shows it in the "dialed in" block, and works that way until you switch drinks.
+- Modes: Red Bull Sprint, Monster Bug Hunt, Celsius Clean Up, Ryse Unblock, Ghost Distraction Purge, Bang Brainstorm, Reign Take Charge, C4 Heavy Burst (short all-out bursts), Alani Nu Polish, Prime Ship It, Rockstar Deep Focus, 3D Big Picture, Bucked Up Grind, Zoa Steady Reset, Coffee Plan, Tea Review, Mystery Can Wild Card.
+- Modes live in one place, `purpose` in data/brands.json. The Claude Code skill, every copy-paste prompt, the download page and the browser button data (extension/data.js) all read it.
+
 ## 1.8.0 (2026-11-21)
 
 - Fixed: typing `/secondwind` in Claude Code loaded an empty command, so Claude improvised instead of following Second Wind. The cause was a permissions line in the command file. Only the long name `/second-wind:secondwind` worked.

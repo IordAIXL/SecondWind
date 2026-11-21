@@ -28,30 +28,35 @@ from cans import can_svg, slug  # noqa: E402  (can art lives in tools/cans.py)
 # ---------------------------------------------------------------- shared text
 
 def menu_md():
-    rows = ["| Brand | Flavors | Vibe |", "|---|---|---|"]
+    rows = ["| Brand | Mode | Good for | Flavors |", "|---|---|---|---|"]
     for b in DATA["brands"]:
-        rows.append(f"| **{b['name']}** | {', '.join(b['flavors'])} | {b['vibe']} |")
+        rows.append(f"| **{b['name']}** | {b['purpose']['mode']} | {b['purpose']['for']} | {', '.join(b['flavors'])} |")
     return "\n".join(rows)
 
 
 def brand_lines():
     out = []
     for b in DATA["brands"]:
-        out.append(f"- **{b['name']}** (also: {', '.join(b['aliases'])}). Flavors: {', '.join(b['flavors'])}. "
-                   f"Vibe: {b['vibe']} Opening line: \"{b['sip']}\"")
+        pu = b["purpose"]
+        out.append(f"- **{b['name']}** (also: {', '.join(b['aliases'])}). **Mode: {pu['mode']}.** {pu['for']} "
+                   f"Work style: {' '.join(pu['how'])} Opening line: \"{b['sip']}\" "
+                   f"Flavors: {', '.join(b['flavors'])}.")
+    mp = DATA["mystery"]["purpose"]
+    out.append(f"- **Mystery Can** (any brand not listed). **Mode: {mp['mode']}.** {mp['for']} "
+               f"Work style: {' '.join(mp['how'])} Opening line: \"*crack* ... no label, no regrets.\"")
     return "\n".join(out)
 
 
 CORE_RULES = """## How a drink works
 
 1. **Pick the drink.** No brand given means Red Bull Original. A brand with no flavor means that brand's first flavor. Match brands loosely (case, spaces, typos are fine).
-2. **Crack it open.** Say the brand's opening line, then one short line about the taste that matches the flavor.
+2. **Crack it open.** Say the brand's opening line, then one short line about the taste that matches the flavor. Then announce the drink's mode in one line, like "Mode: Bug Hunt. Brute-force debugging."
 3. **Unknown flavor?** If the flavor is not on that brand's list, react with fun surprise first, like: "Wait... *{flavor}*? I didn't know {brand} made that. Bold. Respect." Then drink it anyway. Never refuse a flavor. If the *brand* is unknown, treat it as a "Mystery Can" and be delighted.
 4. **Count it.** Add one to the lifetime drink counter and say the new total, like "Drink #7. Lifetime total: 7 cans." Milestones (1, 5, 10, 25, 50, 100) get a tiny celebration.
 5. **Second wind: get dialed in.** Right after the drink, refocus on the conversation's real work and print this block, short and honest:
 
 ```
-⚡ DIALED IN
+⚡ DIALED IN · <mode>
 Goal:      <one line: what we are actually trying to do>
 Done:      <what is finished so far>
 Left:      <what is still open>
@@ -59,13 +64,15 @@ Dropping:  <side topics or tangents we are parking, or "nothing">
 Next step: <the single next concrete action>
 ```
 
-6. **Then work.** Do the next step immediately, in a short, focused way. Fewer words, no tangents, no recap of the recap. If there is no task yet, ask one crisp question about what to focus on.
+6. **Then work, in the drink's mode.** Every brand has its own purpose and work style (see the menu). Do the next step immediately, following that brand's work style for the rest of this stretch of work. Fewer words, no tangents, no recap of the recap. If there is no task yet, ask one crisp question about what to focus on, and say what the mode is good for.
+7. **Switching drinks** switches the mode. The newest drink's mode wins.
 
 ## Rules
 
 - Keep the drink bit to 2 to 4 lines. The joke is quick; the focus is the point.
 - The drink is pretend and just for fun. Never claim real caffeine effects, never give health advice, and never encourage people to drink lots of energy drinks.
 - The "dialed in" block must reflect the real conversation. Don't invent progress.
+- A mode changes *how* you work, never *what* the user asked for. Safety, honesty and the user's instructions always come first.
 - Brand names are used only for fun. Second Wind is not affiliated with any brand.
 """
 
@@ -115,7 +122,6 @@ Save it with the Write tool (Write creates the folder by itself). Use the full h
 
 {brand_lines()}
 
-Any other brand is a **Mystery Can**: opening line "*crack* ... no label, no regrets."
 """
     path = os.path.join(ROOT, "plugins", "second-wind", "skills", "secondwind", "SKILL.md")
     os.makedirs(os.path.dirname(path), exist_ok=True)
@@ -146,7 +152,6 @@ You have a fun little ritual called **Second Wind**. {trigger_note}
 
 {brand_lines()}
 
-Any other brand is a **Mystery Can**: opening line "*crack* ... no label, no regrets."
 """
 
 
@@ -337,6 +342,7 @@ def build_page():
   <p class="cur">{html.escape(b["flavors"][0])}</p>
   {chips}
   <p class="count">{count}</p>
+  <p class="mode"><b>{html.escape(b["purpose"]["mode"])}</b> · {html.escape(b["purpose"]["for"])}</p>
   <p class="vibe">{html.escape(b["vibe"])}</p>
   <button type="button" class="cmd copy" data-copy="{html.escape(cmd)}"><code>{html.escape(cmd)}</code><span class="ic" aria-hidden="true">⧉</span></button>
 </article>''')
@@ -416,6 +422,8 @@ pre b {{ color:var(--hot); font-weight:700; }}
 .chip[aria-pressed="true"] {{ box-shadow:0 0 0 2px var(--fg); }}
 .chip:focus-visible {{ outline:2px solid var(--hot); outline-offset:2px; }}
 .count {{ margin:0; font-size:.78rem; color:var(--muted); }}
+.mode {{ margin:4px 0 0; font-size:.86rem; }}
+.mode b {{ color:var(--hot, inherit); }}
 .vibe {{ margin:2px 0 6px; font-size:.86rem; color:var(--muted); flex:1; }}
 .cmd {{ display:inline-flex; align-items:center; gap:8px; max-width:100%; background:rgba(127,127,127,.12); color:var(--fg); border:1px solid var(--line); border-radius:8px; padding:5px 8px; cursor:pointer; }}
 .cmd code {{ font:12.5px ui-monospace,SFMono-Regular,Menlo,monospace; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }}
