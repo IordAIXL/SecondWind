@@ -91,11 +91,9 @@ def data_js():
         json.dumps(payload, ensure_ascii=False, separators=(",", ":")) + ";\n"
 
 
-def icons():
-    """Toolbar icons: an original lightning-bolt can, drawn with Pillow."""
+def draw_icon():
+    """The app icon: an original lightning-bolt can, drawn with Pillow at 512x512."""
     from PIL import Image, ImageDraw
-    d = os.path.join(EXT, "icons")
-    os.makedirs(d, exist_ok=True)
     big = 512
     im = Image.new("RGBA", (big, big), (0, 0, 0, 0))
     g = ImageDraw.Draw(im)
@@ -109,6 +107,15 @@ def icons():
     # bolt
     bolt = [(290, 136), (176, 290), (250, 290), (214, 400), (340, 236), (262, 236), (300, 136)]
     g.polygon(bolt, fill=(251, 191, 36, 255))
+    return im
+
+
+def icons():
+    """Toolbar icons."""
+    from PIL import Image
+    d = os.path.join(EXT, "icons")
+    os.makedirs(d, exist_ok=True)
+    im = draw_icon()
     for s in (16, 32, 48, 128):
         im.resize((s, s), Image.LANCZOS).save(os.path.join(d, f"icon{s}.png"))
 

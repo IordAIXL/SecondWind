@@ -6,7 +6,10 @@ Perplexity, or anything with a chat box. Nothing to install.
 START IT
   1. Unzip this folder somewhere you'll keep it (for example Documents).
   2. Double-click "Start Second Wind.bat".
+     (Windows may hide the ".bat" part, so it can show as just "Start Second Wind"
+     with a gear icon. Its type is "Windows Batch File".)
      If Windows says "Windows protected your PC", click "More info", then "Run anyway".
+     No .bat file at all? Right-click "SecondWind.ps1" and pick "Run with PowerShell".
   3. A purple can appears in your tray, near the clock (it may be under the ^ arrow).
 
 USE IT

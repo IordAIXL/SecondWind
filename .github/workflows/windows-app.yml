@@ -1,0 +1,90 @@
+# Builds the Second Wind Windows app and packages it for the Microsoft Store (MSIX bundle, x64 + ARM64).
+# The bundle is unsigned on purpose: the Store signs it when it's submitted.
+# Download it from the run's "Artifacts" section.
+name: Windows app (Microsoft Store)
+
+on:
+  push:
+    branches: [main]
+    paths: ["windows-app/**", "desktop/data.json", "desktop/cans/**", ".github/workflows/windows-app.yml", "VERSION"]
+  pull_request:
+    paths: ["windows-app/**", "desktop/data.json", "desktop/cans/**", ".github/workflows/windows-app.yml", "VERSION"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Find the Windows SDK tools (makeappx, makepri)
+        shell: pwsh
+        run: |
+          $bin = Get-ChildItem "${env:ProgramFiles(x86)}\Windows Kits\10\bin\10.*\x64\makeappx.exe" |
+                 Sort-Object FullName -Descending | Select-Object -First 1
+          if (-not $bin) { throw "makeappx.exe not found" }
+          "SDKBIN=$($bin.DirectoryName)" | Out-File $env:GITHUB_ENV -Append
+          Write-Host "Using $($bin.DirectoryName)"
+
+      - name: Build and package
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $version = ([xml](Get-Content windows-app/package/AppxManifest.xml)).Package.Identity.Version
+          $out = "out"
+          New-Item -ItemType Directory -Force $out | Out-Null
+          foreach ($arch in 'x64', 'arm64') {
+            $layout = "layout-$arch"
+            dotnet publish windows-app/SecondWind/SecondWind.csproj -c Release -r "win-$arch" --self-contained true `
+              -p:Version=$($version.Substring(0, $version.LastIndexOf('.'))) -o $layout
+            if ($LASTEXITCODE) { throw "publish failed ($arch)" }
+            Remove-Item "$layout\*.pdb" -ErrorAction SilentlyContinue
+            Copy-Item windows-app/package/Images "$layout\Images" -Recurse
+            (Get-Content windows-app/package/AppxManifest.xml -Raw) -replace 'ProcessorArchitecture="x64"', "ProcessorArchitecture=`"$arch`"" |
+              Set-Content "$layout\AppxManifest.xml" -Encoding utf8
+            Push-Location $layout
+            & "$env:SDKBIN\makepri.exe" createconfig /cf priconfig.xml /dq en-US /o
+            if ($LASTEXITCODE) { throw "makepri createconfig failed" }
+            & "$env:SDKBIN\makepri.exe" new /pr . /cf priconfig.xml /mn AppxManifest.xml /of resources.pri /o
+            if ($LASTEXITCODE) { throw "makepri new failed" }
+            Remove-Item priconfig.xml
+            Pop-Location
+            & "$env:SDKBIN\makeappx.exe" pack /d $layout /p "$out\SecondWind_$($version)_$arch.msix" /o
+            if ($LASTEXITCODE) { throw "makeappx pack failed ($arch)" }
+          }
+          New-Item -ItemType Directory -Force bundle | Out-Null
+          Move-Item "$out\*.msix" bundle
+          & "$env:SDKBIN\makeappx.exe" bundle /d bundle /p "$out\SecondWind_$version.msixbundle" /bv $version /o
+          if ($LASTEXITCODE) { throw "makeappx bundle failed" }
+          Get-ChildItem $out | Format-Table Name, Length
+
+      - name: Self-test (x64)
+        shell: pwsh
+        timeout-minutes: 3
+        run: |
+          $p = Start-Process -FilePath layout-x64\SecondWind.exe -ArgumentList '--selftest', "$PWD\selftest.txt", "$PWD\shots" -PassThru -Wait
+          Get-Content selftest.txt
+          if ($p.ExitCode -ne 0) { throw "self-test failed" }
+          # Also print the screenshots into the log (base64, in chunks) so they can be read without an artifact download.
+          foreach ($f in Get-ChildItem shots\*.png) {
+            $b = [Convert]::ToBase64String([IO.File]::ReadAllBytes($f.FullName))
+            for ($i = 0; $i -lt $b.Length; $i += 3000) { Write-Host "SHOT $($f.Name) $($b.Substring($i, [Math]::Min(3000, $b.Length - $i)))" }
+          }
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: second-wind-store-package
+          path: out/*.msixbundle
+          if-no-files-found: error
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: shots/*.png

@@ -1,0 +1,6 @@
+{
+  "_note": "Fill these in from Partner Center > your app > Product identity. Until then the app builds with placeholders (fine for testing the build, not for submitting).",
+  "identity_name": "SecondWind.PLACEHOLDER",
+  "publisher": "CN=00000000-0000-0000-0000-000000000000",
+  "publisher_display_name": "Second Wind"
+}
