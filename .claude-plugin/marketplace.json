@@ -1,13 +1,13 @@
 {
   "name": "energizer",
   "owner": { "name": "IordAIXL" },
-  "metadata": { "description": "Just-for-fun plugins. Give your AI an energy drink.", "version": "1.9.0" },
+  "metadata": { "description": "Just-for-fun plugins. Give your AI an energy drink.", "version": "1.10.0" },
   "plugins": [
     {
       "name": "second-wind",
       "source": "./plugins/second-wind",
       "description": "/secondwind gives Claude an energy drink (Red Bull, Monster, Celsius, Ghost, coffee, tea and more). Claude cracks it open, counts it, then gets dialed in on your task.",
-      "version": "1.9.0",
+      "version": "1.10.0",
       "category": "fun"
     }
   ]

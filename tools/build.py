@@ -221,11 +221,22 @@ def chip_color(b, f):
 
 
 BROWSER_EXTRA = (
-    '<p class="tip">Firefox: open <code>about:debugging</code>, click <b>This Firefox</b>, then <b>Load Temporary Add-on</b> '
+    '<p class="tip"><b>Updates:</b> when a new version is out, the can gets a green dot. '
+    'Click the Second Wind icon in your toolbar for 3 quick steps (download, replace the files, click reload). '
+    'Firefox: open <code>about:debugging</code>, click <b>This Firefox</b>, then <b>Load Temporary Add-on</b> '
     'and pick <code>manifest.json</code> in the unzipped folder. Firefox forgets it when it closes. '
     'Phone apps can\'t add buttons, so on a phone use the prompts instead.</p>'
-    '<img class="shot" src="previews/extension.png" alt="The Second Wind can button and drink picker next to a chat box" '
+    '<img class="shot" src="previews/extension-favorites.png" alt="The Second Wind can button and drink picker next to a chat box" '
     'width="1280" height="800" loading="lazy">'
+)
+
+
+DESKTOP_EXTRA = (
+    '<p class="tip">Using the Claude desktop app? You can also add Second Wind as a skill: '
+    '<a href="downloads/second-wind-skill.zip" download>download the skill</a>, then in Claude open '
+    '<b>Settings</b>, <b>Capabilities</b>, <b>Skills</b>, and upload the zip. '
+    '<b>Updates:</b> the desktop helper checks GitHub and updates itself, keeping your favorites. '
+    'Mac and phone apps aren\'t supported by the desktop helper yet, so use the prompts there.</p>'
 )
 
 
@@ -252,6 +263,7 @@ def install_section():
             f"Load it: {cmd_btn('/reload-plugins')} (or close and reopen Claude Code)",
             f"Hand it a drink: {cmd_btn('/secondwind')} If that name is taken, use {cmd_btn('/second-wind:secondwind')}",
             f"Installed before v1.8.0? Update first: {cmd_btn('/plugin marketplace update energizer')} then {cmd_btn('/plugin update second-wind@energizer')}",
+            'Get new versions automatically: type <code>/plugin</code>, open <b>Marketplaces</b>, pick <b>energizer</b> and choose <b>Enable auto-update</b>.',
         ], None),
         ("browser", "Browser button", "⚡", "A can button right next to the chat box on ChatGPT, Claude, Gemini, Grok, Copilot and more. One click hands your AI a drink. No prompt setup needed.", [
             '<a class="btn big" href="downloads/second-wind-extension.zip" download>⬇ Download the extension</a>',
@@ -260,6 +272,15 @@ def install_section():
             'Turn on <b>Developer mode</b> (top right corner).',
             'Click <b>Load unpacked</b> and pick the unzipped <b>second-wind</b> folder.',
             'Open ChatGPT, Claude, Gemini or Grok. Click the can above the chat box, pick a drink, and hit send.',
+            'Star a flavor to make it your usual, turn on <b>One-click usual</b>, and drag the can anywhere you like.',
+        ], None),
+        ("desktop", "Desktop apps", "▣", "For the ChatGPT, Claude and Copilot desktop apps on Windows. A floating can you can drag anywhere, plus hotkeys. Nothing to install.", [
+            '<a class="btn big" href="downloads/second-wind-desktop.zip" download>⬇ Download for Windows</a>',
+            'Unzip it somewhere you\'ll keep it, like Documents.',
+            'Double-click <b>Start Second Wind.bat</b>. If Windows says it protected your PC, click <b>More info</b>, then <b>Run anyway</b>.',
+            'A can floats on your screen and sits in your tray. Drag it anywhere.',
+            'Click into your AI app\'s chat box, then click the can (or press <b>Ctrl+Alt+D</b>) and pick a drink. <b>Ctrl+Alt+U</b> hands over your usual instantly.',
+            'Right-click any flavor to star it or make it your usual.',
         ], None),
         ("chatgpt", "ChatGPT", "◎", "Make a Custom GPT called Second Wind. Takes about a minute.", [
             f"Copy the prompt: {copy_btn('Copy the ChatGPT prompt', 'p-chatgpt')}",
@@ -306,7 +327,7 @@ def install_section():
                     f'<a href="{raw}/{files[fname]}">View the prompt on GitHub</a></p>')
         panels.append(f'''<div class="panel" role="tabpanel" id="panel-{key}" aria-labelledby="t-{key}"{"" if i == 0 else " hidden"}>
       <h3>{html.escape(name)}</h3><p class="sub">{html.escape(blurb)}</p>
-      <ol class="how">{lis}</ol>{note}{BROWSER_EXTRA if key == "browser" else ""}
+      <ol class="how">{lis}</ol>{note}{BROWSER_EXTRA if key == "browser" else DESKTOP_EXTRA if key == "desktop" else ""}
     </div>''')
     return f'''<section id="install">
   <h2>Pick your AI</h2>
@@ -602,6 +623,8 @@ def main():
     build_readme()
     import build_extension
     build_extension.main()
+    import build_desktop
+    build_desktop.main()
     print(f"Built Second Wind v{VERSION}: {len(DATA['brands'])+1} brands, {sum(len(b['flavors']) for b in DATA['brands'])} flavor cans, command, prompts, page.")
 
 

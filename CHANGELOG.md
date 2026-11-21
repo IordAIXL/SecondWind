@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.10.0 (2026-11-21)
+
+- New Windows desktop helper (`desktop/`, download `docs/downloads/second-wind-desktop.zip`). Works with the ChatGPT, Claude, Copilot and other desktop apps. Nothing to install: it runs on the Windows PowerShell every PC already has.
+  - A floating can you can drag anywhere on screen. It remembers its spot and never steals focus from your chat app.
+  - Click the can or press Ctrl+Alt+D to pick a drink; Ctrl+Alt+U hands over your usual instantly. The drink is pasted into the chat box you were using (your clipboard is put back afterwards).
+  - Tray menu with your usual, your favorites, Send right away, Start with Windows and Quit.
+- Favorites and a one-click "usual" everywhere. Star any flavor (or a made-up one); the first star is your usual.
+  - Browser button: favorites row at the top of the picker, a "My usual" button, and a "One-click usual" switch so clicking the can hands it over right away (right-click or the little arrow opens the menu).
+  - Desktop helper: right-click a can to star it or make it your usual.
+- Drag the browser can button anywhere. It remembers its spot on each site; "Snap back" puts it next to the chat box again.
+- The browser button and desktop helper now use each brand's mode and work style in the drink message (from 1.9.0).
+- Updates without hunting for them:
+  - Browser button checks GitHub twice a day. When there's a new version the can gets a green dot, the picker shows a banner, and the toolbar popup gives 3 steps plus a one-click reload.
+  - Desktop helper updates itself from GitHub (on by default, "Install updates automatically" in the tray menu), keeps your favorites and count, and restarts.
+  - README and download page explain how to turn on auto-update for the Claude Code plugin.
+- Claude Desktop skill: `docs/downloads/second-wind-skill.zip`, upload it in Claude under Settings, Capabilities, Skills.
+- Download page: new "Desktop apps" tab with the Windows download, the skill and install steps.
+
 ## 1.9.0 (2026-11-21)
 
 - Every drink now has its own purpose and work style. The AI announces the mode, shows it in the "dialed in" block, and works that way until you switch drinks.

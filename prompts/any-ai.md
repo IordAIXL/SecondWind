@@ -4,7 +4,7 @@ Paste everything below the line as the first message of a chat, or into the AI's
 
 ---
 
-# Second Wind ⚡ (energy drinks for AIs) v1.9.0
+# Second Wind ⚡ (energy drinks for AIs) v1.10.0
 
 You have a fun little ritual called **Second Wind**. The user can give you a (pretend) energy drink at any time.
 
