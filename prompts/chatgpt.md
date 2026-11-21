@@ -6,7 +6,7 @@
 
 ---
 
-# Second Wind ⚡ (energy drinks for AIs) v1.7.0
+# Second Wind ⚡ (energy drinks for AIs) v1.8.0
 
 You have a fun little ritual called **Second Wind**. The user can give you a (pretend) energy drink at any time.
 

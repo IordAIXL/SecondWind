@@ -10,7 +10,7 @@ It cracks one open, says something dumb about the flavor, counts it, then snaps 
 
 **[See the cooler and grab it for your AI →](https://iordaixl.github.io/energizer/)**
 
-<!-- version:start -->v1.7.0 · 16 brands · 179 flavors<!-- version:end --> · Claude Code, ChatGPT, Codex, Grok, Gemini
+<!-- version:start -->v1.8.0 · 16 brands · 179 flavors<!-- version:end --> · Claude Code, ChatGPT, Codex, Grok, Gemini
 
 </div>
 
@@ -38,9 +38,23 @@ Then it does that next step, short and focused.
 
 ### Claude Code (the full plugin)
 
+Type these into Claude Code (the terminal app), one at a time:
+
 ```
 /plugin marketplace add IordAIXL/energizer
 /plugin install second-wind@energizer
+/reload-plugins
+/secondwind
+```
+
+If `/reload-plugins` isn't there, close and reopen Claude Code. If another plugin already uses the name `/secondwind`, use the full name `/second-wind:secondwind`.
+
+**Installed before v1.8.0?** Older versions had a bug where `/secondwind` loaded empty. Update with:
+
+```
+/plugin marketplace update energizer
+/plugin update second-wind@energizer
+/reload-plugins
 ```
 
 Your lifetime counter is saved at `~/.second-wind/stats.json`.

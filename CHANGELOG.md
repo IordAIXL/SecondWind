@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.8.0 (2026-11-21)
+
+- Fixed: typing `/secondwind` in Claude Code loaded an empty command, so Claude improvised instead of following Second Wind. The cause was a permissions line in the command file. Only the long name `/second-wind:secondwind` worked.
+- The command is now a Claude Code skill (the current format). `/secondwind` works directly after install.
+- The counter is saved with Claude's Read and Write tools only, so there are no permission pop-ups for a shell command.
+- Install steps on the README and download page now include reloading plugins, the long-name fallback, and how to update an older install.
+
 ## 1.7.0 (2026-11-21)
 
 - New browser button (a Chrome, Edge and Firefox extension in `extension/`). It puts a can button right above the chat box on ChatGPT, Claude, Gemini, Grok, Copilot, Perplexity, DeepSeek, Mistral, Meta AI, Poe and Google AI Studio.
