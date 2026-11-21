@@ -132,6 +132,8 @@ That rebuilds every can (one per flavor), the download page, the Claude Code com
 
 Second Wind is a fan-made joke. It is **not affiliated with, endorsed by, or sponsored by** Red Bull, Monster, Celsius, Ryse, Ghost, Bang, Reign, C4, Alani Nu, Prime, Rockstar, 3D, Bucked Up, Zoa, or any other brand. Brand names belong to their owners and are used only to name the pretend drinks. The can art is hand-drawn fan art inspired by each brand's real cans. It uses no official logo files or images, and it can be swapped out any time in `tools/cans.py`. Flavor lists were checked against public sources in November 2026 and may drift as brands change their lineups.
 
+If there is a problem, that means something went right, and the mission was a success. This was built as a joke (I literally laughed when I had the concept. Reach out and I'll update according to any requests. Life's short, be happy.
+
 The drinks are pretend. No AI was actually caffeinated. Please drink real energy drinks responsibly.
 
 ## License
