@@ -22,13 +22,14 @@
         "Sugarfree",
         "Zero",
         "Watermelon",
-        "Blueberry",
         "Tropical",
-        "Dragon Fruit",
         "Coconut Berry",
         "Strawberry Apricot",
-        "Peach Nectarine",
-        "Juneberry"
+        "Peach",
+        "Juneberry",
+        "Apple Edition",
+        "Iced Edition",
+        "Pink Edition"
       ],
       "vibe": "Classic wings energy. Crisp, a little sweet, very focused.",
       "sip": "*crack* ... a sharp fizz. Wings: deployed.",
@@ -42,15 +43,9 @@
         "Watermelon": {
           "body": "#d0142c"
         },
-        "Blueberry": {
-          "body": "#1d4fd8"
-        },
         "Tropical": {
           "body": "#f2b705",
           "text": "#1f2937"
-        },
-        "Dragon Fruit": {
-          "body": "#2fa84f"
         },
         "Coconut Berry": {
           "body": "#e9eef5",
@@ -59,11 +54,21 @@
         "Strawberry Apricot": {
           "body": "#e2731f"
         },
-        "Peach Nectarine": {
+        "Peach": {
           "body": "#f49b83"
         },
         "Juneberry": {
           "body": "#1f8fb3"
+        },
+        "Apple Edition": {
+          "body": "#6db33f"
+        },
+        "Iced Edition": {
+          "body": "#9cc9e8",
+          "text": "#1f2937"
+        },
+        "Pink Edition": {
+          "body": "#e85d9a"
         }
       }
     },
@@ -87,13 +92,14 @@
         "Zero Ultra",
         "Ultra Paradise",
         "Ultra Violet",
-        "Ultra Blue",
-        "Ultra Watermelon",
         "Ultra Fiesta Mango",
+        "Ultra Watermelon",
+        "Ultra Peachy Keen",
+        "Ultra Strawberry Dreams",
+        "Ultra Blue Hawaiian",
         "Mango Loco",
         "Pipeline Punch",
-        "Pacific Punch",
-        "Khaotic"
+        "Pacific Punch"
       ],
       "vibe": "Big can, big energy. Unleashed, slightly feral.",
       "sip": "*KSSHH* ... that's a lot of can. Unleashing focus.",
@@ -115,9 +121,9 @@
           "accent": "#9b51e0",
           "text": "#111111"
         },
-        "Ultra Blue": {
+        "Ultra Fiesta Mango": {
           "body": "#f4f5f7",
-          "accent": "#2f80ed",
+          "accent": "#f2a007",
           "text": "#111111"
         },
         "Ultra Watermelon": {
@@ -125,9 +131,19 @@
           "accent": "#ef476f",
           "text": "#111111"
         },
-        "Ultra Fiesta Mango": {
+        "Ultra Peachy Keen": {
           "body": "#f4f5f7",
-          "accent": "#f2a007",
+          "accent": "#f7a072",
+          "text": "#111111"
+        },
+        "Ultra Strawberry Dreams": {
+          "body": "#f4f5f7",
+          "accent": "#f26d8f",
+          "text": "#111111"
+        },
+        "Ultra Blue Hawaiian": {
+          "body": "#f4f5f7",
+          "accent": "#19b3d6",
           "text": "#111111"
         },
         "Mango Loco": {
@@ -141,11 +157,6 @@
         "Pacific Punch": {
           "body": "#e2512a",
           "accent": "#ffd23f"
-        },
-        "Khaotic": {
-          "body": "#f28b1d",
-          "accent": "#111111",
-          "text": "#111111"
         }
       }
     },
@@ -171,9 +182,18 @@
         "Arctic Vibe",
         "Sparkling Watermelon",
         "Fantasy Vibe",
-        "Sparkling Grape Rush",
         "Tropical Vibe",
         "Galaxy Vibe",
+        "Sparkling Mango Lemonade",
+        "Fuji Apple Pear",
+        "Sparkling Lemon Lime",
+        "Strawberry Lemonade",
+        "Dragon Fruit Lime",
+        "Astro Vibe",
+        "Oasis Vibe",
+        "Playa Vibe",
+        "Cosmic Vibe",
+        "Sparkling Grape Rush",
         "Mango Passionfruit",
         "Sparkling Cola"
       ],
@@ -186,9 +206,18 @@
         "Arctic Vibe": "#3fb6e8",
         "Sparkling Watermelon": "#f04e6e",
         "Fantasy Vibe": "#a45ee5",
-        "Sparkling Grape Rush": "#7b2fbf",
         "Tropical Vibe": "#f5c400",
         "Galaxy Vibe": "#5b5fe0",
+        "Sparkling Mango Lemonade": "#f5b800",
+        "Fuji Apple Pear": "#9fcf4f",
+        "Sparkling Lemon Lime": "#8fcf2f",
+        "Strawberry Lemonade": "#f8607d",
+        "Dragon Fruit Lime": "#e5317f",
+        "Astro Vibe": "#5a5fe0",
+        "Oasis Vibe": "#22b8a8",
+        "Playa Vibe": "#ff8c42",
+        "Cosmic Vibe": "#7b3fe4",
+        "Sparkling Grape Rush": "#7b2fbf",
         "Mango Passionfruit": "#f59e0b",
         "Sparkling Cola": "#7a3b1d"
       }
@@ -210,25 +239,29 @@
       "motif": "chevrons",
       "flavors": [
         "Kool-Aid Tropical Punch",
+        "Cream Soda",
+        "Frosted Lemonade",
+        "White Mystery Airheads",
+        "Root Beer Float",
+        "Firecracker Popsicle",
+        "Cotton Candy",
+        "Sour Punch Blue Raspberry",
         "Smarties",
-        "Ring Pop Berry Blast",
-        "Sour Jolly Rancher Watermelon",
-        "Hawaiian Punch",
-        "Blue Razz",
-        "Mango Pineapple",
-        "Baja Burst"
+        "Ring Pop Berry Blast"
       ],
       "vibe": "Pre-workout attitude in a can. Up and to the right.",
       "sip": "*crack* ... trending upward. Rysing to the occasion.",
       "flavor_colors": {
         "Kool-Aid Tropical Punch": "#e1306c",
+        "Cream Soda": "#e9c46a",
+        "Frosted Lemonade": "#ffe066",
+        "White Mystery Airheads": "#d9dde3",
+        "Root Beer Float": "#7a3b1d",
+        "Firecracker Popsicle": "#e63946",
+        "Cotton Candy": "#f9a8d4",
+        "Sour Punch Blue Raspberry": "#2563eb",
         "Smarties": "#b38bfa",
-        "Ring Pop Berry Blast": "#3b82f6",
-        "Sour Jolly Rancher Watermelon": "#ff4f79",
-        "Hawaiian Punch": "#d62828",
-        "Blue Razz": "#2563eb",
-        "Mango Pineapple": "#f59e0b",
-        "Baja Burst": "#14b8a6"
+        "Ring Pop Berry Blast": "#3b82f6"
       }
     },
     {
@@ -251,11 +284,16 @@
         "Sour Patch Kids Redberry",
         "Swedish Fish",
         "Warheads Sour Watermelon",
+        "Warheads Sour Green Apple",
         "Orange Cream",
         "Tropical Mango",
         "Cherry Limeade",
         "Welch's Grape",
-        "Faze Pop"
+        "Sour Strips Rainbow",
+        "Sour Pink Lemonade",
+        "'Merica Pop",
+        "7UP",
+        "A&W Root Beer"
       ],
       "vibe": "Playful and loud. Boo, but productive.",
       "sip": "*pssht* ... spooky smooth. Ghosting distractions.",
@@ -265,11 +303,16 @@
         "Sour Patch Kids Redberry": "#ef3b3b",
         "Swedish Fish": "#e0103a",
         "Warheads Sour Watermelon": "#ff5fa2",
+        "Warheads Sour Green Apple": "#7ed957",
         "Orange Cream": "#ff9a3c",
         "Tropical Mango": "#ffb81c",
         "Cherry Limeade": "#c8102e",
         "Welch's Grape": "#7b2cbf",
-        "Faze Pop": "#00c2ff"
+        "Sour Strips Rainbow": "#c084fc",
+        "Sour Pink Lemonade": "#ff8fb1",
+        "'Merica Pop": "#e63946",
+        "7UP": "#1fa64a",
+        "A&W Root Beer": "#a0522d"
       }
     },
     {
@@ -287,69 +330,74 @@
       },
       "motif": "burst",
       "flavors": [
-        "Black Cherry Vanilla",
-        "Rainbow Unicorn",
-        "Star Blast",
-        "Blue Razz",
         "Peach Mango",
-        "Cotton Candy",
-        "Sour Heads",
-        "Frose Rose",
-        "Key Lime Pie",
+        "Black Cherry Vanilla",
+        "Delish Strawberry Kiss",
+        "Candy Apple Crisp",
+        "Wyldin' Watermelon",
+        "Blue Razz",
         "Purple Haze",
-        "Miami Cola",
-        "Lemon Drop"
+        "Star Blast",
+        "Radical Skadattle",
+        "Rainbow Unicorn",
+        "Cotton Candy",
+        "Lime Pop Drop",
+        "American Berry"
       ],
       "vibe": "Neon explosion. Everything is a big deal now.",
       "sip": "*BANG* ... okay that was loud. Fully awake.",
       "flavor_colors": {
+        "Peach Mango": {
+          "accent": "#fb923c",
+          "accent2": "#fde047"
+        },
         "Black Cherry Vanilla": {
           "accent": "#8b1e3f",
           "accent2": "#f4d9c6"
         },
-        "Rainbow Unicorn": {
-          "accent": "#e879f9",
-          "accent2": "#67e8f9"
+        "Delish Strawberry Kiss": {
+          "accent": "#e11d48",
+          "accent2": "#fda4af"
         },
-        "Star Blast": {
-          "accent": "#2563eb",
-          "accent2": "#f43f5e"
+        "Candy Apple Crisp": {
+          "accent": "#dc2626",
+          "accent2": "#84cc16"
+        },
+        "Wyldin' Watermelon": {
+          "accent": "#f43f5e",
+          "accent2": "#22c55e"
         },
         "Blue Razz": {
           "accent": "#1d4ed8",
           "accent2": "#38bdf8"
         },
-        "Peach Mango": {
-          "accent": "#fb923c",
-          "accent2": "#fde047"
+        "Purple Haze": {
+          "accent": "#7c3aed",
+          "accent2": "#c4b5fd"
+        },
+        "Star Blast": {
+          "accent": "#2563eb",
+          "accent2": "#f43f5e"
+        },
+        "Radical Skadattle": {
+          "accent": "#f97316",
+          "accent2": "#a855f7"
+        },
+        "Rainbow Unicorn": {
+          "accent": "#e879f9",
+          "accent2": "#67e8f9"
         },
         "Cotton Candy": {
           "accent": "#f9a8d4",
           "accent2": "#93c5fd"
         },
-        "Sour Heads": {
-          "accent": "#84cc16",
+        "Lime Pop Drop": {
+          "accent": "#65a30d",
           "accent2": "#facc15"
         },
-        "Frose Rose": {
-          "accent": "#fb7185",
-          "accent2": "#fecdd3"
-        },
-        "Key Lime Pie": {
-          "accent": "#a3e635",
-          "accent2": "#fef9c3"
-        },
-        "Purple Haze": {
-          "accent": "#7c3aed",
-          "accent2": "#c4b5fd"
-        },
-        "Miami Cola": {
-          "accent": "#b91c1c",
-          "accent2": "#fca5a5"
-        },
-        "Lemon Drop": {
-          "accent": "#facc15",
-          "accent2": "#fef08a"
+        "American Berry": {
+          "accent": "#1d4ed8",
+          "accent2": "#dc2626"
         }
       }
     },
@@ -369,27 +417,43 @@
       "motif": "crown",
       "flavors": [
         "Razzle Berry",
-        "Melon Mania",
         "Orange Dreamsicle",
-        "Lilikoi Lychee",
-        "Carnival Candy",
         "White Gummy Bear",
-        "Red Dragon",
         "Reignbow Sherbet",
-        "Mang-O-Matic"
+        "Sour Gummy Worm",
+        "Sour Apple",
+        "Melon Mania",
+        "Lilikoi Lychee",
+        "Peach Fizz",
+        "Mang-O-Matic",
+        "Lemon HDZ",
+        "Strawberry Sublime",
+        "Watermelon Warlord",
+        "True Blu",
+        "Cherry Limeade",
+        "Carnival Candy",
+        "Watermelon Sour Gummy"
       ],
       "vibe": "Royal decree: we are finishing this task.",
       "sip": "*crack* ... regal fizz. The throne room is now a focus room.",
       "flavor_colors": {
         "Razzle Berry": "#e2368a",
-        "Melon Mania": "#3ccf5a",
         "Orange Dreamsicle": "#ff8a2a",
-        "Lilikoi Lychee": "#ffd92e",
-        "Carnival Candy": "#c27bff",
         "White Gummy Bear": "#e8e8ec",
-        "Red Dragon": "#e3262f",
         "Reignbow Sherbet": "#ff7fc0",
-        "Mang-O-Matic": "#ffb01f"
+        "Sour Gummy Worm": "#a3e635",
+        "Sour Apple": "#7cc242",
+        "Melon Mania": "#3ccf5a",
+        "Lilikoi Lychee": "#ffd92e",
+        "Peach Fizz": "#ffb07a",
+        "Mang-O-Matic": "#ffb01f",
+        "Lemon HDZ": "#ffe14d",
+        "Strawberry Sublime": "#f43f5e",
+        "Watermelon Warlord": "#ef4444",
+        "True Blu": "#2563eb",
+        "Cherry Limeade": "#be123c",
+        "Carnival Candy": "#c27bff",
+        "Watermelon Sour Gummy": "#ff5c7a"
       }
     },
     {
@@ -410,27 +474,31 @@
       "motif": "hazard",
       "flavors": [
         "Frozen Bombsicle",
-        "Midnight Cherry",
-        "Cherry Limeade",
-        "Twisted Limeade",
-        "Strawberry Watermelon Ice",
         "Orange Slice",
-        "Cotton Candy",
-        "Skittles",
-        "Starburst Cherry"
+        "Jolly Rancher Watermelon",
+        "Popsicle Grape",
+        "Jolly Rancher Blue Raspberry",
+        "Cosmic Rainbow",
+        "Popsicle Hawaiian Pineapple",
+        "Jolly Rancher Green Apple",
+        "Mango Foxtrot",
+        "Strawberry Blast",
+        "Cherry Limeade"
       ],
       "vibe": "Explosive pre-workout energy. Handle with care.",
       "sip": "*crack* ... fuse lit. Detonating the to-do list.",
       "flavor_colors": {
         "Frozen Bombsicle": "#2f6bff",
-        "Midnight Cherry": "#9b1c31",
-        "Cherry Limeade": "#e0284a",
-        "Twisted Limeade": "#9be22d",
-        "Strawberry Watermelon Ice": "#ff5c7a",
         "Orange Slice": "#ff8c1a",
-        "Cotton Candy": "#ff9ed2",
-        "Skittles": "#e11d48",
-        "Starburst Cherry": "#ff3355"
+        "Jolly Rancher Watermelon": "#ff4f79",
+        "Popsicle Grape": "#7c3aed",
+        "Jolly Rancher Blue Raspberry": "#2563eb",
+        "Cosmic Rainbow": "#c084fc",
+        "Popsicle Hawaiian Pineapple": "#fbbf24",
+        "Jolly Rancher Green Apple": "#84cc16",
+        "Mango Foxtrot": "#f59e0b",
+        "Strawberry Blast": "#f43f5e",
+        "Cherry Limeade": "#e0284a"
       }
     },
     {
@@ -451,29 +519,33 @@
       "motif": "hearts",
       "flavors": [
         "Cosmic Stardust",
-        "Hawaiian Shaved Ice",
-        "Mimosa",
-        "Witch's Brew",
-        "Cherry Slush",
         "Breezeberry",
-        "Kimade",
+        "Dream Float",
+        "Hawaiian Shaved Ice",
         "Juicy Peach",
-        "Tropsicle",
-        "Arctic White"
+        "Watermelon Wave",
+        "Orange Kiss",
+        "Cherry Slush",
+        "Blue Slush",
+        "Pink Slush",
+        "Lime Slush",
+        "Strawberry Sunrise"
       ],
       "vibe": "Pastel and cheerful. Productivity, but cute.",
       "sip": "*tss* ... sparkly and sweet. Vibes: aligned.",
       "flavor_colors": {
         "Cosmic Stardust": "#c3a6ff",
-        "Hawaiian Shaved Ice": "#7fd3f7",
-        "Mimosa": "#ffb36b",
-        "Witch's Brew": "#a6e05a",
-        "Cherry Slush": "#ff5b7f",
         "Breezeberry": "#a7c7ff",
-        "Kimade": "#ffadd2",
+        "Dream Float": "#c4b5fd",
+        "Hawaiian Shaved Ice": "#7fd3f7",
         "Juicy Peach": "#ffc29a",
-        "Tropsicle": "#ffe066",
-        "Arctic White": "#eef1f6"
+        "Watermelon Wave": "#ff6b8a",
+        "Orange Kiss": "#ffa94d",
+        "Cherry Slush": "#ff5b7f",
+        "Blue Slush": "#74c0fc",
+        "Pink Slush": "#ff8fc7",
+        "Lime Slush": "#a9e34b",
+        "Strawberry Sunrise": "#ff8787"
       }
     },
     {
@@ -491,24 +563,22 @@
       },
       "motif": "diamond",
       "flavors": [
-        "Tropical Punch",
-        "Blue Raspberry",
+        "Original",
         "Ice Pop",
         "Strawberry Watermelon",
-        "Lemon Lime",
+        "Blue Raspberry",
+        "Tropical Punch",
         "Orange Mango",
-        "Grape"
+        "Lemon Lime",
+        "Cherry Limeade",
+        "Dripsicle"
       ],
       "vibe": "Hype energy. Very confident, possibly filming.",
       "sip": "*crack* ... crisp and hyped. Prime time.",
       "flavor_colors": {
-        "Tropical Punch": {
-          "accent": "#ff3d7f",
-          "accent2": "#ffb800"
-        },
-        "Blue Raspberry": {
-          "accent": "#1e40ff",
-          "accent2": "#00c8ff"
+        "Original": {
+          "accent": "#7c8594",
+          "accent2": "#d6dbe2"
         },
         "Ice Pop": {
           "accent": "#ff2d55",
@@ -518,17 +588,29 @@
           "accent": "#ff4d6d",
           "accent2": "#36d27a"
         },
-        "Lemon Lime": {
-          "accent": "#a6e22e",
-          "accent2": "#ffe600"
+        "Blue Raspberry": {
+          "accent": "#1e40ff",
+          "accent2": "#00c8ff"
+        },
+        "Tropical Punch": {
+          "accent": "#ff3d7f",
+          "accent2": "#ffb800"
         },
         "Orange Mango": {
           "accent": "#ff7a00",
           "accent2": "#ffc400"
         },
-        "Grape": {
-          "accent": "#6d28d9",
-          "accent2": "#c026d3"
+        "Lemon Lime": {
+          "accent": "#a6e22e",
+          "accent2": "#ffe600"
+        },
+        "Cherry Limeade": {
+          "accent": "#c8102e",
+          "accent2": "#84cc16"
+        },
+        "Dripsicle": {
+          "accent": "#f472b6",
+          "accent2": "#60a5fa"
         }
       }
     },
@@ -550,26 +632,30 @@
       "flavors": [
         "Original",
         "Punched",
+        "Punched Strawberry Peach",
+        "Punched Blackberry Smash",
         "Pure Zero Silver Ice",
         "Pure Zero Grape",
         "Pure Zero Watermelon",
-        "Xdurance Blue Razz",
+        "Pure Zero Mandarin Orange",
         "Recovery Lemonade",
-        "Juiced Mango",
-        "Sugar Free"
+        "Recovery Orangeade",
+        "Xdurance Blue Razz"
       ],
       "vibe": "Backstage pass energy. Loud guitars, clean commits.",
       "sip": "*crack* ... power chord. Ready to shred this task.",
       "flavor_colors": {
         "Original": "#f5c400",
         "Punched": "#e3262f",
+        "Punched Strawberry Peach": "#f9a07a",
+        "Punched Blackberry Smash": "#6d28d9",
         "Pure Zero Silver Ice": "#c7ced8",
         "Pure Zero Grape": "#8b3fd9",
         "Pure Zero Watermelon": "#ff5c7a",
-        "Xdurance Blue Razz": "#2f6bff",
+        "Pure Zero Mandarin Orange": "#ff9a1f",
         "Recovery Lemonade": "#ffe14d",
-        "Juiced Mango": "#ff9a1f",
-        "Sugar Free": "#9aa3ad"
+        "Recovery Orangeade": "#ff9a1f",
+        "Xdurance Blue Razz": "#2f6bff"
       }
     },
     {
@@ -589,24 +675,24 @@
       },
       "motif": "cube",
       "flavors": [
-        "Blue Raspberry",
-        "Liquid Ice",
-        "Chrome",
-        "Red Razz",
-        "Purple",
-        "Pina Colada",
-        "Bubblegum"
+        "Liberty Pop",
+        "Blueberry Melon",
+        "Watermelon Grape",
+        "Cucumber Lime",
+        "Strawberry Lemonade",
+        "Citrus Frost",
+        "Spicy Mango"
       ],
       "vibe": "Sleek and geometric. Seeing the problem from every angle.",
       "sip": "*tss* ... depth perception: improved. Seeing all three dimensions.",
       "flavor_colors": {
-        "Blue Raspberry": "#2f6bff",
-        "Liquid Ice": "#5ee6f2",
-        "Chrome": "#d4d7dd",
-        "Red Razz": "#e3262f",
-        "Purple": "#9b5cff",
-        "Pina Colada": "#ffe08a",
-        "Bubblegum": "#ff7fc0"
+        "Liberty Pop": "#e63946",
+        "Blueberry Melon": "#5b8def",
+        "Watermelon Grape": "#c026d3",
+        "Cucumber Lime": "#7ee08a",
+        "Strawberry Lemonade": "#fb7185",
+        "Citrus Frost": "#fde047",
+        "Spicy Mango": "#f97316"
       }
     },
     {
@@ -631,7 +717,8 @@
         "Miami Vice",
         "Grape Gainz",
         "Swole Whip",
-        "Watermelon"
+        "Watermelon",
+        "Cherry Candy"
       ],
       "vibe": "Outdoorsy, antlered, ready to charge.",
       "sip": "*crack* ... antlers up. Charging at the next step.",
@@ -641,7 +728,8 @@
         "Miami Vice": "#ff6fae",
         "Grape Gainz": "#7b2cbf",
         "Swole Whip": "#ffb36b",
-        "Watermelon": "#ff5c7a"
+        "Watermelon": "#ff5c7a",
+        "Cherry Candy": "#d00030"
       }
     },
     {
@@ -660,27 +748,29 @@
       "motif": "waves",
       "flavors": [
         "Pineapple Coconut",
-        "Wild Orange",
-        "Super Berry",
-        "Tropical Punch",
-        "Lemon Lime",
         "White Peach",
-        "Frosted Grape",
+        "Strawberry Watermelon",
+        "Green Apple",
+        "Mango Splash",
         "Cherry Limeade",
-        "Strawberry Watermelon"
+        "Frosted Grape",
+        "Lemon Lime",
+        "Wild Orange",
+        "Tropical Punch"
       ],
       "vibe": "Beachy, healthy-ish, calm but awake.",
       "sip": "*tss* ... tropical calm with a kick. Riding the wave.",
       "flavor_colors": {
         "Pineapple Coconut": "#ffd23f",
-        "Wild Orange": "#ff8a2a",
-        "Super Berry": "#a3238e",
-        "Tropical Punch": "#f2385a",
-        "Lemon Lime": "#8bd13a",
         "White Peach": "#ffb4a2",
-        "Frosted Grape": "#7b4fd6",
+        "Strawberry Watermelon": "#ff5c7a",
+        "Green Apple": "#7cc242",
+        "Mango Splash": "#ffb000",
         "Cherry Limeade": "#c8102e",
-        "Strawberry Watermelon": "#ff5c7a"
+        "Frosted Grape": "#7b4fd6",
+        "Lemon Lime": "#8bd13a",
+        "Wild Orange": "#ff8a2a",
+        "Tropical Punch": "#f2385a"
       }
     },
     {

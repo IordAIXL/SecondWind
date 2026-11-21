@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.5.0 (2026-11-21)
+
+- Flavor audit: every brand's flavor list was checked against current lineups online (179 flavors now). Discontinued flavors are gone and new ones are in, each with its own can colors.
+  - Red Bull: added Apple, Iced and Pink Editions; dropped Blueberry and Dragon Fruit.
+  - Monster: added Ultra Peachy Keen, Ultra Strawberry Dreams, Ultra Blue Hawaiian; dropped Ultra Blue and Khaotic.
+  - Celsius: added 9 current flavors (Mango Lemonade, Fuji Apple Pear, Dragon Fruit Lime, Astro, Oasis, Playa and Cosmic Vibe, and more).
+  - Ryse: current Fuel lineup (Cream Soda, Frosted Lemonade, White Mystery Airheads, Root Beer Float, Firecracker Popsicle, Cotton Candy, Sour Punch Blue Raspberry).
+  - Ghost: added Warheads Sour Green Apple, Sour Strips Rainbow, Sour Pink Lemonade, 7UP, A&W Root Beer; FaZe Pop is now 'Merica Pop.
+  - Bang: current lineup incl. Delish Strawberry Kiss, Candy Apple Crisp, Wyldin' Watermelon, Lime Pop Drop, American Berry.
+  - Reign: 17 current flavors incl. Sour Gummy Worm, Peach Fizz, Watermelon Sour Gummy; dropped Red Dragon.
+  - C4: current Performance lineup (Jolly Rancher, Popsicle and more).
+  - Alani Nu: added Dream Float, Watermelon Wave, Orange Kiss, Blue, Pink and Lime Slush, Strawberry Sunrise.
+  - Prime: added Original, Cherry Limeade, Dripsicle; dropped Grape.
+  - Rockstar, 3D, Bucked Up and Zoa updated to their current lineups.
+- New download page: a hero with cans, a "How it works" section, search that jumps to the matching flavor, one-click copy for every command, and flavor-aware commands.
+- README rewritten: cover image of every can, cleaner install steps, and a full menu table that is generated from the data.
+
 ## 1.4.2 (2026-11-21)
 
 - Better lettering on every can. Text is now drawn from real display fonts and baked into the art, so it looks the same on every phone and computer.
