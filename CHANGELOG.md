@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.4.2 (2026-11-21)
+
+- Better lettering on every can. Text is now drawn from real display fonts and baked into the art, so it looks the same on every phone and computer.
+- Redid Ryse again: bold RYSE logo, big slanted FUEL, slanted flavor ribbon.
+- Redid Ghost again: big GHOST wordmark, large ghost logo, flavor in a white sticker.
+- New lettering on Reign: sharp REIGN letters, a crown with gems, condensed flavor text.
+
 ## 1.3.0 (2026-11-21)
 
 - Can audit against the real brands. Redid four cans that didn't look right:

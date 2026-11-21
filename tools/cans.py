@@ -11,14 +11,60 @@ Used by tools/build.py. Entry point: can_svg(brand, flavor=None).
 """
 import html
 import math
+import os
 import re
 
-BLACK = "Impact,'Arial Black','Inter Black','Helvetica Neue',Arial,sans-serif"
-WIDE = "'Arial Black','Inter Black','Helvetica Neue',Arial,sans-serif"
-SANS = "'Helvetica Neue',Arial,Inter,sans-serif"
-SERIF = "Georgia,'Times New Roman',serif"
-SCRIPT = "'Brush Script MT','Segoe Script','Lucida Handwriting',Georgia,cursive"
-MONO = "'Courier New',Courier,monospace"
+# Lettering is drawn as vector outlines from the open-source (OFL) fonts in
+# tools/fonts/, so every can looks the same on every device.
+BLACK = "anton"          # tall condensed impact style
+WIDE = "archivo"         # wide heavy grotesk
+SANS = "inter"           # small print (weight picks Bold / ExtraBold / Black)
+SERIF = "dmserif"
+SCRIPT = "pacifico"
+MONO = "inter"
+RYSE_FONT = "saira"      # heavy condensed, used slanted
+GHOST_FONT = "rubik"     # chunky rounded
+REIGN_FONT = "russo"     # sharp squared
+COND = "oswald"
+
+FONT_FILES = {
+    "anton": "Anton-Regular.ttf", "archivo": "ArchivoBlack-Regular.ttf",
+    "inter700": "Inter-Bold.ttf", "inter800": "Inter-ExtraBold.ttf", "inter900": "Inter-Black.ttf",
+    "dmserif": "DMSerifDisplay-Regular.ttf", "pacifico": "Pacifico-Regular.ttf",
+    "saira": "SairaCondensed-Black.ttf", "rubik": "Rubik-Black.ttf", "russo": "RussoOne-Regular.ttf",
+    "oswald": "Oswald-Bold.ttf",
+}
+FONT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "fonts")
+_FONTS = {}
+
+
+def _font(key, weight):
+    if key == "inter":
+        key = "inter" + str(800 if weight == 800 else (900 if weight >= 900 else 700))
+    if key not in _FONTS:
+        from fontTools.ttLib import TTFont
+        f = TTFont(os.path.join(FONT_DIR, FONT_FILES[key]))
+        _FONTS[key] = (f, f.getGlyphSet(), f.getBestCmap(), f["hmtx"], f["head"].unitsPerEm)
+    return _FONTS[key]
+
+
+def _outline(s, size, key, weight, spacing=0.0):
+    """Return (path_d, width) for string s at font size `size`, baseline y=0, starting x=0."""
+    from fontTools.pens.svgPathPen import SVGPathPen
+    from fontTools.pens.transformPen import TransformPen
+    f, gs, cmap, hmtx, upem = _font(key, weight)
+    sc = size / upem
+    pen = SVGPathPen(gs, lambda v: f"{v:.2f}".rstrip("0").rstrip("."))
+    x = 0.0
+    for ch in s:
+        gname = cmap.get(ord(ch)) or cmap.get(ord("?"))
+        if gname is None:
+            continue
+        gs[gname].draw(TransformPen(pen, (sc, 0, 0, -sc, x, 0)))
+        x += hmtx[gname][0] * sc + spacing
+    if s:
+        x -= spacing
+    return pen.getCommands(), x
 
 SHAPES = {
     # x, y (top of lid), w, h  inside a 120 x 220 viewBox
@@ -80,15 +126,31 @@ class G:
 
 
 def text(x, y, s, size, fill, family=SANS, weight=700, anchor="middle", fit=None, extra=""):
-    s = esc(s)
-    tl = ""
-    if fit is not None:
-        est = len(s) * size * 0.6
-        if est > fit or "force" in extra:
-            tl = f' textLength="{fit:.1f}" lengthAdjust="spacingAndGlyphs"'
-        extra = extra.replace("force", "")
-    return (f'<text x="{x:.1f}" y="{y:.1f}" font-family="{family}" font-size="{size}" font-weight="{weight}" '
-            f'text-anchor="{anchor}" fill="{fill}"{tl} {extra}>{s}</text>')
+    """Draw a line of lettering as a vector path.
+
+    fit: squeeze the line to at most this width (or exactly this width when extra contains "force").
+    extra may hold letter-spacing="N", font-style="italic", stroke attributes and opacity.
+    """
+    force = "force" in extra
+    extra = extra.replace("force", "")
+    m = re.search(r'letter-spacing="([\d.\-]+)"', extra)
+    spacing = float(m.group(1)) if m else 0.0
+    extra = re.sub(r'letter-spacing="[^"]*"', "", extra)
+    italic = 'font-style="italic"' in extra or family == RYSE_FONT
+    extra = extra.replace('font-style="italic"', "")
+    d, wdt = _outline(str(s), size, family, weight, spacing)
+    sx = 1.0
+    if fit is not None and wdt > 0 and (wdt > fit or force):
+        sx = fit / wdt
+    tw = wdt * sx
+    x0 = x - tw / 2 if anchor == "middle" else (x - tw if anchor == "end" else x)
+    skew = " skewX(-12)" if italic else ""
+    sw = ""
+    if "stroke-width" in extra:
+        # keep strokes even when the line is squeezed
+        extra = extra.replace('stroke-width="', 'vector-effect="non-scaling-stroke" stroke-width="')
+    return (f'<path transform="translate({x0:.2f} {y:.2f}){skew} scale({sx:.4f} 1)" d="{d}" '
+            f'fill="{fill}" {extra.strip()}{sw}/>')
 
 
 def flavor_lines(s, maxlen):
@@ -234,29 +296,32 @@ def ART_celsius(g):
 def ART_ryse(g):
     c = g.c
     a = c["accent"]
-    dark = shade(a, 0.45)
-    fg = ink(a)
+    hi, lo = shade(a, 1.25), shade(a, 0.55)
     gid = f"ry-{slug(g.flavor)}"
-    out = [f'<linearGradient id="{gid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{shade(a, 1.15)}"/>'
-           f'<stop offset="1" stop-color="{shade(a, 0.8)}"/></linearGradient>',
-           f'<rect x="{g.x}" y="{g.t}" width="{g.w}" height="{g.h}" fill="url(#{gid})"/>',
-           # dark diagonal sweep behind the lettering
-           f'<polygon points="{g.x},{g.y(0.30)} {g.r},{g.y(0.12)} {g.r},{g.y(0.62)} {g.x},{g.y(0.86)}" fill="{dark}" opacity="0.9"/>',
-           # top logo: up-triangle mark + RYSE
-           f'<polygon points="{g.cx - 22},{g.y(0.105)} {g.cx - 15},{g.y(0.04)} {g.cx - 8},{g.y(0.105)}" fill="{fg}"/>',
-           text(g.cx + 7, g.y(0.105), "RYSE", 13, fg, WIDE, 900, fit=34, extra='force letter-spacing="1"')]
-    # giant FUEL running up the can
-    out.append(vtext(g.cx + 1, g.y(0.5), "FUEL", 44, "#fff", WIDE, 900, fit=g.h * 0.52,
-                     extra=f'stroke="#111" stroke-width="2" paint-order="stroke" force font-style="italic"'))
-    # speed lines
-    for i in range(4):
-        y0 = g.y(0.22) + i * 9
-        out.append(f'<line x1="{g.r - 14}" y1="{y0}" x2="{g.r - 4}" y2="{y0 - 5}" stroke="#fff" stroke-width="1.6" opacity="0.7"/>')
+    out = [f'<linearGradient id="{gid}" x1="0" y1="0" x2="0.3" y2="1"><stop offset="0" stop-color="{hi}"/>'
+           f'<stop offset="0.55" stop-color="{a}"/><stop offset="1" stop-color="{lo}"/></linearGradient>',
+           f'<rect x="{g.x}" y="{g.t}" width="{g.w}" height="{g.h}" fill="url(#{gid})"/>']
+    # rising diagonal stripes in the background
+    for i in range(7):
+        x0 = g.x - 40 + i * 22
+        out.append(f'<polygon points="{x0},{g.b} {x0 + 9},{g.b} {x0 + 69},{g.t} {x0 + 60},{g.t}" fill="#fff" opacity="0.07"/>')
+    # logo block
+    out.append(f'<polygon points="{g.cx},{g.y(0.035)} {g.cx + 8},{g.y(0.085)} {g.cx - 8},{g.y(0.085)}" fill="#111"/>')
+    out.append(text(g.cx, g.y(0.19), "RYSE", 26, "#fff", RYSE_FONT, 900, fit=g.w - 16,
+                    extra='force stroke="#111" stroke-width="1.6" paint-order="stroke"'))
+    out.append(f'<rect x="{g.x}" y="{g.y(0.215)}" width="{g.w}" height="3" fill="#111"/>')
+    # big FUEL across the can
+    out.append(text(g.cx, g.y(0.46), "FUEL", 46, "#111", RYSE_FONT, 900, fit=g.w - 8, extra="force"))
+    out.append(text(g.cx - 1.5, g.y(0.46) - 1.5, "FUEL", 46, "#fff", RYSE_FONT, 900, fit=g.w - 8, extra="force"))
+    out.append(text(g.cx, g.y(0.52), "ENERGY", 7, "#111", SANS, 900, extra='letter-spacing="3"'))
+    # slanted flavor ribbon
     nl = len(flavor_lines(g.flavor.upper(), 13))
-    out.append(f'<rect x="{g.x + 8}" y="{g.y(0.78)}" width="{g.w - 16}" height="{8 + nl * 7.5}" rx="2" fill="#111"/>')
-    out.append(flavor_text(g, g.y(0.78) + 9, 6, "#fff", WIDE, 900, maxlen=13, width=g.w - 24))
-    if nl < 3:
-        out.append(text(g.cx, g.y(0.945), "ZERO SUGAR · 200MG CAFFEINE", 3.6, fg, SANS, 800, fit=g.w - 14))
+    rh = 9 + nl * 7.5
+    out.append(f'<g transform="rotate(-8 {g.cx} {g.y(0.70)})"><rect x="{g.x - 6}" y="{g.y(0.66)}" width="{g.w + 12}" '
+               f'height="{rh}" fill="#111"/>'
+               + flavor_text(g, g.y(0.66) + 9.5, 6.5, "#fff", RYSE_FONT, 900, maxlen=13, width=g.w - 18)
+               + "</g>")
+    out.append(text(g.cx, g.y(0.93), "ZERO SUGAR · 200MG CAFFEINE", 3.8, ink(lo), SANS, 800, fit=g.w - 14))
     return "".join(out)
 
 
@@ -264,27 +329,26 @@ def ART_ghost(g):
     c = g.c
     a = c["accent"]
     fg = ink(a, "#111111", "#ffffff")
-    out = [f'<rect x="{g.x}" y="{g.t}" width="{g.w}" height="{g.h}" fill="{a}"/>']
-    # faint repeating ghost pattern
-    for row in range(8):
-        for col in range(4):
-            gx = g.x + 6 + col * 24 + (row % 2) * 12
-            gy = g.t + 10 + row * 25
-            out.append(f'<path d="M{gx - 4} {gy + 5} V{gy} a4 4 0 0 1 8 0 V{gy + 5} l-2 -1.5 -2 1.5 -2 -1.5 z" fill="{fg}" opacity="0.08"/>')
-    # top: ghost badge + wordmark
-    bx, by = g.cx, g.y(0.095)
-    out.append(f'<circle cx="{bx}" cy="{by}" r="12.5" fill="#111"/>'
-               f'<path d="M{bx - 8} {by + 9} V{by - 1} a8 8 0 0 1 16 0 V{by + 9} l-2.7 -2.4 -2.6 2.4 -2.7 -2.4 -2.7 2.4 -2.6 -2.4 z" fill="#fff"/>'
-               f'<ellipse cx="{bx - 3}" cy="{by - 1}" rx="1.6" ry="2.4" fill="#111"/>'
-               f'<ellipse cx="{bx + 3}" cy="{by - 1}" rx="1.6" ry="2.4" fill="#111"/>')
-    out.append(text(g.cx, g.y(0.275), "GHOST", 14, "#111", WIDE, 900, fit=g.w - 26, extra="force"))
-    # giant ENERGY running up the can
-    out.append(vtext(g.cx, g.y(0.575), "ENERGY", 30, "#fff", WIDE, 900, fit=g.h * 0.44,
-                     extra='stroke="#111" stroke-width="2.4" paint-order="stroke" force'))
-    nl = len(flavor_lines(g.flavor.upper(), 13))
-    bh = 9 + nl * 8
-    out.append(f'<rect x="{g.x + 6}" y="{g.y(0.82)}" width="{g.w - 12}" height="{bh}" rx="3" fill="#111"/>')
-    out.append(flavor_text(g, g.y(0.82) + 10, 6.5, a if ink(a) == "#111111" else "#fff", WIDE, 900, maxlen=13, width=g.w - 20))
+    out = [f'<rect x="{g.x}" y="{g.t}" width="{g.w}" height="{g.h}" fill="{a}"/>',
+           f'<radialGradient id="gh-{slug(g.flavor)}" cx="0.5" cy="0.45" r="0.6"><stop offset="0" stop-color="#fff" stop-opacity="0.28"/>'
+           f'<stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>',
+           f'<rect x="{g.x}" y="{g.t}" width="{g.w}" height="{g.h}" fill="url(#gh-{slug(g.flavor)})"/>']
+    out.append(text(g.cx, g.y(0.15), "GHOST", 24, "#111", GHOST_FONT, 900, fit=g.w - 14, extra="force"))
+    out.append(f'<rect x="{g.x + 12}" y="{g.y(0.175)}" width="{g.w - 24}" height="9" rx="1" fill="#111"/>')
+    out.append(text(g.cx, g.y(0.175) + 7, "ENERGY", 6.5, a, GHOST_FONT, 900, extra='letter-spacing="3.5"'))
+    # big ghost logo
+    gx, gy, R = g.cx, g.y(0.47), 22
+    out.append(f'<path d="M{gx - R} {gy + R + 6} V{gy} a{R} {R} 0 0 1 {2 * R} 0 V{gy + R + 6} '
+               f'q-{R / 4:.1f} -7 -{R / 2:.1f} 0 q-{R / 4:.1f} 7 -{R / 2:.1f} 0 q-{R / 4:.1f} -7 -{R / 2:.1f} 0 '
+               f'q-{R / 4:.1f} 7 -{R / 2:.1f} 0 z" fill="#fff" stroke="#111" stroke-width="3.2" stroke-linejoin="round"/>')
+    out.append(f'<ellipse cx="{gx - 8}" cy="{gy + 2}" rx="4.2" ry="6.2" fill="#111"/>'
+               f'<ellipse cx="{gx + 8}" cy="{gy + 2}" rx="4.2" ry="6.2" fill="#111"/>'
+               f'<ellipse cx="{gx - 9.2}" cy="{gy - 0.5}" rx="1.3" ry="1.8" fill="#fff"/>'
+               f'<ellipse cx="{gx + 6.8}" cy="{gy - 0.5}" rx="1.3" ry="1.8" fill="#fff"/>')
+    nl = len(flavor_lines(g.flavor.upper(), 12))
+    out.append(f'<rect x="{g.x + 6}" y="{g.y(0.72)}" width="{g.w - 12}" height="{9 + nl * 8.5}" rx="4" fill="#fff" stroke="#111" stroke-width="2"/>')
+    out.append(flavor_text(g, g.y(0.72) + 10.5, 7, "#111", GHOST_FONT, 900, maxlen=12, width=g.w - 22))
+    out.append(text(g.cx, g.y(0.95), "ZERO SUGAR · 200MG CAFFEINE", 3.8, fg, SANS, 800, fit=g.w - 16))
     return "".join(out)
 
 
@@ -313,19 +377,22 @@ def ART_reign(g):
     c = g.c
     a = c["accent"]
     gid = f"re-{slug(g.flavor)}"
-    out = [f'<linearGradient id="{gid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{a}"/>'
-           f'<stop offset="0.6" stop-color="{shade(a, 0.7)}"/><stop offset="1" stop-color="{shade(a, 0.25)}"/></linearGradient>',
+    out = [f'<linearGradient id="{gid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{shade(a, 1.1)}"/>'
+           f'<stop offset="0.55" stop-color="{shade(a, 0.75)}"/><stop offset="1" stop-color="{shade(a, 0.22)}"/></linearGradient>',
            f'<rect x="{g.x}" y="{g.t}" width="{g.w}" height="{g.h}" fill="url(#{gid})"/>',
-           f'<rect x="{g.x + 5}" y="{g.t}" width="2" height="{g.h}" fill="#111" opacity="0.5"/>',
-           f'<rect x="{g.r - 7}" y="{g.t}" width="2" height="{g.h}" fill="#111" opacity="0.5"/>']
-    cy = g.y(0.11)
-    out.append(f'<path d="M{g.cx - 15} {cy + 8} L{g.cx - 15} {cy - 6} L{g.cx - 7.5} {cy + 1} L{g.cx} {cy - 10} '
-               f'L{g.cx + 7.5} {cy + 1} L{g.cx + 15} {cy - 6} L{g.cx + 15} {cy + 8} Z" fill="#111"/>'
-               f'<rect x="{g.cx - 15}" y="{cy + 10}" width="30" height="3" fill="#111"/>')
-    out.append(vtext(g.cx + 9, g.y(0.52), "REIGN", 30, "#fff", WIDE, 900, fit=g.h * 0.5,
+           f'<rect x="{g.x + 5}" y="{g.t}" width="2.5" height="{g.h}" fill="#111" opacity="0.55"/>',
+           f'<rect x="{g.r - 7.5}" y="{g.t}" width="2.5" height="{g.h}" fill="#111" opacity="0.55"/>']
+    cy = g.y(0.1)
+    out.append(f'<path d="M{g.cx - 16} {cy + 9} L{g.cx - 18} {cy - 7} L{g.cx - 8} {cy + 1} L{g.cx} {cy - 11} '
+               f'L{g.cx + 8} {cy + 1} L{g.cx + 18} {cy - 7} L{g.cx + 16} {cy + 9} Z" fill="#111"/>'
+               f'<circle cx="{g.cx}" cy="{cy - 12}" r="2" fill="#111"/><circle cx="{g.cx - 18}" cy="{cy - 8}" r="1.8" fill="#111"/>'
+               f'<circle cx="{g.cx + 18}" cy="{cy - 8}" r="1.8" fill="#111"/>'
+               f'<rect x="{g.cx - 16}" y="{cy + 11}" width="32" height="3.2" fill="#111"/>'
+               f'<path d="M{g.cx} {cy - 2} l3 4 -3 4 -3 -4 z" fill="{a}"/>')
+    out.append(vtext(g.cx + 11, g.y(0.52), "REIGN", 34, "#fff", REIGN_FONT, 400, fit=g.h * 0.52,
                      extra='stroke="#111" stroke-width="2" paint-order="stroke" force'))
-    out.append(text(g.cx, g.y(0.84), "TOTAL BODY FUEL", 4.4, "#fff", SANS, 800, extra='letter-spacing="1"'))
-    out.append(flavor_text(g, g.y(0.9), 6, "#fff", WIDE, 900, maxlen=14, width=g.w - 20))
+    out.append(text(g.cx, g.y(0.835), "TOTAL BODY FUEL", 6, "#fff", COND, 700, extra='letter-spacing="1.2"'))
+    out.append(flavor_text(g, g.y(0.9), 6.5, "#fff", COND, 700, maxlen=16, width=g.w - 20))
     return "".join(out)
 
 
