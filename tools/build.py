@@ -270,7 +270,7 @@ def install_section():
             'Unzip it. On Windows, right-click the file and pick <b>Extract All</b>.',
             f"Open this address in Chrome: {cmd_btn('chrome://extensions')} In Edge use {cmd_btn('edge://extensions')}",
             'Turn on <b>Developer mode</b> (top right corner).',
-            'Click <b>Load unpacked</b> and pick the unzipped <b>second-wind</b> folder.',
+            'Click <b>Load unpacked</b> and pick the unzipped folder (the one with <b>manifest.json</b> inside).',
             'Open ChatGPT, Claude, Gemini or Grok. Click the can above the chat box, pick a drink, and hit send.',
             'Star a flavor to make it your usual, turn on <b>One-click usual</b>, and drag the can anywhere you like.',
         ], None),

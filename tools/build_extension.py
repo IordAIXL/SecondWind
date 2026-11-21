@@ -124,7 +124,7 @@ def zip_it():
                     continue
                 p = os.path.join(base, f)
                 rel = os.path.relpath(p, EXT)
-                info = zipfile.ZipInfo(os.path.join("second-wind", rel).replace(os.sep, "/"), (2026, 1, 1, 0, 0, 0))
+                info = zipfile.ZipInfo(rel.replace(os.sep, "/"), (2026, 1, 1, 0, 0, 0))  # manifest.json at the zip root
                 info.compress_type = zipfile.ZIP_DEFLATED
                 z.writestr(info, open(p, "rb").read())
     return out

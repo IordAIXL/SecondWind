@@ -10,7 +10,7 @@ It cracks one open, says something dumb about the flavor, counts it, then snaps 
 
 **[See the cooler and grab it for your AI →](https://iordaixl.github.io/energizer/)**
 
-<!-- version:start -->v2.0.0 · 16 brands · 179 flavors<!-- version:end --> · Claude Code, ChatGPT, Codex, Grok, Gemini
+<!-- version:start -->v2.0.1 · 16 brands · 179 flavors<!-- version:end --> · Claude Code, ChatGPT, Codex, Grok, Gemini
 
 </div>
 
@@ -67,7 +67,7 @@ A can button that sits right above the chat box on ChatGPT, Claude, Gemini, Grok
 
 1. Download [second-wind-extension.zip](docs/downloads/second-wind-extension.zip) and unzip it.
 2. Open `chrome://extensions` (or `edge://extensions`) and turn on **Developer mode**.
-3. Click **Load unpacked** and pick the unzipped `second-wind` folder.
+3. Click **Load unpacked** and pick the unzipped folder (the one with `manifest.json` inside).
 
 Star a flavor to make it your usual, turn on **One-click usual**, and drag the can anywhere. When a new version is out, the can gets a green dot: click the Second Wind toolbar icon for the 3 quick update steps.
 

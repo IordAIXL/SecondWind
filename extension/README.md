@@ -11,7 +11,7 @@ The download is `docs/downloads/second-wind-extension.zip`.
 1. Download and unzip `second-wind-extension.zip`.
 2. Open `chrome://extensions` (or `edge://extensions`).
 3. Turn on **Developer mode**.
-4. Click **Load unpacked** and pick the unzipped `second-wind` folder.
+4. Click **Load unpacked** and pick the unzipped folder (the one with `manifest.json` inside).
 
 ## Install (Firefox)
 
