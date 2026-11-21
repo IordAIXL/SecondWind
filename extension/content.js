@@ -11,15 +11,18 @@
   var HOST = location.hostname;
 
   // ------------------------------------------------------------ storage
-  var state = { total: 0, autoSend: false, hidden: {}, last: null };
+  var state = { total: 0, autoSend: false, hidden: {}, last: null, favs: [], oneClick: false, pos: {} };
   function load(cb) {
     try {
-      api.storage.local.get(["total", "autoSend", "hidden", "last"], function (r) {
+      api.storage.local.get(["total", "autoSend", "hidden", "last", "favs", "oneClick", "pos"], function (r) {
         r = r || {};
         state.total = r.total || 0;
         state.autoSend = !!r.autoSend;
         state.hidden = r.hidden || {};
         state.last = r.last || null;
+        state.favs = Array.isArray(r.favs) ? r.favs : [];
+        state.oneClick = !!r.oneClick;
+        state.pos = r.pos || {};
         cb();
       });
     } catch (e) { cb(); }
@@ -130,10 +133,14 @@
     } else {
       lines.push("Crack it open! (Fun fact: I'm not sure " + brand.name + " even makes " + flavor + ". React to that, then drink it anyway.) One short line on how it tastes.");
     }
+    var pur = brand.purpose;
+    if (pur && pur.mode) {
+      lines.push("Mode: " + pur.mode + ". " + (pur["for"] || "") + (pur.how && pur.how.length ? " Work style: " + pur.how.join(" ") : ""));
+    }
     lines.push("That's drink #" + n + " I've handed you" + (n === 1 ? ". First one!" : [5, 10, 25, 50, 100].indexOf(n) >= 0 ? ". Milestone!" : "."));
     lines.push("");
     lines.push("Now get your second wind. Refocus on our real work and print this, short and honest:");
-    lines.push("⚡ DIALED IN");
+    lines.push("⚡ DIALED IN" + (pur && pur.mode ? " · " + pur.mode : ""));
     lines.push("Goal: <what we are actually trying to do>");
     lines.push("Done: <what is finished so far>");
     lines.push("Left: <what is still open>");
@@ -168,9 +175,17 @@
     ".row input[type=text]{flex:1;min-width:0;background:#1f1338;border:1px solid #4c1d95;color:#f5f3ff;border-radius:8px;padding:7px 8px;font-size:12px}",
     ".go{background:#fbbf24;color:#1c1033;border:0;border-radius:8px;padding:7px 10px;font-weight:700;cursor:pointer;font-size:12px;white-space:nowrap}",
     ".go.alt{background:#2e1065;color:#f5f3ff}",
-    ".foot{display:flex;justify-content:space-between;align-items:center;padding:6px 12px 10px;color:#a78bfa;font-size:11px;gap:8px}",
+    ".foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;padding:6px 12px 10px;color:#a78bfa;font-size:11px;gap:8px}",
     ".foot label{display:flex;align-items:center;gap:4px;cursor:pointer}",
     ".foot a{color:#a78bfa;cursor:pointer;text-decoration:underline}",
+    ".can{position:relative}",
+    ".star{position:absolute;top:2px;right:4px;font-size:14px;line-height:1;color:#7c6aa8;cursor:pointer;padding:2px}",
+    ".star:hover{color:#fbbf24;transform:scale(1.2)}",
+    ".star.on{color:#fbbf24}",
+    ".can.usual{border-color:#fbbf24}",
+    ".sec{grid-column:1/-1;color:#fbbf24;font-size:10px;letter-spacing:.06em;font-weight:700;padding:2px 2px 0}",
+    ".btn.dragging{cursor:grabbing;transform:none;transition:none}",
+    ".caret{position:absolute;right:-4px;bottom:-4px;width:18px;height:18px;border-radius:50%;background:#fbbf24;color:#1c1033;font-size:10px;line-height:18px;text-align:center;font-weight:800;box-shadow:0 1px 4px rgba(0,0,0,.4)}",
     ".toast{position:fixed;z-index:2147483647;background:#fbbf24;color:#1c1033;font-weight:700;padding:8px 12px;border-radius:10px;font-size:13px;box-shadow:0 6px 20px rgba(0,0,0,.35)}"
   ].join("\n");
 
@@ -188,18 +203,70 @@
     btn.title = "Second Wind: give your AI an energy drink";
     btn.setAttribute("aria-label", "Give your AI an energy drink");
     btn.innerHTML = '<img alt="" src="' + url("cans/" + (state.last ? state.last.brand : SW.default) + ".svg") + '">';
-    btn.addEventListener("click", function (e) { e.preventDefault(); e.stopPropagation(); panel ? closePanel() : openPanel(); });
+    setButtonMode();
+    btn.addEventListener("click", function (e) {
+      e.preventDefault(); e.stopPropagation();
+      if (dragMoved) { dragMoved = false; return; }
+      if (e.target.classList && e.target.classList.contains("caret")) { panel ? closePanel() : openPanel(); return; }
+      if (state.oneClick && !panel) { giveUsual(); return; }
+      panel ? closePanel() : openPanel();
+    });
+    btn.addEventListener("contextmenu", function (e) { e.preventDefault(); e.stopPropagation(); panel ? closePanel() : openPanel(); });
+    btn.addEventListener("pointerdown", onDragStart);
     shadow.appendChild(btn);
     document.documentElement.appendChild(root);
     place();
   }
 
+  // ---- drag the can anywhere (remembered per site)
+  var drag = null, dragMoved = false;
+  function onDragStart(e) {
+    if (e.button !== 0) return;
+    var r = btn.getBoundingClientRect();
+    drag = { sx: e.clientX, sy: e.clientY, ox: r.left, oy: r.top, moved: false };
+    btn.setPointerCapture(e.pointerId);
+    btn.addEventListener("pointermove", onDragMove);
+    btn.addEventListener("pointerup", onDragEnd);
+    btn.addEventListener("pointercancel", onDragEnd);
+  }
+  function onDragMove(e) {
+    if (!drag) return;
+    var dx = e.clientX - drag.sx, dy = e.clientY - drag.sy;
+    if (!drag.moved && Math.abs(dx) + Math.abs(dy) < 6) return;
+    drag.moved = true;
+    btn.classList.add("dragging");
+    var x = Math.max(4, Math.min(innerWidth - 48, drag.ox + dx));
+    var y = Math.max(4, Math.min(innerHeight - 48, drag.oy + dy));
+    btn.style.left = x + "px";
+    btn.style.top = y + "px";
+    if (panel) placePanel();
+  }
+  function onDragEnd(e) {
+    btn.removeEventListener("pointermove", onDragMove);
+    btn.removeEventListener("pointerup", onDragEnd);
+    btn.removeEventListener("pointercancel", onDragEnd);
+    if (drag && drag.moved) {
+      var r = btn.getBoundingClientRect();
+      state.pos[HOST] = { x: r.left / innerWidth, y: r.top / innerHeight };
+      lastPos = "";
+      save();
+      dragMoved = true;
+      setTimeout(function () { dragMoved = false; }, 400);
+    }
+    btn.classList.remove("dragging");
+    drag = null;
+  }
+
   var lastPos = "";
   function place() {
-    if (!btn) return;
+    if (!btn || drag) return;
     var el = findComposer();
     var x, y;
-    if (el) {
+    var saved = state.pos[HOST];
+    if (saved) {
+      x = Math.max(4, Math.min(innerWidth - 48, saved.x * innerWidth));
+      y = Math.max(4, Math.min(innerHeight - 48, saved.y * innerHeight));
+    } else if (el) {
       var r = composerFrame(el).getBoundingClientRect();
       x = Math.min(innerWidth - 52, r.right - 22);
       y = Math.max(8, r.top - 52);
@@ -274,11 +341,21 @@
     var lab = el("label", "", '<input type="checkbox"' + (state.autoSend ? " checked" : "") + "> Send right away");
     lab.querySelector("input").onchange = function (e) { state.autoSend = e.target.checked; save(); };
     f.appendChild(lab);
-    f.appendChild(el("span", "", "Lifetime: " + state.total + " can" + (state.total === 1 ? "" : "s")));
+    var one = el("label", "", '<input type="checkbox"' + (state.oneClick ? " checked" : "") + "> One-click usual");
+    one.title = "Clicking the can hands over your usual right away. Right-click the can (or its little arrow) for this menu.";
+    one.querySelector("input").onchange = function (e) { state.oneClick = e.target.checked; save(); setButtonMode(); };
+    f.appendChild(one);
+    f.appendChild(el("span", "", "Lifetime: " + state.total));
     var hide = el("a", "", "Hide here");
     hide.title = "Hide the button on " + HOST + " (turn it back on from the toolbar icon)";
     hide.onclick = function () { state.hidden[HOST] = true; save(); closePanel(); root.remove(); btn = null; };
     f.appendChild(hide);
+    if (state.pos[HOST]) {
+      var snap = el("a", "", "Snap back");
+      snap.title = "Put the can back next to the chat box";
+      snap.onclick = function () { delete state.pos[HOST]; lastPos = ""; save(); place(); placePanel(); snap.remove(); };
+      f.appendChild(snap);
+    }
     return f;
   }
 
@@ -287,6 +364,14 @@
     panel.appendChild(header("<span>⚡</span> Second Wind"));
     panel.appendChild(el("div", "sub", "Hand your AI a drink. It gets dialed in."));
     var g = el("div", "grid");
+    if (state.favs.length) {
+      g.appendChild(el("div", "sec", "★ YOUR FAVORITES"));
+      state.favs.forEach(function (fv, i) {
+        var fb = byId(fv.brand);
+        g.appendChild(drinkTile(fb, fv.flavor, fb.name + " " + fv.flavor, i === 0));
+      });
+      g.appendChild(el("div", "sec", "ALL BRANDS"));
+    }
     SW.brands.forEach(function (b) {
       var c = el("button", "can", '<img alt="" loading="lazy" src="' + url("cans/" + b.id + ".svg") + '"><span>' + esc(b.name) + "</span>");
       c.title = b.vibe;
@@ -295,12 +380,10 @@
     });
     panel.appendChild(g);
     var row = el("div", "row");
-    var quick = el("button", "go", "⚡ Quick can");
-    quick.title = state.last ? "Your last drink again" : "A classic";
-    quick.onclick = function () {
-      var b = byId(state.last ? state.last.brand : SW.default);
-      give(b, state.last ? state.last.flavor : b.flavors[0].name);
-    };
+    var u = usual();
+    var quick = el("button", "go", state.favs.length ? "⚡ My usual" : "⚡ Quick can");
+    quick.title = byId(u.brand).name + " " + u.flavor + (state.favs.length ? "" : " (star a flavor to set your usual)");
+    quick.onclick = giveUsual;
     var rnd = el("button", "go alt", "🎲 Surprise me");
     rnd.onclick = function () {
       var b = SW.brands[Math.floor(Math.random() * SW.brands.length)];
@@ -317,10 +400,9 @@
     panel.innerHTML = "";
     panel.appendChild(header(esc(b.name) + ' <span style="color:#a78bfa;font-weight:400;font-size:12px">' + esc(b.size) + "</span>", showBrands));
     var g = el("div", "grid");
+    var u = usual();
     b.flavors.forEach(function (f) {
-      var c = el("button", "can", '<img alt="" loading="lazy" src="' + url("cans/" + b.id + "/" + f.slug + ".svg") + '"><span>' + esc(f.name) + "</span>");
-      c.onclick = function () { give(b, f.name); };
-      g.appendChild(c);
+      g.appendChild(drinkTile(b, f.name, f.name, state.favs.length > 0 && u.brand === b.id && u.flavor.toLowerCase() === f.name.toLowerCase()));
     });
     panel.appendChild(g);
     var row = el("div", "row");
@@ -332,11 +414,59 @@
     var custom = function () { var v = inp.value.trim(); if (v) give(b, v); else inp.focus(); };
     go.onclick = custom;
     inp.addEventListener("keydown", function (e) { e.stopPropagation(); if (e.key === "Enter") custom(); });
+    var keep = el("button", "go alt", "☆ Save");
+    keep.title = "Star your made-up flavor";
+    keep.onclick = function () { var v = inp.value.trim(); if (!v) { inp.focus(); return; } if (!isFav(b.id, v)) toggleFav(b.id, v); inp.value = ""; toast("★ Saved to favorites"); };
     row.appendChild(inp);
     row.appendChild(go);
+    row.appendChild(keep);
     panel.appendChild(row);
     panel.appendChild(footer());
     placePanel();
+  }
+
+  // ---- favorites ("usual" = the first favorite)
+  function isFav(brandId, flavor) {
+    return state.favs.some(function (f) { return f.brand === brandId && f.flavor.toLowerCase() === flavor.toLowerCase(); });
+  }
+  function toggleFav(brandId, flavor) {
+    if (isFav(brandId, flavor)) state.favs = state.favs.filter(function (f) { return !(f.brand === brandId && f.flavor.toLowerCase() === flavor.toLowerCase()); });
+    else state.favs.push({ brand: brandId, flavor: flavor });
+    save();
+  }
+  function usual() {
+    if (state.favs.length) return state.favs[0];
+    if (state.last) return state.last;
+    var b = byId(SW.default);
+    return { brand: b.id, flavor: b.flavors[0].name };
+  }
+  function giveUsual() { var u = usual(); give(byId(u.brand), u.flavor); }
+  function setButtonMode() {
+    if (!btn) return;
+    var c = btn.querySelector(".caret");
+    if (state.oneClick && !c) { c = el("span", "caret", "▾"); c.title = "Pick a drink"; btn.appendChild(c); }
+    if (!state.oneClick && c) c.remove();
+    var u = usual();
+    btn.title = state.oneClick ? "Second Wind: click for your usual (" + byId(u.brand).name + " " + u.flavor + "). Right-click for the menu. Drag to move." : "Second Wind: give your AI an energy drink. Drag to move.";
+  }
+  function drinkTile(b, flavor, label, isUsual) {
+    var f = b.flavors.filter(function (x) { return x.name.toLowerCase() === flavor.toLowerCase(); })[0];
+    var src = url("cans/" + b.id + (f ? "/" + f.slug : "") + ".svg");
+    var c = el("button", "can" + (isUsual ? " usual" : ""), '<img alt="" loading="lazy" src="' + src + '"><span>' + esc(label) + "</span>");
+    c.title = isUsual ? "Your usual" : "Click to hand it over";
+    var star = el("span", "star" + (isFav(b.id, flavor) ? " on" : ""), isFav(b.id, flavor) ? "★" : "☆");
+    star.title = isFav(b.id, flavor) ? "Remove from favorites" : "Add to favorites (the first one is your usual)";
+    star.onclick = function (e) {
+      e.stopPropagation();
+      toggleFav(b.id, flavor);
+      var on = isFav(b.id, flavor);
+      star.className = "star" + (on ? " on" : "");
+      star.textContent = on ? "★" : "☆";
+      setButtonMode();
+    };
+    c.appendChild(star);
+    c.onclick = function () { give(b, flavor); };
+    return c;
   }
 
   function byId(id) {
@@ -368,6 +498,7 @@
     }
     state.last = { brand: b.id, flavor: flavor };
     save();
+    setButtonMode();
     var img = btn.querySelector("img");
     var f = b.flavors.filter(function (x) { return x.name === flavor; })[0];
     img.src = url("cans/" + b.id + (f ? "/" + f.slug : "") + ".svg");

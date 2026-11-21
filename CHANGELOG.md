@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.10.0 (2026-11-21)
+
+- New Windows desktop helper (`desktop/`, download `docs/downloads/second-wind-desktop.zip`). Works with the ChatGPT, Claude, Copilot and other desktop apps. Nothing to install: it runs on the Windows PowerShell every PC already has.
+  - A floating can you can drag anywhere on screen. It remembers its spot and never steals focus from your chat app.
+  - Click the can or press Ctrl+Alt+D to pick a drink; Ctrl+Alt+U hands over your usual instantly. The drink is pasted into the chat box you were using (your clipboard is put back afterwards).
+  - Tray menu with your usual, your favorites, Send right away, Start with Windows and Quit.
+- Favorites and a one-click "usual" everywhere. Star any flavor (or a made-up one); the first star is your usual.
+  - Browser button: favorites row at the top of the picker, a "My usual" button, and a "One-click usual" switch so clicking the can hands it over right away (right-click or the little arrow opens the menu).
+  - Desktop helper: right-click a can to star it or make it your usual.
+- Drag the browser can button anywhere. It remembers its spot on each site; "Snap back" puts it next to the chat box again.
+- Drink messages use each brand's own mode and work style when the brand data has one (from the per-brand purpose update).
+- Claude Desktop skill: `docs/downloads/second-wind-skill.zip`, upload it in Claude under Settings, Capabilities, Skills.
+- Download page: new "Desktop apps" tab with the Windows download, the skill and install steps.
+
 ## 1.8.0 (2026-11-21)
 
 - Fixed: typing `/secondwind` in Claude Code loaded an empty command, so Claude improvised instead of following Second Wind. The cause was a permissions line in the command file. Only the long name `/second-wind:secondwind` worked.
