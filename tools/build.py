@@ -210,6 +210,15 @@ def chip_color(b, f):
     return b["colors"]["body"] if b["id"] in ("redbull", "coffee") else b["colors"]["accent"]
 
 
+BROWSER_EXTRA = (
+    '<p class="tip">Firefox: open <code>about:debugging</code>, click <b>This Firefox</b>, then <b>Load Temporary Add-on</b> '
+    'and pick <code>manifest.json</code> in the unzipped folder. Firefox forgets it when it closes. '
+    'Phone apps can\'t add buttons, so on a phone use the prompts instead.</p>'
+    '<img class="shot" src="previews/extension.png" alt="The Second Wind can button and drink picker next to a chat box" '
+    'width="1280" height="800" loading="lazy">'
+)
+
+
 def install_section():
     """The "Pick your AI" chooser: one panel of steps per AI."""
     def prompt_text(fname):
@@ -231,6 +240,14 @@ def install_section():
             f"Add the Second Wind shop: {cmd_btn('/plugin marketplace add ' + REPO)}",
             f"Install the plugin: {cmd_btn('/plugin install second-wind@energizer')}",
             f"Hand it a drink: {cmd_btn('/secondwind')}",
+        ], None),
+        ("browser", "Browser button", "⚡", "A can button right next to the chat box on ChatGPT, Claude, Gemini, Grok, Copilot and more. One click hands your AI a drink. No prompt setup needed.", [
+            '<a class="btn big" href="downloads/second-wind-extension.zip" download>⬇ Download the extension</a>',
+            'Unzip it. On Windows, right-click the file and pick <b>Extract All</b>.',
+            f"Open this address in Chrome: {cmd_btn('chrome://extensions')} In Edge use {cmd_btn('edge://extensions')}",
+            'Turn on <b>Developer mode</b> (top right corner).',
+            'Click <b>Load unpacked</b> and pick the unzipped <b>second-wind</b> folder.',
+            'Open ChatGPT, Claude, Gemini or Grok. Click the can above the chat box, pick a drink, and hit send.',
         ], None),
         ("chatgpt", "ChatGPT", "◎", "Make a Custom GPT called Second Wind. Takes about a minute.", [
             f"Copy the prompt: {copy_btn('Copy the ChatGPT prompt', 'p-chatgpt')}",
@@ -277,7 +294,7 @@ def install_section():
                     f'<a href="{raw}/{files[fname]}">View the prompt on GitHub</a></p>')
         panels.append(f'''<div class="panel" role="tabpanel" id="panel-{key}" aria-labelledby="t-{key}"{"" if i == 0 else " hidden"}>
       <h3>{html.escape(name)}</h3><p class="sub">{html.escape(blurb)}</p>
-      <ol class="how">{lis}</ol>{note}
+      <ol class="how">{lis}</ol>{note}{BROWSER_EXTRA if key == "browser" else ""}
     </div>''')
     return f'''<section id="install">
   <h2>Pick your AI</h2>
@@ -424,6 +441,7 @@ pre b {{ color:var(--hot); font-weight:700; }}
 .btn.done {{ background:var(--ok); color:#fff; }}
 .tip {{ margin:16px 0 0; font-size:.88rem; color:var(--muted); }}
 .tip a {{ color:var(--hot); }}
+.shot {{ display:block; width:100%; height:auto; margin:16px 0 0; border-radius:14px; box-shadow:0 10px 30px rgba(0,0,0,.35); }}
 footer {{ border-top:1px solid var(--line); padding:28px 0 56px; color:var(--muted); font-size:.85rem; }}
 footer p {{ max-width:780px; }}
 .empty {{ display:none; color:var(--muted); padding:24px 0; }}
@@ -567,6 +585,8 @@ def main():
     build_prompts()
     build_page()
     build_readme()
+    import build_extension
+    build_extension.main()
     print(f"Built Second Wind v{VERSION}: {len(DATA['brands'])+1} brands, {sum(len(b['flavors']) for b in DATA['brands'])} flavor cans, command, prompts, page.")
 
 

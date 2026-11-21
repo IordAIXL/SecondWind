@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="Reign Lilikoi Lychee can, Second Wind art">
+  <defs>
+    <linearGradient id="shade-reign-lilikoi-lychee" x1="0" x2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0.55"/>
+      <stop offset="0.07" stop-color="#000" stop-opacity="0.22"/>
+      <stop offset="0.17" stop-color="#fff" stop-opacity="0.10"/>
+      <stop offset="0.23" stop-color="#fff" stop-opacity="0.45"/>
+      <stop offset="0.29" stop-color="#fff" stop-opacity="0.08"/>
+      <stop offset="0.42" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="0.70" stop-color="#000" stop-opacity="0.08"/>
+      <stop offset="0.84" stop-color="#000" stop-opacity="0.28"/>
+      <stop offset="0.91" stop-color="#fff" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.62"/>
+    </linearGradient>
+    <linearGradient id="vshade-reign-lilikoi-lychee" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0.28"/>
+      <stop offset="0.05" stop-color="#000" stop-opacity="0"/>
+      <stop offset="0.94" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.32"/>
+    </linearGradient>
+    <linearGradient id="metal-reign-lilikoi-lychee" x1="0" x2="1">
+      <stop offset="0" stop-color="#5d626b"/><stop offset="0.12" stop-color="#9aa0a8"/>
+      <stop offset="0.24" stop-color="#ffffff"/><stop offset="0.36" stop-color="#c5cad1"/>
+      <stop offset="0.62" stop-color="#e3e6ea"/><stop offset="0.86" stop-color="#8d939b"/>
+      <stop offset="1" stop-color="#4b5058"/>
+    </linearGradient>
+    <linearGradient id="lid-reign-lilikoi-lychee" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f4f6f8"/><stop offset="0.5" stop-color="#bfc4cb"/>
+      <stop offset="1" stop-color="#8e949c"/>
+    </linearGradient>
+    <linearGradient id="well-reign-lilikoi-lychee" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#9ea4ac"/><stop offset="0.55" stop-color="#d9dde2"/>
+      <stop offset="1" stop-color="#eef0f3"/>
+    </linearGradient>
+    <radialGradient id="floor-reign-lilikoi-lychee"><stop offset="0" stop-color="#000" stop-opacity="0.4"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+    <clipPath id="body-reign-lilikoi-lychee"><path d="M16 18 A44.0 6.6 0 0 0 104 18 L104 198 A44.0 6.6 0 0 1 16 198 Z"/></clipPath>
+  </defs>
+  <ellipse cx="60.0" cy="207" rx="52.0" ry="9.6" fill="url(#floor-reign-lilikoi-lychee)"/>
+  <path d="M16 198 A44.0 6.6 0 0 0 104 198 L99 205 A39.0 5.9 0 0 1 21 205 Z" fill="url(#metal-reign-lilikoi-lychee)"/>
+  <path d="M21 205 A39.0 5.9 0 0 0 99 205" stroke="#3f444b" stroke-width="0.8" fill="none" opacity="0.6"/>
+  <path d="M16 18 C16 13,21 15,22 9 L98 9 C99 15,104 13,104 18 A44.0 6.6 0 0 1 16 18 Z" fill="url(#metal-reign-lilikoi-lychee)"/>
+  <path d="M18 15 A42.0 6.6 0 0 0 102 15" stroke="#fff" stroke-width="0.6" fill="none" opacity="0.5"/>
+  <g clip-path="url(#body-reign-lilikoi-lychee)">
+    <linearGradient id="re-lilikoi-lychee" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffdc42"/><stop offset="0.55" stop-color="#bfa222"/><stop offset="1" stop-color="#382f0a"/></linearGradient><rect x="16" y="18" width="88" height="180" fill="url(#re-lilikoi-lychee)"/><rect x="21" y="18" width="2.5" height="180" fill="#111" opacity="0.55"/><rect x="96.5" y="18" width="2.5" height="180" fill="#111" opacity="0.55"/><path d="M44.0 45.0 L42.0 29.0 L52.0 37.0 L60.0 25.0 L68.0 37.0 L78.0 29.0 L76.0 45.0 Z" fill="#111"/><circle cx="60.0" cy="24.0" r="2" fill="#111"/><circle cx="42.0" cy="28.0" r="1.8" fill="#111"/><circle cx="78.0" cy="28.0" r="1.8" fill="#111"/><rect x="44.0" y="47.0" width="32" height="3.2" fill="#111"/><path d="M60.0 34.0 l3 4 -3 4 -3 -4 z" fill="#ffd92e"/><g transform="translate(71.0 111.6) rotate(-90)"><path transform="translate(-46.80 0.00) scale(0.8590 1)" d="M2.04 -23.8H16.32Q19.89 -23.8 21.51 -22.19Q23.12 -20.57 23.12 -17V-13.94Q23.12 -11.12 22.19 -9.55Q21.25 -7.99 19.21 -7.48L23.46 0H16.83L12.92 -7.14H8.16V0H2.04ZM17 -17Q17 -19.04 14.96 -19.04H8.16V-11.9H14.96Q17 -11.9 17 -13.94ZM45.39 0H26.52V-23.8H45.39V-19.04H32.64V-14.45H42.67V-9.69H32.64V-4.76H45.39ZM59.33 0H47.09V-4.76H50.15V-19.04H47.09V-23.8H59.33V-19.04H56.27V-4.76H59.33ZM82.79 -0.51Q74.83 0.34 68.17 0.34Q64.84 0.34 63.27 -1.22Q61.71 -2.79 61.71 -6.12V-17Q61.71 -20.57 63.33 -22.19Q64.94 -23.8 68.51 -23.8H80.75V-19.04H69.87Q67.83 -19.04 67.83 -17V-6.12Q67.83 -5.34 68.29 -4.88Q68.75 -4.42 69.53 -4.42Q73.44 -4.42 76.67 -4.59V-9.52H72.25V-13.6H82.79ZM106.93 0H100.47L92.31 -14.28V0H86.19V-23.8H92.65L100.81 -9.52V-23.8H106.93Z" fill="#fff" stroke="#111" vector-effect="non-scaling-stroke" stroke-width="2" paint-order="stroke"/></g><path transform="translate(30.16 168.30) scale(1.0000 1)" d="M0.8 0V-4.06H0.07V-4.86H2.6V-4.06H1.88V0ZM5.62 0.07Q5.08 0.07 4.76 -0.12Q4.44 -0.31 4.3 -0.67Q4.16 -1.03 4.16 -1.53V-3.34Q4.16 -3.84 4.3 -4.19Q4.44 -4.55 4.76 -4.74Q5.08 -4.93 5.62 -4.93Q6.17 -4.93 6.5 -4.74Q6.82 -4.55 6.95 -4.19Q7.09 -3.84 7.09 -3.34V-1.53Q7.09 -1.03 6.95 -0.67Q6.82 -0.31 6.5 -0.12Q6.17 0.07 5.62 0.07ZM5.62 -0.69Q5.79 -0.69 5.87 -0.77Q5.95 -0.86 5.97 -0.99Q5.99 -1.12 5.99 -1.26V-3.6Q5.99 -3.74 5.97 -3.87Q5.95 -4 5.87 -4.09Q5.79 -4.17 5.62 -4.17Q5.47 -4.17 5.39 -4.09Q5.31 -4 5.29 -3.87Q5.26 -3.74 5.26 -3.6V-1.26Q5.26 -1.12 5.28 -0.99Q5.3 -0.86 5.38 -0.77Q5.45 -0.69 5.62 -0.69ZM9.38 0V-4.06H8.65V-4.86H11.19V-4.06H10.46V0ZM12.58 0 13.5 -4.86H14.72L15.63 0H14.64L14.48 -1.03H13.76L13.6 0ZM13.86 -1.67H14.38L14.12 -3.56ZM17.32 0V-4.86H18.4V-0.73H19.51V0ZM23.92 0V-4.86H25.18Q25.49 -4.86 25.77 -4.81Q26.05 -4.76 26.27 -4.63Q26.48 -4.49 26.61 -4.25Q26.73 -4 26.73 -3.59Q26.73 -3.29 26.64 -3.09Q26.56 -2.89 26.4 -2.77Q26.24 -2.65 26.02 -2.61Q26.3 -2.57 26.49 -2.43Q26.68 -2.28 26.78 -2.03Q26.88 -1.79 26.88 -1.44Q26.88 -1.06 26.78 -0.79Q26.68 -0.52 26.5 -0.34Q26.31 -0.17 26.04 -0.08Q25.76 0 25.41 0ZM24.99 -0.75H25.22Q25.57 -0.75 25.71 -0.93Q25.84 -1.11 25.84 -1.46Q25.84 -1.73 25.78 -1.9Q25.72 -2.06 25.58 -2.13Q25.45 -2.21 25.21 -2.21H24.99ZM24.99 -2.92H25.2Q25.45 -2.92 25.57 -2.99Q25.7 -3.07 25.74 -3.21Q25.79 -3.35 25.79 -3.56Q25.79 -3.75 25.72 -3.88Q25.65 -4.01 25.52 -4.07Q25.38 -4.14 25.18 -4.14H24.99ZM30.04 0.07Q29.49 0.07 29.17 -0.12Q28.85 -0.31 28.72 -0.67Q28.58 -1.03 28.58 -1.53V-3.34Q28.58 -3.84 28.72 -4.19Q28.85 -4.55 29.17 -4.74Q29.49 -4.93 30.04 -4.93Q30.59 -4.93 30.91 -4.74Q31.23 -4.55 31.37 -4.19Q31.51 -3.84 31.51 -3.34V-1.53Q31.51 -1.03 31.37 -0.67Q31.23 -0.31 30.91 -0.12Q30.59 0.07 30.04 0.07ZM30.04 -0.69Q30.2 -0.69 30.28 -0.77Q30.36 -0.86 30.38 -0.99Q30.41 -1.12 30.41 -1.26V-3.6Q30.41 -3.74 30.38 -3.87Q30.36 -4 30.28 -4.09Q30.2 -4.17 30.04 -4.17Q29.88 -4.17 29.8 -4.09Q29.72 -4 29.7 -3.87Q29.68 -3.74 29.68 -3.6V-1.26Q29.68 -1.12 29.7 -0.99Q29.72 -0.86 29.79 -0.77Q29.87 -0.69 30.04 -0.69ZM33.36 0V-4.86H34.59Q35.23 -4.86 35.58 -4.7Q35.93 -4.54 36.08 -4.2Q36.22 -3.86 36.22 -3.32V-1.56Q36.22 -1.01 36.08 -0.67Q35.93 -0.32 35.58 -0.16Q35.23 0 34.6 0ZM34.43 -0.74H34.6Q34.85 -0.74 34.96 -0.82Q35.06 -0.89 35.09 -1.03Q35.12 -1.18 35.12 -1.39V-3.51Q35.12 -3.73 35.09 -3.86Q35.05 -3.99 34.94 -4.05Q34.84 -4.11 34.6 -4.11H34.43ZM38.69 0V-1.99L37.76 -4.86H38.78L39.24 -3.32L39.65 -4.86H40.63L39.72 -1.99V0ZM44.97 0V-4.86H47.07V-4.13H46.04V-2.91H46.94V-2.16H46.04V0ZM50.18 0.07Q49.62 0.07 49.31 -0.11Q48.99 -0.29 48.86 -0.65Q48.74 -1 48.74 -1.51V-4.86H49.8V-1.34Q49.8 -1.19 49.82 -1.04Q49.85 -0.89 49.93 -0.8Q50.01 -0.7 50.18 -0.7Q50.35 -0.7 50.43 -0.8Q50.51 -0.89 50.53 -1.04Q50.55 -1.19 50.55 -1.34V-4.86H51.62V-1.51Q51.62 -1 51.49 -0.65Q51.36 -0.29 51.05 -0.11Q50.74 0.07 50.18 0.07ZM53.5 0V-4.86H55.69V-4.13H54.58V-2.92H55.42V-2.18H54.58V-0.73H55.7V0ZM57.38 0V-4.86H58.46V-0.73H59.57V0Z" fill="#fff" /><path transform="translate(39.85 180.00) scale(1.0000 1)" d="M0.39 0V-5.26H1.55V-0.79H2.76V0ZM3.28 0V-5.26H4.44V0ZM5.23 0V-5.26H6.39V-0.79H7.6V0ZM8.11 0V-5.26H9.28V0ZM10.06 0V-5.26H11.23V-3.11L12.11 -5.26H13.25L12.27 -2.89L13.29 0H12.11L11.35 -2.33L11.23 -2.12V0ZM15.26 0.08Q14.66 0.08 14.32 -0.13Q13.97 -0.34 13.83 -0.73Q13.68 -1.12 13.68 -1.66V-3.61Q13.68 -4.16 13.83 -4.54Q13.97 -4.93 14.32 -5.13Q14.66 -5.34 15.26 -5.34Q15.85 -5.34 16.2 -5.13Q16.55 -4.93 16.7 -4.54Q16.85 -4.16 16.85 -3.61V-1.66Q16.85 -1.12 16.7 -0.73Q16.55 -0.34 16.2 -0.13Q15.85 0.08 15.26 0.08ZM15.26 -0.75Q15.44 -0.75 15.52 -0.84Q15.61 -0.93 15.63 -1.07Q15.66 -1.22 15.66 -1.36V-3.9Q15.66 -4.06 15.63 -4.2Q15.61 -4.34 15.52 -4.43Q15.44 -4.52 15.26 -4.52Q15.09 -4.52 15 -4.43Q14.92 -4.34 14.89 -4.2Q14.87 -4.06 14.87 -3.9V-1.36Q14.87 -1.22 14.89 -1.07Q14.91 -0.93 14.99 -0.84Q15.07 -0.75 15.26 -0.75ZM17.56 0V-5.26H18.73V0ZM21.18 0V-5.26H22.34V-0.79H23.55V0ZM24.72 0V-2.15L23.72 -5.26H24.82L25.32 -3.6L25.77 -5.26H26.82L25.84 -2.15V0ZM28.77 0.08Q28.17 0.08 27.82 -0.14Q27.48 -0.36 27.33 -0.75Q27.19 -1.14 27.19 -1.68V-3.57Q27.19 -4.12 27.33 -4.51Q27.48 -4.91 27.82 -5.12Q28.17 -5.34 28.77 -5.34Q29.35 -5.34 29.68 -5.14Q30.01 -4.95 30.15 -4.61Q30.28 -4.26 30.28 -3.82V-3.36H29.15V-3.89Q29.15 -4.04 29.13 -4.19Q29.11 -4.33 29.04 -4.42Q28.96 -4.52 28.77 -4.52Q28.59 -4.52 28.5 -4.42Q28.41 -4.32 28.39 -4.18Q28.37 -4.03 28.37 -3.87V-1.39Q28.37 -1.22 28.4 -1.07Q28.42 -0.92 28.51 -0.84Q28.6 -0.75 28.77 -0.75Q28.95 -0.75 29.03 -0.84Q29.11 -0.94 29.13 -1.09Q29.15 -1.23 29.15 -1.39V-1.94H30.28V-1.49Q30.28 -1.04 30.15 -0.69Q30.02 -0.33 29.69 -0.13Q29.36 0.08 28.77 0.08ZM30.94 0V-5.26H32.1V-3.13H32.92V-5.26H34.09V0H32.92V-2.3H32.1V0ZM34.89 0V-5.26H37.25V-4.47H36.05V-3.17H36.97V-2.36H36.05V-0.79H37.26V0ZM37.79 0V-5.26H40.16V-4.47H38.95V-3.17H39.87V-2.36H38.95V-0.79H40.17V0Z" fill="#fff" />
+    <text x="60.0" y="195.5" font-family="inter" font-size="3.1" font-weight="700" text-anchor="middle" fill="#ffffff" opacity="0.75">16 FL OZ (473 mL)</text>
+    <rect x="16" y="11.4" width="88" height="193.2" fill="url(#vshade-reign-lilikoi-lychee)"/>
+    <rect x="16" y="11.4" width="88" height="193.2" fill="url(#shade-reign-lilikoi-lychee)"/>
+    <rect x="34.0" y="11.4" width="2.2" height="193.2" fill="#fff" opacity="0.3"/>
+  </g>
+  <path d="M16 18 A44.0 6.6 0 0 0 104 18 L104 198 A44.0 6.6 0 0 1 16 198 Z" fill="none" stroke="#000" stroke-opacity="0.25" stroke-width="0.5"/>
+  <ellipse cx="60.0" cy="9" rx="38.0" ry="5.9" fill="url(#lid-reign-lilikoi-lychee)" stroke="#6e747c" stroke-width="0.7"/>
+  <ellipse cx="60.0" cy="9.4" rx="35.8" ry="4.6" fill="url(#well-reign-lilikoi-lychee)" stroke="#8a9098" stroke-width="0.5"/>
+  <path d="M50.6 10.8 q9.4 3.2 18.8 0 l-2.5 -2.1 h-13.8 z" fill="#a9aeb5" stroke="#7c828a" stroke-width="0.4"/>
+  <path d="M49.5 6.8 h20.9 a2.2 2.2 0 0 1 0 4.5 h-20.9 a2.2 2.2 0 0 1 0 -4.5 z" fill="#d6dade" stroke="#737981" stroke-width="0.5"/>
+  <ellipse cx="55.4" cy="9" rx="3.6" ry="1.1" fill="#7f858d"/>
+  <circle cx="64.2" cy="9" r="0.9" fill="#9097a0" stroke="#6b717a" stroke-width="0.3"/>
+  <path d="M23.5 8.6 A36.5 5.3 0 0 1 96.5 8.6" stroke="#fff" stroke-width="0.7" fill="none" opacity="0.8"/>
+</svg>
