@@ -55,7 +55,8 @@ def manifest():
         "icons": {s: f"icons/icon{s}.png" for s in ("16", "32", "48", "128")},
         "action": {"default_title": "Second Wind", "default_popup": "popup.html",
                    "default_icon": {s: f"icons/icon{s}.png" for s in ("16", "32")}},
-        "permissions": ["storage"],
+        "permissions": ["storage", "alarms"],
+        "background": {"service_worker": "background.js", "scripts": ["background.js"]},
         "content_scripts": [{
             "matches": SITES,
             "js": ["data.js", "content.js"],

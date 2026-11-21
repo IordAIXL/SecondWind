@@ -3,8 +3,13 @@
 # or Ctrl+Alt+U to hand over your usual instantly. The drink message gets pasted into the chat box.
 # Start it with "Start Second Wind.bat". Settings live in %APPDATA%\SecondWind\settings.json.
 
+param([int]$WaitPid = 0)
+
 $ErrorActionPreference = 'Stop'
 $Here = Split-Path -Parent $MyInvocation.MyCommand.Path
+
+# After an update the old copy hands over: wait for it to quit first.
+if ($WaitPid -gt 0) { try { Wait-Process -Id $WaitPid -Timeout 15 -ErrorAction SilentlyContinue } catch { } }
 
 # ---------------------------------------------------------------- one copy only
 $createdNew = $false
@@ -74,13 +79,14 @@ foreach ($b in $Brands) { $BrandById[$b.id] = $b }
 
 $SettingsDir = Join-Path $env:APPDATA 'SecondWind'
 $SettingsFile = Join-Path $SettingsDir 'settings.json'
-$State = [ordered]@{ total = 0; autoSend = $false; favorites = @(); last = $null; showFloat = $true; floatX = -1; floatY = -1 }
+$State = [ordered]@{ total = 0; autoSend = $false; favorites = @(); last = $null; showFloat = $true; floatX = -1; floatY = -1; autoUpdate = $true }
 if (Test-Path $SettingsFile) {
     try {
         $s = Get-Content -Raw -Encoding UTF8 $SettingsFile | ConvertFrom-Json
         if ($null -ne $s.total) { $State.total = [int]$s.total }
         if ($null -ne $s.autoSend) { $State.autoSend = [bool]$s.autoSend }
         if ($null -ne $s.favorites) { $State.favorites = @($s.favorites | ForEach-Object { [pscustomobject]@{ brand = [string]$_.brand; flavor = [string]$_.flavor } }) }
+        if ($null -ne $s.autoUpdate) { $State.autoUpdate = [bool]$s.autoUpdate }
         if ($null -ne $s.showFloat) { $State.showFloat = [bool]$s.showFloat }
         if ($null -ne $s.floatX) { $State.floatX = [int]$s.floatX; $State.floatY = [int]$s.floatY }
         if ($null -ne $s.last) { $State.last = [pscustomobject]@{ brand = [string]$s.last.brand; flavor = [string]$s.last.flavor } }
@@ -89,7 +95,7 @@ if (Test-Path $SettingsFile) {
 function Save-State {
     try {
         if (-not (Test-Path $SettingsDir)) { New-Item -ItemType Directory -Path $SettingsDir | Out-Null }
-        $json = [pscustomobject]@{ total = $State.total; autoSend = $State.autoSend; favorites = @($State.favorites); last = $State.last; showFloat = $State.showFloat; floatX = $State.floatX; floatY = $State.floatY } | ConvertTo-Json -Depth 4
+        $json = [pscustomobject]@{ total = $State.total; autoSend = $State.autoSend; favorites = @($State.favorites); last = $State.last; showFloat = $State.showFloat; floatX = $State.floatX; floatY = $State.floatY; autoUpdate = $State.autoUpdate } | ConvertTo-Json -Depth 4
         [System.IO.File]::WriteAllText($SettingsFile, $json, (New-Object System.Text.UTF8Encoding($false)))
     } catch { }
 }
@@ -534,6 +540,17 @@ function Update-TrayMenu {
     $st = $TrayMenu.Items.Add('Start with Windows')
     $st.Checked = (Test-Path $StartupLink)
     $st.Add_Click({ Set-Startup (-not (Test-Path $StartupLink)); Update-TrayMenu })
+    $au = $TrayMenu.Items.Add('Install updates automatically')
+    $au.Checked = $State.autoUpdate
+    $au.Add_Click({ $State.autoUpdate = -not $State.autoUpdate; Save-State; Update-TrayMenu })
+    if ($script:NewVersion) {
+        $up = $TrayMenu.Items.Add("Update to v$($script:NewVersion) now")
+        $up.Font = New-Object System.Drawing.Font($TrayMenu.Font, [System.Drawing.FontStyle]::Bold)
+        $up.Add_Click({ Install-Update })
+    } else {
+        $ck = $TrayMenu.Items.Add('Check for updates')
+        $ck.Add_Click({ Check-Update $true })
+    }
     $c = $TrayMenu.Items.Add("Lifetime: $($State.total) cans  (v$($Data.version))")
     $c.Enabled = $false
     [void]$TrayMenu.Items.Add('-')
@@ -608,6 +625,66 @@ function Update-Float {
     $Float.Invalidate()
 }
 
+# ---------------------------------------------------------------- updates (from GitHub)
+$VersionUrl = 'https://raw.githubusercontent.com/IordAIXL/energizer/main/VERSION'
+$ZipUrl = 'https://github.com/IordAIXL/energizer/raw/main/docs/downloads/second-wind-desktop.zip'
+$script:NewVersion = $null
+try { [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12 } catch { }
+
+function Check-Update([bool]$loud) {
+    try {
+        $wc = New-Object System.Net.WebClient
+        $wc.Headers['User-Agent'] = 'SecondWind'
+        $latest = $wc.DownloadString("$VersionUrl`?t=$([DateTime]::Now.Ticks)").Trim()
+        $wc.Dispose()
+        if ([version]$latest -gt [version]$Data.version) {
+            $script:NewVersion = $latest
+            Update-TrayMenu
+            if ($State.autoUpdate) { Install-Update; return }
+            $Tray.ShowBalloonTip(6000, "$Bolt Second Wind v$latest is out", 'Right-click the tray can and pick "Update now". It takes a few seconds.', [System.Windows.Forms.ToolTipIcon]::Info)
+        } elseif ($loud) {
+            $Tray.ShowBalloonTip(3000, 'Second Wind', "You're up to date (v$($Data.version)).", [System.Windows.Forms.ToolTipIcon]::Info)
+        }
+    } catch {
+        if ($loud) { $Tray.ShowBalloonTip(3000, 'Second Wind', "Couldn't reach GitHub to check for updates.", [System.Windows.Forms.ToolTipIcon]::Warning) }
+    }
+}
+
+function Install-Update {
+    $tmp = Join-Path $env:TEMP ("SecondWind-update-" + [guid]::NewGuid().ToString('N'))
+    try {
+        New-Item -ItemType Directory -Path $tmp | Out-Null
+        $zip = Join-Path $tmp 'update.zip'
+        $wc = New-Object System.Net.WebClient
+        $wc.Headers['User-Agent'] = 'SecondWind'
+        $wc.DownloadFile($ZipUrl, $zip)
+        $wc.Dispose()
+        Expand-Archive -Path $zip -DestinationPath (Join-Path $tmp 'x') -Force
+        $src = Join-Path $tmp 'x\Second Wind'
+        if (-not (Test-Path (Join-Path $src 'SecondWind.ps1'))) { throw 'The download looks broken.' }
+        $newData = Get-Content -Raw -Encoding UTF8 (Join-Path $src 'data.json') | ConvertFrom-Json
+        if ([version]$newData.version -le [version]$Data.version) { $script:NewVersion = $null; Update-TrayMenu; return }
+        Copy-Item -Path (Join-Path $src '*') -Destination $Here -Recurse -Force
+    } catch {
+        $Tray.ShowBalloonTip(5000, 'Second Wind', "The update didn't work: $($_.Exception.Message) You can download it again from the website.", [System.Windows.Forms.ToolTipIcon]::Warning)
+        return
+    } finally {
+        try { Remove-Item -Path $tmp -Recurse -Force -ErrorAction SilentlyContinue } catch { }
+    }
+    $Tray.ShowBalloonTip(3000, "$Bolt Second Wind updated", "Now on v$($script:NewVersion). Your favorites and count are kept.", [System.Windows.Forms.ToolTipIcon]::Info)
+    # Start the new copy, then quit this one. The new copy waits for us to exit.
+    $ps = Join-Path $env:SystemRoot 'System32\WindowsPowerShell\v1.0\powershell.exe'
+    Start-Process -FilePath $ps -WindowStyle Hidden -ArgumentList @('-NoProfile', '-ExecutionPolicy', 'Bypass', '-WindowStyle', 'Hidden', '-File', "`"$(Join-Path $Here 'SecondWind.ps1')`"", '-WaitPid', $MyPid)
+    [System.Windows.Forms.Application]::Exit()
+}
+
+$UpdateTimer = New-Object System.Windows.Forms.Timer
+$UpdateTimer.Interval = 12 * 60 * 60 * 1000
+$UpdateTimer.Add_Tick({ Check-Update $false })
+$FirstCheck = New-Object System.Windows.Forms.Timer
+$FirstCheck.Interval = 20000
+$FirstCheck.Add_Tick({ $FirstCheck.Stop(); Check-Update $false; $UpdateTimer.Start() })
+
 # ---------------------------------------------------------------- hotkeys
 $MOD_ALT = 0x1; $MOD_CONTROL = 0x2; $MOD_NOREPEAT = 0x4000
 $Hotkeys = New-Object SWHotkeys
@@ -620,6 +697,7 @@ $Hotkeys.Add_Pressed({
 
 Update-TrayMenu
 Update-Float
+$FirstCheck.Start()
 $msg = 'Drag the floating can anywhere. Click it (or press Ctrl+Alt+D) to pick a drink. Ctrl+Alt+U gives your usual.'
 if (-not ($okPick -and $okUsual)) { $msg = 'Running in your tray, but another app already uses Ctrl+Alt+D or Ctrl+Alt+U. Click the tray can instead.' }
 $Tray.ShowBalloonTip(5000, "$Bolt Second Wind", $msg, [System.Windows.Forms.ToolTipIcon]::Info)

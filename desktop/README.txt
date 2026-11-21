@@ -27,3 +27,9 @@ TRAY MENU (right-click the tray can)
 
 Settings and your lifetime count are saved in %APPDATA%\SecondWind\settings.json.
 Second Wind is a fan-made joke, not affiliated with any drink brand.
+
+UPDATES
+  Second Wind checks GitHub for a new version and updates itself,
+  keeping your favorites and count. Turn this off with
+  "Install updates automatically" in the tray menu, or pick
+  "Check for updates" any time.

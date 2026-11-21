@@ -11,10 +11,10 @@
   var HOST = location.hostname;
 
   // ------------------------------------------------------------ storage
-  var state = { total: 0, autoSend: false, hidden: {}, last: null, favs: [], oneClick: false, pos: {} };
+  var state = { total: 0, autoSend: false, hidden: {}, last: null, favs: [], oneClick: false, pos: {}, update: null };
   function load(cb) {
     try {
-      api.storage.local.get(["total", "autoSend", "hidden", "last", "favs", "oneClick", "pos"], function (r) {
+      api.storage.local.get(["total", "autoSend", "hidden", "last", "favs", "oneClick", "pos", "update"], function (r) {
         r = r || {};
         state.total = r.total || 0;
         state.autoSend = !!r.autoSend;
@@ -23,6 +23,7 @@
         state.favs = Array.isArray(r.favs) ? r.favs : [];
         state.oneClick = !!r.oneClick;
         state.pos = r.pos || {};
+        state.update = r.update || null;
         cb();
       });
     } catch (e) { cb(); }
@@ -186,6 +187,9 @@
     ".sec{grid-column:1/-1;color:#fbbf24;font-size:10px;letter-spacing:.06em;font-weight:700;padding:2px 2px 0}",
     ".btn.dragging{cursor:grabbing;transform:none;transition:none}",
     ".caret{position:absolute;right:-4px;bottom:-4px;width:18px;height:18px;border-radius:50%;background:#fbbf24;color:#1c1033;font-size:10px;line-height:18px;text-align:center;font-weight:800;box-shadow:0 1px 4px rgba(0,0,0,.4)}",
+    ".newdot{position:absolute;left:-3px;top:-3px;width:12px;height:12px;border-radius:50%;background:#22c55e;border:2px solid #1c1033}",
+    ".updbar{margin:0 10px 8px;padding:7px 9px;border-radius:8px;background:#14532d;color:#dcfce7;font-size:12px;line-height:1.35}",
+    ".updbar a{color:#bbf7d0;font-weight:700;cursor:pointer;text-decoration:underline}",
     ".toast{position:fixed;z-index:2147483647;background:#fbbf24;color:#1c1033;font-weight:700;padding:8px 12px;border-radius:10px;font-size:13px;box-shadow:0 6px 20px rgba(0,0,0,.35)}"
   ].join("\n");
 
@@ -363,6 +367,9 @@
     panel.innerHTML = "";
     panel.appendChild(header("<span>⚡</span> Second Wind"));
     panel.appendChild(el("div", "sub", "Hand your AI a drink. It gets dialed in."));
+    if (state.update) {
+      panel.appendChild(el("div", "updbar", "✨ Second Wind v" + esc(state.update) + " is out. Click the Second Wind icon in your browser toolbar (puzzle piece) for the 3 quick steps, or <a href=\"https://github.com/IordAIXL/energizer/raw/main/docs/downloads/second-wind-extension.zip\" target=\"_blank\" rel=\"noopener\">download it now</a>."));
+    }
     var g = el("div", "grid");
     if (state.favs.length) {
       g.appendChild(el("div", "sec", "★ YOUR FAVORITES"));
@@ -446,6 +453,9 @@
     var c = btn.querySelector(".caret");
     if (state.oneClick && !c) { c = el("span", "caret", "▾"); c.title = "Pick a drink"; btn.appendChild(c); }
     if (!state.oneClick && c) c.remove();
+    var dot = btn.querySelector(".newdot");
+    if (state.update && !dot) { dot = el("span", "newdot"); dot.title = "Update available"; btn.appendChild(dot); }
+    if (!state.update && dot) dot.remove();
     var u = usual();
     btn.title = state.oneClick ? "Second Wind: click for your usual (" + byId(u.brand).name + " " + u.flavor + "). Right-click for the menu. Drag to move." : "Second Wind: give your AI an energy drink. Drag to move.";
   }
@@ -531,6 +541,7 @@
         if (!state.hidden[HOST] && !btn) { build(); }
       }
       if (ch.total) state.total = ch.total.newValue || 0;
+      if (ch.update) { state.update = ch.update.newValue || null; setButtonMode(); }
     });
   } catch (e) { /* ignore */ }
 })();
