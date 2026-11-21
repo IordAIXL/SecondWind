@@ -57,6 +57,8 @@ If `/reload-plugins` isn't there, close and reopen Claude Code. If another plugi
 /reload-plugins
 ```
 
+To get new versions automatically, type `/plugin`, open **Marketplaces**, pick **energizer** and choose **Enable auto-update** (or run `/plugin marketplace update energizer` any time).
+
 Your lifetime counter is saved at `~/.second-wind/stats.json`.
 
 ### Browser button (Chrome, Edge, Firefox)
@@ -67,13 +69,13 @@ A can button that sits right above the chat box on ChatGPT, Claude, Gemini, Grok
 2. Open `chrome://extensions` (or `edge://extensions`) and turn on **Developer mode**.
 3. Click **Load unpacked** and pick the unzipped `second-wind` folder.
 
-Star a flavor to make it your usual, turn on **One-click usual**, and drag the can anywhere.
+Star a flavor to make it your usual, turn on **One-click usual**, and drag the can anywhere. When a new version is out, the can gets a green dot: click the Second Wind toolbar icon for the 3 quick update steps.
 
 Firefox: `about:debugging` → This Firefox → Load Temporary Add-on → pick `manifest.json`. Phone apps can't add buttons, so use the prompts there. More in [extension/README.md](extension/README.md).
 
 ### Desktop apps (Windows)
 
-For the ChatGPT, Claude and Copilot desktop apps. Download [second-wind-desktop.zip](docs/downloads/second-wind-desktop.zip), unzip it, and double-click **Start Second Wind.bat**. A can floats on your screen (drag it anywhere). Click it or press **Ctrl+Alt+D** to pick a drink, or **Ctrl+Alt+U** for your usual. Right-click a can to star it. More in [desktop/README.txt](desktop/README.txt).
+For the ChatGPT, Claude and Copilot desktop apps. Download [second-wind-desktop.zip](docs/downloads/second-wind-desktop.zip), unzip it, and double-click **Start Second Wind.bat**. A can floats on your screen (drag it anywhere). Click it or press **Ctrl+Alt+D** to pick a drink, or **Ctrl+Alt+U** for your usual. Right-click a can to star it. It updates itself from GitHub. More in [desktop/README.txt](desktop/README.txt).
 
 Claude desktop app users can also upload [second-wind-skill.zip](docs/downloads/second-wind-skill.zip) under Settings → Capabilities → Skills.
 

@@ -11,6 +11,10 @@
   - Desktop helper: right-click a can to star it or make it your usual.
 - Drag the browser can button anywhere. It remembers its spot on each site; "Snap back" puts it next to the chat box again.
 - The browser button and desktop helper now use each brand's mode and work style in the drink message (from 1.9.0).
+- Updates without hunting for them:
+  - Browser button checks GitHub twice a day. When there's a new version the can gets a green dot, the picker shows a banner, and the toolbar popup gives 3 steps plus a one-click reload.
+  - Desktop helper updates itself from GitHub (on by default, "Install updates automatically" in the tray menu), keeps your favorites and count, and restarts.
+  - README and download page explain how to turn on auto-update for the Claude Code plugin.
 - Claude Desktop skill: `docs/downloads/second-wind-skill.zip`, upload it in Claude under Settings, Capabilities, Skills.
 - Download page: new "Desktop apps" tab with the Windows download, the skill and install steps.
 
