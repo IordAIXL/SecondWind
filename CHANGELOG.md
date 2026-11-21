@@ -10,9 +10,15 @@
   - Browser button: favorites row at the top of the picker, a "My usual" button, and a "One-click usual" switch so clicking the can hands it over right away (right-click or the little arrow opens the menu).
   - Desktop helper: right-click a can to star it or make it your usual.
 - Drag the browser can button anywhere. It remembers its spot on each site; "Snap back" puts it next to the chat box again.
-- Drink messages use each brand's own mode and work style when the brand data has one (from the per-brand purpose update).
+- The browser button and desktop helper now use each brand's mode and work style in the drink message (from 1.9.0).
 - Claude Desktop skill: `docs/downloads/second-wind-skill.zip`, upload it in Claude under Settings, Capabilities, Skills.
 - Download page: new "Desktop apps" tab with the Windows download, the skill and install steps.
+
+## 1.9.0 (2026-11-21)
+
+- Every drink now has its own purpose and work style. The AI announces the mode, shows it in the "dialed in" block, and works that way until you switch drinks.
+- Modes: Red Bull Sprint, Monster Bug Hunt, Celsius Clean Up, Ryse Unblock, Ghost Distraction Purge, Bang Brainstorm, Reign Take Charge, C4 Heavy Burst (short all-out bursts), Alani Nu Polish, Prime Ship It, Rockstar Deep Focus, 3D Big Picture, Bucked Up Grind, Zoa Steady Reset, Coffee Plan, Tea Review, Mystery Can Wild Card.
+- Modes live in one place, `purpose` in data/brands.json. The Claude Code skill, every copy-paste prompt, the download page and the browser button data (extension/data.js) all read it.
 
 ## 1.8.0 (2026-11-21)
 

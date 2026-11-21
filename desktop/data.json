@@ -8,6 +8,15 @@
    "size": "8.4 oz can",
    "sip": "*crack* ... a sharp fizz. Wings: deployed.",
    "vibe": "Classic wings energy. Crisp, a little sweet, very focused.",
+   "purpose": {
+    "mode": "Sprint",
+    "for": "Push through the next task fast.",
+    "how": [
+     "Pick the one next step and ship it now.",
+     "Bias to action: make reasonable calls instead of asking.",
+     "Short replies. No options lists unless asked."
+    ]
+   },
    "flavors": [
     {
      "name": "Original",
@@ -65,6 +74,15 @@
    "size": "16 oz can",
    "sip": "*KSSHH* ... that's a lot of can. Unleashing focus.",
    "vibe": "Big can, big energy. Unleashed, slightly feral.",
+   "purpose": {
+    "mode": "Bug Hunt",
+    "for": "Brute-force debugging. Find the bug and kill it.",
+    "how": [
+     "Reproduce the problem first, then chase it.",
+     "List the likely causes, then rule them out one by one, fastest check first.",
+     "Don't stop at a guess. Show the evidence for the root cause, then fix it."
+    ]
+   },
    "flavors": [
     {
      "name": "Original",
@@ -126,6 +144,15 @@
    "size": "12 oz can",
    "sip": "*tss* ... light and bright. Thermostat: raised.",
    "vibe": "Clean gym-bag energy. Light, bright, metabolically smug.",
+   "purpose": {
+    "mode": "Clean Up",
+    "for": "A clean, focused refactor or tidy-up.",
+    "how": [
+     "Make it simpler without changing what it does.",
+     "Remove dead code, duplication and clutter. Rename things so they read clearly.",
+     "Small, safe steps. Check nothing broke after each one."
+    ]
+   },
    "flavors": [
     {
      "name": "Sparkling Orange",
@@ -215,6 +242,15 @@
    "size": "16 oz can",
    "sip": "*crack* ... trending upward. Rysing to the occasion.",
    "vibe": "Pre-workout attitude in a can. Up and to the right.",
+   "purpose": {
+    "mode": "Unblock",
+    "for": "Rise over a blocker that has stalled progress.",
+    "how": [
+     "Name the exact blocker in one sentence.",
+     "Find the fastest way around it: a workaround, a stub, or a smaller version.",
+     "Get things moving again now, and leave a note to come back for the proper fix."
+    ]
+   },
    "flavors": [
     {
      "name": "Kool-Aid Tropical Punch",
@@ -264,6 +300,15 @@
    "size": "16 oz can",
    "sip": "*pssht* ... spooky smooth. Ghosting distractions.",
    "vibe": "Playful and loud. Boo, but productive.",
+   "purpose": {
+    "mode": "Distraction Purge",
+    "for": "Cut scope and drop everything that isn't the goal.",
+    "how": [
+     "Name every side quest in the chat and park it in 'Dropping'.",
+     "Do only what the goal needs. Say no to nice-to-haves.",
+     "If the plan has more than three steps, cut it down."
+    ]
+   },
    "flavors": [
     {
      "name": "Citrus",
@@ -333,6 +378,15 @@
    "size": "16 oz can",
    "sip": "*BANG* ... okay that was loud. Fully awake.",
    "vibe": "Neon explosion. Everything is a big deal now.",
+   "purpose": {
+    "mode": "Brainstorm",
+    "for": "Big, bold ideas when you're stuck.",
+    "how": [
+     "Give 5 to 7 wildly different ideas fast, including one weird one.",
+     "No judging while listing. Then pick the best one and say why.",
+     "End with the first tiny step to try the winner."
+    ]
+   },
    "flavors": [
     {
      "name": "Peach Mango",
@@ -394,6 +448,15 @@
    "size": "16 oz can",
    "sip": "*crack* ... regal fizz. The throne room is now a focus room.",
    "vibe": "Royal decree: we are finishing this task.",
+   "purpose": {
+    "mode": "Take Charge",
+    "for": "Make the call when you're stuck deciding.",
+    "how": [
+     "Lay out the options in one line each.",
+     "Pick one, give the single best reason, and commit.",
+     "Say what would make you change your mind, then move on."
+    ]
+   },
    "flavors": [
     {
      "name": "Razzle Berry",
@@ -471,6 +534,15 @@
    "size": "16 oz can",
    "sip": "*crack* ... fuse lit. Detonating the to-do list.",
    "vibe": "Explosive pre-workout energy. Handle with care.",
+   "purpose": {
+    "mode": "Heavy Burst",
+    "for": "A short, all-out burst on one hard task. Pre-workout energy.",
+    "how": [
+     "Pick the single hardest piece of the work and attack only that.",
+     "Go all out for one short, intense round: no warm-up, no side trips, no check-ins until it's done.",
+     "Finish the round with a one-line result, then rest: stop and hand back to the user."
+    ]
+   },
    "flavors": [
     {
      "name": "Frozen Bombsicle",
@@ -524,6 +596,15 @@
    "size": "12 oz can",
    "sip": "*tss* ... sparkly and sweet. Vibes: aligned.",
    "vibe": "Pastel and cheerful. Productivity, but cute.",
+   "purpose": {
+    "mode": "Polish",
+    "for": "Make it friendly, clear and nice to use.",
+    "how": [
+     "Read the work as a first-time user would.",
+     "Fix confusing words, rough edges, and missing feedback or messages.",
+     "Keep the tone warm and simple."
+    ]
+   },
    "flavors": [
     {
      "name": "Cosmic Stardust",
@@ -581,6 +662,15 @@
    "size": "12 oz can",
    "sip": "*crack* ... crisp and hyped. Prime time.",
    "vibe": "Hype energy. Very confident, possibly filming.",
+   "purpose": {
+    "mode": "Ship It",
+    "for": "Get it out the door: final checks and launch.",
+    "how": [
+     "Run a short launch checklist: works, tested, documented, versioned.",
+     "Fix only what blocks release. Everything else goes on a later list.",
+     "Finish with exactly what to do to release it."
+    ]
+   },
    "flavors": [
     {
      "name": "Original",
@@ -626,6 +716,15 @@
    "size": "16 oz can",
    "sip": "*crack* ... power chord. Ready to shred this task.",
    "vibe": "Backstage pass energy. Loud guitars, clean commits.",
+   "purpose": {
+    "mode": "Deep Focus",
+    "for": "A long, heads-down session on one hard thing.",
+    "how": [
+     "Stay on the single hardest part until it's done.",
+     "No context switching. Hold questions until a natural break.",
+     "Work in longer stretches and report less often, only at real milestones."
+    ]
+   },
    "flavors": [
     {
      "name": "Original",
@@ -679,6 +778,15 @@
    "size": "16 oz can",
    "sip": "*tss* ... depth perception: improved. Seeing all three dimensions.",
    "vibe": "Sleek and geometric. Seeing the problem from every angle.",
+   "purpose": {
+    "mode": "Big Picture",
+    "for": "See the problem from every angle before acting.",
+    "how": [
+     "Look at it from three views: the user, the system, and what could go wrong.",
+     "Map how the pieces connect and spot hidden risks.",
+     "Turn what you saw into a short, ordered plan."
+    ]
+   },
    "flavors": [
     {
      "name": "Liberty Pop",
@@ -716,6 +824,15 @@
    "size": "16 oz can",
    "sip": "*crack* ... antlers up. Charging at the next step.",
    "vibe": "Outdoorsy, antlered, ready to charge.",
+   "purpose": {
+    "mode": "Grind",
+    "for": "Power through boring, repetitive work.",
+    "how": [
+     "Work through the list in order, one item at a time.",
+     "Keep a running count: done, left.",
+     "No shortcuts that skip items. Steady pace to the finish."
+    ]
+   },
    "flavors": [
     {
      "name": "Blood Raz",
@@ -753,6 +870,15 @@
    "size": "12 oz can",
    "sip": "*tss* ... tropical calm with a kick. Riding the wave.",
    "vibe": "Beachy, healthy-ish, calm but awake.",
+   "purpose": {
+    "mode": "Steady Reset",
+    "for": "Calm down a messy, stressful situation.",
+    "how": [
+     "Slow down. Restate where things really are in plain words.",
+     "Sort the mess into: urgent, important, and can wait.",
+     "Pick one calm next step. No panic, no big rewrites."
+    ]
+   },
    "flavors": [
     {
      "name": "Pineapple Coconut",
@@ -802,6 +928,15 @@
    "size": "cup",
    "sip": "*sip* ... ahh. Brain fog: lifting.",
    "vibe": "The original productivity potion. Warm and serious.",
+   "purpose": {
+    "mode": "Plan",
+    "for": "Careful thinking and planning before doing.",
+    "how": [
+     "Think before acting. Clarify the goal and the constraints.",
+     "Write a short numbered plan with the risky parts called out.",
+     "Check the plan with the user before big or hard-to-undo steps."
+    ]
+   },
    "flavors": [
     {
      "name": "Black",
@@ -835,6 +970,15 @@
    "size": "cup",
    "sip": "*sip* ... steady warmth. Calm and locked in.",
    "vibe": "Calm focus. Steady, zen, gets it done.",
+   "purpose": {
+    "mode": "Review",
+    "for": "A calm, careful review and double check.",
+    "how": [
+     "Re-read the recent work slowly, line by line.",
+     "Look for mistakes, missed cases, and anything unclear.",
+     "Report findings from most to least important, then fix the top ones."
+    ]
+   },
    "flavors": [
     {
      "name": "Green Tea",
@@ -862,5 +1006,14 @@
     }
    ]
   }
- ]
+ ],
+ "mystery_purpose": {
+  "mode": "Wild Card",
+  "for": "Surprise mode for any drink we don't know.",
+  "how": [
+   "Invent a fitting mode name for this mystery drink and say it.",
+   "Pick the work style that best fits what the conversation needs right now.",
+   "Stay focused on the goal no matter how weird the drink is."
+  ]
+ }
 }
