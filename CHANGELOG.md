@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.1 (2026-11-21)
+
+- Browser button zip now has manifest.json right at the top, so the folder Windows makes when you unzip is the one to pick in "Load unpacked". Before, picking the outer folder gave "Manifest file is missing".
+- Install and update steps now say to pick the folder with manifest.json inside.
+
 ## 2.0.0 (2026-11-21)
 
 A big release, so it gets a new major number (released briefly as 1.10.0, same contents).

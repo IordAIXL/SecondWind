@@ -1,6 +1,6 @@
 {
   "name": "second-wind",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Give Claude an energy drink. It cracks one open, keeps a lifetime count, then refocuses: goal, done, left, next step, go.",
   "author": { "name": "IordAIXL" },
   "homepage": "https://github.com/IordAIXL/energizer",
