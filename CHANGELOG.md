@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.6.0 (2026-11-21)
+
+- New "Pick your AI" chooser on the download page. Tap Claude Code, ChatGPT, Codex, Grok, Gemini or Other AI to see only the steps for that one.
+- One-click button copies the full prompt for each AI, so nobody has to dig through GitHub.
+- The page remembers your pick, and links like #get-chatgpt open straight to that AI.
+- Phone fixes: the step lists wrap cleanly and the hero cans no longer cause sideways scrolling.
+
 ## 1.5.0 (2026-11-21)
 
 - Flavor audit: every brand's flavor list was checked against current lineups online (179 flavors now). Discontinued flavors are gone and new ones are in, each with its own can colors.
