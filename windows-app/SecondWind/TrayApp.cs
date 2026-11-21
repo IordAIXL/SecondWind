@@ -94,6 +94,37 @@ namespace SecondWind
 
         public void SaveNow() { state.Save(); }
 
+        // Used by the build to make Store screenshots: draws the picker and the floating can to PNG files.
+        public void Snapshots(string dir)
+        {
+            Directory.CreateDirectory(dir);
+            state.Favorites.Clear();
+            foreach (var (b, f) in new[] { ("redbull", "Original"), ("monster", "Zero Ultra"), ("celsius", "Sparkling Orange"), ("ghost", "Sour Patch Kids Redberry") })
+                if (Catalog.ById.ContainsKey(b)) state.Favorites.Add(new Drink(b, f));
+            state.Total = 42;
+            void Shot(Control c, string name)
+            {
+                Application.DoEvents();
+                using (var bmp = new Bitmap(c.Width, c.Height))
+                {
+                    c.DrawToBitmap(bmp, new Rectangle(0, 0, c.Width, c.Height));
+                    bmp.Save(Path.Combine(dir, name), System.Drawing.Imaging.ImageFormat.Png);
+                }
+            }
+            OpenPicker(centered: true);
+            Shot(picker, "picker-brands.png");
+            ShowFlavors(Catalog.Get("redbull"));
+            Shot(picker, "picker-flavors.png");
+            picker.Hide();
+            state.Last = state.Favorites[0];
+            floatCan.Invalidate();
+            Shot(floatCan, "float-can.png");
+            UpdateTrayMenu();
+            trayMenu.Show(new Point(200, 200));
+            Shot(trayMenu, "tray-menu.png");
+            trayMenu.Close();
+        }
+
         int Px(double n) { return (int)Math.Round(n * scale); }
 
         protected override void Dispose(bool disposing)

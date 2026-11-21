@@ -69,7 +69,7 @@ jobs:
         shell: pwsh
         timeout-minutes: 3
         run: |
-          $p = Start-Process -FilePath layout-x64\SecondWind.exe -ArgumentList '--selftest', "$PWD\selftest.txt" -PassThru -Wait
+          $p = Start-Process -FilePath layout-x64\SecondWind.exe -ArgumentList '--selftest', "$PWD\selftest.txt", "$PWD\shots" -PassThru -Wait
           Get-Content selftest.txt
           if ($p.ExitCode -ne 0) { throw "self-test failed" }
 
@@ -78,3 +78,8 @@ jobs:
           name: second-wind-store-package
           path: out/*.msixbundle
           if-no-files-found: error
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: shots/*.png

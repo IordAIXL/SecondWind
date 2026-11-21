@@ -14,7 +14,7 @@ namespace SecondWind
         [STAThread]
         static int Main(string[] args)
         {
-            if (args.Length > 0 && args[0] == "--selftest") return SelfTest(args.Length > 1 ? args[1] : "selftest.txt");
+            if (args.Length > 0 && args[0] == "--selftest") return SelfTest(args);
             using var mutex = new Mutex(true, MutexName, out bool createdNew);
             using var openEvent = new EventWaitHandle(false, EventResetMode.AutoReset, OpenEventName);
             if (!createdNew)
@@ -52,8 +52,9 @@ namespace SecondWind
         }
 
         // Used by the build: loads the drinks, builds every message, opens the app for a moment, then quits.
-        static int SelfTest(string report)
+        static int SelfTest(string[] args)
         {
+            var report = args.Length > 1 ? args[1] : "selftest.txt";
             var log = new System.Text.StringBuilder();
             int code = 0;
             try
@@ -67,6 +68,7 @@ namespace SecondWind
                 log.AppendLine("brands: " + Catalog.Brands.Count + ", version " + Catalog.Version);
                 log.AppendLine(DrinkMessage.Build(Catalog.Get(null), "Original", true, 5));
                 var app = new TrayApp(false);
+                if (args.Length > 2) app.Snapshots(args[2]);
                 app.OpenPicker();
                 var t = new System.Windows.Forms.Timer { Interval = 3000 };
                 t.Tick += (s, e) => { t.Stop(); app.ExitThread(); };
