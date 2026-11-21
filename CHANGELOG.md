@@ -1,6 +1,8 @@
 # Changelog
 
-## 1.10.0 (2026-11-21)
+## 2.0.0 (2026-11-21)
+
+A big release, so it gets a new major number (released briefly as 1.10.0, same contents).
 
 - New Windows desktop helper (`desktop/`, download `docs/downloads/second-wind-desktop.zip`). Works with the ChatGPT, Claude, Copilot and other desktop apps. Nothing to install: it runs on the Windows PowerShell every PC already has.
   - A floating can you can drag anywhere on screen. It remembers its spot and never steals focus from your chat app.
