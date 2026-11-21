@@ -74,7 +74,7 @@ Everything is generated from [data/brands.json](data/brands.json). Add a brand o
 python3 tools/build.py
 ```
 
-That rebuilds the can art, the download page, the Claude Code command and all the prompts. Bump `VERSION` and add a line to `CHANGELOG.md` when you change things.
+(The can art needs `pip install fonttools` once.) That rebuilds the can art, the download page, the Claude Code command and all the prompts. Bump `VERSION` and add a line to `CHANGELOG.md` when you change things.
 
 ## Disclaimer
 
