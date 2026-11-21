@@ -211,122 +211,248 @@ def chip_color(b, f):
 
 
 def build_page():
-    cans_html = []
-    for b in DATA["brands"] + [dict(DATA["mystery"], flavors=["Your Made-Up Flavor"], vibe="Any brand or flavor we don't know. Claude will be delighted.")]:
-        flv = ", ".join(b["flavors"])
-        cmd = "/secondwind" if b["id"] == "redbull" else (
-            "/secondwind pickle-flavored rocket fuel" if b["id"] == "mystery" else f"/secondwind {b['aliases'][0]}")
+    brands = DATA["brands"]
+    n_flavors = sum(len(b["flavors"]) for b in brands)
+    cards = []
+    for b in brands + [dict(DATA["mystery"], aliases=["mystery"], flavors=["Your Made-Up Flavor"],
+                            vibe="Any brand or flavor we don't know. Your AI will be delighted.")]:
+        mystery = b["id"] == "mystery"
+        alias = b["aliases"][0]
+        cmd = "/secondwind pickle rocket fuel" if mystery else (
+            "/secondwind" if b["id"] == "redbull" else f"/secondwind {alias}")
         chips = ""
-        if b["id"] != "mystery":
-            chips = '<div class="chips">' + "".join(
+        if not mystery:
+            chips = '<div class="chips" role="group" aria-label="Flavors">' + "".join(
                 f'<button type="button" class="chip" data-src="cans/{b["id"]}/{slug(f)}.svg" '
-                f'title="{html.escape(f)}" aria-label="Show {html.escape(f)}" '
-                f'style="background:{html.escape(chip_color(b, f))}"></button>' for f in b["flavors"]) + "</div>"
-        cans_html.append(f'''<figure class="can">
+                f'data-flavor="{html.escape(f)}" data-cmd="/secondwind {html.escape(alias)} {html.escape(f.lower())}" '
+                f'title="{html.escape(f)}" aria-label="{html.escape(f)}" aria-pressed="{"true" if i == 0 else "false"}" '
+                f'style="--c:{html.escape(chip_color(b, f))}"></button>' for i, f in enumerate(b["flavors"])) + "</div>"
+        count = "Any flavor you can dream up" if mystery else f'{len(b["flavors"])} flavors'
+        search = " ".join([b["name"]] + b.get("aliases", []) + b["flavors"]).lower()
+        cards.append(f'''<article class="can" data-search="{html.escape(search)}">
   <div class="art"><img src="cans/{b["id"]}.svg" alt="{html.escape(b["name"])} can" width="120" height="220" loading="lazy"></div>
-  <figcaption><strong>{html.escape(b["name"])}</strong>
-  <span class="cur">{html.escape(b["flavors"][0])}</span>
+  <h3>{html.escape(b["name"])}</h3>
+  <p class="cur">{html.escape(b["flavors"][0])}</p>
   {chips}
-  <span class="vibe">{html.escape(b["vibe"])}</span>
-  <span class="flv">{html.escape(flv)}</span>
-  <code>{html.escape(cmd)}</code></figcaption>
-</figure>''')
+  <p class="count">{count}</p>
+  <p class="vibe">{html.escape(b["vibe"])}</p>
+  <button type="button" class="cmd copy" data-copy="{html.escape(cmd)}"><code>{html.escape(cmd)}</code><span class="ic" aria-hidden="true">⧉</span></button>
+</article>''')
     raw = f"https://github.com/{REPO}/blob/main/prompts"
+    hero = "".join(f'<img src="cans/{i}.svg" alt="" class="h{n}" width="120" height="220">'
+                   for n, i in enumerate(["celsius", "monster", "redbull", "ghost", "alani"]))
     page = f'''<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Second Wind</title>
-<meta name="description" content="Give your AI an energy drink. A just-for-fun Claude Code plugin plus prompts for ChatGPT, Codex, Grok and more.">
+<meta name="description" content="Give your AI an energy drink. A just-for-fun Claude Code plugin plus prompts for ChatGPT, Codex, Grok, Gemini and more.">
+<meta property="og:title" content="Second Wind: give your AI an energy drink">
+<meta property="og:description" content="{len(brands)} brands, {n_flavors} flavors, one lifetime counter. Then your AI gets dialed in on the task.">
 <link rel="icon" href="cans/redbull.svg">
 <style>
-:root {{ --bg:#0b0d12; --fg:#f3f4f6; --muted:#9ca3af; --card:#151922; --line:#262c38; --hot:#facc15; --hot2:#f43f5e; }}
-@media (prefers-color-scheme: light) {{ :root {{ --bg:#f7f7f5; --fg:#111827; --muted:#4b5563; --card:#ffffff; --line:#e5e7eb; --hot:#ca8a04; --hot2:#e11d48; }} }}
+:root {{ --bg:#0a0c11; --bg2:#10131a; --fg:#f4f5f7; --muted:#9aa3b2; --card:#141821; --line:#232937; --hot:#facc15; --hot2:#f43f5e; --ok:#22c55e; }}
+@media (prefers-color-scheme: light) {{ :root {{ --bg:#f6f6f3; --bg2:#ecece7; --fg:#12151c; --muted:#525b6b; --card:#ffffff; --line:#e2e4e9; --hot:#b98900; --hot2:#e11d48; --ok:#15803d; }} }}
 * {{ box-sizing:border-box; }}
-body {{ margin:0; background:var(--bg); color:var(--fg); font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif; }}
-main {{ max-width:1100px; margin:0 auto; padding:40px 16px 80px; }}
-h1 {{ font-size:clamp(2.2rem,6vw,3.8rem); margin:0; letter-spacing:-0.02em; }}
+html {{ scroll-behavior:smooth; }}
+body {{ margin:0; background:var(--bg); color:var(--fg); font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; -webkit-font-smoothing:antialiased; }}
+a {{ color:inherit; }}
+.wrap {{ max-width:1140px; margin:0 auto; padding:0 16px; }}
+nav {{ position:sticky; top:0; z-index:5; backdrop-filter:saturate(1.4) blur(10px); background:color-mix(in srgb, var(--bg) 80%, transparent); border-bottom:1px solid var(--line); }}
+nav .wrap {{ display:flex; align-items:center; gap:20px; height:56px; }}
+nav .logo {{ font-weight:800; text-decoration:none; letter-spacing:-.01em; }}
+nav .links {{ margin-left:auto; display:flex; gap:18px; font-size:.92rem; }}
+nav .links a {{ text-decoration:none; color:var(--muted); }}
+nav .links a:hover {{ color:var(--fg); }}
+@media (max-width:560px) {{ nav .links a.hide-sm {{ display:none; }} }}
+.hero {{ display:grid; grid-template-columns:1.1fr 1fr; gap:32px; align-items:center; padding:56px 0 40px; }}
+@media (max-width:820px) {{ .hero {{ grid-template-columns:1fr; padding-top:36px; }} }}
+h1 {{ font-size:clamp(2.4rem,6vw,4.2rem); line-height:1.02; margin:0 0 16px; letter-spacing:-.03em; }}
 h1 span {{ background:linear-gradient(90deg,var(--hot),var(--hot2)); -webkit-background-clip:text; background-clip:text; color:transparent; }}
-.lede {{ color:var(--muted); font-size:1.15rem; max-width:640px; }}
-h2 {{ margin-top:56px; font-size:1.5rem; }}
-.grid {{ display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:16px; margin-top:20px; }}
-.can {{ margin:0; background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px 12px; text-align:center; transition:transform .15s; }}
-.can:hover {{ transform:translateY(-4px) rotate(-1deg); }}
-.art img {{ width:110px; height:auto; display:block; margin:0 auto; }}
-.cur {{ font-size:.85rem; font-weight:600; }}
-.chips {{ display:flex; flex-wrap:wrap; justify-content:center; gap:5px; }}
-.chip {{ width:16px; height:16px; border-radius:50%; border:2px solid var(--line); padding:0; cursor:pointer; }}
-.chip[aria-pressed="true"] {{ border-color:var(--fg); }}
-figcaption {{ display:flex; flex-direction:column; gap:6px; margin-top:8px; }}
-.vibe {{ font-size:.85rem; color:var(--muted); }}
-.flv {{ font-size:.75rem; color:var(--muted); opacity:.85; }}
-code {{ font:13px ui-monospace,SFMono-Regular,Menlo,monospace; background:rgba(127,127,127,.15); padding:3px 6px; border-radius:6px; word-break:break-word; }}
-pre {{ white-space:pre-wrap; word-break:break-word; background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; overflow-x:auto; font:14px ui-monospace,Menlo,monospace; }}
-.cards {{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; }}
-.card {{ background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px; }}
-.card h3 {{ margin:0 0 6px; }}
-.card p {{ margin:0 0 10px; color:var(--muted); font-size:.95rem; }}
-a {{ color:var(--hot); }}
-.btn {{ display:inline-block; background:var(--hot); color:#111; font-weight:700; padding:10px 18px; border-radius:999px; text-decoration:none; margin:16px 8px 0 0; }}
+.lede {{ color:var(--muted); font-size:1.15rem; max-width:560px; margin:0; }}
+.stats {{ display:flex; flex-wrap:wrap; gap:8px; margin:20px 0 0; padding:0; list-style:none; }}
+.stats li {{ font-size:.82rem; border:1px solid var(--line); border-radius:999px; padding:4px 10px; color:var(--muted); }}
+.btns {{ display:flex; flex-wrap:wrap; gap:10px; margin-top:24px; }}
+.btn {{ display:inline-flex; align-items:center; gap:8px; background:var(--hot); color:#111; font-weight:700; padding:11px 18px; border-radius:999px; text-decoration:none; border:0; }}
 .btn.alt {{ background:transparent; color:var(--fg); border:1px solid var(--line); }}
-footer {{ margin-top:64px; color:var(--muted); font-size:.85rem; border-top:1px solid var(--line); padding-top:20px; }}
+.btn:hover {{ filter:brightness(1.05); transform:translateY(-1px); }}
+.fan {{ position:relative; height:300px; }}
+.fan img {{ position:absolute; bottom:0; width:120px; height:auto; filter:drop-shadow(0 18px 18px rgba(0,0,0,.35)); transition:transform .3s; }}
+.fan .h0 {{ left:4%; transform:rotate(-14deg) translateY(12px); }}
+.fan .h1 {{ left:20%; transform:rotate(-6deg); }}
+.fan .h2 {{ left:39%; transform:translateY(-14px); z-index:2; }}
+.fan .h3 {{ left:56%; transform:rotate(6deg); }}
+.fan .h4 {{ left:72%; transform:rotate(14deg) translateY(12px); }}
+.fan:hover .h0 {{ transform:rotate(-18deg) translate(-8px,10px); }}
+.fan:hover .h4 {{ transform:rotate(18deg) translate(8px,10px); }}
+section {{ padding:48px 0; }}
+h2 {{ font-size:clamp(1.6rem,3.4vw,2.2rem); margin:0 0 8px; letter-spacing:-.02em; }}
+.sub {{ color:var(--muted); margin:0 0 24px; }}
+.steps {{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; counter-reset:s; }}
+@media (max-width:820px) {{ .steps {{ grid-template-columns:1fr; }} }}
+.step {{ background:var(--card); border:1px solid var(--line); border-radius:16px; padding:20px; }}
+.step::before {{ counter-increment:s; content:counter(s); display:inline-grid; place-items:center; width:28px; height:28px; border-radius:50%; background:var(--hot); color:#111; font-weight:800; margin-bottom:10px; }}
+.step h3 {{ margin:0 0 6px; font-size:1.05rem; }}
+.step p {{ margin:0; color:var(--muted); font-size:.95rem; }}
+pre {{ white-space:pre-wrap; word-break:break-word; background:var(--bg2); border:1px solid var(--line); border-radius:14px; padding:16px 18px; font:14px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace; margin:16px 0 0; }}
+pre b {{ color:var(--hot); font-weight:700; }}
+.tools {{ display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin-bottom:18px; }}
+.tools input {{ flex:1 1 260px; max-width:420px; font:inherit; color:var(--fg); background:var(--card); border:1px solid var(--line); border-radius:999px; padding:10px 16px; }}
+.tools input:focus {{ outline:2px solid var(--hot); outline-offset:1px; }}
+.tools .n {{ color:var(--muted); font-size:.9rem; }}
+.grid {{ display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:16px; }}
+.can {{ background:var(--card); border:1px solid var(--line); border-radius:18px; padding:18px 14px 16px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:6px; transition:transform .15s, border-color .15s; }}
+.can:hover {{ transform:translateY(-3px); border-color:color-mix(in srgb, var(--hot) 40%, var(--line)); }}
+.can[hidden] {{ display:none; }}
+.art img {{ width:112px; height:auto; display:block; filter:drop-shadow(0 10px 10px rgba(0,0,0,.25)); }}
+.can h3 {{ margin:6px 0 0; font-size:1.05rem; }}
+.cur {{ margin:0; font-weight:600; font-size:.9rem; min-height:1.4em; }}
+.chips {{ display:flex; flex-wrap:wrap; justify-content:center; gap:5px; max-width:180px; }}
+.chip {{ width:16px; height:16px; border-radius:50%; padding:0; cursor:pointer; background:var(--c); border:2px solid var(--card); box-shadow:0 0 0 1px var(--line); }}
+.chip[aria-pressed="true"] {{ box-shadow:0 0 0 2px var(--fg); }}
+.chip:focus-visible {{ outline:2px solid var(--hot); outline-offset:2px; }}
+.count {{ margin:0; font-size:.78rem; color:var(--muted); }}
+.vibe {{ margin:2px 0 6px; font-size:.86rem; color:var(--muted); flex:1; }}
+.cmd {{ display:inline-flex; align-items:center; gap:8px; max-width:100%; background:rgba(127,127,127,.12); color:var(--fg); border:1px solid var(--line); border-radius:8px; padding:5px 8px; cursor:pointer; }}
+.cmd code {{ font:12.5px ui-monospace,SFMono-Regular,Menlo,monospace; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }}
+.cmd .ic {{ color:var(--muted); font-size:.85rem; }}
+.cmd.done .ic {{ color:var(--ok); }}
+.cards {{ display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:16px; }}
+.card {{ background:var(--card); border:1px solid var(--line); border-radius:16px; padding:20px; display:flex; flex-direction:column; gap:8px; }}
+.card.main {{ grid-column:1 / -1; }}
+.card h3 {{ margin:0; }}
+.card p {{ margin:0; color:var(--muted); font-size:.95rem; }}
+.card a.go {{ margin-top:auto; color:var(--hot); font-weight:600; text-decoration:none; }}
+.card pre {{ margin:6px 0 0; position:relative; }}
+.card .copy.pre {{ align-self:flex-start; }}
+footer {{ border-top:1px solid var(--line); padding:28px 0 56px; color:var(--muted); font-size:.85rem; }}
+footer p {{ max-width:780px; }}
+.empty {{ display:none; color:var(--muted); padding:24px 0; }}
 </style>
 </head>
 <body>
-<main>
-<h1>Second <span>Wind</span> ⚡</h1>
-<p class="lede">Give your AI an energy drink. It cracks one open, says something dumb about the flavor, then snaps back into focus: goal, done, left, next step, go. Just for fun. v{VERSION}</p>
-<a class="btn" href="https://github.com/{REPO}/archive/refs/heads/main.zip">Download everything (.zip)</a>
-<a class="btn alt" href="https://github.com/{REPO}">View on GitHub</a>
+<nav><div class="wrap">
+  <a class="logo" href="#top">Second Wind ⚡</a>
+  <div class="links"><a href="#how" class="hide-sm">How it works</a><a href="#cooler">The cooler</a><a href="#install">Install</a><a href="https://github.com/{REPO}">GitHub</a></div>
+</div></nav>
+<main class="wrap" id="top">
+<header class="hero">
+  <div>
+    <h1>Give your AI an <span>energy drink.</span></h1>
+    <p class="lede">It cracks one open, says something dumb about the flavor, counts it, then snaps back into focus on your actual task. Just for fun.</p>
+    <ul class="stats"><li>v{VERSION}</li><li>{len(brands)} brands</li><li>{n_flavors} flavors</li><li>Claude Code, ChatGPT, Codex, Grok, Gemini</li></ul>
+    <div class="btns">
+      <a class="btn" href="#install">Get it for your AI</a>
+      <a class="btn alt" href="https://github.com/{REPO}/archive/refs/heads/main.zip">Download .zip</a>
+    </div>
+  </div>
+  <div class="fan" aria-hidden="true">{hero}</div>
+</header>
 
-<h2>The cooler</h2>
-<p class="lede">Tap the dots under a can to see each flavor. Ask for any brand and flavor. Make one up and watch your AI get excited about it.</p>
-<div class="grid">
-{chr(10).join(cans_html)}
-</div>
-<script>
-document.querySelectorAll('.chip').forEach(function (c) {{
-  c.addEventListener('click', function () {{
-    var fig = c.closest('.can');
-    fig.querySelector('img').src = c.dataset.src;
-    fig.querySelector('.cur').textContent = c.title;
-    fig.querySelectorAll('.chip').forEach(function (o) {{ o.setAttribute('aria-pressed', o === c); }});
-  }});
-}});
-</script>
-
-<h2>Get it for your AI</h2>
-<div class="cards">
-  <div class="card"><h3>Claude Code</h3><p>Real plugin with a <code>/secondwind</code> command and a lifetime counter.</p>
-<pre>/plugin marketplace add {REPO}
-/plugin install second-wind@energizer</pre></div>
-  <div class="card"><h3>ChatGPT</h3><p>Make a Custom GPT or paste into Custom Instructions.</p><a href="{raw}/chatgpt.md">Get the ChatGPT prompt</a></div>
-  <div class="card"><h3>Codex</h3><p>Drop-in <code>AGENTS.md</code>. Also works for Cursor, Aider and friends.</p><a href="{raw}/codex.md">Get the Codex setup</a></div>
-  <div class="card"><h3>Grok</h3><p>Paste into Grok's custom instructions.</p><a href="{raw}/grok.md">Get the Grok prompt</a></div>
-  <div class="card"><h3>Gemini</h3><p>Make a Gem with it.</p><a href="{raw}/gemini.md">Get the Gemini prompt</a></div>
-  <div class="card"><h3>Anything else</h3><p>Copilot, Claude.ai, Perplexity, local models.</p><a href="{raw}/any-ai.md">Get the universal prompt</a></div>
-</div>
-
-<h2>What a drink looks like</h2>
+<section id="how">
+  <h2>How it works</h2>
+  <p class="sub">One command. A quick joke, then real focus.</p>
+  <div class="steps">
+    <div class="step"><h3>Crack it open</h3><p>Pick any brand and flavor, or make one up. Your AI reacts to the taste in a line or two.</p></div>
+    <div class="step"><h3>Count it</h3><p>Every drink adds to a lifetime counter, with tiny celebrations at 1, 5, 10, 25, 50 and 100 cans.</p></div>
+    <div class="step"><h3>Get dialed in</h3><p>It sums up the goal, what's done, what's left and what to drop, then does the next step.</p></div>
+  </div>
 <pre>&gt; /secondwind ghost citrus
 
 *pssht* ... spooky smooth. Ghosting distractions.
 Bright citrus, zero chill. Drink #12. Lifetime total: 12 cans.
 
-⚡ DIALED IN
+<b>⚡ DIALED IN</b>
 Goal:      Fix the login page crash on Safari
 Done:      Found the bad date parsing in auth.js
 Left:      Patch it, add a test
 Dropping:  The CSS cleanup idea (parked)
 Next step: Replace Date.parse with the ISO helper</pre>
+</section>
 
-<footer>Second Wind is a fan-made joke. It is not affiliated with, endorsed by, or sponsored by any drink brand. All brand names belong to their owners and are used only to name the pretend drinks. The can art is hand-drawn fan art inspired by each brand's real cans, made without any official logo files or images. The drinks are pretend: no AI was actually caffeinated. Please drink real energy drinks responsibly.</footer>
+<section id="cooler">
+  <h2>The cooler</h2>
+  <p class="sub">Tap the colored dots to see each flavor. Click a command to copy it.</p>
+  <div class="tools"><input type="search" id="q" placeholder="Search brands or flavors, like mango" aria-label="Search brands or flavors"><span class="n" id="n"></span></div>
+  <div class="grid" id="grid">
+{chr(10).join(cards)}
+  </div>
+  <p class="empty" id="empty">No can matches that. Make it up anyway: your AI will drink it.</p>
+</section>
+
+<section id="install">
+  <h2>Get it for your AI</h2>
+  <p class="sub">The Claude Code plugin is the full version. Everything else is a copy-paste prompt.</p>
+  <div class="cards">
+    <div class="card main"><h3>Claude Code</h3><p>A real plugin with the <code>/secondwind</code> command and a lifetime counter saved on your computer.</p>
+<pre>/plugin marketplace add {REPO}
+/plugin install second-wind@energizer</pre>
+      <button type="button" class="cmd copy pre" data-copy="/plugin marketplace add {REPO}&#10;/plugin install second-wind@energizer"><code>Copy both lines</code><span class="ic" aria-hidden="true">⧉</span></button></div>
+    <div class="card"><h3>ChatGPT</h3><p>Make a Custom GPT or paste it into Custom Instructions.</p><a class="go" href="{raw}/chatgpt.md">Get the ChatGPT prompt →</a></div>
+    <div class="card"><h3>Codex</h3><p>A drop-in <code>AGENTS.md</code>. Also works for Cursor, Aider and friends.</p><a class="go" href="{raw}/codex.md">Get the Codex setup →</a></div>
+    <div class="card"><h3>Grok</h3><p>Paste it into Grok's custom instructions.</p><a class="go" href="{raw}/grok.md">Get the Grok prompt →</a></div>
+    <div class="card"><h3>Gemini</h3><p>Make a Gem with it.</p><a class="go" href="{raw}/gemini.md">Get the Gemini prompt →</a></div>
+    <div class="card"><h3>Anything else</h3><p>Copilot, Claude.ai, Perplexity, local models.</p><a class="go" href="{raw}/any-ai.md">Get the universal prompt →</a></div>
+  </div>
+</section>
 </main>
+<footer><div class="wrap">
+<p>Second Wind is a fan-made joke. It is not affiliated with, endorsed by, or sponsored by any drink brand. Brand names belong to their owners and are used only to name the pretend drinks. The can art is hand-drawn fan art inspired by each brand's real cans, made without any official logo files or images. No AI was actually caffeinated. Please drink real energy drinks responsibly.</p>
+<p>v{VERSION} · <a href="https://github.com/{REPO}">GitHub</a> · <a href="https://github.com/{REPO}/blob/main/CHANGELOG.md">Changelog</a> · MIT license</p>
+</div></footer>
+<script>
+(function () {{
+  function copy(t, el) {{
+    var done = function () {{ el.classList.add('done'); var i = el.querySelector('.ic'); if (i) i.textContent = '✓'; setTimeout(function () {{ el.classList.remove('done'); if (i) i.textContent = '⧉'; }}, 1400); }};
+    if (navigator.clipboard && navigator.clipboard.writeText) {{ navigator.clipboard.writeText(t).then(done, function () {{}}); }}
+    else {{ var a = document.createElement('textarea'); a.value = t; document.body.appendChild(a); a.select(); try {{ document.execCommand('copy'); done(); }} catch (e) {{}} a.remove(); }}
+  }}
+  function pick(chip) {{
+    var card = chip.closest('.can');
+    card.querySelector('img').src = chip.dataset.src;
+    card.querySelector('.cur').textContent = chip.dataset.flavor;
+    var b = card.querySelector('.cmd'); b.dataset.copy = chip.dataset.cmd; b.querySelector('code').textContent = chip.dataset.cmd;
+    card.querySelectorAll('.chip').forEach(function (o) {{ o.setAttribute('aria-pressed', o === chip); }});
+  }}
+  document.addEventListener('click', function (e) {{
+    var chip = e.target.closest('.chip');
+    if (chip) {{ pick(chip); return; }}
+    var c = e.target.closest('.copy');
+    if (c) copy(c.dataset.copy, c);
+  }});
+  var q = document.getElementById('q'), cards = [].slice.call(document.querySelectorAll('.can')), n = document.getElementById('n'), empty = document.getElementById('empty');
+  function filter() {{
+    var t = q.value.trim().toLowerCase(), shown = 0;
+    cards.forEach(function (c) {{ var hit = !t || c.dataset.search.indexOf(t) > -1 || c.querySelector('h3').textContent === 'Mystery Can'; c.hidden = !hit; if (hit) shown++;
+      if (t) {{ var m = [].slice.call(c.querySelectorAll('.chip')).filter(function (x) {{ return x.dataset.flavor.toLowerCase().indexOf(t) > -1; }})[0]; if (m) pick(m); }} }});
+    n.textContent = t ? shown + ' match' + (shown === 1 ? '' : 'es') : '';
+    empty.style.display = t && shown <= 1 ? 'block' : 'none';
+  }}
+  q.addEventListener('input', filter);
+}})();
+</script>
 </body>
 </html>
 '''
     open(os.path.join(ROOT, "docs", "index.html"), "w", encoding="utf-8").write(page)
+
+
+# ---------------------------------------------------------------- README (generated parts)
+
+def build_readme():
+    import re as _re
+    path = os.path.join(ROOT, "README.md")
+    txt = open(path, encoding="utf-8").read()
+    n = sum(len(b["flavors"]) for b in DATA["brands"])
+    ver = f"v{VERSION} · {len(DATA['brands'])} brands · {n} flavors"
+    rows = ["| Brand | Flavors |", "|---|---|"]
+    for b in DATA["brands"]:
+        rows.append(f'| <img src="docs/cans/{b["id"]}.svg" width="22" alt=""> **{b["name"]}** | {", ".join(b["flavors"])} |')
+    txt = _re.sub(r"<!-- version:start -->.*?<!-- version:end -->", f"<!-- version:start -->{ver}<!-- version:end -->", txt, flags=_re.S)
+    txt = _re.sub(r"<!-- menu:start -->.*?<!-- menu:end -->", "<!-- menu:start -->\n" + "\n".join(rows) + "\n<!-- menu:end -->", txt, flags=_re.S)
+    open(path, "w", encoding="utf-8").write(txt)
+
 
 # ---------------------------------------------------------------- main
 
@@ -344,6 +470,7 @@ def main():
     build_command()
     build_prompts()
     build_page()
+    build_readme()
     print(f"Built Second Wind v{VERSION}: {len(DATA['brands'])+1} brands, {sum(len(b['flavors']) for b in DATA['brands'])} flavor cans, command, prompts, page.")
 
 

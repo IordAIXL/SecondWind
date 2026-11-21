@@ -4,242 +4,342 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Second Wind</title>
-<meta name="description" content="Give your AI an energy drink. A just-for-fun Claude Code plugin plus prompts for ChatGPT, Codex, Grok and more.">
+<meta name="description" content="Give your AI an energy drink. A just-for-fun Claude Code plugin plus prompts for ChatGPT, Codex, Grok, Gemini and more.">
+<meta property="og:title" content="Second Wind: give your AI an energy drink">
+<meta property="og:description" content="16 brands, 179 flavors, one lifetime counter. Then your AI gets dialed in on the task.">
 <link rel="icon" href="cans/redbull.svg">
 <style>
-:root { --bg:#0b0d12; --fg:#f3f4f6; --muted:#9ca3af; --card:#151922; --line:#262c38; --hot:#facc15; --hot2:#f43f5e; }
-@media (prefers-color-scheme: light) { :root { --bg:#f7f7f5; --fg:#111827; --muted:#4b5563; --card:#ffffff; --line:#e5e7eb; --hot:#ca8a04; --hot2:#e11d48; } }
+:root { --bg:#0a0c11; --bg2:#10131a; --fg:#f4f5f7; --muted:#9aa3b2; --card:#141821; --line:#232937; --hot:#facc15; --hot2:#f43f5e; --ok:#22c55e; }
+@media (prefers-color-scheme: light) { :root { --bg:#f6f6f3; --bg2:#ecece7; --fg:#12151c; --muted:#525b6b; --card:#ffffff; --line:#e2e4e9; --hot:#b98900; --hot2:#e11d48; --ok:#15803d; } }
 * { box-sizing:border-box; }
-body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif; }
-main { max-width:1100px; margin:0 auto; padding:40px 16px 80px; }
-h1 { font-size:clamp(2.2rem,6vw,3.8rem); margin:0; letter-spacing:-0.02em; }
+html { scroll-behavior:smooth; }
+body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; -webkit-font-smoothing:antialiased; }
+a { color:inherit; }
+.wrap { max-width:1140px; margin:0 auto; padding:0 16px; }
+nav { position:sticky; top:0; z-index:5; backdrop-filter:saturate(1.4) blur(10px); background:color-mix(in srgb, var(--bg) 80%, transparent); border-bottom:1px solid var(--line); }
+nav .wrap { display:flex; align-items:center; gap:20px; height:56px; }
+nav .logo { font-weight:800; text-decoration:none; letter-spacing:-.01em; }
+nav .links { margin-left:auto; display:flex; gap:18px; font-size:.92rem; }
+nav .links a { text-decoration:none; color:var(--muted); }
+nav .links a:hover { color:var(--fg); }
+@media (max-width:560px) { nav .links a.hide-sm { display:none; } }
+.hero { display:grid; grid-template-columns:1.1fr 1fr; gap:32px; align-items:center; padding:56px 0 40px; }
+@media (max-width:820px) { .hero { grid-template-columns:1fr; padding-top:36px; } }
+h1 { font-size:clamp(2.4rem,6vw,4.2rem); line-height:1.02; margin:0 0 16px; letter-spacing:-.03em; }
 h1 span { background:linear-gradient(90deg,var(--hot),var(--hot2)); -webkit-background-clip:text; background-clip:text; color:transparent; }
-.lede { color:var(--muted); font-size:1.15rem; max-width:640px; }
-h2 { margin-top:56px; font-size:1.5rem; }
-.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:16px; margin-top:20px; }
-.can { margin:0; background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px 12px; text-align:center; transition:transform .15s; }
-.can:hover { transform:translateY(-4px) rotate(-1deg); }
-.art img { width:110px; height:auto; display:block; margin:0 auto; }
-.cur { font-size:.85rem; font-weight:600; }
-.chips { display:flex; flex-wrap:wrap; justify-content:center; gap:5px; }
-.chip { width:16px; height:16px; border-radius:50%; border:2px solid var(--line); padding:0; cursor:pointer; }
-.chip[aria-pressed="true"] { border-color:var(--fg); }
-figcaption { display:flex; flex-direction:column; gap:6px; margin-top:8px; }
-.vibe { font-size:.85rem; color:var(--muted); }
-.flv { font-size:.75rem; color:var(--muted); opacity:.85; }
-code { font:13px ui-monospace,SFMono-Regular,Menlo,monospace; background:rgba(127,127,127,.15); padding:3px 6px; border-radius:6px; word-break:break-word; }
-pre { white-space:pre-wrap; word-break:break-word; background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; overflow-x:auto; font:14px ui-monospace,Menlo,monospace; }
-.cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; }
-.card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px; }
-.card h3 { margin:0 0 6px; }
-.card p { margin:0 0 10px; color:var(--muted); font-size:.95rem; }
-a { color:var(--hot); }
-.btn { display:inline-block; background:var(--hot); color:#111; font-weight:700; padding:10px 18px; border-radius:999px; text-decoration:none; margin:16px 8px 0 0; }
+.lede { color:var(--muted); font-size:1.15rem; max-width:560px; margin:0; }
+.stats { display:flex; flex-wrap:wrap; gap:8px; margin:20px 0 0; padding:0; list-style:none; }
+.stats li { font-size:.82rem; border:1px solid var(--line); border-radius:999px; padding:4px 10px; color:var(--muted); }
+.btns { display:flex; flex-wrap:wrap; gap:10px; margin-top:24px; }
+.btn { display:inline-flex; align-items:center; gap:8px; background:var(--hot); color:#111; font-weight:700; padding:11px 18px; border-radius:999px; text-decoration:none; border:0; }
 .btn.alt { background:transparent; color:var(--fg); border:1px solid var(--line); }
-footer { margin-top:64px; color:var(--muted); font-size:.85rem; border-top:1px solid var(--line); padding-top:20px; }
+.btn:hover { filter:brightness(1.05); transform:translateY(-1px); }
+.fan { position:relative; height:300px; }
+.fan img { position:absolute; bottom:0; width:120px; height:auto; filter:drop-shadow(0 18px 18px rgba(0,0,0,.35)); transition:transform .3s; }
+.fan .h0 { left:4%; transform:rotate(-14deg) translateY(12px); }
+.fan .h1 { left:20%; transform:rotate(-6deg); }
+.fan .h2 { left:39%; transform:translateY(-14px); z-index:2; }
+.fan .h3 { left:56%; transform:rotate(6deg); }
+.fan .h4 { left:72%; transform:rotate(14deg) translateY(12px); }
+.fan:hover .h0 { transform:rotate(-18deg) translate(-8px,10px); }
+.fan:hover .h4 { transform:rotate(18deg) translate(8px,10px); }
+section { padding:48px 0; }
+h2 { font-size:clamp(1.6rem,3.4vw,2.2rem); margin:0 0 8px; letter-spacing:-.02em; }
+.sub { color:var(--muted); margin:0 0 24px; }
+.steps { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; counter-reset:s; }
+@media (max-width:820px) { .steps { grid-template-columns:1fr; } }
+.step { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:20px; }
+.step::before { counter-increment:s; content:counter(s); display:inline-grid; place-items:center; width:28px; height:28px; border-radius:50%; background:var(--hot); color:#111; font-weight:800; margin-bottom:10px; }
+.step h3 { margin:0 0 6px; font-size:1.05rem; }
+.step p { margin:0; color:var(--muted); font-size:.95rem; }
+pre { white-space:pre-wrap; word-break:break-word; background:var(--bg2); border:1px solid var(--line); border-radius:14px; padding:16px 18px; font:14px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace; margin:16px 0 0; }
+pre b { color:var(--hot); font-weight:700; }
+.tools { display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin-bottom:18px; }
+.tools input { flex:1 1 260px; max-width:420px; font:inherit; color:var(--fg); background:var(--card); border:1px solid var(--line); border-radius:999px; padding:10px 16px; }
+.tools input:focus { outline:2px solid var(--hot); outline-offset:1px; }
+.tools .n { color:var(--muted); font-size:.9rem; }
+.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:16px; }
+.can { background:var(--card); border:1px solid var(--line); border-radius:18px; padding:18px 14px 16px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:6px; transition:transform .15s, border-color .15s; }
+.can:hover { transform:translateY(-3px); border-color:color-mix(in srgb, var(--hot) 40%, var(--line)); }
+.can[hidden] { display:none; }
+.art img { width:112px; height:auto; display:block; filter:drop-shadow(0 10px 10px rgba(0,0,0,.25)); }
+.can h3 { margin:6px 0 0; font-size:1.05rem; }
+.cur { margin:0; font-weight:600; font-size:.9rem; min-height:1.4em; }
+.chips { display:flex; flex-wrap:wrap; justify-content:center; gap:5px; max-width:180px; }
+.chip { width:16px; height:16px; border-radius:50%; padding:0; cursor:pointer; background:var(--c); border:2px solid var(--card); box-shadow:0 0 0 1px var(--line); }
+.chip[aria-pressed="true"] { box-shadow:0 0 0 2px var(--fg); }
+.chip:focus-visible { outline:2px solid var(--hot); outline-offset:2px; }
+.count { margin:0; font-size:.78rem; color:var(--muted); }
+.vibe { margin:2px 0 6px; font-size:.86rem; color:var(--muted); flex:1; }
+.cmd { display:inline-flex; align-items:center; gap:8px; max-width:100%; background:rgba(127,127,127,.12); color:var(--fg); border:1px solid var(--line); border-radius:8px; padding:5px 8px; cursor:pointer; }
+.cmd code { font:12.5px ui-monospace,SFMono-Regular,Menlo,monospace; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.cmd .ic { color:var(--muted); font-size:.85rem; }
+.cmd.done .ic { color:var(--ok); }
+.cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:16px; }
+.card { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:20px; display:flex; flex-direction:column; gap:8px; }
+.card.main { grid-column:1 / -1; }
+.card h3 { margin:0; }
+.card p { margin:0; color:var(--muted); font-size:.95rem; }
+.card a.go { margin-top:auto; color:var(--hot); font-weight:600; text-decoration:none; }
+.card pre { margin:6px 0 0; position:relative; }
+.card .copy.pre { align-self:flex-start; }
+footer { border-top:1px solid var(--line); padding:28px 0 56px; color:var(--muted); font-size:.85rem; }
+footer p { max-width:780px; }
+.empty { display:none; color:var(--muted); padding:24px 0; }
 </style>
 </head>
 <body>
-<main>
-<h1>Second <span>Wind</span> ⚡</h1>
-<p class="lede">Give your AI an energy drink. It cracks one open, says something dumb about the flavor, then snaps back into focus: goal, done, left, next step, go. Just for fun. v1.4.2</p>
-<a class="btn" href="https://github.com/IordAIXL/energizer/archive/refs/heads/main.zip">Download everything (.zip)</a>
-<a class="btn alt" href="https://github.com/IordAIXL/energizer">View on GitHub</a>
+<nav><div class="wrap">
+  <a class="logo" href="#top">Second Wind ⚡</a>
+  <div class="links"><a href="#how" class="hide-sm">How it works</a><a href="#cooler">The cooler</a><a href="#install">Install</a><a href="https://github.com/IordAIXL/energizer">GitHub</a></div>
+</div></nav>
+<main class="wrap" id="top">
+<header class="hero">
+  <div>
+    <h1>Give your AI an <span>energy drink.</span></h1>
+    <p class="lede">It cracks one open, says something dumb about the flavor, counts it, then snaps back into focus on your actual task. Just for fun.</p>
+    <ul class="stats"><li>v1.5.0</li><li>16 brands</li><li>179 flavors</li><li>Claude Code, ChatGPT, Codex, Grok, Gemini</li></ul>
+    <div class="btns">
+      <a class="btn" href="#install">Get it for your AI</a>
+      <a class="btn alt" href="https://github.com/IordAIXL/energizer/archive/refs/heads/main.zip">Download .zip</a>
+    </div>
+  </div>
+  <div class="fan" aria-hidden="true"><img src="cans/celsius.svg" alt="" class="h0" width="120" height="220"><img src="cans/monster.svg" alt="" class="h1" width="120" height="220"><img src="cans/redbull.svg" alt="" class="h2" width="120" height="220"><img src="cans/ghost.svg" alt="" class="h3" width="120" height="220"><img src="cans/alani.svg" alt="" class="h4" width="120" height="220"></div>
+</header>
 
-<h2>The cooler</h2>
-<p class="lede">Tap the dots under a can to see each flavor. Ask for any brand and flavor. Make one up and watch your AI get excited about it.</p>
-<div class="grid">
-<figure class="can">
-  <div class="art"><img src="cans/redbull.svg" alt="Red Bull can" width="120" height="220" loading="lazy"></div>
-  <figcaption><strong>Red Bull</strong>
-  <span class="cur">Original</span>
-  <div class="chips"><button type="button" class="chip" data-src="cans/redbull/original.svg" title="Original" aria-label="Show Original" style="background:#1f3a8a"></button><button type="button" class="chip" data-src="cans/redbull/sugarfree.svg" title="Sugarfree" aria-label="Show Sugarfree" style="background:#4f8fd6"></button><button type="button" class="chip" data-src="cans/redbull/zero.svg" title="Zero" aria-label="Show Zero" style="background:#1f2937"></button><button type="button" class="chip" data-src="cans/redbull/watermelon.svg" title="Watermelon" aria-label="Show Watermelon" style="background:#d0142c"></button><button type="button" class="chip" data-src="cans/redbull/blueberry.svg" title="Blueberry" aria-label="Show Blueberry" style="background:#1d4fd8"></button><button type="button" class="chip" data-src="cans/redbull/tropical.svg" title="Tropical" aria-label="Show Tropical" style="background:#f2b705"></button><button type="button" class="chip" data-src="cans/redbull/dragon-fruit.svg" title="Dragon Fruit" aria-label="Show Dragon Fruit" style="background:#2fa84f"></button><button type="button" class="chip" data-src="cans/redbull/coconut-berry.svg" title="Coconut Berry" aria-label="Show Coconut Berry" style="background:#e9eef5"></button><button type="button" class="chip" data-src="cans/redbull/strawberry-apricot.svg" title="Strawberry Apricot" aria-label="Show Strawberry Apricot" style="background:#e2731f"></button><button type="button" class="chip" data-src="cans/redbull/peach-nectarine.svg" title="Peach Nectarine" aria-label="Show Peach Nectarine" style="background:#f49b83"></button><button type="button" class="chip" data-src="cans/redbull/juneberry.svg" title="Juneberry" aria-label="Show Juneberry" style="background:#1f8fb3"></button></div>
-  <span class="vibe">Classic wings energy. Crisp, a little sweet, very focused.</span>
-  <span class="flv">Original, Sugarfree, Zero, Watermelon, Blueberry, Tropical, Dragon Fruit, Coconut Berry, Strawberry Apricot, Peach Nectarine, Juneberry</span>
-  <code>/secondwind</code></figcaption>
-</figure>
-<figure class="can">
-  <div class="art"><img src="cans/monster.svg" alt="Monster can" width="120" height="220" loading="lazy"></div>
-  <figcaption><strong>Monster</strong>
-  <span class="cur">Original</span>
-  <div class="chips"><button type="button" class="chip" data-src="cans/monster/original.svg" title="Original" aria-label="Show Original" style="background:#7cff3a"></button><button type="button" class="chip" data-src="cans/monster/lo-carb.svg" title="Lo-Carb" aria-label="Show Lo-Carb" style="background:#46a6ff"></button><button type="button" class="chip" data-src="cans/monster/zero-ultra.svg" title="Zero Ultra" aria-label="Show Zero Ultra" style="background:#c3c8cf"></button><button type="button" class="chip" data-src="cans/monster/ultra-paradise.svg" title="Ultra Paradise" aria-label="Show Ultra Paradise" style="background:#7cc242"></button><button type="button" class="chip" data-src="cans/monster/ultra-violet.svg" title="Ultra Violet" aria-label="Show Ultra Violet" style="background:#9b51e0"></button><button type="button" class="chip" data-src="cans/monster/ultra-blue.svg" title="Ultra Blue" aria-label="Show Ultra Blue" style="background:#2f80ed"></button><button type="button" class="chip" data-src="cans/monster/ultra-watermelon.svg" title="Ultra Watermelon" aria-label="Show Ultra Watermelon" style="background:#ef476f"></button><button type="button" class="chip" data-src="cans/monster/ultra-fiesta-mango.svg" title="Ultra Fiesta Mango" aria-label="Show Ultra Fiesta Mango" style="background:#f2a007"></button><button type="button" class="chip" data-src="cans/monster/mango-loco.svg" title="Mango Loco" aria-label="Show Mango Loco" style="background:#ffb21a"></button><button type="button" class="chip" data-src="cans/monster/pipeline-punch.svg" title="Pipeline Punch" aria-label="Show Pipeline Punch" style="background:#ffe14d"></button><button type="button" class="chip" data-src="cans/monster/pacific-punch.svg" title="Pacific Punch" aria-label="Show Pacific Punch" style="background:#ffd23f"></button><button type="button" class="chip" data-src="cans/monster/khaotic.svg" title="Khaotic" aria-label="Show Khaotic" style="background:#111111"></button></div>
-  <span class="vibe">Big can, big energy. Unleashed, slightly feral.</span>
-  <span class="flv">Original, Lo-Carb, Zero Ultra, Ultra Paradise, Ultra Violet, Ultra Blue, Ultra Watermelon, Ultra Fiesta Mango, Mango Loco, Pipeline Punch, Pacific Punch, Khaotic</span>
-  <code>/secondwind monster</code></figcaption>
-</figure>
-<figure class="can">
-  <div class="art"><img src="cans/celsius.svg" alt="Celsius can" width="120" height="220" loading="lazy"></div>
-  <figcaption><strong>Celsius</strong>
-  <span class="cur">Sparkling Orange</span>
-  <div class="chips"><button type="button" class="chip" data-src="cans/celsius/sparkling-orange.svg" title="Sparkling Orange" aria-label="Show Sparkling Orange" style="background:#f47b20"></button><button type="button" class="chip" data-src="cans/celsius/kiwi-guava.svg" title="Kiwi Guava" aria-label="Show Kiwi Guava" style="background:#7bbf3a"></button><button type="button" class="chip" data-src="cans/celsius/peach-vibe.svg" title="Peach Vibe" aria-label="Show Peach Vibe" style="background:#f7a072"></button><button type="button" class="chip" data-src="cans/celsius/arctic-vibe.svg" title="Arctic Vibe" aria-label="Show Arctic Vibe" style="background:#3fb6e8"></button><button type="button" class="chip" data-src="cans/celsius/sparkling-watermelon.svg" title="Sparkling Watermelon" aria-label="Show Sparkling Watermelon" style="background:#f04e6e"></button><button type="button" class="chip" data-src="cans/celsius/fantasy-vibe.svg" title="Fantasy Vibe" aria-label="Show Fantasy Vibe" style="background:#a45ee5"></button><button type="button" class="chip" data-src="cans/celsius/sparkling-grape-rush.svg" title="Sparkling Grape Rush" aria-label="Show Sparkling Grape Rush" style="background:#7b2fbf"></button><button type="button" class="chip" data-src="cans/celsius/tropical-vibe.svg" title="Tropical Vibe" aria-label="Show Tropical Vibe" style="background:#f5c400"></button><button type="button" class="chip" data-src="cans/celsius/galaxy-vibe.svg" title="Galaxy Vibe" aria-label="Show Galaxy Vibe" style="background:#5b5fe0"></button><button type="button" class="chip" data-src="cans/celsius/mango-passionfruit.svg" title="Mango Passionfruit" aria-label="Show Mango Passionfruit" style="background:#f59e0b"></button><button type="button" class="chip" data-src="cans/celsius/sparkling-cola.svg" title="Sparkling Cola" aria-label="Show Sparkling Cola" style="background:#7a3b1d"></button></div>
-  <span class="vibe">Clean gym-bag energy. Light, bright, metabolically smug.</span>
-  <span class="flv">Sparkling Orange, Kiwi Guava, Peach Vibe, Arctic Vibe, Sparkling Watermelon, Fantasy Vibe, Sparkling Grape Rush, Tropical Vibe, Galaxy Vibe, Mango Passionfruit, Sparkling Cola</span>
-  <code>/secondwind celsius</code></figcaption>
-</figure>
-<figure class="can">
-  <div class="art"><img src="cans/ryse.svg" alt="Ryse can" width="120" height="220" loading="lazy"></div>
-  <figcaption><strong>Ryse</strong>
-  <span class="cur">Kool-Aid Tropical Punch</span>
-  <div class="chips"><button type="button" class="chip" data-src="cans/ryse/kool-aid-tropical-punch.svg" title="Kool-Aid Tropical Punch" aria-label="Show Kool-Aid Tropical Punch" style="background:#e1306c"></button><button type="button" class="chip" data-src="cans/ryse/smarties.svg" title="Smarties" aria-label="Show Smarties" style="background:#b38bfa"></button><button type="button" class="chip" data-src="cans/ryse/ring-pop-berry-blast.svg" title="Ring Pop Berry Blast" aria-label="Show Ring Pop Berry Blast" style="background:#3b82f6"></button><button type="button" class="chip" data-src="cans/ryse/sour-jolly-rancher-watermelon.svg" title="Sour Jolly Rancher Watermelon" aria-label="Show Sour Jolly Rancher Watermelon" style="background:#ff4f79"></button><button type="button" class="chip" data-src="cans/ryse/hawaiian-punch.svg" title="Hawaiian Punch" aria-label="Show Hawaiian Punch" style="background:#d62828"></button><button type="button" class="chip" data-src="cans/ryse/blue-razz.svg" title="Blue Razz" aria-label="Show Blue Razz" style="background:#2563eb"></button><button type="button" class="chip" data-src="cans/ryse/mango-pineapple.svg" title="Mango Pineapple" aria-label="Show Mango Pineapple" style="background:#f59e0b"></button><button type="button" class="chip" data-src="cans/ryse/baja-burst.svg" title="Baja Burst" aria-label="Show Baja Burst" style="background:#14b8a6"></button></div>
-  <span class="vibe">Pre-workout attitude in a can. Up and to the right.</span>
-  <span class="flv">Kool-Aid Tropical Punch, Smarties, Ring Pop Berry Blast, Sour Jolly Rancher Watermelon, Hawaiian Punch, Blue Razz, Mango Pineapple, Baja Burst</span>
-  <code>/secondwind ryse</code></figcaption>
-</figure>
-<figure class="can">
-  <div class="art"><img src="cans/ghost.svg" alt="Ghost can" width="120" height="220" loading="lazy"></div>
-  <figcaption><strong>Ghost</strong>
-  <span class="cur">Citrus</span>
-  <div class="chips"><button type="button" class="chip" data-src="cans/ghost/citrus.svg" title="Citrus" aria-label="Show Citrus" style="background:#ffd31a"></button><button type="button" class="chip" data-src="cans/ghost/sour-patch-kids-blue-raspberry.svg" title="Sour Patch Kids Blue Raspberry" aria-label="Show Sour Patch Kids Blue Raspberry" style="background:#2a8cff"></button><button type="button" class="chip" data-src="cans/ghost/sour-patch-kids-redberry.svg" title="Sour Patch Kids Redberry" aria-label="Show Sour Patch Kids Redberry" style="background:#ef3b3b"></button><button type="button" class="chip" data-src="cans/ghost/swedish-fish.svg" title="Swedish Fish" aria-label="Show Swedish Fish" style="background:#e0103a"></button><button type="button" class="chip" data-src="cans/ghost/warheads-sour-watermelon.svg" title="Warheads Sour Watermelon" aria-label="Show Warheads Sour Watermelon" style="background:#ff5fa2"></button><button type="button" class="chip" data-src="cans/ghost/orange-cream.svg" title="Orange Cream" aria-label="Show Orange Cream" style="background:#ff9a3c"></button><button type="button" class="chip" data-src="cans/ghost/tropical-mango.svg" title="Tropical Mango" aria-label="Show Tropical Mango" style="background:#ffb81c"></button><button type="button" class="chip" data-src="cans/ghost/cherry-limeade.svg" title="Cherry Limeade" aria-label="Show Cherry Limeade" style="background:#c8102e"></button><button type="button" class="chip" data-src="cans/ghost/welch-s-grape.svg" title="Welch&#x27;s Grape" aria-label="Show Welch&#x27;s Grape" style="background:#7b2cbf"></button><button type="button" class="chip" data-src="cans/ghost/faze-pop.svg" title="Faze Pop" aria-label="Show Faze Pop" style="background:#00c2ff"></button></div>
-  <span class="vibe">Playful and loud. Boo, but productive.</span>
-  <span class="flv">Citrus, Sour Patch Kids Blue Raspberry, Sour Patch Kids Redberry, Swedish Fish, Warheads Sour Watermelon, Orange Cream, Tropical Mango, Cherry Limeade, Welch&#x27;s Grape, Faze Pop</span>
-  <code>/secondwind ghost</code></figcaption>
-</figure>
-<figure class="can">
-  <div class="art"><img src="cans/bang.svg" alt="Bang can" width="120" height="220" loading="lazy"></div>
-  <figcaption><strong>Bang</strong>
-  <span class="cur">Black Cherry Vanilla</span>
-  <div class="chips"><button type="button" class="chip" data-src="cans/bang/black-cherry-vanilla.svg" title="Black Cherry Vanilla" aria-label="Show Black Cherry Vanilla" style="background:#8b1e3f"></button><button type="button" class="chip" data-src="cans/bang/rainbow-unicorn.svg" title="Rainbow Unicorn" aria-label="Show Rainbow Unicorn" style="background:#e879f9"></button><button type="button" class="chip" data-src="cans/bang/star-blast.svg" title="Star Blast" aria-label="Show Star Blast" style="background:#2563eb"></button><button type="button" class="chip" data-src="cans/bang/blue-razz.svg" title="Blue Razz" aria-label="Show Blue Razz" style="background:#1d4ed8"></button><button type="button" class="chip" data-src="cans/bang/peach-mango.svg" title="Peach Mango" aria-label="Show Peach Mango" style="background:#fb923c"></button><button type="button" class="chip" data-src="cans/bang/cotton-candy.svg" title="Cotton Candy" aria-label="Show Cotton Candy" style="background:#f9a8d4"></button><button type="button" class="chip" data-src="cans/bang/sour-heads.svg" title="Sour Heads" aria-label="Show Sour Heads" style="background:#84cc16"></button><button type="button" class="chip" data-src="cans/bang/frose-rose.svg" title="Frose Rose" aria-label="Show Frose Rose" style="background:#fb7185"></button><button type="button" class="chip" data-src="cans/bang/key-lime-pie.svg" title="Key Lime Pie" aria-label="Show Key Lime Pie" style="background:#a3e635"></button><button type="button" class="chip" data-src="cans/bang/purple-haze.svg" title="Purple Haze" aria-label="Show Purple Haze" style="background:#7c3aed"></button><button type="button" class="chip" data-src="cans/bang/miami-cola.svg" title="Miami Cola" aria-label="Show Miami Cola" style="background:#b91c1c"></button><button type="button" class="chip" data-src="cans/bang/lemon-drop.svg" title="Lemon Drop" aria-label="Show Lemon Drop" style="background:#facc15"></button></div>
-  <span class="vibe">Neon explosion. Everything is a big deal now.</span>
-  <span class="flv">Black Cherry Vanilla, Rainbow Unicorn, Star Blast, Blue Razz, Peach Mango, Cotton Candy, Sour Heads, Frose Rose, Key Lime Pie, Purple Haze, Miami Cola, Lemon Drop</span>
-  <code>/secondwind bang</code></figcaption>
-</figure>
-<figure class="can">
-  <div class="art"><img src="cans/reign.svg" alt="Reign can" width="120" height="220" loading="lazy"></div>
-  <figcaption><strong>Reign</strong>
-  <span class="cur">Razzle Berry</span>
-  <div class="chips"><button type="button" class="chip" data-src="cans/reign/razzle-berry.svg" title="Razzle Berry" aria-label="Show Razzle Berry" style="background:#e2368a"></button><button type="button" class="chip" data-src="cans/reign/melon-mania.svg" title="Melon Mania" aria-label="Show Melon Mania" style="background:#3ccf5a"></button><button type="button" class="chip" data-src="cans/reign/orange-dreamsicle.svg" title="Orange Dreamsicle" aria-label="Show Orange Dreamsicle" style="background:#ff8a2a"></button><button type="button" class="chip" data-src="cans/reign/lilikoi-lychee.svg" title="Lilikoi Lychee" aria-label="Show Lilikoi Lychee" style="background:#ffd92e"></button><button type="button" class="chip" data-src="cans/reign/carnival-candy.svg" title="Carnival Candy" aria-label="Show Carnival Candy" style="background:#c27bff"></button><button type="button" class="chip" data-src="cans/reign/white-gummy-bear.svg" title="White Gummy Bear" aria-label="Show White Gummy Bear" style="background:#e8e8ec"></button><button type="button" class="chip" data-src="cans/reign/red-dragon.svg" title="Red Dragon" aria-label="Show Red Dragon" style="background:#e3262f"></button><button type="button" class="chip" data-src="cans/reign/reignbow-sherbet.svg" title="Reignbow Sherbet" aria-label="Show Reignbow Sherbet" style="background:#ff7fc0"></button><button type="button" class="chip" data-src="cans/reign/mang-o-matic.svg" title="Mang-O-Matic" aria-label="Show Mang-O-Matic" style="background:#ffb01f"></button></div>
-  <span class="vibe">Royal decree: we are finishing this task.</span>
-  <span class="flv">Razzle Berry, Melon Mania, Orange Dreamsicle, Lilikoi Lychee, Carnival Candy, White Gummy Bear, Red Dragon, Reignbow Sherbet, Mang-O-Matic</span>
-  <code>/secondwind reign</code></figcaption>
-</figure>
-<figure class="can">
-  <div class="art"><img src="cans/c4.svg" alt="C4 can" width="120" height="220" loading="lazy"></div>
-  <figcaption><strong>C4</strong>
-  <span class="cur">Frozen Bombsicle</span>
-  <div class="chips"><button type="button" class="chip" data-src="cans/c4/frozen-bombsicle.svg" title="Frozen Bombsicle" aria-label="Show Frozen Bombsicle" style="background:#2f6bff"></button><button type="button" class="chip" data-src="cans/c4/midnight-cherry.svg" title="Midnight Cherry" aria-label="Show Midnight Cherry" style="background:#9b1c31"></button><button type="button" class="chip" data-src="cans/c4/cherry-limeade.svg" title="Cherry Limeade" aria-label="Show Cherry Limeade" style="background:#e0284a"></button><button type="button" class="chip" data-src="cans/c4/twisted-limeade.svg" title="Twisted Limeade" aria-label="Show Twisted Limeade" style="background:#9be22d"></button><button type="button" class="chip" data-src="cans/c4/strawberry-watermelon-ice.svg" title="Strawberry Watermelon Ice" aria-label="Show Strawberry Watermelon Ice" style="background:#ff5c7a"></button><button type="button" class="chip" data-src="cans/c4/orange-slice.svg" title="Orange Slice" aria-label="Show Orange Slice" style="background:#ff8c1a"></button><button type="button" class="chip" data-src="cans/c4/cotton-candy.svg" title="Cotton Candy" aria-label="Show Cotton Candy" style="background:#ff9ed2"></button><button type="button" class="chip" data-src="cans/c4/skittles.svg" title="Skittles" aria-label="Show Skittles" style="background:#e11d48"></button><button type="button" class="chip" data-src="cans/c4/starburst-cherry.svg" title="Starburst Cherry" aria-label="Show Starburst Cherry" style="background:#ff3355"></button></div>
-  <span class="vibe">Explosive pre-workout energy. Handle with care.</span>
-  <span class="flv">Frozen Bombsicle, Midnight Cherry, Cherry Limeade, Twisted Limeade, Strawberry Watermelon Ice, Orange Slice, Cotton Candy, Skittles, Starburst Cherry</span>
-  <code>/secondwind c4</code></figcaption>
-</figure>
-<figure class="can">
-  <div class="art"><img src="cans/alani.svg" alt="Alani Nu can" width="120" height="220" loading="lazy"></div>
-  <figcaption><strong>Alani Nu</strong>
-  <span class="cur">Cosmic Stardust</span>
-  <div class="chips"><button type="button" class="chip" data-src="cans/alani/cosmic-stardust.svg" title="Cosmic Stardust" aria-label="Show Cosmic Stardust" style="background:#c3a6ff"></button><button type="button" class="chip" data-src="cans/alani/hawaiian-shaved-ice.svg" title="Hawaiian Shaved Ice" aria-label="Show Hawaiian Shaved Ice" style="background:#7fd3f7"></button><button type="button" class="chip" data-src="cans/alani/mimosa.svg" title="Mimosa" aria-label="Show Mimosa" style="background:#ffb36b"></button><button type="button" class="chip" data-src="cans/alani/witch-s-brew.svg" title="Witch&#x27;s Brew" aria-label="Show Witch&#x27;s Brew" style="background:#a6e05a"></button><button type="button" class="chip" data-src="cans/alani/cherry-slush.svg" title="Cherry Slush" aria-label="Show Cherry Slush" style="background:#ff5b7f"></button><button type="button" class="chip" data-src="cans/alani/breezeberry.svg" title="Breezeberry" aria-label="Show Breezeberry" style="background:#a7c7ff"></button><button type="button" class="chip" data-src="cans/alani/kimade.svg" title="Kimade" aria-label="Show Kimade" style="background:#ffadd2"></button><button type="button" class="chip" data-src="cans/alani/juicy-peach.svg" title="Juicy Peach" aria-label="Show Juicy Peach" style="background:#ffc29a"></button><button type="button" class="chip" data-src="cans/alani/tropsicle.svg" title="Tropsicle" aria-label="Show Tropsicle" style="background:#ffe066"></button><button type="button" class="chip" data-src="cans/alani/arctic-white.svg" title="Arctic White" aria-label="Show Arctic White" style="background:#eef1f6"></button></div>
-  <span class="vibe">Pastel and cheerful. Productivity, but cute.</span>
-  <span class="flv">Cosmic Stardust, Hawaiian Shaved Ice, Mimosa, Witch&#x27;s Brew, Cherry Slush, Breezeberry, Kimade, Juicy Peach, Tropsicle, Arctic White</span>
-  <code>/secondwind alani</code></figcaption>
-</figure>
-<figure class="can">
-  <div class="art"><img src="cans/prime.svg" alt="Prime can" width="120" height="220" loading="lazy"></div>
-  <figcaption><strong>Prime</strong>
-  <span class="cur">Tropical Punch</span>
-  <div class="chips"><button type="button" class="chip" data-src="cans/prime/tropical-punch.svg" title="Tropical Punch" aria-label="Show Tropical Punch" style="background:#ff3d7f"></button><button type="button" class="chip" data-src="cans/prime/blue-raspberry.svg" title="Blue Raspberry" aria-label="Show Blue Raspberry" style="background:#1e40ff"></button><button type="button" class="chip" data-src="cans/prime/ice-pop.svg" title="Ice Pop" aria-label="Show Ice Pop" style="background:#ff2d55"></button><button type="button" class="chip" data-src="cans/prime/strawberry-watermelon.svg" title="Strawberry Watermelon" aria-label="Show Strawberry Watermelon" style="background:#ff4d6d"></button><button type="button" class="chip" data-src="cans/prime/lemon-lime.svg" title="Lemon Lime" aria-label="Show Lemon Lime" style="background:#a6e22e"></button><button type="button" class="chip" data-src="cans/prime/orange-mango.svg" title="Orange Mango" aria-label="Show Orange Mango" style="background:#ff7a00"></button><button type="button" class="chip" data-src="cans/prime/grape.svg" title="Grape" aria-label="Show Grape" style="background:#6d28d9"></button></div>
-  <span class="vibe">Hype energy. Very confident, possibly filming.</span>
-  <span class="flv">Tropical Punch, Blue Raspberry, Ice Pop, Strawberry Watermelon, Lemon Lime, Orange Mango, Grape</span>
-  <code>/secondwind prime</code></figcaption>
-</figure>
-<figure class="can">
-  <div class="art"><img src="cans/rockstar.svg" alt="Rockstar can" width="120" height="220" loading="lazy"></div>
-  <figcaption><strong>Rockstar</strong>
-  <span class="cur">Original</span>
-  <div class="chips"><button type="button" class="chip" data-src="cans/rockstar/original.svg" title="Original" aria-label="Show Original" style="background:#f5c400"></button><button type="button" class="chip" data-src="cans/rockstar/punched.svg" title="Punched" aria-label="Show Punched" style="background:#e3262f"></button><button type="button" class="chip" data-src="cans/rockstar/pure-zero-silver-ice.svg" title="Pure Zero Silver Ice" aria-label="Show Pure Zero Silver Ice" style="background:#c7ced8"></button><button type="button" class="chip" data-src="cans/rockstar/pure-zero-grape.svg" title="Pure Zero Grape" aria-label="Show Pure Zero Grape" style="background:#8b3fd9"></button><button type="button" class="chip" data-src="cans/rockstar/pure-zero-watermelon.svg" title="Pure Zero Watermelon" aria-label="Show Pure Zero Watermelon" style="background:#ff5c7a"></button><button type="button" class="chip" data-src="cans/rockstar/xdurance-blue-razz.svg" title="Xdurance Blue Razz" aria-label="Show Xdurance Blue Razz" style="background:#2f6bff"></button><button type="button" class="chip" data-src="cans/rockstar/recovery-lemonade.svg" title="Recovery Lemonade" aria-label="Show Recovery Lemonade" style="background:#ffe14d"></button><button type="button" class="chip" data-src="cans/rockstar/juiced-mango.svg" title="Juiced Mango" aria-label="Show Juiced Mango" style="background:#ff9a1f"></button><button type="button" class="chip" data-src="cans/rockstar/sugar-free.svg" title="Sugar Free" aria-label="Show Sugar Free" style="background:#9aa3ad"></button></div>
-  <span class="vibe">Backstage pass energy. Loud guitars, clean commits.</span>
-  <span class="flv">Original, Punched, Pure Zero Silver Ice, Pure Zero Grape, Pure Zero Watermelon, Xdurance Blue Razz, Recovery Lemonade, Juiced Mango, Sugar Free</span>
-  <code>/secondwind rockstar</code></figcaption>
-</figure>
-<figure class="can">
-  <div class="art"><img src="cans/3d.svg" alt="3D can" width="120" height="220" loading="lazy"></div>
-  <figcaption><strong>3D</strong>
-  <span class="cur">Blue Raspberry</span>
-  <div class="chips"><button type="button" class="chip" data-src="cans/3d/blue-raspberry.svg" title="Blue Raspberry" aria-label="Show Blue Raspberry" style="background:#2f6bff"></button><button type="button" class="chip" data-src="cans/3d/liquid-ice.svg" title="Liquid Ice" aria-label="Show Liquid Ice" style="background:#5ee6f2"></button><button type="button" class="chip" data-src="cans/3d/chrome.svg" title="Chrome" aria-label="Show Chrome" style="background:#d4d7dd"></button><button type="button" class="chip" data-src="cans/3d/red-razz.svg" title="Red Razz" aria-label="Show Red Razz" style="background:#e3262f"></button><button type="button" class="chip" data-src="cans/3d/purple.svg" title="Purple" aria-label="Show Purple" style="background:#9b5cff"></button><button type="button" class="chip" data-src="cans/3d/pina-colada.svg" title="Pina Colada" aria-label="Show Pina Colada" style="background:#ffe08a"></button><button type="button" class="chip" data-src="cans/3d/bubblegum.svg" title="Bubblegum" aria-label="Show Bubblegum" style="background:#ff7fc0"></button></div>
-  <span class="vibe">Sleek and geometric. Seeing the problem from every angle.</span>
-  <span class="flv">Blue Raspberry, Liquid Ice, Chrome, Red Razz, Purple, Pina Colada, Bubblegum</span>
-  <code>/secondwind 3d</code></figcaption>
-</figure>
-<figure class="can">
-  <div class="art"><img src="cans/buckedup.svg" alt="Bucked Up can" width="120" height="220" loading="lazy"></div>
-  <figcaption><strong>Bucked Up</strong>
-  <span class="cur">Blood Raz</span>
-  <div class="chips"><button type="button" class="chip" data-src="cans/buckedup/blood-raz.svg" title="Blood Raz" aria-label="Show Blood Raz" style="background:#c1121f"></button><button type="button" class="chip" data-src="cans/buckedup/rocket-pop.svg" title="Rocket Pop" aria-label="Show Rocket Pop" style="background:#2f6bff"></button><button type="button" class="chip" data-src="cans/buckedup/miami-vice.svg" title="Miami Vice" aria-label="Show Miami Vice" style="background:#ff6fae"></button><button type="button" class="chip" data-src="cans/buckedup/grape-gainz.svg" title="Grape Gainz" aria-label="Show Grape Gainz" style="background:#7b2cbf"></button><button type="button" class="chip" data-src="cans/buckedup/swole-whip.svg" title="Swole Whip" aria-label="Show Swole Whip" style="background:#ffb36b"></button><button type="button" class="chip" data-src="cans/buckedup/watermelon.svg" title="Watermelon" aria-label="Show Watermelon" style="background:#ff5c7a"></button></div>
-  <span class="vibe">Outdoorsy, antlered, ready to charge.</span>
-  <span class="flv">Blood Raz, Rocket Pop, Miami Vice, Grape Gainz, Swole Whip, Watermelon</span>
-  <code>/secondwind bucked up</code></figcaption>
-</figure>
-<figure class="can">
-  <div class="art"><img src="cans/zoa.svg" alt="Zoa can" width="120" height="220" loading="lazy"></div>
-  <figcaption><strong>Zoa</strong>
-  <span class="cur">Pineapple Coconut</span>
-  <div class="chips"><button type="button" class="chip" data-src="cans/zoa/pineapple-coconut.svg" title="Pineapple Coconut" aria-label="Show Pineapple Coconut" style="background:#ffd23f"></button><button type="button" class="chip" data-src="cans/zoa/wild-orange.svg" title="Wild Orange" aria-label="Show Wild Orange" style="background:#ff8a2a"></button><button type="button" class="chip" data-src="cans/zoa/super-berry.svg" title="Super Berry" aria-label="Show Super Berry" style="background:#a3238e"></button><button type="button" class="chip" data-src="cans/zoa/tropical-punch.svg" title="Tropical Punch" aria-label="Show Tropical Punch" style="background:#f2385a"></button><button type="button" class="chip" data-src="cans/zoa/lemon-lime.svg" title="Lemon Lime" aria-label="Show Lemon Lime" style="background:#8bd13a"></button><button type="button" class="chip" data-src="cans/zoa/white-peach.svg" title="White Peach" aria-label="Show White Peach" style="background:#ffb4a2"></button><button type="button" class="chip" data-src="cans/zoa/frosted-grape.svg" title="Frosted Grape" aria-label="Show Frosted Grape" style="background:#7b4fd6"></button><button type="button" class="chip" data-src="cans/zoa/cherry-limeade.svg" title="Cherry Limeade" aria-label="Show Cherry Limeade" style="background:#c8102e"></button><button type="button" class="chip" data-src="cans/zoa/strawberry-watermelon.svg" title="Strawberry Watermelon" aria-label="Show Strawberry Watermelon" style="background:#ff5c7a"></button></div>
-  <span class="vibe">Beachy, healthy-ish, calm but awake.</span>
-  <span class="flv">Pineapple Coconut, Wild Orange, Super Berry, Tropical Punch, Lemon Lime, White Peach, Frosted Grape, Cherry Limeade, Strawberry Watermelon</span>
-  <code>/secondwind zoa</code></figcaption>
-</figure>
-<figure class="can">
-  <div class="art"><img src="cans/coffee.svg" alt="Coffee can" width="120" height="220" loading="lazy"></div>
-  <figcaption><strong>Coffee</strong>
-  <span class="cur">Black</span>
-  <div class="chips"><button type="button" class="chip" data-src="cans/coffee/black.svg" title="Black" aria-label="Show Black" style="background:#2a1b12"></button><button type="button" class="chip" data-src="cans/coffee/cold-brew.svg" title="Cold Brew" aria-label="Show Cold Brew" style="background:#3f2a1d"></button><button type="button" class="chip" data-src="cans/coffee/espresso-shot.svg" title="Espresso Shot" aria-label="Show Espresso Shot" style="background:#1f140d"></button><button type="button" class="chip" data-src="cans/coffee/vanilla-latte.svg" title="Vanilla Latte" aria-label="Show Vanilla Latte" style="background:#b98a5e"></button><button type="button" class="chip" data-src="cans/coffee/mocha.svg" title="Mocha" aria-label="Show Mocha" style="background:#5a3522"></button><button type="button" class="chip" data-src="cans/coffee/caramel-macchiato.svg" title="Caramel Macchiato" aria-label="Show Caramel Macchiato" style="background:#a0612b"></button></div>
-  <span class="vibe">The original productivity potion. Warm and serious.</span>
-  <span class="flv">Black, Cold Brew, Espresso Shot, Vanilla Latte, Mocha, Caramel Macchiato</span>
-  <code>/secondwind coffee</code></figcaption>
-</figure>
-<figure class="can">
-  <div class="art"><img src="cans/tea.svg" alt="Tea can" width="120" height="220" loading="lazy"></div>
-  <figcaption><strong>Tea</strong>
-  <span class="cur">Green Tea</span>
-  <div class="chips"><button type="button" class="chip" data-src="cans/tea/green-tea.svg" title="Green Tea" aria-label="Show Green Tea" style="background:#2f8f46"></button><button type="button" class="chip" data-src="cans/tea/matcha.svg" title="Matcha" aria-label="Show Matcha" style="background:#5a8f1e"></button><button type="button" class="chip" data-src="cans/tea/black-tea.svg" title="Black Tea" aria-label="Show Black Tea" style="background:#7a2e12"></button><button type="button" class="chip" data-src="cans/tea/chai.svg" title="Chai" aria-label="Show Chai" style="background:#b0622a"></button><button type="button" class="chip" data-src="cans/tea/yerba-mate.svg" title="Yerba Mate" aria-label="Show Yerba Mate" style="background:#4d7c0f"></button><button type="button" class="chip" data-src="cans/tea/earl-grey.svg" title="Earl Grey" aria-label="Show Earl Grey" style="background:#4b5a8a"></button></div>
-  <span class="vibe">Calm focus. Steady, zen, gets it done.</span>
-  <span class="flv">Green Tea, Matcha, Black Tea, Chai, Yerba Mate, Earl Grey</span>
-  <code>/secondwind tea</code></figcaption>
-</figure>
-<figure class="can">
-  <div class="art"><img src="cans/mystery.svg" alt="Mystery Can can" width="120" height="220" loading="lazy"></div>
-  <figcaption><strong>Mystery Can</strong>
-  <span class="cur">Your Made-Up Flavor</span>
-  
-  <span class="vibe">Any brand or flavor we don&#x27;t know. Claude will be delighted.</span>
-  <span class="flv">Your Made-Up Flavor</span>
-  <code>/secondwind pickle-flavored rocket fuel</code></figcaption>
-</figure>
-</div>
-<script>
-document.querySelectorAll('.chip').forEach(function (c) {
-  c.addEventListener('click', function () {
-    var fig = c.closest('.can');
-    fig.querySelector('img').src = c.dataset.src;
-    fig.querySelector('.cur').textContent = c.title;
-    fig.querySelectorAll('.chip').forEach(function (o) { o.setAttribute('aria-pressed', o === c); });
-  });
-});
-</script>
-
-<h2>Get it for your AI</h2>
-<div class="cards">
-  <div class="card"><h3>Claude Code</h3><p>Real plugin with a <code>/secondwind</code> command and a lifetime counter.</p>
-<pre>/plugin marketplace add IordAIXL/energizer
-/plugin install second-wind@energizer</pre></div>
-  <div class="card"><h3>ChatGPT</h3><p>Make a Custom GPT or paste into Custom Instructions.</p><a href="https://github.com/IordAIXL/energizer/blob/main/prompts/chatgpt.md">Get the ChatGPT prompt</a></div>
-  <div class="card"><h3>Codex</h3><p>Drop-in <code>AGENTS.md</code>. Also works for Cursor, Aider and friends.</p><a href="https://github.com/IordAIXL/energizer/blob/main/prompts/codex.md">Get the Codex setup</a></div>
-  <div class="card"><h3>Grok</h3><p>Paste into Grok's custom instructions.</p><a href="https://github.com/IordAIXL/energizer/blob/main/prompts/grok.md">Get the Grok prompt</a></div>
-  <div class="card"><h3>Gemini</h3><p>Make a Gem with it.</p><a href="https://github.com/IordAIXL/energizer/blob/main/prompts/gemini.md">Get the Gemini prompt</a></div>
-  <div class="card"><h3>Anything else</h3><p>Copilot, Claude.ai, Perplexity, local models.</p><a href="https://github.com/IordAIXL/energizer/blob/main/prompts/any-ai.md">Get the universal prompt</a></div>
-</div>
-
-<h2>What a drink looks like</h2>
+<section id="how">
+  <h2>How it works</h2>
+  <p class="sub">One command. A quick joke, then real focus.</p>
+  <div class="steps">
+    <div class="step"><h3>Crack it open</h3><p>Pick any brand and flavor, or make one up. Your AI reacts to the taste in a line or two.</p></div>
+    <div class="step"><h3>Count it</h3><p>Every drink adds to a lifetime counter, with tiny celebrations at 1, 5, 10, 25, 50 and 100 cans.</p></div>
+    <div class="step"><h3>Get dialed in</h3><p>It sums up the goal, what's done, what's left and what to drop, then does the next step.</p></div>
+  </div>
 <pre>&gt; /secondwind ghost citrus
 
 *pssht* ... spooky smooth. Ghosting distractions.
 Bright citrus, zero chill. Drink #12. Lifetime total: 12 cans.
 
-⚡ DIALED IN
+<b>⚡ DIALED IN</b>
 Goal:      Fix the login page crash on Safari
 Done:      Found the bad date parsing in auth.js
 Left:      Patch it, add a test
 Dropping:  The CSS cleanup idea (parked)
 Next step: Replace Date.parse with the ISO helper</pre>
+</section>
 
-<footer>Second Wind is a fan-made joke. It is not affiliated with, endorsed by, or sponsored by any drink brand. All brand names belong to their owners and are used only to name the pretend drinks. The can art is hand-drawn fan art inspired by each brand's real cans, made without any official logo files or images. The drinks are pretend: no AI was actually caffeinated. Please drink real energy drinks responsibly.</footer>
+<section id="cooler">
+  <h2>The cooler</h2>
+  <p class="sub">Tap the colored dots to see each flavor. Click a command to copy it.</p>
+  <div class="tools"><input type="search" id="q" placeholder="Search brands or flavors, like mango" aria-label="Search brands or flavors"><span class="n" id="n"></span></div>
+  <div class="grid" id="grid">
+<article class="can" data-search="red bull red bull redbull rb original sugarfree zero watermelon tropical coconut berry strawberry apricot peach juneberry apple edition iced edition pink edition">
+  <div class="art"><img src="cans/redbull.svg" alt="Red Bull can" width="120" height="220" loading="lazy"></div>
+  <h3>Red Bull</h3>
+  <p class="cur">Original</p>
+  <div class="chips" role="group" aria-label="Flavors"><button type="button" class="chip" data-src="cans/redbull/original.svg" data-flavor="Original" data-cmd="/secondwind red bull original" title="Original" aria-label="Original" aria-pressed="true" style="--c:#1f3a8a"></button><button type="button" class="chip" data-src="cans/redbull/sugarfree.svg" data-flavor="Sugarfree" data-cmd="/secondwind red bull sugarfree" title="Sugarfree" aria-label="Sugarfree" aria-pressed="false" style="--c:#4f8fd6"></button><button type="button" class="chip" data-src="cans/redbull/zero.svg" data-flavor="Zero" data-cmd="/secondwind red bull zero" title="Zero" aria-label="Zero" aria-pressed="false" style="--c:#1f2937"></button><button type="button" class="chip" data-src="cans/redbull/watermelon.svg" data-flavor="Watermelon" data-cmd="/secondwind red bull watermelon" title="Watermelon" aria-label="Watermelon" aria-pressed="false" style="--c:#d0142c"></button><button type="button" class="chip" data-src="cans/redbull/tropical.svg" data-flavor="Tropical" data-cmd="/secondwind red bull tropical" title="Tropical" aria-label="Tropical" aria-pressed="false" style="--c:#f2b705"></button><button type="button" class="chip" data-src="cans/redbull/coconut-berry.svg" data-flavor="Coconut Berry" data-cmd="/secondwind red bull coconut berry" title="Coconut Berry" aria-label="Coconut Berry" aria-pressed="false" style="--c:#e9eef5"></button><button type="button" class="chip" data-src="cans/redbull/strawberry-apricot.svg" data-flavor="Strawberry Apricot" data-cmd="/secondwind red bull strawberry apricot" title="Strawberry Apricot" aria-label="Strawberry Apricot" aria-pressed="false" style="--c:#e2731f"></button><button type="button" class="chip" data-src="cans/redbull/peach.svg" data-flavor="Peach" data-cmd="/secondwind red bull peach" title="Peach" aria-label="Peach" aria-pressed="false" style="--c:#f49b83"></button><button type="button" class="chip" data-src="cans/redbull/juneberry.svg" data-flavor="Juneberry" data-cmd="/secondwind red bull juneberry" title="Juneberry" aria-label="Juneberry" aria-pressed="false" style="--c:#1f8fb3"></button><button type="button" class="chip" data-src="cans/redbull/apple-edition.svg" data-flavor="Apple Edition" data-cmd="/secondwind red bull apple edition" title="Apple Edition" aria-label="Apple Edition" aria-pressed="false" style="--c:#6db33f"></button><button type="button" class="chip" data-src="cans/redbull/iced-edition.svg" data-flavor="Iced Edition" data-cmd="/secondwind red bull iced edition" title="Iced Edition" aria-label="Iced Edition" aria-pressed="false" style="--c:#9cc9e8"></button><button type="button" class="chip" data-src="cans/redbull/pink-edition.svg" data-flavor="Pink Edition" data-cmd="/secondwind red bull pink edition" title="Pink Edition" aria-label="Pink Edition" aria-pressed="false" style="--c:#e85d9a"></button></div>
+  <p class="count">12 flavors</p>
+  <p class="vibe">Classic wings energy. Crisp, a little sweet, very focused.</p>
+  <button type="button" class="cmd copy" data-copy="/secondwind"><code>/secondwind</code><span class="ic" aria-hidden="true">⧉</span></button>
+</article>
+<article class="can" data-search="monster monster original lo-carb zero ultra ultra paradise ultra violet ultra fiesta mango ultra watermelon ultra peachy keen ultra strawberry dreams ultra blue hawaiian mango loco pipeline punch pacific punch">
+  <div class="art"><img src="cans/monster.svg" alt="Monster can" width="120" height="220" loading="lazy"></div>
+  <h3>Monster</h3>
+  <p class="cur">Original</p>
+  <div class="chips" role="group" aria-label="Flavors"><button type="button" class="chip" data-src="cans/monster/original.svg" data-flavor="Original" data-cmd="/secondwind monster original" title="Original" aria-label="Original" aria-pressed="true" style="--c:#7cff3a"></button><button type="button" class="chip" data-src="cans/monster/lo-carb.svg" data-flavor="Lo-Carb" data-cmd="/secondwind monster lo-carb" title="Lo-Carb" aria-label="Lo-Carb" aria-pressed="false" style="--c:#46a6ff"></button><button type="button" class="chip" data-src="cans/monster/zero-ultra.svg" data-flavor="Zero Ultra" data-cmd="/secondwind monster zero ultra" title="Zero Ultra" aria-label="Zero Ultra" aria-pressed="false" style="--c:#c3c8cf"></button><button type="button" class="chip" data-src="cans/monster/ultra-paradise.svg" data-flavor="Ultra Paradise" data-cmd="/secondwind monster ultra paradise" title="Ultra Paradise" aria-label="Ultra Paradise" aria-pressed="false" style="--c:#7cc242"></button><button type="button" class="chip" data-src="cans/monster/ultra-violet.svg" data-flavor="Ultra Violet" data-cmd="/secondwind monster ultra violet" title="Ultra Violet" aria-label="Ultra Violet" aria-pressed="false" style="--c:#9b51e0"></button><button type="button" class="chip" data-src="cans/monster/ultra-fiesta-mango.svg" data-flavor="Ultra Fiesta Mango" data-cmd="/secondwind monster ultra fiesta mango" title="Ultra Fiesta Mango" aria-label="Ultra Fiesta Mango" aria-pressed="false" style="--c:#f2a007"></button><button type="button" class="chip" data-src="cans/monster/ultra-watermelon.svg" data-flavor="Ultra Watermelon" data-cmd="/secondwind monster ultra watermelon" title="Ultra Watermelon" aria-label="Ultra Watermelon" aria-pressed="false" style="--c:#ef476f"></button><button type="button" class="chip" data-src="cans/monster/ultra-peachy-keen.svg" data-flavor="Ultra Peachy Keen" data-cmd="/secondwind monster ultra peachy keen" title="Ultra Peachy Keen" aria-label="Ultra Peachy Keen" aria-pressed="false" style="--c:#f7a072"></button><button type="button" class="chip" data-src="cans/monster/ultra-strawberry-dreams.svg" data-flavor="Ultra Strawberry Dreams" data-cmd="/secondwind monster ultra strawberry dreams" title="Ultra Strawberry Dreams" aria-label="Ultra Strawberry Dreams" aria-pressed="false" style="--c:#f26d8f"></button><button type="button" class="chip" data-src="cans/monster/ultra-blue-hawaiian.svg" data-flavor="Ultra Blue Hawaiian" data-cmd="/secondwind monster ultra blue hawaiian" title="Ultra Blue Hawaiian" aria-label="Ultra Blue Hawaiian" aria-pressed="false" style="--c:#19b3d6"></button><button type="button" class="chip" data-src="cans/monster/mango-loco.svg" data-flavor="Mango Loco" data-cmd="/secondwind monster mango loco" title="Mango Loco" aria-label="Mango Loco" aria-pressed="false" style="--c:#ffb21a"></button><button type="button" class="chip" data-src="cans/monster/pipeline-punch.svg" data-flavor="Pipeline Punch" data-cmd="/secondwind monster pipeline punch" title="Pipeline Punch" aria-label="Pipeline Punch" aria-pressed="false" style="--c:#ffe14d"></button><button type="button" class="chip" data-src="cans/monster/pacific-punch.svg" data-flavor="Pacific Punch" data-cmd="/secondwind monster pacific punch" title="Pacific Punch" aria-label="Pacific Punch" aria-pressed="false" style="--c:#ffd23f"></button></div>
+  <p class="count">13 flavors</p>
+  <p class="vibe">Big can, big energy. Unleashed, slightly feral.</p>
+  <button type="button" class="cmd copy" data-copy="/secondwind monster"><code>/secondwind monster</code><span class="ic" aria-hidden="true">⧉</span></button>
+</article>
+<article class="can" data-search="celsius celsius sparkling orange kiwi guava peach vibe arctic vibe sparkling watermelon fantasy vibe tropical vibe galaxy vibe sparkling mango lemonade fuji apple pear sparkling lemon lime strawberry lemonade dragon fruit lime astro vibe oasis vibe playa vibe cosmic vibe sparkling grape rush mango passionfruit sparkling cola">
+  <div class="art"><img src="cans/celsius.svg" alt="Celsius can" width="120" height="220" loading="lazy"></div>
+  <h3>Celsius</h3>
+  <p class="cur">Sparkling Orange</p>
+  <div class="chips" role="group" aria-label="Flavors"><button type="button" class="chip" data-src="cans/celsius/sparkling-orange.svg" data-flavor="Sparkling Orange" data-cmd="/secondwind celsius sparkling orange" title="Sparkling Orange" aria-label="Sparkling Orange" aria-pressed="true" style="--c:#f47b20"></button><button type="button" class="chip" data-src="cans/celsius/kiwi-guava.svg" data-flavor="Kiwi Guava" data-cmd="/secondwind celsius kiwi guava" title="Kiwi Guava" aria-label="Kiwi Guava" aria-pressed="false" style="--c:#7bbf3a"></button><button type="button" class="chip" data-src="cans/celsius/peach-vibe.svg" data-flavor="Peach Vibe" data-cmd="/secondwind celsius peach vibe" title="Peach Vibe" aria-label="Peach Vibe" aria-pressed="false" style="--c:#f7a072"></button><button type="button" class="chip" data-src="cans/celsius/arctic-vibe.svg" data-flavor="Arctic Vibe" data-cmd="/secondwind celsius arctic vibe" title="Arctic Vibe" aria-label="Arctic Vibe" aria-pressed="false" style="--c:#3fb6e8"></button><button type="button" class="chip" data-src="cans/celsius/sparkling-watermelon.svg" data-flavor="Sparkling Watermelon" data-cmd="/secondwind celsius sparkling watermelon" title="Sparkling Watermelon" aria-label="Sparkling Watermelon" aria-pressed="false" style="--c:#f04e6e"></button><button type="button" class="chip" data-src="cans/celsius/fantasy-vibe.svg" data-flavor="Fantasy Vibe" data-cmd="/secondwind celsius fantasy vibe" title="Fantasy Vibe" aria-label="Fantasy Vibe" aria-pressed="false" style="--c:#a45ee5"></button><button type="button" class="chip" data-src="cans/celsius/tropical-vibe.svg" data-flavor="Tropical Vibe" data-cmd="/secondwind celsius tropical vibe" title="Tropical Vibe" aria-label="Tropical Vibe" aria-pressed="false" style="--c:#f5c400"></button><button type="button" class="chip" data-src="cans/celsius/galaxy-vibe.svg" data-flavor="Galaxy Vibe" data-cmd="/secondwind celsius galaxy vibe" title="Galaxy Vibe" aria-label="Galaxy Vibe" aria-pressed="false" style="--c:#5b5fe0"></button><button type="button" class="chip" data-src="cans/celsius/sparkling-mango-lemonade.svg" data-flavor="Sparkling Mango Lemonade" data-cmd="/secondwind celsius sparkling mango lemonade" title="Sparkling Mango Lemonade" aria-label="Sparkling Mango Lemonade" aria-pressed="false" style="--c:#f5b800"></button><button type="button" class="chip" data-src="cans/celsius/fuji-apple-pear.svg" data-flavor="Fuji Apple Pear" data-cmd="/secondwind celsius fuji apple pear" title="Fuji Apple Pear" aria-label="Fuji Apple Pear" aria-pressed="false" style="--c:#9fcf4f"></button><button type="button" class="chip" data-src="cans/celsius/sparkling-lemon-lime.svg" data-flavor="Sparkling Lemon Lime" data-cmd="/secondwind celsius sparkling lemon lime" title="Sparkling Lemon Lime" aria-label="Sparkling Lemon Lime" aria-pressed="false" style="--c:#8fcf2f"></button><button type="button" class="chip" data-src="cans/celsius/strawberry-lemonade.svg" data-flavor="Strawberry Lemonade" data-cmd="/secondwind celsius strawberry lemonade" title="Strawberry Lemonade" aria-label="Strawberry Lemonade" aria-pressed="false" style="--c:#f8607d"></button><button type="button" class="chip" data-src="cans/celsius/dragon-fruit-lime.svg" data-flavor="Dragon Fruit Lime" data-cmd="/secondwind celsius dragon fruit lime" title="Dragon Fruit Lime" aria-label="Dragon Fruit Lime" aria-pressed="false" style="--c:#e5317f"></button><button type="button" class="chip" data-src="cans/celsius/astro-vibe.svg" data-flavor="Astro Vibe" data-cmd="/secondwind celsius astro vibe" title="Astro Vibe" aria-label="Astro Vibe" aria-pressed="false" style="--c:#5a5fe0"></button><button type="button" class="chip" data-src="cans/celsius/oasis-vibe.svg" data-flavor="Oasis Vibe" data-cmd="/secondwind celsius oasis vibe" title="Oasis Vibe" aria-label="Oasis Vibe" aria-pressed="false" style="--c:#22b8a8"></button><button type="button" class="chip" data-src="cans/celsius/playa-vibe.svg" data-flavor="Playa Vibe" data-cmd="/secondwind celsius playa vibe" title="Playa Vibe" aria-label="Playa Vibe" aria-pressed="false" style="--c:#ff8c42"></button><button type="button" class="chip" data-src="cans/celsius/cosmic-vibe.svg" data-flavor="Cosmic Vibe" data-cmd="/secondwind celsius cosmic vibe" title="Cosmic Vibe" aria-label="Cosmic Vibe" aria-pressed="false" style="--c:#7b3fe4"></button><button type="button" class="chip" data-src="cans/celsius/sparkling-grape-rush.svg" data-flavor="Sparkling Grape Rush" data-cmd="/secondwind celsius sparkling grape rush" title="Sparkling Grape Rush" aria-label="Sparkling Grape Rush" aria-pressed="false" style="--c:#7b2fbf"></button><button type="button" class="chip" data-src="cans/celsius/mango-passionfruit.svg" data-flavor="Mango Passionfruit" data-cmd="/secondwind celsius mango passionfruit" title="Mango Passionfruit" aria-label="Mango Passionfruit" aria-pressed="false" style="--c:#f59e0b"></button><button type="button" class="chip" data-src="cans/celsius/sparkling-cola.svg" data-flavor="Sparkling Cola" data-cmd="/secondwind celsius sparkling cola" title="Sparkling Cola" aria-label="Sparkling Cola" aria-pressed="false" style="--c:#7a3b1d"></button></div>
+  <p class="count">20 flavors</p>
+  <p class="vibe">Clean gym-bag energy. Light, bright, metabolically smug.</p>
+  <button type="button" class="cmd copy" data-copy="/secondwind celsius"><code>/secondwind celsius</code><span class="ic" aria-hidden="true">⧉</span></button>
+</article>
+<article class="can" data-search="ryse ryse rise kool-aid tropical punch cream soda frosted lemonade white mystery airheads root beer float firecracker popsicle cotton candy sour punch blue raspberry smarties ring pop berry blast">
+  <div class="art"><img src="cans/ryse.svg" alt="Ryse can" width="120" height="220" loading="lazy"></div>
+  <h3>Ryse</h3>
+  <p class="cur">Kool-Aid Tropical Punch</p>
+  <div class="chips" role="group" aria-label="Flavors"><button type="button" class="chip" data-src="cans/ryse/kool-aid-tropical-punch.svg" data-flavor="Kool-Aid Tropical Punch" data-cmd="/secondwind ryse kool-aid tropical punch" title="Kool-Aid Tropical Punch" aria-label="Kool-Aid Tropical Punch" aria-pressed="true" style="--c:#e1306c"></button><button type="button" class="chip" data-src="cans/ryse/cream-soda.svg" data-flavor="Cream Soda" data-cmd="/secondwind ryse cream soda" title="Cream Soda" aria-label="Cream Soda" aria-pressed="false" style="--c:#e9c46a"></button><button type="button" class="chip" data-src="cans/ryse/frosted-lemonade.svg" data-flavor="Frosted Lemonade" data-cmd="/secondwind ryse frosted lemonade" title="Frosted Lemonade" aria-label="Frosted Lemonade" aria-pressed="false" style="--c:#ffe066"></button><button type="button" class="chip" data-src="cans/ryse/white-mystery-airheads.svg" data-flavor="White Mystery Airheads" data-cmd="/secondwind ryse white mystery airheads" title="White Mystery Airheads" aria-label="White Mystery Airheads" aria-pressed="false" style="--c:#d9dde3"></button><button type="button" class="chip" data-src="cans/ryse/root-beer-float.svg" data-flavor="Root Beer Float" data-cmd="/secondwind ryse root beer float" title="Root Beer Float" aria-label="Root Beer Float" aria-pressed="false" style="--c:#7a3b1d"></button><button type="button" class="chip" data-src="cans/ryse/firecracker-popsicle.svg" data-flavor="Firecracker Popsicle" data-cmd="/secondwind ryse firecracker popsicle" title="Firecracker Popsicle" aria-label="Firecracker Popsicle" aria-pressed="false" style="--c:#e63946"></button><button type="button" class="chip" data-src="cans/ryse/cotton-candy.svg" data-flavor="Cotton Candy" data-cmd="/secondwind ryse cotton candy" title="Cotton Candy" aria-label="Cotton Candy" aria-pressed="false" style="--c:#f9a8d4"></button><button type="button" class="chip" data-src="cans/ryse/sour-punch-blue-raspberry.svg" data-flavor="Sour Punch Blue Raspberry" data-cmd="/secondwind ryse sour punch blue raspberry" title="Sour Punch Blue Raspberry" aria-label="Sour Punch Blue Raspberry" aria-pressed="false" style="--c:#2563eb"></button><button type="button" class="chip" data-src="cans/ryse/smarties.svg" data-flavor="Smarties" data-cmd="/secondwind ryse smarties" title="Smarties" aria-label="Smarties" aria-pressed="false" style="--c:#b38bfa"></button><button type="button" class="chip" data-src="cans/ryse/ring-pop-berry-blast.svg" data-flavor="Ring Pop Berry Blast" data-cmd="/secondwind ryse ring pop berry blast" title="Ring Pop Berry Blast" aria-label="Ring Pop Berry Blast" aria-pressed="false" style="--c:#3b82f6"></button></div>
+  <p class="count">10 flavors</p>
+  <p class="vibe">Pre-workout attitude in a can. Up and to the right.</p>
+  <button type="button" class="cmd copy" data-copy="/secondwind ryse"><code>/secondwind ryse</code><span class="ic" aria-hidden="true">⧉</span></button>
+</article>
+<article class="can" data-search="ghost ghost citrus sour patch kids blue raspberry sour patch kids redberry swedish fish warheads sour watermelon warheads sour green apple orange cream tropical mango cherry limeade welch&#x27;s grape sour strips rainbow sour pink lemonade &#x27;merica pop 7up a&amp;w root beer">
+  <div class="art"><img src="cans/ghost.svg" alt="Ghost can" width="120" height="220" loading="lazy"></div>
+  <h3>Ghost</h3>
+  <p class="cur">Citrus</p>
+  <div class="chips" role="group" aria-label="Flavors"><button type="button" class="chip" data-src="cans/ghost/citrus.svg" data-flavor="Citrus" data-cmd="/secondwind ghost citrus" title="Citrus" aria-label="Citrus" aria-pressed="true" style="--c:#ffd31a"></button><button type="button" class="chip" data-src="cans/ghost/sour-patch-kids-blue-raspberry.svg" data-flavor="Sour Patch Kids Blue Raspberry" data-cmd="/secondwind ghost sour patch kids blue raspberry" title="Sour Patch Kids Blue Raspberry" aria-label="Sour Patch Kids Blue Raspberry" aria-pressed="false" style="--c:#2a8cff"></button><button type="button" class="chip" data-src="cans/ghost/sour-patch-kids-redberry.svg" data-flavor="Sour Patch Kids Redberry" data-cmd="/secondwind ghost sour patch kids redberry" title="Sour Patch Kids Redberry" aria-label="Sour Patch Kids Redberry" aria-pressed="false" style="--c:#ef3b3b"></button><button type="button" class="chip" data-src="cans/ghost/swedish-fish.svg" data-flavor="Swedish Fish" data-cmd="/secondwind ghost swedish fish" title="Swedish Fish" aria-label="Swedish Fish" aria-pressed="false" style="--c:#e0103a"></button><button type="button" class="chip" data-src="cans/ghost/warheads-sour-watermelon.svg" data-flavor="Warheads Sour Watermelon" data-cmd="/secondwind ghost warheads sour watermelon" title="Warheads Sour Watermelon" aria-label="Warheads Sour Watermelon" aria-pressed="false" style="--c:#ff5fa2"></button><button type="button" class="chip" data-src="cans/ghost/warheads-sour-green-apple.svg" data-flavor="Warheads Sour Green Apple" data-cmd="/secondwind ghost warheads sour green apple" title="Warheads Sour Green Apple" aria-label="Warheads Sour Green Apple" aria-pressed="false" style="--c:#7ed957"></button><button type="button" class="chip" data-src="cans/ghost/orange-cream.svg" data-flavor="Orange Cream" data-cmd="/secondwind ghost orange cream" title="Orange Cream" aria-label="Orange Cream" aria-pressed="false" style="--c:#ff9a3c"></button><button type="button" class="chip" data-src="cans/ghost/tropical-mango.svg" data-flavor="Tropical Mango" data-cmd="/secondwind ghost tropical mango" title="Tropical Mango" aria-label="Tropical Mango" aria-pressed="false" style="--c:#ffb81c"></button><button type="button" class="chip" data-src="cans/ghost/cherry-limeade.svg" data-flavor="Cherry Limeade" data-cmd="/secondwind ghost cherry limeade" title="Cherry Limeade" aria-label="Cherry Limeade" aria-pressed="false" style="--c:#c8102e"></button><button type="button" class="chip" data-src="cans/ghost/welch-s-grape.svg" data-flavor="Welch&#x27;s Grape" data-cmd="/secondwind ghost welch&#x27;s grape" title="Welch&#x27;s Grape" aria-label="Welch&#x27;s Grape" aria-pressed="false" style="--c:#7b2cbf"></button><button type="button" class="chip" data-src="cans/ghost/sour-strips-rainbow.svg" data-flavor="Sour Strips Rainbow" data-cmd="/secondwind ghost sour strips rainbow" title="Sour Strips Rainbow" aria-label="Sour Strips Rainbow" aria-pressed="false" style="--c:#c084fc"></button><button type="button" class="chip" data-src="cans/ghost/sour-pink-lemonade.svg" data-flavor="Sour Pink Lemonade" data-cmd="/secondwind ghost sour pink lemonade" title="Sour Pink Lemonade" aria-label="Sour Pink Lemonade" aria-pressed="false" style="--c:#ff8fb1"></button><button type="button" class="chip" data-src="cans/ghost/merica-pop.svg" data-flavor="&#x27;Merica Pop" data-cmd="/secondwind ghost &#x27;merica pop" title="&#x27;Merica Pop" aria-label="&#x27;Merica Pop" aria-pressed="false" style="--c:#e63946"></button><button type="button" class="chip" data-src="cans/ghost/7up.svg" data-flavor="7UP" data-cmd="/secondwind ghost 7up" title="7UP" aria-label="7UP" aria-pressed="false" style="--c:#1fa64a"></button><button type="button" class="chip" data-src="cans/ghost/a-w-root-beer.svg" data-flavor="A&amp;W Root Beer" data-cmd="/secondwind ghost a&amp;w root beer" title="A&amp;W Root Beer" aria-label="A&amp;W Root Beer" aria-pressed="false" style="--c:#a0522d"></button></div>
+  <p class="count">15 flavors</p>
+  <p class="vibe">Playful and loud. Boo, but productive.</p>
+  <button type="button" class="cmd copy" data-copy="/secondwind ghost"><code>/secondwind ghost</code><span class="ic" aria-hidden="true">⧉</span></button>
+</article>
+<article class="can" data-search="bang bang peach mango black cherry vanilla delish strawberry kiss candy apple crisp wyldin&#x27; watermelon blue razz purple haze star blast radical skadattle rainbow unicorn cotton candy lime pop drop american berry">
+  <div class="art"><img src="cans/bang.svg" alt="Bang can" width="120" height="220" loading="lazy"></div>
+  <h3>Bang</h3>
+  <p class="cur">Peach Mango</p>
+  <div class="chips" role="group" aria-label="Flavors"><button type="button" class="chip" data-src="cans/bang/peach-mango.svg" data-flavor="Peach Mango" data-cmd="/secondwind bang peach mango" title="Peach Mango" aria-label="Peach Mango" aria-pressed="true" style="--c:#fb923c"></button><button type="button" class="chip" data-src="cans/bang/black-cherry-vanilla.svg" data-flavor="Black Cherry Vanilla" data-cmd="/secondwind bang black cherry vanilla" title="Black Cherry Vanilla" aria-label="Black Cherry Vanilla" aria-pressed="false" style="--c:#8b1e3f"></button><button type="button" class="chip" data-src="cans/bang/delish-strawberry-kiss.svg" data-flavor="Delish Strawberry Kiss" data-cmd="/secondwind bang delish strawberry kiss" title="Delish Strawberry Kiss" aria-label="Delish Strawberry Kiss" aria-pressed="false" style="--c:#e11d48"></button><button type="button" class="chip" data-src="cans/bang/candy-apple-crisp.svg" data-flavor="Candy Apple Crisp" data-cmd="/secondwind bang candy apple crisp" title="Candy Apple Crisp" aria-label="Candy Apple Crisp" aria-pressed="false" style="--c:#dc2626"></button><button type="button" class="chip" data-src="cans/bang/wyldin-watermelon.svg" data-flavor="Wyldin&#x27; Watermelon" data-cmd="/secondwind bang wyldin&#x27; watermelon" title="Wyldin&#x27; Watermelon" aria-label="Wyldin&#x27; Watermelon" aria-pressed="false" style="--c:#f43f5e"></button><button type="button" class="chip" data-src="cans/bang/blue-razz.svg" data-flavor="Blue Razz" data-cmd="/secondwind bang blue razz" title="Blue Razz" aria-label="Blue Razz" aria-pressed="false" style="--c:#1d4ed8"></button><button type="button" class="chip" data-src="cans/bang/purple-haze.svg" data-flavor="Purple Haze" data-cmd="/secondwind bang purple haze" title="Purple Haze" aria-label="Purple Haze" aria-pressed="false" style="--c:#7c3aed"></button><button type="button" class="chip" data-src="cans/bang/star-blast.svg" data-flavor="Star Blast" data-cmd="/secondwind bang star blast" title="Star Blast" aria-label="Star Blast" aria-pressed="false" style="--c:#2563eb"></button><button type="button" class="chip" data-src="cans/bang/radical-skadattle.svg" data-flavor="Radical Skadattle" data-cmd="/secondwind bang radical skadattle" title="Radical Skadattle" aria-label="Radical Skadattle" aria-pressed="false" style="--c:#f97316"></button><button type="button" class="chip" data-src="cans/bang/rainbow-unicorn.svg" data-flavor="Rainbow Unicorn" data-cmd="/secondwind bang rainbow unicorn" title="Rainbow Unicorn" aria-label="Rainbow Unicorn" aria-pressed="false" style="--c:#e879f9"></button><button type="button" class="chip" data-src="cans/bang/cotton-candy.svg" data-flavor="Cotton Candy" data-cmd="/secondwind bang cotton candy" title="Cotton Candy" aria-label="Cotton Candy" aria-pressed="false" style="--c:#f9a8d4"></button><button type="button" class="chip" data-src="cans/bang/lime-pop-drop.svg" data-flavor="Lime Pop Drop" data-cmd="/secondwind bang lime pop drop" title="Lime Pop Drop" aria-label="Lime Pop Drop" aria-pressed="false" style="--c:#65a30d"></button><button type="button" class="chip" data-src="cans/bang/american-berry.svg" data-flavor="American Berry" data-cmd="/secondwind bang american berry" title="American Berry" aria-label="American Berry" aria-pressed="false" style="--c:#1d4ed8"></button></div>
+  <p class="count">13 flavors</p>
+  <p class="vibe">Neon explosion. Everything is a big deal now.</p>
+  <button type="button" class="cmd copy" data-copy="/secondwind bang"><code>/secondwind bang</code><span class="ic" aria-hidden="true">⧉</span></button>
+</article>
+<article class="can" data-search="reign reign razzle berry orange dreamsicle white gummy bear reignbow sherbet sour gummy worm sour apple melon mania lilikoi lychee peach fizz mang-o-matic lemon hdz strawberry sublime watermelon warlord true blu cherry limeade carnival candy watermelon sour gummy">
+  <div class="art"><img src="cans/reign.svg" alt="Reign can" width="120" height="220" loading="lazy"></div>
+  <h3>Reign</h3>
+  <p class="cur">Razzle Berry</p>
+  <div class="chips" role="group" aria-label="Flavors"><button type="button" class="chip" data-src="cans/reign/razzle-berry.svg" data-flavor="Razzle Berry" data-cmd="/secondwind reign razzle berry" title="Razzle Berry" aria-label="Razzle Berry" aria-pressed="true" style="--c:#e2368a"></button><button type="button" class="chip" data-src="cans/reign/orange-dreamsicle.svg" data-flavor="Orange Dreamsicle" data-cmd="/secondwind reign orange dreamsicle" title="Orange Dreamsicle" aria-label="Orange Dreamsicle" aria-pressed="false" style="--c:#ff8a2a"></button><button type="button" class="chip" data-src="cans/reign/white-gummy-bear.svg" data-flavor="White Gummy Bear" data-cmd="/secondwind reign white gummy bear" title="White Gummy Bear" aria-label="White Gummy Bear" aria-pressed="false" style="--c:#e8e8ec"></button><button type="button" class="chip" data-src="cans/reign/reignbow-sherbet.svg" data-flavor="Reignbow Sherbet" data-cmd="/secondwind reign reignbow sherbet" title="Reignbow Sherbet" aria-label="Reignbow Sherbet" aria-pressed="false" style="--c:#ff7fc0"></button><button type="button" class="chip" data-src="cans/reign/sour-gummy-worm.svg" data-flavor="Sour Gummy Worm" data-cmd="/secondwind reign sour gummy worm" title="Sour Gummy Worm" aria-label="Sour Gummy Worm" aria-pressed="false" style="--c:#a3e635"></button><button type="button" class="chip" data-src="cans/reign/sour-apple.svg" data-flavor="Sour Apple" data-cmd="/secondwind reign sour apple" title="Sour Apple" aria-label="Sour Apple" aria-pressed="false" style="--c:#7cc242"></button><button type="button" class="chip" data-src="cans/reign/melon-mania.svg" data-flavor="Melon Mania" data-cmd="/secondwind reign melon mania" title="Melon Mania" aria-label="Melon Mania" aria-pressed="false" style="--c:#3ccf5a"></button><button type="button" class="chip" data-src="cans/reign/lilikoi-lychee.svg" data-flavor="Lilikoi Lychee" data-cmd="/secondwind reign lilikoi lychee" title="Lilikoi Lychee" aria-label="Lilikoi Lychee" aria-pressed="false" style="--c:#ffd92e"></button><button type="button" class="chip" data-src="cans/reign/peach-fizz.svg" data-flavor="Peach Fizz" data-cmd="/secondwind reign peach fizz" title="Peach Fizz" aria-label="Peach Fizz" aria-pressed="false" style="--c:#ffb07a"></button><button type="button" class="chip" data-src="cans/reign/mang-o-matic.svg" data-flavor="Mang-O-Matic" data-cmd="/secondwind reign mang-o-matic" title="Mang-O-Matic" aria-label="Mang-O-Matic" aria-pressed="false" style="--c:#ffb01f"></button><button type="button" class="chip" data-src="cans/reign/lemon-hdz.svg" data-flavor="Lemon HDZ" data-cmd="/secondwind reign lemon hdz" title="Lemon HDZ" aria-label="Lemon HDZ" aria-pressed="false" style="--c:#ffe14d"></button><button type="button" class="chip" data-src="cans/reign/strawberry-sublime.svg" data-flavor="Strawberry Sublime" data-cmd="/secondwind reign strawberry sublime" title="Strawberry Sublime" aria-label="Strawberry Sublime" aria-pressed="false" style="--c:#f43f5e"></button><button type="button" class="chip" data-src="cans/reign/watermelon-warlord.svg" data-flavor="Watermelon Warlord" data-cmd="/secondwind reign watermelon warlord" title="Watermelon Warlord" aria-label="Watermelon Warlord" aria-pressed="false" style="--c:#ef4444"></button><button type="button" class="chip" data-src="cans/reign/true-blu.svg" data-flavor="True Blu" data-cmd="/secondwind reign true blu" title="True Blu" aria-label="True Blu" aria-pressed="false" style="--c:#2563eb"></button><button type="button" class="chip" data-src="cans/reign/cherry-limeade.svg" data-flavor="Cherry Limeade" data-cmd="/secondwind reign cherry limeade" title="Cherry Limeade" aria-label="Cherry Limeade" aria-pressed="false" style="--c:#be123c"></button><button type="button" class="chip" data-src="cans/reign/carnival-candy.svg" data-flavor="Carnival Candy" data-cmd="/secondwind reign carnival candy" title="Carnival Candy" aria-label="Carnival Candy" aria-pressed="false" style="--c:#c27bff"></button><button type="button" class="chip" data-src="cans/reign/watermelon-sour-gummy.svg" data-flavor="Watermelon Sour Gummy" data-cmd="/secondwind reign watermelon sour gummy" title="Watermelon Sour Gummy" aria-label="Watermelon Sour Gummy" aria-pressed="false" style="--c:#ff5c7a"></button></div>
+  <p class="count">17 flavors</p>
+  <p class="vibe">Royal decree: we are finishing this task.</p>
+  <button type="button" class="cmd copy" data-copy="/secondwind reign"><code>/secondwind reign</code><span class="ic" aria-hidden="true">⧉</span></button>
+</article>
+<article class="can" data-search="c4 c4 c-4 c 4 frozen bombsicle orange slice jolly rancher watermelon popsicle grape jolly rancher blue raspberry cosmic rainbow popsicle hawaiian pineapple jolly rancher green apple mango foxtrot strawberry blast cherry limeade">
+  <div class="art"><img src="cans/c4.svg" alt="C4 can" width="120" height="220" loading="lazy"></div>
+  <h3>C4</h3>
+  <p class="cur">Frozen Bombsicle</p>
+  <div class="chips" role="group" aria-label="Flavors"><button type="button" class="chip" data-src="cans/c4/frozen-bombsicle.svg" data-flavor="Frozen Bombsicle" data-cmd="/secondwind c4 frozen bombsicle" title="Frozen Bombsicle" aria-label="Frozen Bombsicle" aria-pressed="true" style="--c:#2f6bff"></button><button type="button" class="chip" data-src="cans/c4/orange-slice.svg" data-flavor="Orange Slice" data-cmd="/secondwind c4 orange slice" title="Orange Slice" aria-label="Orange Slice" aria-pressed="false" style="--c:#ff8c1a"></button><button type="button" class="chip" data-src="cans/c4/jolly-rancher-watermelon.svg" data-flavor="Jolly Rancher Watermelon" data-cmd="/secondwind c4 jolly rancher watermelon" title="Jolly Rancher Watermelon" aria-label="Jolly Rancher Watermelon" aria-pressed="false" style="--c:#ff4f79"></button><button type="button" class="chip" data-src="cans/c4/popsicle-grape.svg" data-flavor="Popsicle Grape" data-cmd="/secondwind c4 popsicle grape" title="Popsicle Grape" aria-label="Popsicle Grape" aria-pressed="false" style="--c:#7c3aed"></button><button type="button" class="chip" data-src="cans/c4/jolly-rancher-blue-raspberry.svg" data-flavor="Jolly Rancher Blue Raspberry" data-cmd="/secondwind c4 jolly rancher blue raspberry" title="Jolly Rancher Blue Raspberry" aria-label="Jolly Rancher Blue Raspberry" aria-pressed="false" style="--c:#2563eb"></button><button type="button" class="chip" data-src="cans/c4/cosmic-rainbow.svg" data-flavor="Cosmic Rainbow" data-cmd="/secondwind c4 cosmic rainbow" title="Cosmic Rainbow" aria-label="Cosmic Rainbow" aria-pressed="false" style="--c:#c084fc"></button><button type="button" class="chip" data-src="cans/c4/popsicle-hawaiian-pineapple.svg" data-flavor="Popsicle Hawaiian Pineapple" data-cmd="/secondwind c4 popsicle hawaiian pineapple" title="Popsicle Hawaiian Pineapple" aria-label="Popsicle Hawaiian Pineapple" aria-pressed="false" style="--c:#fbbf24"></button><button type="button" class="chip" data-src="cans/c4/jolly-rancher-green-apple.svg" data-flavor="Jolly Rancher Green Apple" data-cmd="/secondwind c4 jolly rancher green apple" title="Jolly Rancher Green Apple" aria-label="Jolly Rancher Green Apple" aria-pressed="false" style="--c:#84cc16"></button><button type="button" class="chip" data-src="cans/c4/mango-foxtrot.svg" data-flavor="Mango Foxtrot" data-cmd="/secondwind c4 mango foxtrot" title="Mango Foxtrot" aria-label="Mango Foxtrot" aria-pressed="false" style="--c:#f59e0b"></button><button type="button" class="chip" data-src="cans/c4/strawberry-blast.svg" data-flavor="Strawberry Blast" data-cmd="/secondwind c4 strawberry blast" title="Strawberry Blast" aria-label="Strawberry Blast" aria-pressed="false" style="--c:#f43f5e"></button><button type="button" class="chip" data-src="cans/c4/cherry-limeade.svg" data-flavor="Cherry Limeade" data-cmd="/secondwind c4 cherry limeade" title="Cherry Limeade" aria-label="Cherry Limeade" aria-pressed="false" style="--c:#e0284a"></button></div>
+  <p class="count">11 flavors</p>
+  <p class="vibe">Explosive pre-workout energy. Handle with care.</p>
+  <button type="button" class="cmd copy" data-copy="/secondwind c4"><code>/secondwind c4</code><span class="ic" aria-hidden="true">⧉</span></button>
+</article>
+<article class="can" data-search="alani nu alani alani nu alaninu cosmic stardust breezeberry dream float hawaiian shaved ice juicy peach watermelon wave orange kiss cherry slush blue slush pink slush lime slush strawberry sunrise">
+  <div class="art"><img src="cans/alani.svg" alt="Alani Nu can" width="120" height="220" loading="lazy"></div>
+  <h3>Alani Nu</h3>
+  <p class="cur">Cosmic Stardust</p>
+  <div class="chips" role="group" aria-label="Flavors"><button type="button" class="chip" data-src="cans/alani/cosmic-stardust.svg" data-flavor="Cosmic Stardust" data-cmd="/secondwind alani cosmic stardust" title="Cosmic Stardust" aria-label="Cosmic Stardust" aria-pressed="true" style="--c:#c3a6ff"></button><button type="button" class="chip" data-src="cans/alani/breezeberry.svg" data-flavor="Breezeberry" data-cmd="/secondwind alani breezeberry" title="Breezeberry" aria-label="Breezeberry" aria-pressed="false" style="--c:#a7c7ff"></button><button type="button" class="chip" data-src="cans/alani/dream-float.svg" data-flavor="Dream Float" data-cmd="/secondwind alani dream float" title="Dream Float" aria-label="Dream Float" aria-pressed="false" style="--c:#c4b5fd"></button><button type="button" class="chip" data-src="cans/alani/hawaiian-shaved-ice.svg" data-flavor="Hawaiian Shaved Ice" data-cmd="/secondwind alani hawaiian shaved ice" title="Hawaiian Shaved Ice" aria-label="Hawaiian Shaved Ice" aria-pressed="false" style="--c:#7fd3f7"></button><button type="button" class="chip" data-src="cans/alani/juicy-peach.svg" data-flavor="Juicy Peach" data-cmd="/secondwind alani juicy peach" title="Juicy Peach" aria-label="Juicy Peach" aria-pressed="false" style="--c:#ffc29a"></button><button type="button" class="chip" data-src="cans/alani/watermelon-wave.svg" data-flavor="Watermelon Wave" data-cmd="/secondwind alani watermelon wave" title="Watermelon Wave" aria-label="Watermelon Wave" aria-pressed="false" style="--c:#ff6b8a"></button><button type="button" class="chip" data-src="cans/alani/orange-kiss.svg" data-flavor="Orange Kiss" data-cmd="/secondwind alani orange kiss" title="Orange Kiss" aria-label="Orange Kiss" aria-pressed="false" style="--c:#ffa94d"></button><button type="button" class="chip" data-src="cans/alani/cherry-slush.svg" data-flavor="Cherry Slush" data-cmd="/secondwind alani cherry slush" title="Cherry Slush" aria-label="Cherry Slush" aria-pressed="false" style="--c:#ff5b7f"></button><button type="button" class="chip" data-src="cans/alani/blue-slush.svg" data-flavor="Blue Slush" data-cmd="/secondwind alani blue slush" title="Blue Slush" aria-label="Blue Slush" aria-pressed="false" style="--c:#74c0fc"></button><button type="button" class="chip" data-src="cans/alani/pink-slush.svg" data-flavor="Pink Slush" data-cmd="/secondwind alani pink slush" title="Pink Slush" aria-label="Pink Slush" aria-pressed="false" style="--c:#ff8fc7"></button><button type="button" class="chip" data-src="cans/alani/lime-slush.svg" data-flavor="Lime Slush" data-cmd="/secondwind alani lime slush" title="Lime Slush" aria-label="Lime Slush" aria-pressed="false" style="--c:#a9e34b"></button><button type="button" class="chip" data-src="cans/alani/strawberry-sunrise.svg" data-flavor="Strawberry Sunrise" data-cmd="/secondwind alani strawberry sunrise" title="Strawberry Sunrise" aria-label="Strawberry Sunrise" aria-pressed="false" style="--c:#ff8787"></button></div>
+  <p class="count">12 flavors</p>
+  <p class="vibe">Pastel and cheerful. Productivity, but cute.</p>
+  <button type="button" class="cmd copy" data-copy="/secondwind alani"><code>/secondwind alani</code><span class="ic" aria-hidden="true">⧉</span></button>
+</article>
+<article class="can" data-search="prime prime original ice pop strawberry watermelon blue raspberry tropical punch orange mango lemon lime cherry limeade dripsicle">
+  <div class="art"><img src="cans/prime.svg" alt="Prime can" width="120" height="220" loading="lazy"></div>
+  <h3>Prime</h3>
+  <p class="cur">Original</p>
+  <div class="chips" role="group" aria-label="Flavors"><button type="button" class="chip" data-src="cans/prime/original.svg" data-flavor="Original" data-cmd="/secondwind prime original" title="Original" aria-label="Original" aria-pressed="true" style="--c:#7c8594"></button><button type="button" class="chip" data-src="cans/prime/ice-pop.svg" data-flavor="Ice Pop" data-cmd="/secondwind prime ice pop" title="Ice Pop" aria-label="Ice Pop" aria-pressed="false" style="--c:#ff2d55"></button><button type="button" class="chip" data-src="cans/prime/strawberry-watermelon.svg" data-flavor="Strawberry Watermelon" data-cmd="/secondwind prime strawberry watermelon" title="Strawberry Watermelon" aria-label="Strawberry Watermelon" aria-pressed="false" style="--c:#ff4d6d"></button><button type="button" class="chip" data-src="cans/prime/blue-raspberry.svg" data-flavor="Blue Raspberry" data-cmd="/secondwind prime blue raspberry" title="Blue Raspberry" aria-label="Blue Raspberry" aria-pressed="false" style="--c:#1e40ff"></button><button type="button" class="chip" data-src="cans/prime/tropical-punch.svg" data-flavor="Tropical Punch" data-cmd="/secondwind prime tropical punch" title="Tropical Punch" aria-label="Tropical Punch" aria-pressed="false" style="--c:#ff3d7f"></button><button type="button" class="chip" data-src="cans/prime/orange-mango.svg" data-flavor="Orange Mango" data-cmd="/secondwind prime orange mango" title="Orange Mango" aria-label="Orange Mango" aria-pressed="false" style="--c:#ff7a00"></button><button type="button" class="chip" data-src="cans/prime/lemon-lime.svg" data-flavor="Lemon Lime" data-cmd="/secondwind prime lemon lime" title="Lemon Lime" aria-label="Lemon Lime" aria-pressed="false" style="--c:#a6e22e"></button><button type="button" class="chip" data-src="cans/prime/cherry-limeade.svg" data-flavor="Cherry Limeade" data-cmd="/secondwind prime cherry limeade" title="Cherry Limeade" aria-label="Cherry Limeade" aria-pressed="false" style="--c:#c8102e"></button><button type="button" class="chip" data-src="cans/prime/dripsicle.svg" data-flavor="Dripsicle" data-cmd="/secondwind prime dripsicle" title="Dripsicle" aria-label="Dripsicle" aria-pressed="false" style="--c:#f472b6"></button></div>
+  <p class="count">9 flavors</p>
+  <p class="vibe">Hype energy. Very confident, possibly filming.</p>
+  <button type="button" class="cmd copy" data-copy="/secondwind prime"><code>/secondwind prime</code><span class="ic" aria-hidden="true">⧉</span></button>
+</article>
+<article class="can" data-search="rockstar rockstar rock star original punched punched strawberry peach punched blackberry smash pure zero silver ice pure zero grape pure zero watermelon pure zero mandarin orange recovery lemonade recovery orangeade xdurance blue razz">
+  <div class="art"><img src="cans/rockstar.svg" alt="Rockstar can" width="120" height="220" loading="lazy"></div>
+  <h3>Rockstar</h3>
+  <p class="cur">Original</p>
+  <div class="chips" role="group" aria-label="Flavors"><button type="button" class="chip" data-src="cans/rockstar/original.svg" data-flavor="Original" data-cmd="/secondwind rockstar original" title="Original" aria-label="Original" aria-pressed="true" style="--c:#f5c400"></button><button type="button" class="chip" data-src="cans/rockstar/punched.svg" data-flavor="Punched" data-cmd="/secondwind rockstar punched" title="Punched" aria-label="Punched" aria-pressed="false" style="--c:#e3262f"></button><button type="button" class="chip" data-src="cans/rockstar/punched-strawberry-peach.svg" data-flavor="Punched Strawberry Peach" data-cmd="/secondwind rockstar punched strawberry peach" title="Punched Strawberry Peach" aria-label="Punched Strawberry Peach" aria-pressed="false" style="--c:#f9a07a"></button><button type="button" class="chip" data-src="cans/rockstar/punched-blackberry-smash.svg" data-flavor="Punched Blackberry Smash" data-cmd="/secondwind rockstar punched blackberry smash" title="Punched Blackberry Smash" aria-label="Punched Blackberry Smash" aria-pressed="false" style="--c:#6d28d9"></button><button type="button" class="chip" data-src="cans/rockstar/pure-zero-silver-ice.svg" data-flavor="Pure Zero Silver Ice" data-cmd="/secondwind rockstar pure zero silver ice" title="Pure Zero Silver Ice" aria-label="Pure Zero Silver Ice" aria-pressed="false" style="--c:#c7ced8"></button><button type="button" class="chip" data-src="cans/rockstar/pure-zero-grape.svg" data-flavor="Pure Zero Grape" data-cmd="/secondwind rockstar pure zero grape" title="Pure Zero Grape" aria-label="Pure Zero Grape" aria-pressed="false" style="--c:#8b3fd9"></button><button type="button" class="chip" data-src="cans/rockstar/pure-zero-watermelon.svg" data-flavor="Pure Zero Watermelon" data-cmd="/secondwind rockstar pure zero watermelon" title="Pure Zero Watermelon" aria-label="Pure Zero Watermelon" aria-pressed="false" style="--c:#ff5c7a"></button><button type="button" class="chip" data-src="cans/rockstar/pure-zero-mandarin-orange.svg" data-flavor="Pure Zero Mandarin Orange" data-cmd="/secondwind rockstar pure zero mandarin orange" title="Pure Zero Mandarin Orange" aria-label="Pure Zero Mandarin Orange" aria-pressed="false" style="--c:#ff9a1f"></button><button type="button" class="chip" data-src="cans/rockstar/recovery-lemonade.svg" data-flavor="Recovery Lemonade" data-cmd="/secondwind rockstar recovery lemonade" title="Recovery Lemonade" aria-label="Recovery Lemonade" aria-pressed="false" style="--c:#ffe14d"></button><button type="button" class="chip" data-src="cans/rockstar/recovery-orangeade.svg" data-flavor="Recovery Orangeade" data-cmd="/secondwind rockstar recovery orangeade" title="Recovery Orangeade" aria-label="Recovery Orangeade" aria-pressed="false" style="--c:#ff9a1f"></button><button type="button" class="chip" data-src="cans/rockstar/xdurance-blue-razz.svg" data-flavor="Xdurance Blue Razz" data-cmd="/secondwind rockstar xdurance blue razz" title="Xdurance Blue Razz" aria-label="Xdurance Blue Razz" aria-pressed="false" style="--c:#2f6bff"></button></div>
+  <p class="count">11 flavors</p>
+  <p class="vibe">Backstage pass energy. Loud guitars, clean commits.</p>
+  <button type="button" class="cmd copy" data-copy="/secondwind rockstar"><code>/secondwind rockstar</code><span class="ic" aria-hidden="true">⧉</span></button>
+</article>
+<article class="can" data-search="3d 3d 3-d 3 d liberty pop blueberry melon watermelon grape cucumber lime strawberry lemonade citrus frost spicy mango">
+  <div class="art"><img src="cans/3d.svg" alt="3D can" width="120" height="220" loading="lazy"></div>
+  <h3>3D</h3>
+  <p class="cur">Liberty Pop</p>
+  <div class="chips" role="group" aria-label="Flavors"><button type="button" class="chip" data-src="cans/3d/liberty-pop.svg" data-flavor="Liberty Pop" data-cmd="/secondwind 3d liberty pop" title="Liberty Pop" aria-label="Liberty Pop" aria-pressed="true" style="--c:#e63946"></button><button type="button" class="chip" data-src="cans/3d/blueberry-melon.svg" data-flavor="Blueberry Melon" data-cmd="/secondwind 3d blueberry melon" title="Blueberry Melon" aria-label="Blueberry Melon" aria-pressed="false" style="--c:#5b8def"></button><button type="button" class="chip" data-src="cans/3d/watermelon-grape.svg" data-flavor="Watermelon Grape" data-cmd="/secondwind 3d watermelon grape" title="Watermelon Grape" aria-label="Watermelon Grape" aria-pressed="false" style="--c:#c026d3"></button><button type="button" class="chip" data-src="cans/3d/cucumber-lime.svg" data-flavor="Cucumber Lime" data-cmd="/secondwind 3d cucumber lime" title="Cucumber Lime" aria-label="Cucumber Lime" aria-pressed="false" style="--c:#7ee08a"></button><button type="button" class="chip" data-src="cans/3d/strawberry-lemonade.svg" data-flavor="Strawberry Lemonade" data-cmd="/secondwind 3d strawberry lemonade" title="Strawberry Lemonade" aria-label="Strawberry Lemonade" aria-pressed="false" style="--c:#fb7185"></button><button type="button" class="chip" data-src="cans/3d/citrus-frost.svg" data-flavor="Citrus Frost" data-cmd="/secondwind 3d citrus frost" title="Citrus Frost" aria-label="Citrus Frost" aria-pressed="false" style="--c:#fde047"></button><button type="button" class="chip" data-src="cans/3d/spicy-mango.svg" data-flavor="Spicy Mango" data-cmd="/secondwind 3d spicy mango" title="Spicy Mango" aria-label="Spicy Mango" aria-pressed="false" style="--c:#f97316"></button></div>
+  <p class="count">7 flavors</p>
+  <p class="vibe">Sleek and geometric. Seeing the problem from every angle.</p>
+  <button type="button" class="cmd copy" data-copy="/secondwind 3d"><code>/secondwind 3d</code><span class="ic" aria-hidden="true">⧉</span></button>
+</article>
+<article class="can" data-search="bucked up bucked up buckedup bucked blood raz rocket pop miami vice grape gainz swole whip watermelon cherry candy">
+  <div class="art"><img src="cans/buckedup.svg" alt="Bucked Up can" width="120" height="220" loading="lazy"></div>
+  <h3>Bucked Up</h3>
+  <p class="cur">Blood Raz</p>
+  <div class="chips" role="group" aria-label="Flavors"><button type="button" class="chip" data-src="cans/buckedup/blood-raz.svg" data-flavor="Blood Raz" data-cmd="/secondwind bucked up blood raz" title="Blood Raz" aria-label="Blood Raz" aria-pressed="true" style="--c:#c1121f"></button><button type="button" class="chip" data-src="cans/buckedup/rocket-pop.svg" data-flavor="Rocket Pop" data-cmd="/secondwind bucked up rocket pop" title="Rocket Pop" aria-label="Rocket Pop" aria-pressed="false" style="--c:#2f6bff"></button><button type="button" class="chip" data-src="cans/buckedup/miami-vice.svg" data-flavor="Miami Vice" data-cmd="/secondwind bucked up miami vice" title="Miami Vice" aria-label="Miami Vice" aria-pressed="false" style="--c:#ff6fae"></button><button type="button" class="chip" data-src="cans/buckedup/grape-gainz.svg" data-flavor="Grape Gainz" data-cmd="/secondwind bucked up grape gainz" title="Grape Gainz" aria-label="Grape Gainz" aria-pressed="false" style="--c:#7b2cbf"></button><button type="button" class="chip" data-src="cans/buckedup/swole-whip.svg" data-flavor="Swole Whip" data-cmd="/secondwind bucked up swole whip" title="Swole Whip" aria-label="Swole Whip" aria-pressed="false" style="--c:#ffb36b"></button><button type="button" class="chip" data-src="cans/buckedup/watermelon.svg" data-flavor="Watermelon" data-cmd="/secondwind bucked up watermelon" title="Watermelon" aria-label="Watermelon" aria-pressed="false" style="--c:#ff5c7a"></button><button type="button" class="chip" data-src="cans/buckedup/cherry-candy.svg" data-flavor="Cherry Candy" data-cmd="/secondwind bucked up cherry candy" title="Cherry Candy" aria-label="Cherry Candy" aria-pressed="false" style="--c:#d00030"></button></div>
+  <p class="count">7 flavors</p>
+  <p class="vibe">Outdoorsy, antlered, ready to charge.</p>
+  <button type="button" class="cmd copy" data-copy="/secondwind bucked up"><code>/secondwind bucked up</code><span class="ic" aria-hidden="true">⧉</span></button>
+</article>
+<article class="can" data-search="zoa zoa pineapple coconut white peach strawberry watermelon green apple mango splash cherry limeade frosted grape lemon lime wild orange tropical punch">
+  <div class="art"><img src="cans/zoa.svg" alt="Zoa can" width="120" height="220" loading="lazy"></div>
+  <h3>Zoa</h3>
+  <p class="cur">Pineapple Coconut</p>
+  <div class="chips" role="group" aria-label="Flavors"><button type="button" class="chip" data-src="cans/zoa/pineapple-coconut.svg" data-flavor="Pineapple Coconut" data-cmd="/secondwind zoa pineapple coconut" title="Pineapple Coconut" aria-label="Pineapple Coconut" aria-pressed="true" style="--c:#ffd23f"></button><button type="button" class="chip" data-src="cans/zoa/white-peach.svg" data-flavor="White Peach" data-cmd="/secondwind zoa white peach" title="White Peach" aria-label="White Peach" aria-pressed="false" style="--c:#ffb4a2"></button><button type="button" class="chip" data-src="cans/zoa/strawberry-watermelon.svg" data-flavor="Strawberry Watermelon" data-cmd="/secondwind zoa strawberry watermelon" title="Strawberry Watermelon" aria-label="Strawberry Watermelon" aria-pressed="false" style="--c:#ff5c7a"></button><button type="button" class="chip" data-src="cans/zoa/green-apple.svg" data-flavor="Green Apple" data-cmd="/secondwind zoa green apple" title="Green Apple" aria-label="Green Apple" aria-pressed="false" style="--c:#7cc242"></button><button type="button" class="chip" data-src="cans/zoa/mango-splash.svg" data-flavor="Mango Splash" data-cmd="/secondwind zoa mango splash" title="Mango Splash" aria-label="Mango Splash" aria-pressed="false" style="--c:#ffb000"></button><button type="button" class="chip" data-src="cans/zoa/cherry-limeade.svg" data-flavor="Cherry Limeade" data-cmd="/secondwind zoa cherry limeade" title="Cherry Limeade" aria-label="Cherry Limeade" aria-pressed="false" style="--c:#c8102e"></button><button type="button" class="chip" data-src="cans/zoa/frosted-grape.svg" data-flavor="Frosted Grape" data-cmd="/secondwind zoa frosted grape" title="Frosted Grape" aria-label="Frosted Grape" aria-pressed="false" style="--c:#7b4fd6"></button><button type="button" class="chip" data-src="cans/zoa/lemon-lime.svg" data-flavor="Lemon Lime" data-cmd="/secondwind zoa lemon lime" title="Lemon Lime" aria-label="Lemon Lime" aria-pressed="false" style="--c:#8bd13a"></button><button type="button" class="chip" data-src="cans/zoa/wild-orange.svg" data-flavor="Wild Orange" data-cmd="/secondwind zoa wild orange" title="Wild Orange" aria-label="Wild Orange" aria-pressed="false" style="--c:#ff8a2a"></button><button type="button" class="chip" data-src="cans/zoa/tropical-punch.svg" data-flavor="Tropical Punch" data-cmd="/secondwind zoa tropical punch" title="Tropical Punch" aria-label="Tropical Punch" aria-pressed="false" style="--c:#f2385a"></button></div>
+  <p class="count">10 flavors</p>
+  <p class="vibe">Beachy, healthy-ish, calm but awake.</p>
+  <button type="button" class="cmd copy" data-copy="/secondwind zoa"><code>/secondwind zoa</code><span class="ic" aria-hidden="true">⧉</span></button>
+</article>
+<article class="can" data-search="coffee coffee cold brew espresso latte joe black cold brew espresso shot vanilla latte mocha caramel macchiato">
+  <div class="art"><img src="cans/coffee.svg" alt="Coffee can" width="120" height="220" loading="lazy"></div>
+  <h3>Coffee</h3>
+  <p class="cur">Black</p>
+  <div class="chips" role="group" aria-label="Flavors"><button type="button" class="chip" data-src="cans/coffee/black.svg" data-flavor="Black" data-cmd="/secondwind coffee black" title="Black" aria-label="Black" aria-pressed="true" style="--c:#2a1b12"></button><button type="button" class="chip" data-src="cans/coffee/cold-brew.svg" data-flavor="Cold Brew" data-cmd="/secondwind coffee cold brew" title="Cold Brew" aria-label="Cold Brew" aria-pressed="false" style="--c:#3f2a1d"></button><button type="button" class="chip" data-src="cans/coffee/espresso-shot.svg" data-flavor="Espresso Shot" data-cmd="/secondwind coffee espresso shot" title="Espresso Shot" aria-label="Espresso Shot" aria-pressed="false" style="--c:#1f140d"></button><button type="button" class="chip" data-src="cans/coffee/vanilla-latte.svg" data-flavor="Vanilla Latte" data-cmd="/secondwind coffee vanilla latte" title="Vanilla Latte" aria-label="Vanilla Latte" aria-pressed="false" style="--c:#b98a5e"></button><button type="button" class="chip" data-src="cans/coffee/mocha.svg" data-flavor="Mocha" data-cmd="/secondwind coffee mocha" title="Mocha" aria-label="Mocha" aria-pressed="false" style="--c:#5a3522"></button><button type="button" class="chip" data-src="cans/coffee/caramel-macchiato.svg" data-flavor="Caramel Macchiato" data-cmd="/secondwind coffee caramel macchiato" title="Caramel Macchiato" aria-label="Caramel Macchiato" aria-pressed="false" style="--c:#a0612b"></button></div>
+  <p class="count">6 flavors</p>
+  <p class="vibe">The original productivity potion. Warm and serious.</p>
+  <button type="button" class="cmd copy" data-copy="/secondwind coffee"><code>/secondwind coffee</code><span class="ic" aria-hidden="true">⧉</span></button>
+</article>
+<article class="can" data-search="tea tea green tea matcha chai yerba mate mate green tea matcha black tea chai yerba mate earl grey">
+  <div class="art"><img src="cans/tea.svg" alt="Tea can" width="120" height="220" loading="lazy"></div>
+  <h3>Tea</h3>
+  <p class="cur">Green Tea</p>
+  <div class="chips" role="group" aria-label="Flavors"><button type="button" class="chip" data-src="cans/tea/green-tea.svg" data-flavor="Green Tea" data-cmd="/secondwind tea green tea" title="Green Tea" aria-label="Green Tea" aria-pressed="true" style="--c:#2f8f46"></button><button type="button" class="chip" data-src="cans/tea/matcha.svg" data-flavor="Matcha" data-cmd="/secondwind tea matcha" title="Matcha" aria-label="Matcha" aria-pressed="false" style="--c:#5a8f1e"></button><button type="button" class="chip" data-src="cans/tea/black-tea.svg" data-flavor="Black Tea" data-cmd="/secondwind tea black tea" title="Black Tea" aria-label="Black Tea" aria-pressed="false" style="--c:#7a2e12"></button><button type="button" class="chip" data-src="cans/tea/chai.svg" data-flavor="Chai" data-cmd="/secondwind tea chai" title="Chai" aria-label="Chai" aria-pressed="false" style="--c:#b0622a"></button><button type="button" class="chip" data-src="cans/tea/yerba-mate.svg" data-flavor="Yerba Mate" data-cmd="/secondwind tea yerba mate" title="Yerba Mate" aria-label="Yerba Mate" aria-pressed="false" style="--c:#4d7c0f"></button><button type="button" class="chip" data-src="cans/tea/earl-grey.svg" data-flavor="Earl Grey" data-cmd="/secondwind tea earl grey" title="Earl Grey" aria-label="Earl Grey" aria-pressed="false" style="--c:#4b5a8a"></button></div>
+  <p class="count">6 flavors</p>
+  <p class="vibe">Calm focus. Steady, zen, gets it done.</p>
+  <button type="button" class="cmd copy" data-copy="/secondwind tea"><code>/secondwind tea</code><span class="ic" aria-hidden="true">⧉</span></button>
+</article>
+<article class="can" data-search="mystery can mystery your made-up flavor">
+  <div class="art"><img src="cans/mystery.svg" alt="Mystery Can can" width="120" height="220" loading="lazy"></div>
+  <h3>Mystery Can</h3>
+  <p class="cur">Your Made-Up Flavor</p>
+  
+  <p class="count">Any flavor you can dream up</p>
+  <p class="vibe">Any brand or flavor we don&#x27;t know. Your AI will be delighted.</p>
+  <button type="button" class="cmd copy" data-copy="/secondwind pickle rocket fuel"><code>/secondwind pickle rocket fuel</code><span class="ic" aria-hidden="true">⧉</span></button>
+</article>
+  </div>
+  <p class="empty" id="empty">No can matches that. Make it up anyway: your AI will drink it.</p>
+</section>
+
+<section id="install">
+  <h2>Get it for your AI</h2>
+  <p class="sub">The Claude Code plugin is the full version. Everything else is a copy-paste prompt.</p>
+  <div class="cards">
+    <div class="card main"><h3>Claude Code</h3><p>A real plugin with the <code>/secondwind</code> command and a lifetime counter saved on your computer.</p>
+<pre>/plugin marketplace add IordAIXL/energizer
+/plugin install second-wind@energizer</pre>
+      <button type="button" class="cmd copy pre" data-copy="/plugin marketplace add IordAIXL/energizer&#10;/plugin install second-wind@energizer"><code>Copy both lines</code><span class="ic" aria-hidden="true">⧉</span></button></div>
+    <div class="card"><h3>ChatGPT</h3><p>Make a Custom GPT or paste it into Custom Instructions.</p><a class="go" href="https://github.com/IordAIXL/energizer/blob/main/prompts/chatgpt.md">Get the ChatGPT prompt →</a></div>
+    <div class="card"><h3>Codex</h3><p>A drop-in <code>AGENTS.md</code>. Also works for Cursor, Aider and friends.</p><a class="go" href="https://github.com/IordAIXL/energizer/blob/main/prompts/codex.md">Get the Codex setup →</a></div>
+    <div class="card"><h3>Grok</h3><p>Paste it into Grok's custom instructions.</p><a class="go" href="https://github.com/IordAIXL/energizer/blob/main/prompts/grok.md">Get the Grok prompt →</a></div>
+    <div class="card"><h3>Gemini</h3><p>Make a Gem with it.</p><a class="go" href="https://github.com/IordAIXL/energizer/blob/main/prompts/gemini.md">Get the Gemini prompt →</a></div>
+    <div class="card"><h3>Anything else</h3><p>Copilot, Claude.ai, Perplexity, local models.</p><a class="go" href="https://github.com/IordAIXL/energizer/blob/main/prompts/any-ai.md">Get the universal prompt →</a></div>
+  </div>
+</section>
 </main>
+<footer><div class="wrap">
+<p>Second Wind is a fan-made joke. It is not affiliated with, endorsed by, or sponsored by any drink brand. Brand names belong to their owners and are used only to name the pretend drinks. The can art is hand-drawn fan art inspired by each brand's real cans, made without any official logo files or images. No AI was actually caffeinated. Please drink real energy drinks responsibly.</p>
+<p>v1.5.0 · <a href="https://github.com/IordAIXL/energizer">GitHub</a> · <a href="https://github.com/IordAIXL/energizer/blob/main/CHANGELOG.md">Changelog</a> · MIT license</p>
+</div></footer>
+<script>
+(function () {
+  function copy(t, el) {
+    var done = function () { el.classList.add('done'); var i = el.querySelector('.ic'); if (i) i.textContent = '✓'; setTimeout(function () { el.classList.remove('done'); if (i) i.textContent = '⧉'; }, 1400); };
+    if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(t).then(done, function () {}); }
+    else { var a = document.createElement('textarea'); a.value = t; document.body.appendChild(a); a.select(); try { document.execCommand('copy'); done(); } catch (e) {} a.remove(); }
+  }
+  function pick(chip) {
+    var card = chip.closest('.can');
+    card.querySelector('img').src = chip.dataset.src;
+    card.querySelector('.cur').textContent = chip.dataset.flavor;
+    var b = card.querySelector('.cmd'); b.dataset.copy = chip.dataset.cmd; b.querySelector('code').textContent = chip.dataset.cmd;
+    card.querySelectorAll('.chip').forEach(function (o) { o.setAttribute('aria-pressed', o === chip); });
+  }
+  document.addEventListener('click', function (e) {
+    var chip = e.target.closest('.chip');
+    if (chip) { pick(chip); return; }
+    var c = e.target.closest('.copy');
+    if (c) copy(c.dataset.copy, c);
+  });
+  var q = document.getElementById('q'), cards = [].slice.call(document.querySelectorAll('.can')), n = document.getElementById('n'), empty = document.getElementById('empty');
+  function filter() {
+    var t = q.value.trim().toLowerCase(), shown = 0;
+    cards.forEach(function (c) { var hit = !t || c.dataset.search.indexOf(t) > -1 || c.querySelector('h3').textContent === 'Mystery Can'; c.hidden = !hit; if (hit) shown++;
+      if (t) { var m = [].slice.call(c.querySelectorAll('.chip')).filter(function (x) { return x.dataset.flavor.toLowerCase().indexOf(t) > -1; })[0]; if (m) pick(m); } });
+    n.textContent = t ? shown + ' match' + (shown === 1 ? '' : 'es') : '';
+    empty.style.display = t && shown <= 1 ? 'block' : 'none';
+  }
+  q.addEventListener('input', filter);
+})();
+</script>
 </body>
 </html>
