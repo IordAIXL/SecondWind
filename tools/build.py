@@ -625,6 +625,8 @@ def main():
     build_extension.main()
     import build_desktop
     build_desktop.main()
+    import build_windows_app
+    build_windows_app.main()
     print(f"Built Second Wind v{VERSION}: {len(DATA['brands'])+1} brands, {sum(len(b['flavors']) for b in DATA['brands'])} flavor cans, command, prompts, page.")
 
 

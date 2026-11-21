@@ -1,5 +1,17 @@
 # Changelog
 
+## 3.0.0 (2026-11-21)
+
+A big release, so it gets a new major number.
+
+- New: Second Wind as a real Windows app, made for the Microsoft Store (`windows-app/`). Store apps are signed by Microsoft, so Smart App Control and SmartScreen don't block them like they block the PowerShell helper.
+  - Same features as the desktop helper: floating can you can drag anywhere, drink picker (Ctrl+Alt+D), your usual (Ctrl+Alt+U), favorites, Send right away, pastes into the chat app you were using.
+  - "Start with Windows" uses the Store's own startup switch (also in Settings > Apps > Startup).
+  - Updates come from the Store, so there's no update code in the app.
+  - Opening the app again while it's running shows the drink picker. The first time you open it, the picker shows up in the middle of the screen.
+  - Built and packaged (MSIX bundle, x64 + ARM64) on GitHub's Windows machines by `.github/workflows/windows-app.yml`, with a quick self-test.
+- The PowerShell desktop helper stays available for PCs without Smart App Control.
+
 ## 2.0.2 (2026-11-21)
 
 - Desktop helper: can now be started with right-click SecondWind.ps1 > "Run with PowerShell" (it hides its own console window), for PCs where the .bat file is hidden or removed.

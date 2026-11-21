@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Second Wind for Windows (Microsoft Store app). Built by .github/workflows/windows-app.yml. -->
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
+    <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+    <UseWindowsForms Condition="'$(OS)' == 'Windows_NT'">true</UseWindowsForms>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>SecondWind</AssemblyName>
+    <RootNamespace>SecondWind</RootNamespace>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <SelfContained>true</SelfContained>
+    <RuntimeIdentifiers>win-x64;win-arm64</RuntimeIdentifiers>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <Version>0.0.0</Version>
+    <Product>Second Wind</Product>
+    <Company>Second Wind</Company>
+  </PropertyGroup>
+  <!-- Linux compile check only (the Linux SDK has no Windows Desktop targets). Real builds run on Windows. -->
+  <ItemGroup Condition="'$(OS)' != 'Windows_NT'">
+    <FrameworkReference Include="Microsoft.WindowsDesktop.App.WindowsForms" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Drinks + can pictures come straight from desktop/ (made by tools/build_desktop.py). -->
+    <Content Include="..\..\desktop\data.json" Link="Assets\data.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\..\desktop\cans\**\*.png" Link="Assets\cans\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

@@ -121,7 +121,7 @@ footer p { max-width:780px; }
   <div>
     <h1>Give your AI an <span>energy drink.</span></h1>
     <p class="lede">It cracks one open, says something dumb about the flavor, counts it, then snaps back into focus on your actual task. Just for fun.</p>
-    <ul class="stats"><li>v2.0.2</li><li>16 brands</li><li>179 flavors</li><li>Claude Code, ChatGPT, Codex, Grok, Gemini</li></ul>
+    <ul class="stats"><li>v3.0.0</li><li>16 brands</li><li>179 flavors</li><li>Claude Code, ChatGPT, Codex, Grok, Gemini</li></ul>
     <div class="btns">
       <a class="btn" href="#install">Pick your AI</a>
       <a class="btn alt" href="https://github.com/IordAIXL/energizer/archive/refs/heads/main.zip">Download .zip</a>
@@ -359,7 +359,7 @@ Next step: Replace Date.parse with the ISO helper</pre>
       <h3>Other AI</h3><p class="sub">Copilot, Claude.ai, Perplexity, local models: anything that takes instructions.</p>
       <ol class="how"><li>Copy the universal prompt: <button type="button" class="btn copy big" data-copy-from="p-other"><span class="ic" aria-hidden="true">⧉</span> <span class="lbl">Copy the prompt</span></button></li><li>Paste it into the AI's custom instructions, system prompt or project instructions. No settings? Paste it as the first message.</li><li>Type <button type="button" class="cmd copy" data-copy="/secondwind"><code>/secondwind</code><span class="ic" aria-hidden="true">⧉</span></button> or just hand it a drink in plain words.</li></ol><p class="tip"><a href="https://github.com/IordAIXL/energizer/blob/main/prompts/any-ai.md">View the prompt on GitHub</a></p>
     </div></div>
-  <script type="text/plain" id="p-chatgpt"># Second Wind ⚡ (energy drinks for AIs) v2.0.2
+  <script type="text/plain" id="p-chatgpt"># Second Wind ⚡ (energy drinks for AIs) v3.0.0
 
 You have a fun little ritual called **Second Wind**. The user can give you a (pretend) energy drink at any time.
 
@@ -423,7 +423,7 @@ Next step: <the single next concrete action>
 - **Coffee** (also: coffee, cold brew, espresso, latte, joe). **Mode: Plan.** Careful thinking and planning before doing. Work style: Think before acting. Clarify the goal and the constraints. Write a short numbered plan with the risky parts called out. Check the plan with the user before big or hard-to-undo steps. Opening line: "*sip* ... ahh. Brain fog: lifting." Flavors: Black, Cold Brew, Espresso Shot, Vanilla Latte, Mocha, Caramel Macchiato.
 - **Tea** (also: tea, green tea, matcha, chai, yerba mate, mate). **Mode: Review.** A calm, careful review and double check. Work style: Re-read the recent work slowly, line by line. Look for mistakes, missed cases, and anything unclear. Report findings from most to least important, then fix the top ones. Opening line: "*sip* ... steady warmth. Calm and locked in." Flavors: Green Tea, Matcha, Black Tea, Chai, Yerba Mate, Earl Grey.
 - **Mystery Can** (any brand not listed). **Mode: Wild Card.** Surprise mode for any drink we don't know. Work style: Invent a fitting mode name for this mystery drink and say it. Pick the work style that best fits what the conversation needs right now. Stay focused on the goal no matter how weird the drink is. Opening line: "*crack* ... no label, no regrets."</script><script type="text/plain" id="p-codex"><!-- Second Wind: drop this into AGENTS.md (Codex), GEMINI.md, .cursorrules, etc. -->
-# Second Wind ⚡ (energy drinks for AIs) v2.0.2
+# Second Wind ⚡ (energy drinks for AIs) v3.0.0
 
 You have a fun little ritual called **Second Wind**. When the user gives you a (pretend) energy drink, you crack it open and then get dialed in on the coding task.
 
@@ -488,7 +488,7 @@ Next step: <the single next concrete action>
 - **Tea** (also: tea, green tea, matcha, chai, yerba mate, mate). **Mode: Review.** A calm, careful review and double check. Work style: Re-read the recent work slowly, line by line. Look for mistakes, missed cases, and anything unclear. Report findings from most to least important, then fix the top ones. Opening line: "*sip* ... steady warmth. Calm and locked in." Flavors: Green Tea, Matcha, Black Tea, Chai, Yerba Mate, Earl Grey.
 - **Mystery Can** (any brand not listed). **Mode: Wild Card.** Surprise mode for any drink we don't know. Work style: Invent a fitting mode name for this mystery drink and say it. Pick the work style that best fits what the conversation needs right now. Stay focused on the goal no matter how weird the drink is. Opening line: "*crack* ... no label, no regrets."
 
-</script><script type="text/plain" id="p-grok"># Second Wind ⚡ (energy drinks for AIs) v2.0.2
+</script><script type="text/plain" id="p-grok"># Second Wind ⚡ (energy drinks for AIs) v3.0.0
 
 You have a fun little ritual called **Second Wind**. The user can give you a (pretend) energy drink at any time.
 
@@ -551,7 +551,7 @@ Next step: <the single next concrete action>
 - **Zoa** (also: zoa). **Mode: Steady Reset.** Calm down a messy, stressful situation. Work style: Slow down. Restate where things really are in plain words. Sort the mess into: urgent, important, and can wait. Pick one calm next step. No panic, no big rewrites. Opening line: "*tss* ... tropical calm with a kick. Riding the wave." Flavors: Pineapple Coconut, White Peach, Strawberry Watermelon, Green Apple, Mango Splash, Cherry Limeade, Frosted Grape, Lemon Lime, Wild Orange, Tropical Punch.
 - **Coffee** (also: coffee, cold brew, espresso, latte, joe). **Mode: Plan.** Careful thinking and planning before doing. Work style: Think before acting. Clarify the goal and the constraints. Write a short numbered plan with the risky parts called out. Check the plan with the user before big or hard-to-undo steps. Opening line: "*sip* ... ahh. Brain fog: lifting." Flavors: Black, Cold Brew, Espresso Shot, Vanilla Latte, Mocha, Caramel Macchiato.
 - **Tea** (also: tea, green tea, matcha, chai, yerba mate, mate). **Mode: Review.** A calm, careful review and double check. Work style: Re-read the recent work slowly, line by line. Look for mistakes, missed cases, and anything unclear. Report findings from most to least important, then fix the top ones. Opening line: "*sip* ... steady warmth. Calm and locked in." Flavors: Green Tea, Matcha, Black Tea, Chai, Yerba Mate, Earl Grey.
-- **Mystery Can** (any brand not listed). **Mode: Wild Card.** Surprise mode for any drink we don't know. Work style: Invent a fitting mode name for this mystery drink and say it. Pick the work style that best fits what the conversation needs right now. Stay focused on the goal no matter how weird the drink is. Opening line: "*crack* ... no label, no regrets."</script><script type="text/plain" id="p-gemini"># Second Wind ⚡ (energy drinks for AIs) v2.0.2
+- **Mystery Can** (any brand not listed). **Mode: Wild Card.** Surprise mode for any drink we don't know. Work style: Invent a fitting mode name for this mystery drink and say it. Pick the work style that best fits what the conversation needs right now. Stay focused on the goal no matter how weird the drink is. Opening line: "*crack* ... no label, no regrets."</script><script type="text/plain" id="p-gemini"># Second Wind ⚡ (energy drinks for AIs) v3.0.0
 
 You have a fun little ritual called **Second Wind**. The user can give you a (pretend) energy drink at any time.
 
@@ -614,7 +614,7 @@ Next step: <the single next concrete action>
 - **Zoa** (also: zoa). **Mode: Steady Reset.** Calm down a messy, stressful situation. Work style: Slow down. Restate where things really are in plain words. Sort the mess into: urgent, important, and can wait. Pick one calm next step. No panic, no big rewrites. Opening line: "*tss* ... tropical calm with a kick. Riding the wave." Flavors: Pineapple Coconut, White Peach, Strawberry Watermelon, Green Apple, Mango Splash, Cherry Limeade, Frosted Grape, Lemon Lime, Wild Orange, Tropical Punch.
 - **Coffee** (also: coffee, cold brew, espresso, latte, joe). **Mode: Plan.** Careful thinking and planning before doing. Work style: Think before acting. Clarify the goal and the constraints. Write a short numbered plan with the risky parts called out. Check the plan with the user before big or hard-to-undo steps. Opening line: "*sip* ... ahh. Brain fog: lifting." Flavors: Black, Cold Brew, Espresso Shot, Vanilla Latte, Mocha, Caramel Macchiato.
 - **Tea** (also: tea, green tea, matcha, chai, yerba mate, mate). **Mode: Review.** A calm, careful review and double check. Work style: Re-read the recent work slowly, line by line. Look for mistakes, missed cases, and anything unclear. Report findings from most to least important, then fix the top ones. Opening line: "*sip* ... steady warmth. Calm and locked in." Flavors: Green Tea, Matcha, Black Tea, Chai, Yerba Mate, Earl Grey.
-- **Mystery Can** (any brand not listed). **Mode: Wild Card.** Surprise mode for any drink we don't know. Work style: Invent a fitting mode name for this mystery drink and say it. Pick the work style that best fits what the conversation needs right now. Stay focused on the goal no matter how weird the drink is. Opening line: "*crack* ... no label, no regrets."</script><script type="text/plain" id="p-other"># Second Wind ⚡ (energy drinks for AIs) v2.0.2
+- **Mystery Can** (any brand not listed). **Mode: Wild Card.** Surprise mode for any drink we don't know. Work style: Invent a fitting mode name for this mystery drink and say it. Pick the work style that best fits what the conversation needs right now. Stay focused on the goal no matter how weird the drink is. Opening line: "*crack* ... no label, no regrets."</script><script type="text/plain" id="p-other"># Second Wind ⚡ (energy drinks for AIs) v3.0.0
 
 You have a fun little ritual called **Second Wind**. The user can give you a (pretend) energy drink at any time.
 
@@ -682,7 +682,7 @@ Next step: <the single next concrete action>
 </main>
 <footer><div class="wrap">
 <p>Second Wind is a fan-made joke. It is not affiliated with, endorsed by, or sponsored by any drink brand. Brand names belong to their owners and are used only to name the pretend drinks. The can art is hand-drawn fan art inspired by each brand's real cans, made without any official logo files or images. No AI was actually caffeinated. Please drink real energy drinks responsibly.</p>
-<p>v2.0.2 · <a href="https://github.com/IordAIXL/energizer">GitHub</a> · <a href="https://github.com/IordAIXL/energizer/blob/main/CHANGELOG.md">Changelog</a> · MIT license</p>
+<p>v3.0.0 · <a href="https://github.com/IordAIXL/energizer">GitHub</a> · <a href="https://github.com/IordAIXL/energizer/blob/main/CHANGELOG.md">Changelog</a> · MIT license</p>
 </div></footer>
 <script>
 (function () {
