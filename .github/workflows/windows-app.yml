@@ -72,6 +72,11 @@ jobs:
           $p = Start-Process -FilePath layout-x64\SecondWind.exe -ArgumentList '--selftest', "$PWD\selftest.txt", "$PWD\shots" -PassThru -Wait
           Get-Content selftest.txt
           if ($p.ExitCode -ne 0) { throw "self-test failed" }
+          # Also print the screenshots into the log (base64, in chunks) so they can be read without an artifact download.
+          foreach ($f in Get-ChildItem shots\*.png) {
+            $b = [Convert]::ToBase64String([IO.File]::ReadAllBytes($f.FullName))
+            for ($i = 0; $i -lt $b.Length; $i += 3000) { Write-Host "SHOT $($f.Name) $($b.Substring($i, [Math]::Min(3000, $b.Length - $i)))" }
+          }
 
       - uses: actions/upload-artifact@v4
         with:
