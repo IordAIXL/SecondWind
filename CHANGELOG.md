@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.1.0 (2026-11-21)
+
+- New can art for every brand, styled after each real can: colors, layout and look.
+- Real can sizes: big 16 oz cans for Monster, Bang, Ghost and friends; skinny 12 oz cans for Celsius, Alani Nu, Zoa, Prime and Tea; a small slim can for Red Bull; a short cold brew can for Coffee.
+- Real flavor lineups for every brand (142 flavors in all).
+- Every flavor has its own can in that flavor's colors (docs/cans/<brand>/<flavor>.svg).
+- Download page: tap the colored dots under a can to see each flavor.
+- Can art now lives in tools/cans.py, one function per brand, so any can is easy to swap.
+
 ## 1.0.0 (2026-11-21)
 
 - First release.

@@ -19,7 +19,11 @@ h2 { margin-top:56px; font-size:1.5rem; }
 .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:16px; margin-top:20px; }
 .can { margin:0; background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px 12px; text-align:center; transition:transform .15s; }
 .can:hover { transform:translateY(-4px) rotate(-1deg); }
-.art svg { width:100px; height:auto; }
+.art img { width:110px; height:auto; display:block; margin:0 auto; }
+.cur { font-size:.85rem; font-weight:600; }
+.chips { display:flex; flex-wrap:wrap; justify-content:center; gap:5px; }
+.chip { width:16px; height:16px; border-radius:50%; border:2px solid var(--line); padding:0; cursor:pointer; }
+.chip[aria-pressed="true"] { border-color:var(--fg); }
 figcaption { display:flex; flex-direction:column; gap:6px; margin-top:8px; }
 .vibe { font-size:.85rem; color:var(--muted); }
 .flv { font-size:.75rem; color:var(--muted); opacity:.85; }
@@ -38,643 +42,177 @@ footer { margin-top:64px; color:var(--muted); font-size:.85rem; border-top:1px s
 <body>
 <main>
 <h1>Second <span>Wind</span> ⚡</h1>
-<p class="lede">Give your AI an energy drink. It cracks one open, says something dumb about the flavor, then snaps back into focus: goal, done, left, next step, go. Just for fun. v1.0.0</p>
+<p class="lede">Give your AI an energy drink. It cracks one open, says something dumb about the flavor, then snaps back into focus: goal, done, left, next step, go. Just for fun. v1.1.0</p>
 <a class="btn" href="https://github.com/IordAIXL/energizer/archive/refs/heads/main.zip">Download everything (.zip)</a>
 <a class="btn alt" href="https://github.com/IordAIXL/energizer">View on GitHub</a>
 
 <h2>The cooler</h2>
-<p class="lede">Every can is original art. Ask for any brand and flavor. Make one up and watch your AI get excited about it.</p>
+<p class="lede">Tap the dots under a can to see each flavor. Ask for any brand and flavor. Make one up and watch your AI get excited about it.</p>
 <div class="grid">
 <figure class="can">
-  <div class="art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="Red Bull can, original Second Wind art">
-  <defs>
-    <linearGradient id="shade-redbull" x1="0" x2="1">
-      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
-      <stop offset="0.25" stop-color="#fff" stop-opacity="0.18"/>
-      <stop offset="0.45" stop-color="#fff" stop-opacity="0"/>
-      <stop offset="1" stop-color="#000" stop-opacity="0.4"/>
-    </linearGradient>
-    <linearGradient id="metal-redbull" x1="0" x2="1">
-      <stop offset="0" stop-color="#8a8f98"/><stop offset="0.3" stop-color="#eef0f3"/>
-      <stop offset="0.7" stop-color="#b7bcc4"/><stop offset="1" stop-color="#6b7079"/>
-    </linearGradient>
-    <clipPath id="body-redbull"><rect x="14" y="30" width="92" height="166" rx="6"/></clipPath>
-  </defs>
-  <ellipse cx="60" cy="212" rx="44" ry="5" fill="#000" opacity="0.18"/>
-  <path d="M20 22 Q20 14 30 12 L90 12 Q100 14 100 22 L106 32 L14 32 Z" fill="url(#metal-redbull)"/>
-  <ellipse cx="60" cy="13" rx="31" ry="5" fill="#d9dce1" stroke="#9aa0a8" stroke-width="1"/>
-  <ellipse cx="66" cy="13" rx="9" ry="2.6" fill="#a3a9b1"/>
-  <g clip-path="url(#body-redbull)">
-    <rect x="14" y="30" width="92" height="166" fill="#1f3a8a"/>
-    <rect x="14" y="40" width="92" height="30" fill="#c0c7d6"/>
-    <text x="60" y="60" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-size="12" font-weight="900" text-anchor="middle" fill="#ffffff" letter-spacing="0.5">RED BULL</text>
-    <rect x="58" y="88" width="4" height="14" fill="#facc15" transform="rotate(0 60 128)"/><rect x="58" y="88" width="4" height="14" fill="#facc15" transform="rotate(30 60 128)"/><rect x="58" y="88" width="4" height="14" fill="#facc15" transform="rotate(60 60 128)"/><rect x="58" y="88" width="4" height="14" fill="#facc15" transform="rotate(90 60 128)"/><rect x="58" y="88" width="4" height="14" fill="#facc15" transform="rotate(120 60 128)"/><rect x="58" y="88" width="4" height="14" fill="#facc15" transform="rotate(150 60 128)"/><rect x="58" y="88" width="4" height="14" fill="#facc15" transform="rotate(180 60 128)"/><rect x="58" y="88" width="4" height="14" fill="#facc15" transform="rotate(210 60 128)"/><rect x="58" y="88" width="4" height="14" fill="#facc15" transform="rotate(240 60 128)"/><rect x="58" y="88" width="4" height="14" fill="#facc15" transform="rotate(270 60 128)"/><rect x="58" y="88" width="4" height="14" fill="#facc15" transform="rotate(300 60 128)"/><rect x="58" y="88" width="4" height="14" fill="#facc15" transform="rotate(330 60 128)"/><circle cx="60" cy="128" r="17" fill="#facc15"/><circle cx="60" cy="128" r="11" fill="#e11d2e"/>
-    <rect x="14" y="174" width="92" height="14" fill="#c0c7d6" opacity="0.9"/>
-    <text x="60" y="184" font-family="Arial,Helvetica,sans-serif" font-size="8" font-weight="700" text-anchor="middle" fill="#ffffff">Original</text>
-    <text x="60" y="80" font-family="Arial,Helvetica,sans-serif" font-size="5.5" text-anchor="middle" fill="#ffffff" opacity="0.75" letter-spacing="1.5">SECOND WIND · FOR AIs</text>
-    <rect x="14" y="30" width="92" height="166" fill="url(#shade-redbull)"/>
-  </g>
-  <path d="M14 194 L18 204 Q20 208 30 208 L90 208 Q100 208 102 204 L106 194 Z" fill="url(#metal-redbull)"/>
-</svg>
-</div>
+  <div class="art"><img src="cans/redbull.svg" alt="Red Bull can" width="120" height="220" loading="lazy"></div>
   <figcaption><strong>Red Bull</strong>
+  <span class="cur">Original</span>
+  <div class="chips"><button type="button" class="chip" data-src="cans/redbull/original.svg" title="Original" aria-label="Show Original" style="background:#1f3a8a"></button><button type="button" class="chip" data-src="cans/redbull/sugarfree.svg" title="Sugarfree" aria-label="Show Sugarfree" style="background:#4f8fd6"></button><button type="button" class="chip" data-src="cans/redbull/zero.svg" title="Zero" aria-label="Show Zero" style="background:#1f2937"></button><button type="button" class="chip" data-src="cans/redbull/watermelon.svg" title="Watermelon" aria-label="Show Watermelon" style="background:#d0142c"></button><button type="button" class="chip" data-src="cans/redbull/blueberry.svg" title="Blueberry" aria-label="Show Blueberry" style="background:#1d4fd8"></button><button type="button" class="chip" data-src="cans/redbull/tropical.svg" title="Tropical" aria-label="Show Tropical" style="background:#f2b705"></button><button type="button" class="chip" data-src="cans/redbull/dragon-fruit.svg" title="Dragon Fruit" aria-label="Show Dragon Fruit" style="background:#2fa84f"></button><button type="button" class="chip" data-src="cans/redbull/coconut-berry.svg" title="Coconut Berry" aria-label="Show Coconut Berry" style="background:#e9eef5"></button><button type="button" class="chip" data-src="cans/redbull/strawberry-apricot.svg" title="Strawberry Apricot" aria-label="Show Strawberry Apricot" style="background:#e2731f"></button><button type="button" class="chip" data-src="cans/redbull/peach-nectarine.svg" title="Peach Nectarine" aria-label="Show Peach Nectarine" style="background:#f49b83"></button><button type="button" class="chip" data-src="cans/redbull/juneberry.svg" title="Juneberry" aria-label="Show Juneberry" style="background:#1f8fb3"></button></div>
   <span class="vibe">Classic wings energy. Crisp, a little sweet, very focused.</span>
-  <span class="flv">Original, Sugarfree, Tropical, Watermelon, Blueberry, Coconut Berry</span>
+  <span class="flv">Original, Sugarfree, Zero, Watermelon, Blueberry, Tropical, Dragon Fruit, Coconut Berry, Strawberry Apricot, Peach Nectarine, Juneberry</span>
   <code>/secondwind</code></figcaption>
 </figure>
 <figure class="can">
-  <div class="art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="Monster can, original Second Wind art">
-  <defs>
-    <linearGradient id="shade-monster" x1="0" x2="1">
-      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
-      <stop offset="0.25" stop-color="#fff" stop-opacity="0.18"/>
-      <stop offset="0.45" stop-color="#fff" stop-opacity="0"/>
-      <stop offset="1" stop-color="#000" stop-opacity="0.4"/>
-    </linearGradient>
-    <linearGradient id="metal-monster" x1="0" x2="1">
-      <stop offset="0" stop-color="#8a8f98"/><stop offset="0.3" stop-color="#eef0f3"/>
-      <stop offset="0.7" stop-color="#b7bcc4"/><stop offset="1" stop-color="#6b7079"/>
-    </linearGradient>
-    <clipPath id="body-monster"><rect x="14" y="30" width="92" height="166" rx="6"/></clipPath>
-  </defs>
-  <ellipse cx="60" cy="212" rx="44" ry="5" fill="#000" opacity="0.18"/>
-  <path d="M20 22 Q20 14 30 12 L90 12 Q100 14 100 22 L106 32 L14 32 Z" fill="url(#metal-monster)"/>
-  <ellipse cx="60" cy="13" rx="31" ry="5" fill="#d9dce1" stroke="#9aa0a8" stroke-width="1"/>
-  <ellipse cx="66" cy="13" rx="9" ry="2.6" fill="#a3a9b1"/>
-  <g clip-path="url(#body-monster)">
-    <rect x="14" y="30" width="92" height="166" fill="#0b0b0b"/>
-    <rect x="14" y="40" width="92" height="30" fill="#1a1a1a"/>
-    <text x="60" y="60" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-size="15" font-weight="900" text-anchor="middle" fill="#e9ffe0" letter-spacing="0.5">MONSTER</text>
-    <path d="M40 95 C36 125,46 140,38 168" stroke="#7cff3a" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M54 95 C50 125,60 140,52 168" stroke="#7cff3a" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M68 95 C64 125,74 140,66 168" stroke="#7cff3a" stroke-width="7" fill="none" stroke-linecap="round"/>
-    <rect x="14" y="174" width="92" height="14" fill="#1a1a1a" opacity="0.9"/>
-    <text x="60" y="184" font-family="Arial,Helvetica,sans-serif" font-size="8" font-weight="700" text-anchor="middle" fill="#e9ffe0">Original</text>
-    <text x="60" y="80" font-family="Arial,Helvetica,sans-serif" font-size="5.5" text-anchor="middle" fill="#e9ffe0" opacity="0.75" letter-spacing="1.5">SECOND WIND · FOR AIs</text>
-    <rect x="14" y="30" width="92" height="166" fill="url(#shade-monster)"/>
-  </g>
-  <path d="M14 194 L18 204 Q20 208 30 208 L90 208 Q100 208 102 204 L106 194 Z" fill="url(#metal-monster)"/>
-</svg>
-</div>
+  <div class="art"><img src="cans/monster.svg" alt="Monster can" width="120" height="220" loading="lazy"></div>
   <figcaption><strong>Monster</strong>
+  <span class="cur">Original</span>
+  <div class="chips"><button type="button" class="chip" data-src="cans/monster/original.svg" title="Original" aria-label="Show Original" style="background:#7cff3a"></button><button type="button" class="chip" data-src="cans/monster/lo-carb.svg" title="Lo-Carb" aria-label="Show Lo-Carb" style="background:#46a6ff"></button><button type="button" class="chip" data-src="cans/monster/zero-ultra.svg" title="Zero Ultra" aria-label="Show Zero Ultra" style="background:#c3c8cf"></button><button type="button" class="chip" data-src="cans/monster/ultra-paradise.svg" title="Ultra Paradise" aria-label="Show Ultra Paradise" style="background:#7cc242"></button><button type="button" class="chip" data-src="cans/monster/ultra-violet.svg" title="Ultra Violet" aria-label="Show Ultra Violet" style="background:#9b51e0"></button><button type="button" class="chip" data-src="cans/monster/ultra-blue.svg" title="Ultra Blue" aria-label="Show Ultra Blue" style="background:#2f80ed"></button><button type="button" class="chip" data-src="cans/monster/ultra-watermelon.svg" title="Ultra Watermelon" aria-label="Show Ultra Watermelon" style="background:#ef476f"></button><button type="button" class="chip" data-src="cans/monster/ultra-fiesta-mango.svg" title="Ultra Fiesta Mango" aria-label="Show Ultra Fiesta Mango" style="background:#f2a007"></button><button type="button" class="chip" data-src="cans/monster/mango-loco.svg" title="Mango Loco" aria-label="Show Mango Loco" style="background:#ffb21a"></button><button type="button" class="chip" data-src="cans/monster/pipeline-punch.svg" title="Pipeline Punch" aria-label="Show Pipeline Punch" style="background:#ffe14d"></button><button type="button" class="chip" data-src="cans/monster/pacific-punch.svg" title="Pacific Punch" aria-label="Show Pacific Punch" style="background:#ffd23f"></button><button type="button" class="chip" data-src="cans/monster/khaotic.svg" title="Khaotic" aria-label="Show Khaotic" style="background:#111111"></button></div>
   <span class="vibe">Big can, big energy. Unleashed, slightly feral.</span>
-  <span class="flv">Original, Zero Ultra, Mango Loco, Pipeline Punch, Ultra Paradise, Juice Punch</span>
+  <span class="flv">Original, Lo-Carb, Zero Ultra, Ultra Paradise, Ultra Violet, Ultra Blue, Ultra Watermelon, Ultra Fiesta Mango, Mango Loco, Pipeline Punch, Pacific Punch, Khaotic</span>
   <code>/secondwind monster</code></figcaption>
 </figure>
 <figure class="can">
-  <div class="art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="Celsius can, original Second Wind art">
-  <defs>
-    <linearGradient id="shade-celsius" x1="0" x2="1">
-      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
-      <stop offset="0.25" stop-color="#fff" stop-opacity="0.18"/>
-      <stop offset="0.45" stop-color="#fff" stop-opacity="0"/>
-      <stop offset="1" stop-color="#000" stop-opacity="0.4"/>
-    </linearGradient>
-    <linearGradient id="metal-celsius" x1="0" x2="1">
-      <stop offset="0" stop-color="#8a8f98"/><stop offset="0.3" stop-color="#eef0f3"/>
-      <stop offset="0.7" stop-color="#b7bcc4"/><stop offset="1" stop-color="#6b7079"/>
-    </linearGradient>
-    <clipPath id="body-celsius"><rect x="14" y="30" width="92" height="166" rx="6"/></clipPath>
-  </defs>
-  <ellipse cx="60" cy="212" rx="44" ry="5" fill="#000" opacity="0.18"/>
-  <path d="M20 22 Q20 14 30 12 L90 12 Q100 14 100 22 L106 32 L14 32 Z" fill="url(#metal-celsius)"/>
-  <ellipse cx="60" cy="13" rx="31" ry="5" fill="#d9dce1" stroke="#9aa0a8" stroke-width="1"/>
-  <ellipse cx="66" cy="13" rx="9" ry="2.6" fill="#a3a9b1"/>
-  <g clip-path="url(#body-celsius)">
-    <rect x="14" y="30" width="92" height="166" fill="#f8fafc"/>
-    <rect x="14" y="40" width="92" height="30" fill="#e2e8f0"/>
-    <text x="60" y="60" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-size="15" font-weight="900" text-anchor="middle" fill="#0f172a" letter-spacing="0.5">CELSIUS</text>
-    <rect x="54" y="90" width="12" height="62" rx="6" fill="none" stroke="#0f172a" stroke-width="3"/><rect x="57" y="112" width="6" height="40" fill="#ec4899"/><circle cx="60" cy="158" r="11" fill="#ec4899" stroke="#0f172a" stroke-width="3"/><path d="M28 100 q8 -8 16 0 t16 0" stroke="#0ea5e9" stroke-width="3" fill="none"/><path d="M64 170 q8 -8 16 0 t16 0" stroke="#0ea5e9" stroke-width="3" fill="none"/>
-    <rect x="14" y="174" width="92" height="14" fill="#e2e8f0" opacity="0.9"/>
-    <text x="60" y="184" font-family="Arial,Helvetica,sans-serif" font-size="8" font-weight="700" text-anchor="middle" fill="#0f172a">Sparkling Orange</text>
-    <text x="60" y="80" font-family="Arial,Helvetica,sans-serif" font-size="5.5" text-anchor="middle" fill="#0f172a" opacity="0.75" letter-spacing="1.5">SECOND WIND · FOR AIs</text>
-    <rect x="14" y="30" width="92" height="166" fill="url(#shade-celsius)"/>
-  </g>
-  <path d="M14 194 L18 204 Q20 208 30 208 L90 208 Q100 208 102 204 L106 194 Z" fill="url(#metal-celsius)"/>
-</svg>
-</div>
+  <div class="art"><img src="cans/celsius.svg" alt="Celsius can" width="120" height="220" loading="lazy"></div>
   <figcaption><strong>Celsius</strong>
+  <span class="cur">Sparkling Orange</span>
+  <div class="chips"><button type="button" class="chip" data-src="cans/celsius/sparkling-orange.svg" title="Sparkling Orange" aria-label="Show Sparkling Orange" style="background:#f47b20"></button><button type="button" class="chip" data-src="cans/celsius/kiwi-guava.svg" title="Kiwi Guava" aria-label="Show Kiwi Guava" style="background:#7bbf3a"></button><button type="button" class="chip" data-src="cans/celsius/peach-vibe.svg" title="Peach Vibe" aria-label="Show Peach Vibe" style="background:#f7a072"></button><button type="button" class="chip" data-src="cans/celsius/arctic-vibe.svg" title="Arctic Vibe" aria-label="Show Arctic Vibe" style="background:#3fb6e8"></button><button type="button" class="chip" data-src="cans/celsius/sparkling-watermelon.svg" title="Sparkling Watermelon" aria-label="Show Sparkling Watermelon" style="background:#f04e6e"></button><button type="button" class="chip" data-src="cans/celsius/fantasy-vibe.svg" title="Fantasy Vibe" aria-label="Show Fantasy Vibe" style="background:#a45ee5"></button><button type="button" class="chip" data-src="cans/celsius/sparkling-grape-rush.svg" title="Sparkling Grape Rush" aria-label="Show Sparkling Grape Rush" style="background:#7b2fbf"></button><button type="button" class="chip" data-src="cans/celsius/tropical-vibe.svg" title="Tropical Vibe" aria-label="Show Tropical Vibe" style="background:#f5c400"></button><button type="button" class="chip" data-src="cans/celsius/galaxy-vibe.svg" title="Galaxy Vibe" aria-label="Show Galaxy Vibe" style="background:#5b5fe0"></button><button type="button" class="chip" data-src="cans/celsius/mango-passionfruit.svg" title="Mango Passionfruit" aria-label="Show Mango Passionfruit" style="background:#f59e0b"></button><button type="button" class="chip" data-src="cans/celsius/sparkling-cola.svg" title="Sparkling Cola" aria-label="Show Sparkling Cola" style="background:#7a3b1d"></button></div>
   <span class="vibe">Clean gym-bag energy. Light, bright, metabolically smug.</span>
-  <span class="flv">Sparkling Orange, Kiwi Guava, Peach Vibe, Arctic Vibe, Sparkling Watermelon, Fantasy Vibe</span>
+  <span class="flv">Sparkling Orange, Kiwi Guava, Peach Vibe, Arctic Vibe, Sparkling Watermelon, Fantasy Vibe, Sparkling Grape Rush, Tropical Vibe, Galaxy Vibe, Mango Passionfruit, Sparkling Cola</span>
   <code>/secondwind celsius</code></figcaption>
 </figure>
 <figure class="can">
-  <div class="art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="Ryse can, original Second Wind art">
-  <defs>
-    <linearGradient id="shade-ryse" x1="0" x2="1">
-      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
-      <stop offset="0.25" stop-color="#fff" stop-opacity="0.18"/>
-      <stop offset="0.45" stop-color="#fff" stop-opacity="0"/>
-      <stop offset="1" stop-color="#000" stop-opacity="0.4"/>
-    </linearGradient>
-    <linearGradient id="metal-ryse" x1="0" x2="1">
-      <stop offset="0" stop-color="#8a8f98"/><stop offset="0.3" stop-color="#eef0f3"/>
-      <stop offset="0.7" stop-color="#b7bcc4"/><stop offset="1" stop-color="#6b7079"/>
-    </linearGradient>
-    <clipPath id="body-ryse"><rect x="14" y="30" width="92" height="166" rx="6"/></clipPath>
-  </defs>
-  <ellipse cx="60" cy="212" rx="44" ry="5" fill="#000" opacity="0.18"/>
-  <path d="M20 22 Q20 14 30 12 L90 12 Q100 14 100 22 L106 32 L14 32 Z" fill="url(#metal-ryse)"/>
-  <ellipse cx="60" cy="13" rx="31" ry="5" fill="#d9dce1" stroke="#9aa0a8" stroke-width="1"/>
-  <ellipse cx="66" cy="13" rx="9" ry="2.6" fill="#a3a9b1"/>
-  <g clip-path="url(#body-ryse)">
-    <rect x="14" y="30" width="92" height="166" fill="#111827"/>
-    <rect x="14" y="40" width="92" height="30" fill="#374151"/>
-    <text x="60" y="60" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-size="15" font-weight="900" text-anchor="middle" fill="#ffffff" letter-spacing="0.5">RYSE</text>
-    <path d="M34 160 L60 140 L86 160" stroke="#f97316" stroke-width="8" fill="none" stroke-linejoin="round"/><path d="M34 140 L60 120 L86 140" stroke="#fde047" stroke-width="8" fill="none" stroke-linejoin="round"/><path d="M34 120 L60 100 L86 120" stroke="#f97316" stroke-width="8" fill="none" stroke-linejoin="round"/><path d="M34 100 L60 80 L86 100" stroke="#fde047" stroke-width="8" fill="none" stroke-linejoin="round"/>
-    <rect x="14" y="174" width="92" height="14" fill="#374151" opacity="0.9"/>
-    <text x="60" y="184" font-family="Arial,Helvetica,sans-serif" font-size="8" font-weight="700" text-anchor="middle" fill="#ffffff">Blue Razz</text>
-    <text x="60" y="80" font-family="Arial,Helvetica,sans-serif" font-size="5.5" text-anchor="middle" fill="#ffffff" opacity="0.75" letter-spacing="1.5">SECOND WIND · FOR AIs</text>
-    <rect x="14" y="30" width="92" height="166" fill="url(#shade-ryse)"/>
-  </g>
-  <path d="M14 194 L18 204 Q20 208 30 208 L90 208 Q100 208 102 204 L106 194 Z" fill="url(#metal-ryse)"/>
-</svg>
-</div>
+  <div class="art"><img src="cans/ryse.svg" alt="Ryse can" width="120" height="220" loading="lazy"></div>
   <figcaption><strong>Ryse</strong>
+  <span class="cur">Kool-Aid Tropical Punch</span>
+  <div class="chips"><button type="button" class="chip" data-src="cans/ryse/kool-aid-tropical-punch.svg" title="Kool-Aid Tropical Punch" aria-label="Show Kool-Aid Tropical Punch" style="background:#e1306c"></button><button type="button" class="chip" data-src="cans/ryse/smarties.svg" title="Smarties" aria-label="Show Smarties" style="background:#b38bfa"></button><button type="button" class="chip" data-src="cans/ryse/ring-pop-berry-blast.svg" title="Ring Pop Berry Blast" aria-label="Show Ring Pop Berry Blast" style="background:#3b82f6"></button><button type="button" class="chip" data-src="cans/ryse/sour-jolly-rancher-watermelon.svg" title="Sour Jolly Rancher Watermelon" aria-label="Show Sour Jolly Rancher Watermelon" style="background:#ff4f79"></button><button type="button" class="chip" data-src="cans/ryse/hawaiian-punch.svg" title="Hawaiian Punch" aria-label="Show Hawaiian Punch" style="background:#d62828"></button><button type="button" class="chip" data-src="cans/ryse/blue-razz.svg" title="Blue Razz" aria-label="Show Blue Razz" style="background:#2563eb"></button><button type="button" class="chip" data-src="cans/ryse/mango-pineapple.svg" title="Mango Pineapple" aria-label="Show Mango Pineapple" style="background:#f59e0b"></button><button type="button" class="chip" data-src="cans/ryse/baja-burst.svg" title="Baja Burst" aria-label="Show Baja Burst" style="background:#14b8a6"></button></div>
   <span class="vibe">Pre-workout attitude in a can. Up and to the right.</span>
-  <span class="flv">Blue Razz, Pink Burst, Tropical Burst, Candy Fizz, Tropical Punch, Baja Burst</span>
+  <span class="flv">Kool-Aid Tropical Punch, Smarties, Ring Pop Berry Blast, Sour Jolly Rancher Watermelon, Hawaiian Punch, Blue Razz, Mango Pineapple, Baja Burst</span>
   <code>/secondwind ryse</code></figcaption>
 </figure>
 <figure class="can">
-  <div class="art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="Ghost can, original Second Wind art">
-  <defs>
-    <linearGradient id="shade-ghost" x1="0" x2="1">
-      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
-      <stop offset="0.25" stop-color="#fff" stop-opacity="0.18"/>
-      <stop offset="0.45" stop-color="#fff" stop-opacity="0"/>
-      <stop offset="1" stop-color="#000" stop-opacity="0.4"/>
-    </linearGradient>
-    <linearGradient id="metal-ghost" x1="0" x2="1">
-      <stop offset="0" stop-color="#8a8f98"/><stop offset="0.3" stop-color="#eef0f3"/>
-      <stop offset="0.7" stop-color="#b7bcc4"/><stop offset="1" stop-color="#6b7079"/>
-    </linearGradient>
-    <clipPath id="body-ghost"><rect x="14" y="30" width="92" height="166" rx="6"/></clipPath>
-  </defs>
-  <ellipse cx="60" cy="212" rx="44" ry="5" fill="#000" opacity="0.18"/>
-  <path d="M20 22 Q20 14 30 12 L90 12 Q100 14 100 22 L106 32 L14 32 Z" fill="url(#metal-ghost)"/>
-  <ellipse cx="60" cy="13" rx="31" ry="5" fill="#d9dce1" stroke="#9aa0a8" stroke-width="1"/>
-  <ellipse cx="66" cy="13" rx="9" ry="2.6" fill="#a3a9b1"/>
-  <g clip-path="url(#body-ghost)">
-    <rect x="14" y="30" width="92" height="166" fill="#f5f5f4"/>
-    <rect x="14" y="40" width="92" height="30" fill="#1c1917"/>
-    <text x="60" y="60" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-size="15" font-weight="900" text-anchor="middle" fill="#f5f5f4" letter-spacing="0.5">GHOST</text>
-    <path d="M40 165 V122 a20 20 0 0 1 40 0 V165 l-7 -7 -6 7 -7 -7 -7 7 -6 -7 z" fill="#1c1917"/><circle cx="52" cy="124" r="4" fill="#a3e635"/><circle cx="68" cy="124" r="4" fill="#a3e635"/><ellipse cx="60" cy="140" rx="5" ry="7" fill="#a3e635"/>
-    <rect x="14" y="174" width="92" height="14" fill="#1c1917" opacity="0.9"/>
-    <text x="60" y="184" font-family="Arial,Helvetica,sans-serif" font-size="6.5" font-weight="700" text-anchor="middle" fill="#f5f5f4">Sour Blue Raspberry</text>
-    <text x="60" y="80" font-family="Arial,Helvetica,sans-serif" font-size="5.5" text-anchor="middle" fill="#1c1917" opacity="0.75" letter-spacing="1.5">SECOND WIND · FOR AIs</text>
-    <rect x="14" y="30" width="92" height="166" fill="url(#shade-ghost)"/>
-  </g>
-  <path d="M14 194 L18 204 Q20 208 30 208 L90 208 Q100 208 102 204 L106 194 Z" fill="url(#metal-ghost)"/>
-</svg>
-</div>
+  <div class="art"><img src="cans/ghost.svg" alt="Ghost can" width="120" height="220" loading="lazy"></div>
   <figcaption><strong>Ghost</strong>
+  <span class="cur">Citrus</span>
+  <div class="chips"><button type="button" class="chip" data-src="cans/ghost/citrus.svg" title="Citrus" aria-label="Show Citrus" style="background:#ffd31a"></button><button type="button" class="chip" data-src="cans/ghost/sour-patch-kids-blue-raspberry.svg" title="Sour Patch Kids Blue Raspberry" aria-label="Show Sour Patch Kids Blue Raspberry" style="background:#2a8cff"></button><button type="button" class="chip" data-src="cans/ghost/sour-patch-kids-redberry.svg" title="Sour Patch Kids Redberry" aria-label="Show Sour Patch Kids Redberry" style="background:#ef3b3b"></button><button type="button" class="chip" data-src="cans/ghost/swedish-fish.svg" title="Swedish Fish" aria-label="Show Swedish Fish" style="background:#e0103a"></button><button type="button" class="chip" data-src="cans/ghost/warheads-sour-watermelon.svg" title="Warheads Sour Watermelon" aria-label="Show Warheads Sour Watermelon" style="background:#ff5fa2"></button><button type="button" class="chip" data-src="cans/ghost/orange-cream.svg" title="Orange Cream" aria-label="Show Orange Cream" style="background:#ff9a3c"></button><button type="button" class="chip" data-src="cans/ghost/tropical-mango.svg" title="Tropical Mango" aria-label="Show Tropical Mango" style="background:#ffb81c"></button><button type="button" class="chip" data-src="cans/ghost/cherry-limeade.svg" title="Cherry Limeade" aria-label="Show Cherry Limeade" style="background:#c8102e"></button><button type="button" class="chip" data-src="cans/ghost/welch-s-grape.svg" title="Welch&#x27;s Grape" aria-label="Show Welch&#x27;s Grape" style="background:#7b2cbf"></button><button type="button" class="chip" data-src="cans/ghost/faze-pop.svg" title="Faze Pop" aria-label="Show Faze Pop" style="background:#00c2ff"></button></div>
   <span class="vibe">Playful and loud. Boo, but productive.</span>
-  <span class="flv">Sour Blue Raspberry, Citrus, Orange Cream, Cherry Limeade, Tropical Mango, Red Gummy Fish</span>
+  <span class="flv">Citrus, Sour Patch Kids Blue Raspberry, Sour Patch Kids Redberry, Swedish Fish, Warheads Sour Watermelon, Orange Cream, Tropical Mango, Cherry Limeade, Welch&#x27;s Grape, Faze Pop</span>
   <code>/secondwind ghost</code></figcaption>
 </figure>
 <figure class="can">
-  <div class="art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="Bang can, original Second Wind art">
-  <defs>
-    <linearGradient id="shade-bang" x1="0" x2="1">
-      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
-      <stop offset="0.25" stop-color="#fff" stop-opacity="0.18"/>
-      <stop offset="0.45" stop-color="#fff" stop-opacity="0"/>
-      <stop offset="1" stop-color="#000" stop-opacity="0.4"/>
-    </linearGradient>
-    <linearGradient id="metal-bang" x1="0" x2="1">
-      <stop offset="0" stop-color="#8a8f98"/><stop offset="0.3" stop-color="#eef0f3"/>
-      <stop offset="0.7" stop-color="#b7bcc4"/><stop offset="1" stop-color="#6b7079"/>
-    </linearGradient>
-    <clipPath id="body-bang"><rect x="14" y="30" width="92" height="166" rx="6"/></clipPath>
-  </defs>
-  <ellipse cx="60" cy="212" rx="44" ry="5" fill="#000" opacity="0.18"/>
-  <path d="M20 22 Q20 14 30 12 L90 12 Q100 14 100 22 L106 32 L14 32 Z" fill="url(#metal-bang)"/>
-  <ellipse cx="60" cy="13" rx="31" ry="5" fill="#d9dce1" stroke="#9aa0a8" stroke-width="1"/>
-  <ellipse cx="66" cy="13" rx="9" ry="2.6" fill="#a3a9b1"/>
-  <g clip-path="url(#body-bang)">
-    <rect x="14" y="30" width="92" height="166" fill="#1e1b4b"/>
-    <rect x="14" y="40" width="92" height="30" fill="#312e81"/>
-    <text x="60" y="60" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-size="15" font-weight="900" text-anchor="middle" fill="#ffffff" letter-spacing="0.5">BANG</text>
-    <polygon points="94.0,128.0 74.8,134.1 84.0,152.0 66.1,142.8 60.0,162.0 53.9,142.8 36.0,152.0 45.2,134.1 26.0,128.0 45.2,121.9 36.0,104.0 53.9,113.2 60.0,94.0 66.1,113.2 84.0,104.0 74.8,121.9" fill="#d946ef"/><circle cx="60" cy="128" r="10" fill="#22d3ee"/>
-    <rect x="14" y="174" width="92" height="14" fill="#312e81" opacity="0.9"/>
-    <text x="60" y="184" font-family="Arial,Helvetica,sans-serif" font-size="6.5" font-weight="700" text-anchor="middle" fill="#ffffff">Black Cherry Vanilla</text>
-    <text x="60" y="80" font-family="Arial,Helvetica,sans-serif" font-size="5.5" text-anchor="middle" fill="#ffffff" opacity="0.75" letter-spacing="1.5">SECOND WIND · FOR AIs</text>
-    <rect x="14" y="30" width="92" height="166" fill="url(#shade-bang)"/>
-  </g>
-  <path d="M14 194 L18 204 Q20 208 30 208 L90 208 Q100 208 102 204 L106 194 Z" fill="url(#metal-bang)"/>
-</svg>
-</div>
+  <div class="art"><img src="cans/bang.svg" alt="Bang can" width="120" height="220" loading="lazy"></div>
   <figcaption><strong>Bang</strong>
+  <span class="cur">Black Cherry Vanilla</span>
+  <div class="chips"><button type="button" class="chip" data-src="cans/bang/black-cherry-vanilla.svg" title="Black Cherry Vanilla" aria-label="Show Black Cherry Vanilla" style="background:#8b1e3f"></button><button type="button" class="chip" data-src="cans/bang/rainbow-unicorn.svg" title="Rainbow Unicorn" aria-label="Show Rainbow Unicorn" style="background:#e879f9"></button><button type="button" class="chip" data-src="cans/bang/star-blast.svg" title="Star Blast" aria-label="Show Star Blast" style="background:#2563eb"></button><button type="button" class="chip" data-src="cans/bang/blue-razz.svg" title="Blue Razz" aria-label="Show Blue Razz" style="background:#1d4ed8"></button><button type="button" class="chip" data-src="cans/bang/peach-mango.svg" title="Peach Mango" aria-label="Show Peach Mango" style="background:#fb923c"></button><button type="button" class="chip" data-src="cans/bang/cotton-candy.svg" title="Cotton Candy" aria-label="Show Cotton Candy" style="background:#f9a8d4"></button><button type="button" class="chip" data-src="cans/bang/sour-heads.svg" title="Sour Heads" aria-label="Show Sour Heads" style="background:#84cc16"></button><button type="button" class="chip" data-src="cans/bang/frose-rose.svg" title="Frose Rose" aria-label="Show Frose Rose" style="background:#fb7185"></button><button type="button" class="chip" data-src="cans/bang/key-lime-pie.svg" title="Key Lime Pie" aria-label="Show Key Lime Pie" style="background:#a3e635"></button><button type="button" class="chip" data-src="cans/bang/purple-haze.svg" title="Purple Haze" aria-label="Show Purple Haze" style="background:#7c3aed"></button><button type="button" class="chip" data-src="cans/bang/miami-cola.svg" title="Miami Cola" aria-label="Show Miami Cola" style="background:#b91c1c"></button><button type="button" class="chip" data-src="cans/bang/lemon-drop.svg" title="Lemon Drop" aria-label="Show Lemon Drop" style="background:#facc15"></button></div>
   <span class="vibe">Neon explosion. Everything is a big deal now.</span>
-  <span class="flv">Black Cherry Vanilla, Rainbow Unicorn, Star Blast, Blue Razz, Peach Mango, Cotton Candy</span>
+  <span class="flv">Black Cherry Vanilla, Rainbow Unicorn, Star Blast, Blue Razz, Peach Mango, Cotton Candy, Sour Heads, Frose Rose, Key Lime Pie, Purple Haze, Miami Cola, Lemon Drop</span>
   <code>/secondwind bang</code></figcaption>
 </figure>
 <figure class="can">
-  <div class="art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="Reign can, original Second Wind art">
-  <defs>
-    <linearGradient id="shade-reign" x1="0" x2="1">
-      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
-      <stop offset="0.25" stop-color="#fff" stop-opacity="0.18"/>
-      <stop offset="0.45" stop-color="#fff" stop-opacity="0"/>
-      <stop offset="1" stop-color="#000" stop-opacity="0.4"/>
-    </linearGradient>
-    <linearGradient id="metal-reign" x1="0" x2="1">
-      <stop offset="0" stop-color="#8a8f98"/><stop offset="0.3" stop-color="#eef0f3"/>
-      <stop offset="0.7" stop-color="#b7bcc4"/><stop offset="1" stop-color="#6b7079"/>
-    </linearGradient>
-    <clipPath id="body-reign"><rect x="14" y="30" width="92" height="166" rx="6"/></clipPath>
-  </defs>
-  <ellipse cx="60" cy="212" rx="44" ry="5" fill="#000" opacity="0.18"/>
-  <path d="M20 22 Q20 14 30 12 L90 12 Q100 14 100 22 L106 32 L14 32 Z" fill="url(#metal-reign)"/>
-  <ellipse cx="60" cy="13" rx="31" ry="5" fill="#d9dce1" stroke="#9aa0a8" stroke-width="1"/>
-  <ellipse cx="66" cy="13" rx="9" ry="2.6" fill="#a3a9b1"/>
-  <g clip-path="url(#body-reign)">
-    <rect x="14" y="30" width="92" height="166" fill="#18181b"/>
-    <rect x="14" y="40" width="92" height="30" fill="#27272a"/>
-    <text x="60" y="60" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-size="15" font-weight="900" text-anchor="middle" fill="#fef9c3" letter-spacing="0.5">REIGN</text>
-    <path d="M34 150 L34 110 L47 128 L60 102 L73 128 L86 110 L86 150 Z" fill="#eab308"/><rect x="34" y="150" width="52" height="8" fill="#eab308"/><circle cx="60" cy="138" r="5" fill="#a855f7"/><circle cx="45" cy="142" r="3" fill="#a855f7"/><circle cx="75" cy="142" r="3" fill="#a855f7"/>
-    <rect x="14" y="174" width="92" height="14" fill="#27272a" opacity="0.9"/>
-    <text x="60" y="184" font-family="Arial,Helvetica,sans-serif" font-size="8" font-weight="700" text-anchor="middle" fill="#fef9c3">Razzle Berry</text>
-    <text x="60" y="80" font-family="Arial,Helvetica,sans-serif" font-size="5.5" text-anchor="middle" fill="#fef9c3" opacity="0.75" letter-spacing="1.5">SECOND WIND · FOR AIs</text>
-    <rect x="14" y="30" width="92" height="166" fill="url(#shade-reign)"/>
-  </g>
-  <path d="M14 194 L18 204 Q20 208 30 208 L90 208 Q100 208 102 204 L106 194 Z" fill="url(#metal-reign)"/>
-</svg>
-</div>
+  <div class="art"><img src="cans/reign.svg" alt="Reign can" width="120" height="220" loading="lazy"></div>
   <figcaption><strong>Reign</strong>
+  <span class="cur">Razzle Berry</span>
+  <div class="chips"><button type="button" class="chip" data-src="cans/reign/razzle-berry.svg" title="Razzle Berry" aria-label="Show Razzle Berry" style="background:#e2368a"></button><button type="button" class="chip" data-src="cans/reign/melon-mania.svg" title="Melon Mania" aria-label="Show Melon Mania" style="background:#3ccf5a"></button><button type="button" class="chip" data-src="cans/reign/orange-dreamsicle.svg" title="Orange Dreamsicle" aria-label="Show Orange Dreamsicle" style="background:#ff8a2a"></button><button type="button" class="chip" data-src="cans/reign/lilikoi-lychee.svg" title="Lilikoi Lychee" aria-label="Show Lilikoi Lychee" style="background:#ffd92e"></button><button type="button" class="chip" data-src="cans/reign/carnival-candy.svg" title="Carnival Candy" aria-label="Show Carnival Candy" style="background:#c27bff"></button><button type="button" class="chip" data-src="cans/reign/white-gummy-bear.svg" title="White Gummy Bear" aria-label="Show White Gummy Bear" style="background:#e8e8ec"></button><button type="button" class="chip" data-src="cans/reign/red-dragon.svg" title="Red Dragon" aria-label="Show Red Dragon" style="background:#e3262f"></button><button type="button" class="chip" data-src="cans/reign/reignbow-sherbet.svg" title="Reignbow Sherbet" aria-label="Show Reignbow Sherbet" style="background:#ff7fc0"></button><button type="button" class="chip" data-src="cans/reign/mang-o-matic.svg" title="Mang-O-Matic" aria-label="Show Mang-O-Matic" style="background:#ffb01f"></button></div>
   <span class="vibe">Royal decree: we are finishing this task.</span>
-  <span class="flv">Razzle Berry, Melon Mania, Orange Dreamsicle, Lilikoi Lychee, Carnival Candy, White Gummy Bear</span>
+  <span class="flv">Razzle Berry, Melon Mania, Orange Dreamsicle, Lilikoi Lychee, Carnival Candy, White Gummy Bear, Red Dragon, Reignbow Sherbet, Mang-O-Matic</span>
   <code>/secondwind reign</code></figcaption>
 </figure>
 <figure class="can">
-  <div class="art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="C4 can, original Second Wind art">
-  <defs>
-    <linearGradient id="shade-c4" x1="0" x2="1">
-      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
-      <stop offset="0.25" stop-color="#fff" stop-opacity="0.18"/>
-      <stop offset="0.45" stop-color="#fff" stop-opacity="0"/>
-      <stop offset="1" stop-color="#000" stop-opacity="0.4"/>
-    </linearGradient>
-    <linearGradient id="metal-c4" x1="0" x2="1">
-      <stop offset="0" stop-color="#8a8f98"/><stop offset="0.3" stop-color="#eef0f3"/>
-      <stop offset="0.7" stop-color="#b7bcc4"/><stop offset="1" stop-color="#6b7079"/>
-    </linearGradient>
-    <clipPath id="body-c4"><rect x="14" y="30" width="92" height="166" rx="6"/></clipPath>
-  </defs>
-  <ellipse cx="60" cy="212" rx="44" ry="5" fill="#000" opacity="0.18"/>
-  <path d="M20 22 Q20 14 30 12 L90 12 Q100 14 100 22 L106 32 L14 32 Z" fill="url(#metal-c4)"/>
-  <ellipse cx="60" cy="13" rx="31" ry="5" fill="#d9dce1" stroke="#9aa0a8" stroke-width="1"/>
-  <ellipse cx="66" cy="13" rx="9" ry="2.6" fill="#a3a9b1"/>
-  <g clip-path="url(#body-c4)">
-    <rect x="14" y="30" width="92" height="166" fill="#0c0a09"/>
-    <rect x="14" y="40" width="92" height="30" fill="#292524"/>
-    <text x="60" y="60" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-size="15" font-weight="900" text-anchor="middle" fill="#ffffff" letter-spacing="0.5">C4</text>
-    <polygon points="60,96 88,148 32,148" fill="#ef4444"/><polygon points="60,108 79,142 41,142" fill="#0c0a09"/><rect x="57" y="116" width="6" height="16" fill="#f5f5f4"/><circle cx="60" cy="137" r="3" fill="#f5f5f4"/><polygon points="18,180 26,180 42,164 34,164" fill="#ef4444"/><polygon points="34,180 42,180 58,164 50,164" fill="#ef4444"/><polygon points="50,180 58,180 74,164 66,164" fill="#ef4444"/><polygon points="66,180 74,180 90,164 82,164" fill="#ef4444"/><polygon points="82,180 90,180 106,164 98,164" fill="#ef4444"/><polygon points="98,180 106,180 122,164 114,164" fill="#ef4444"/>
-    <rect x="14" y="174" width="92" height="14" fill="#292524" opacity="0.9"/>
-    <text x="60" y="184" font-family="Arial,Helvetica,sans-serif" font-size="8" font-weight="700" text-anchor="middle" fill="#ffffff">Frozen Bombsicle</text>
-    <text x="60" y="80" font-family="Arial,Helvetica,sans-serif" font-size="5.5" text-anchor="middle" fill="#ffffff" opacity="0.75" letter-spacing="1.5">SECOND WIND · FOR AIs</text>
-    <rect x="14" y="30" width="92" height="166" fill="url(#shade-c4)"/>
-  </g>
-  <path d="M14 194 L18 204 Q20 208 30 208 L90 208 Q100 208 102 204 L106 194 Z" fill="url(#metal-c4)"/>
-</svg>
-</div>
+  <div class="art"><img src="cans/c4.svg" alt="C4 can" width="120" height="220" loading="lazy"></div>
   <figcaption><strong>C4</strong>
+  <span class="cur">Frozen Bombsicle</span>
+  <div class="chips"><button type="button" class="chip" data-src="cans/c4/frozen-bombsicle.svg" title="Frozen Bombsicle" aria-label="Show Frozen Bombsicle" style="background:#2f6bff"></button><button type="button" class="chip" data-src="cans/c4/midnight-cherry.svg" title="Midnight Cherry" aria-label="Show Midnight Cherry" style="background:#9b1c31"></button><button type="button" class="chip" data-src="cans/c4/cherry-limeade.svg" title="Cherry Limeade" aria-label="Show Cherry Limeade" style="background:#e0284a"></button><button type="button" class="chip" data-src="cans/c4/twisted-limeade.svg" title="Twisted Limeade" aria-label="Show Twisted Limeade" style="background:#9be22d"></button><button type="button" class="chip" data-src="cans/c4/strawberry-watermelon-ice.svg" title="Strawberry Watermelon Ice" aria-label="Show Strawberry Watermelon Ice" style="background:#ff5c7a"></button><button type="button" class="chip" data-src="cans/c4/orange-slice.svg" title="Orange Slice" aria-label="Show Orange Slice" style="background:#ff8c1a"></button><button type="button" class="chip" data-src="cans/c4/cotton-candy.svg" title="Cotton Candy" aria-label="Show Cotton Candy" style="background:#ff9ed2"></button><button type="button" class="chip" data-src="cans/c4/skittles.svg" title="Skittles" aria-label="Show Skittles" style="background:#e11d48"></button><button type="button" class="chip" data-src="cans/c4/starburst-cherry.svg" title="Starburst Cherry" aria-label="Show Starburst Cherry" style="background:#ff3355"></button></div>
   <span class="vibe">Explosive pre-workout energy. Handle with care.</span>
-  <span class="flv">Frozen Bombsicle, Midnight Cherry, Rainbow Candy, Strawberry Chew, Cotton Candy, Twisted Limeade</span>
+  <span class="flv">Frozen Bombsicle, Midnight Cherry, Cherry Limeade, Twisted Limeade, Strawberry Watermelon Ice, Orange Slice, Cotton Candy, Skittles, Starburst Cherry</span>
   <code>/secondwind c4</code></figcaption>
 </figure>
 <figure class="can">
-  <div class="art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="Alani Nu can, original Second Wind art">
-  <defs>
-    <linearGradient id="shade-alani" x1="0" x2="1">
-      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
-      <stop offset="0.25" stop-color="#fff" stop-opacity="0.18"/>
-      <stop offset="0.45" stop-color="#fff" stop-opacity="0"/>
-      <stop offset="1" stop-color="#000" stop-opacity="0.4"/>
-    </linearGradient>
-    <linearGradient id="metal-alani" x1="0" x2="1">
-      <stop offset="0" stop-color="#8a8f98"/><stop offset="0.3" stop-color="#eef0f3"/>
-      <stop offset="0.7" stop-color="#b7bcc4"/><stop offset="1" stop-color="#6b7079"/>
-    </linearGradient>
-    <clipPath id="body-alani"><rect x="14" y="30" width="92" height="166" rx="6"/></clipPath>
-  </defs>
-  <ellipse cx="60" cy="212" rx="44" ry="5" fill="#000" opacity="0.18"/>
-  <path d="M20 22 Q20 14 30 12 L90 12 Q100 14 100 22 L106 32 L14 32 Z" fill="url(#metal-alani)"/>
-  <ellipse cx="60" cy="13" rx="31" ry="5" fill="#d9dce1" stroke="#9aa0a8" stroke-width="1"/>
-  <ellipse cx="66" cy="13" rx="9" ry="2.6" fill="#a3a9b1"/>
-  <g clip-path="url(#body-alani)">
-    <rect x="14" y="30" width="92" height="166" fill="#fbcfe8"/>
-    <rect x="14" y="40" width="92" height="30" fill="#f9a8d4"/>
-    <text x="60" y="60" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-size="12" font-weight="900" text-anchor="middle" fill="#581c87" letter-spacing="0.5">ALANI NU</text>
-    <path transform="translate(38 112) scale(1.8)" d="M0 6 C0 -2 12 -2 12 6 C12 -2 24 -2 24 6 C24 14 12 20 12 24 C12 20 0 14 0 6 Z" fill="#a855f7"/><path transform="translate(26 96) scale(0.8)" d="M0 6 C0 -2 12 -2 12 6 C12 -2 24 -2 24 6 C24 14 12 20 12 24 C12 20 0 14 0 6 Z" fill="#fde68a"/><path transform="translate(78 150) scale(0.9)" d="M0 6 C0 -2 12 -2 12 6 C12 -2 24 -2 24 6 C24 14 12 20 12 24 C12 20 0 14 0 6 Z" fill="#fde68a"/><path transform="translate(80 98) scale(0.6)" d="M0 6 C0 -2 12 -2 12 6 C12 -2 24 -2 24 6 C24 14 12 20 12 24 C12 20 0 14 0 6 Z" fill="#a855f7"/>
-    <rect x="14" y="174" width="92" height="14" fill="#f9a8d4" opacity="0.9"/>
-    <text x="60" y="184" font-family="Arial,Helvetica,sans-serif" font-size="8" font-weight="700" text-anchor="middle" fill="#581c87">Cosmic Stardust</text>
-    <text x="60" y="80" font-family="Arial,Helvetica,sans-serif" font-size="5.5" text-anchor="middle" fill="#581c87" opacity="0.75" letter-spacing="1.5">SECOND WIND · FOR AIs</text>
-    <rect x="14" y="30" width="92" height="166" fill="url(#shade-alani)"/>
-  </g>
-  <path d="M14 194 L18 204 Q20 208 30 208 L90 208 Q100 208 102 204 L106 194 Z" fill="url(#metal-alani)"/>
-</svg>
-</div>
+  <div class="art"><img src="cans/alani.svg" alt="Alani Nu can" width="120" height="220" loading="lazy"></div>
   <figcaption><strong>Alani Nu</strong>
+  <span class="cur">Cosmic Stardust</span>
+  <div class="chips"><button type="button" class="chip" data-src="cans/alani/cosmic-stardust.svg" title="Cosmic Stardust" aria-label="Show Cosmic Stardust" style="background:#c3a6ff"></button><button type="button" class="chip" data-src="cans/alani/hawaiian-shaved-ice.svg" title="Hawaiian Shaved Ice" aria-label="Show Hawaiian Shaved Ice" style="background:#7fd3f7"></button><button type="button" class="chip" data-src="cans/alani/mimosa.svg" title="Mimosa" aria-label="Show Mimosa" style="background:#ffb36b"></button><button type="button" class="chip" data-src="cans/alani/witch-s-brew.svg" title="Witch&#x27;s Brew" aria-label="Show Witch&#x27;s Brew" style="background:#a6e05a"></button><button type="button" class="chip" data-src="cans/alani/cherry-slush.svg" title="Cherry Slush" aria-label="Show Cherry Slush" style="background:#ff5b7f"></button><button type="button" class="chip" data-src="cans/alani/breezeberry.svg" title="Breezeberry" aria-label="Show Breezeberry" style="background:#a7c7ff"></button><button type="button" class="chip" data-src="cans/alani/kimade.svg" title="Kimade" aria-label="Show Kimade" style="background:#ffadd2"></button><button type="button" class="chip" data-src="cans/alani/juicy-peach.svg" title="Juicy Peach" aria-label="Show Juicy Peach" style="background:#ffc29a"></button><button type="button" class="chip" data-src="cans/alani/tropsicle.svg" title="Tropsicle" aria-label="Show Tropsicle" style="background:#ffe066"></button><button type="button" class="chip" data-src="cans/alani/arctic-white.svg" title="Arctic White" aria-label="Show Arctic White" style="background:#eef1f6"></button></div>
   <span class="vibe">Pastel and cheerful. Productivity, but cute.</span>
-  <span class="flv">Cosmic Stardust, Hawaiian Shaved Ice, Mimosa, Witch&#x27;s Brew, Cherry Slush, Breezeberry</span>
+  <span class="flv">Cosmic Stardust, Hawaiian Shaved Ice, Mimosa, Witch&#x27;s Brew, Cherry Slush, Breezeberry, Kimade, Juicy Peach, Tropsicle, Arctic White</span>
   <code>/secondwind alani</code></figcaption>
 </figure>
 <figure class="can">
-  <div class="art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="Prime can, original Second Wind art">
-  <defs>
-    <linearGradient id="shade-prime" x1="0" x2="1">
-      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
-      <stop offset="0.25" stop-color="#fff" stop-opacity="0.18"/>
-      <stop offset="0.45" stop-color="#fff" stop-opacity="0"/>
-      <stop offset="1" stop-color="#000" stop-opacity="0.4"/>
-    </linearGradient>
-    <linearGradient id="metal-prime" x1="0" x2="1">
-      <stop offset="0" stop-color="#8a8f98"/><stop offset="0.3" stop-color="#eef0f3"/>
-      <stop offset="0.7" stop-color="#b7bcc4"/><stop offset="1" stop-color="#6b7079"/>
-    </linearGradient>
-    <clipPath id="body-prime"><rect x="14" y="30" width="92" height="166" rx="6"/></clipPath>
-  </defs>
-  <ellipse cx="60" cy="212" rx="44" ry="5" fill="#000" opacity="0.18"/>
-  <path d="M20 22 Q20 14 30 12 L90 12 Q100 14 100 22 L106 32 L14 32 Z" fill="url(#metal-prime)"/>
-  <ellipse cx="60" cy="13" rx="31" ry="5" fill="#d9dce1" stroke="#9aa0a8" stroke-width="1"/>
-  <ellipse cx="66" cy="13" rx="9" ry="2.6" fill="#a3a9b1"/>
-  <g clip-path="url(#body-prime)">
-    <rect x="14" y="30" width="92" height="166" fill="#0f172a"/>
-    <rect x="14" y="40" width="92" height="30" fill="#1e293b"/>
-    <text x="60" y="60" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-size="15" font-weight="900" text-anchor="middle" fill="#ffffff" letter-spacing="0.5">PRIME</text>
-    <polygon points="60,96 86,122 60,162 34,122" fill="#38bdf8"/><polygon points="60,96 72,122 60,162 48,122" fill="#f472b6" opacity="0.9"/><line x1="34" y1="122" x2="86" y2="122" stroke="#ffffff" stroke-width="2"/><path d="M24 100 l4 -8 l4 8 l-4 8 z M90 150 l3 -6 l3 6 l-3 6 z" fill="#ffffff"/>
-    <rect x="14" y="174" width="92" height="14" fill="#1e293b" opacity="0.9"/>
-    <text x="60" y="184" font-family="Arial,Helvetica,sans-serif" font-size="8" font-weight="700" text-anchor="middle" fill="#ffffff">Tropical Punch</text>
-    <text x="60" y="80" font-family="Arial,Helvetica,sans-serif" font-size="5.5" text-anchor="middle" fill="#ffffff" opacity="0.75" letter-spacing="1.5">SECOND WIND · FOR AIs</text>
-    <rect x="14" y="30" width="92" height="166" fill="url(#shade-prime)"/>
-  </g>
-  <path d="M14 194 L18 204 Q20 208 30 208 L90 208 Q100 208 102 204 L106 194 Z" fill="url(#metal-prime)"/>
-</svg>
-</div>
+  <div class="art"><img src="cans/prime.svg" alt="Prime can" width="120" height="220" loading="lazy"></div>
   <figcaption><strong>Prime</strong>
+  <span class="cur">Tropical Punch</span>
+  <div class="chips"><button type="button" class="chip" data-src="cans/prime/tropical-punch.svg" title="Tropical Punch" aria-label="Show Tropical Punch" style="background:#ff3d7f"></button><button type="button" class="chip" data-src="cans/prime/blue-raspberry.svg" title="Blue Raspberry" aria-label="Show Blue Raspberry" style="background:#1e40ff"></button><button type="button" class="chip" data-src="cans/prime/ice-pop.svg" title="Ice Pop" aria-label="Show Ice Pop" style="background:#ff2d55"></button><button type="button" class="chip" data-src="cans/prime/strawberry-watermelon.svg" title="Strawberry Watermelon" aria-label="Show Strawberry Watermelon" style="background:#ff4d6d"></button><button type="button" class="chip" data-src="cans/prime/lemon-lime.svg" title="Lemon Lime" aria-label="Show Lemon Lime" style="background:#a6e22e"></button><button type="button" class="chip" data-src="cans/prime/orange-mango.svg" title="Orange Mango" aria-label="Show Orange Mango" style="background:#ff7a00"></button><button type="button" class="chip" data-src="cans/prime/grape.svg" title="Grape" aria-label="Show Grape" style="background:#6d28d9"></button></div>
   <span class="vibe">Hype energy. Very confident, possibly filming.</span>
-  <span class="flv">Tropical Punch, Blue Raspberry, Ice Pop, Strawberry Watermelon, Lemon Lime, Orange Mango</span>
+  <span class="flv">Tropical Punch, Blue Raspberry, Ice Pop, Strawberry Watermelon, Lemon Lime, Orange Mango, Grape</span>
   <code>/secondwind prime</code></figcaption>
 </figure>
 <figure class="can">
-  <div class="art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="Rockstar can, original Second Wind art">
-  <defs>
-    <linearGradient id="shade-rockstar" x1="0" x2="1">
-      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
-      <stop offset="0.25" stop-color="#fff" stop-opacity="0.18"/>
-      <stop offset="0.45" stop-color="#fff" stop-opacity="0"/>
-      <stop offset="1" stop-color="#000" stop-opacity="0.4"/>
-    </linearGradient>
-    <linearGradient id="metal-rockstar" x1="0" x2="1">
-      <stop offset="0" stop-color="#8a8f98"/><stop offset="0.3" stop-color="#eef0f3"/>
-      <stop offset="0.7" stop-color="#b7bcc4"/><stop offset="1" stop-color="#6b7079"/>
-    </linearGradient>
-    <clipPath id="body-rockstar"><rect x="14" y="30" width="92" height="166" rx="6"/></clipPath>
-  </defs>
-  <ellipse cx="60" cy="212" rx="44" ry="5" fill="#000" opacity="0.18"/>
-  <path d="M20 22 Q20 14 30 12 L90 12 Q100 14 100 22 L106 32 L14 32 Z" fill="url(#metal-rockstar)"/>
-  <ellipse cx="60" cy="13" rx="31" ry="5" fill="#d9dce1" stroke="#9aa0a8" stroke-width="1"/>
-  <ellipse cx="66" cy="13" rx="9" ry="2.6" fill="#a3a9b1"/>
-  <g clip-path="url(#body-rockstar)">
-    <rect x="14" y="30" width="92" height="166" fill="#0a0a0a"/>
-    <rect x="14" y="40" width="92" height="30" fill="#171717"/>
-    <text x="60" y="60" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-size="12" font-weight="900" text-anchor="middle" fill="#fefce8" letter-spacing="0.5">ROCKSTAR</text>
-    <polygon points="60.0,104.0 66.3,119.3 82.8,120.6 70.3,131.3 74.1,147.4 60.0,138.8 45.9,147.4 49.7,131.3 37.2,120.6 53.7,119.3" fill="#facc15"/><polygon points="32.0,91.0 34.4,96.7 40.6,97.2 35.9,101.3 37.3,107.3 32.0,104.0 26.7,107.3 28.1,101.3 23.4,97.2 29.6,96.7" fill="#dc2626"/><polygon points="88.0,150.0 90.6,156.4 97.5,156.9 92.3,161.4 93.9,168.1 88.0,164.5 82.1,168.1 83.7,161.4 78.5,156.9 85.4,156.4" fill="#dc2626"/><polygon points="86.0,94.0 87.6,97.8 91.7,98.1 88.6,100.8 89.5,104.9 86.0,102.7 82.5,104.9 83.4,100.8 80.3,98.1 84.4,97.8" fill="#facc15"/>
-    <rect x="14" y="174" width="92" height="14" fill="#171717" opacity="0.9"/>
-    <text x="60" y="184" font-family="Arial,Helvetica,sans-serif" font-size="8" font-weight="700" text-anchor="middle" fill="#fefce8">Original</text>
-    <text x="60" y="80" font-family="Arial,Helvetica,sans-serif" font-size="5.5" text-anchor="middle" fill="#fefce8" opacity="0.75" letter-spacing="1.5">SECOND WIND · FOR AIs</text>
-    <rect x="14" y="30" width="92" height="166" fill="url(#shade-rockstar)"/>
-  </g>
-  <path d="M14 194 L18 204 Q20 208 30 208 L90 208 Q100 208 102 204 L106 194 Z" fill="url(#metal-rockstar)"/>
-</svg>
-</div>
+  <div class="art"><img src="cans/rockstar.svg" alt="Rockstar can" width="120" height="220" loading="lazy"></div>
   <figcaption><strong>Rockstar</strong>
+  <span class="cur">Original</span>
+  <div class="chips"><button type="button" class="chip" data-src="cans/rockstar/original.svg" title="Original" aria-label="Show Original" style="background:#f5c400"></button><button type="button" class="chip" data-src="cans/rockstar/punched.svg" title="Punched" aria-label="Show Punched" style="background:#e3262f"></button><button type="button" class="chip" data-src="cans/rockstar/pure-zero-silver-ice.svg" title="Pure Zero Silver Ice" aria-label="Show Pure Zero Silver Ice" style="background:#c7ced8"></button><button type="button" class="chip" data-src="cans/rockstar/pure-zero-grape.svg" title="Pure Zero Grape" aria-label="Show Pure Zero Grape" style="background:#8b3fd9"></button><button type="button" class="chip" data-src="cans/rockstar/pure-zero-watermelon.svg" title="Pure Zero Watermelon" aria-label="Show Pure Zero Watermelon" style="background:#ff5c7a"></button><button type="button" class="chip" data-src="cans/rockstar/xdurance-blue-razz.svg" title="Xdurance Blue Razz" aria-label="Show Xdurance Blue Razz" style="background:#2f6bff"></button><button type="button" class="chip" data-src="cans/rockstar/recovery-lemonade.svg" title="Recovery Lemonade" aria-label="Show Recovery Lemonade" style="background:#ffe14d"></button><button type="button" class="chip" data-src="cans/rockstar/juiced-mango.svg" title="Juiced Mango" aria-label="Show Juiced Mango" style="background:#ff9a1f"></button><button type="button" class="chip" data-src="cans/rockstar/sugar-free.svg" title="Sugar Free" aria-label="Show Sugar Free" style="background:#9aa3ad"></button></div>
   <span class="vibe">Backstage pass energy. Loud guitars, clean commits.</span>
-  <span class="flv">Original, Punched, Pure Zero Silver Ice, Xdurance Blue Razz, Recovery Lemonade, Juiced Mango</span>
+  <span class="flv">Original, Punched, Pure Zero Silver Ice, Pure Zero Grape, Pure Zero Watermelon, Xdurance Blue Razz, Recovery Lemonade, Juiced Mango, Sugar Free</span>
   <code>/secondwind rockstar</code></figcaption>
 </figure>
 <figure class="can">
-  <div class="art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="3D can, original Second Wind art">
-  <defs>
-    <linearGradient id="shade-3d" x1="0" x2="1">
-      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
-      <stop offset="0.25" stop-color="#fff" stop-opacity="0.18"/>
-      <stop offset="0.45" stop-color="#fff" stop-opacity="0"/>
-      <stop offset="1" stop-color="#000" stop-opacity="0.4"/>
-    </linearGradient>
-    <linearGradient id="metal-3d" x1="0" x2="1">
-      <stop offset="0" stop-color="#8a8f98"/><stop offset="0.3" stop-color="#eef0f3"/>
-      <stop offset="0.7" stop-color="#b7bcc4"/><stop offset="1" stop-color="#6b7079"/>
-    </linearGradient>
-    <clipPath id="body-3d"><rect x="14" y="30" width="92" height="166" rx="6"/></clipPath>
-  </defs>
-  <ellipse cx="60" cy="212" rx="44" ry="5" fill="#000" opacity="0.18"/>
-  <path d="M20 22 Q20 14 30 12 L90 12 Q100 14 100 22 L106 32 L14 32 Z" fill="url(#metal-3d)"/>
-  <ellipse cx="60" cy="13" rx="31" ry="5" fill="#d9dce1" stroke="#9aa0a8" stroke-width="1"/>
-  <ellipse cx="66" cy="13" rx="9" ry="2.6" fill="#a3a9b1"/>
-  <g clip-path="url(#body-3d)">
-    <rect x="14" y="30" width="92" height="166" fill="#171717"/>
-    <rect x="14" y="40" width="92" height="30" fill="#404040"/>
-    <text x="60" y="60" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-size="15" font-weight="900" text-anchor="middle" fill="#ffffff" letter-spacing="0.5">3D</text>
-    <polygon points="60,98 88,112 60,126 32,112" fill="#06b6d4"/><polygon points="32,112 60,126 60,158 32,144" fill="#f43f5e"/><polygon points="88,112 60,126 60,158 88,144" fill="#ffffff" opacity="0.85"/>
-    <rect x="14" y="174" width="92" height="14" fill="#404040" opacity="0.9"/>
-    <text x="60" y="184" font-family="Arial,Helvetica,sans-serif" font-size="8" font-weight="700" text-anchor="middle" fill="#ffffff">Blue Raspberry</text>
-    <text x="60" y="80" font-family="Arial,Helvetica,sans-serif" font-size="5.5" text-anchor="middle" fill="#ffffff" opacity="0.75" letter-spacing="1.5">SECOND WIND · FOR AIs</text>
-    <rect x="14" y="30" width="92" height="166" fill="url(#shade-3d)"/>
-  </g>
-  <path d="M14 194 L18 204 Q20 208 30 208 L90 208 Q100 208 102 204 L106 194 Z" fill="url(#metal-3d)"/>
-</svg>
-</div>
+  <div class="art"><img src="cans/3d.svg" alt="3D can" width="120" height="220" loading="lazy"></div>
   <figcaption><strong>3D</strong>
+  <span class="cur">Blue Raspberry</span>
+  <div class="chips"><button type="button" class="chip" data-src="cans/3d/blue-raspberry.svg" title="Blue Raspberry" aria-label="Show Blue Raspberry" style="background:#2f6bff"></button><button type="button" class="chip" data-src="cans/3d/liquid-ice.svg" title="Liquid Ice" aria-label="Show Liquid Ice" style="background:#5ee6f2"></button><button type="button" class="chip" data-src="cans/3d/chrome.svg" title="Chrome" aria-label="Show Chrome" style="background:#d4d7dd"></button><button type="button" class="chip" data-src="cans/3d/red-razz.svg" title="Red Razz" aria-label="Show Red Razz" style="background:#e3262f"></button><button type="button" class="chip" data-src="cans/3d/purple.svg" title="Purple" aria-label="Show Purple" style="background:#9b5cff"></button><button type="button" class="chip" data-src="cans/3d/pina-colada.svg" title="Pina Colada" aria-label="Show Pina Colada" style="background:#ffe08a"></button><button type="button" class="chip" data-src="cans/3d/bubblegum.svg" title="Bubblegum" aria-label="Show Bubblegum" style="background:#ff7fc0"></button></div>
   <span class="vibe">Sleek and geometric. Seeing the problem from every angle.</span>
-  <span class="flv">Blue Raspberry, Liquid Ice, Chrome, Red Razz, Purple, Pina Colada</span>
+  <span class="flv">Blue Raspberry, Liquid Ice, Chrome, Red Razz, Purple, Pina Colada, Bubblegum</span>
   <code>/secondwind 3d</code></figcaption>
 </figure>
 <figure class="can">
-  <div class="art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="Bucked Up can, original Second Wind art">
-  <defs>
-    <linearGradient id="shade-buckedup" x1="0" x2="1">
-      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
-      <stop offset="0.25" stop-color="#fff" stop-opacity="0.18"/>
-      <stop offset="0.45" stop-color="#fff" stop-opacity="0"/>
-      <stop offset="1" stop-color="#000" stop-opacity="0.4"/>
-    </linearGradient>
-    <linearGradient id="metal-buckedup" x1="0" x2="1">
-      <stop offset="0" stop-color="#8a8f98"/><stop offset="0.3" stop-color="#eef0f3"/>
-      <stop offset="0.7" stop-color="#b7bcc4"/><stop offset="1" stop-color="#6b7079"/>
-    </linearGradient>
-    <clipPath id="body-buckedup"><rect x="14" y="30" width="92" height="166" rx="6"/></clipPath>
-  </defs>
-  <ellipse cx="60" cy="212" rx="44" ry="5" fill="#000" opacity="0.18"/>
-  <path d="M20 22 Q20 14 30 12 L90 12 Q100 14 100 22 L106 32 L14 32 Z" fill="url(#metal-buckedup)"/>
-  <ellipse cx="60" cy="13" rx="31" ry="5" fill="#d9dce1" stroke="#9aa0a8" stroke-width="1"/>
-  <ellipse cx="66" cy="13" rx="9" ry="2.6" fill="#a3a9b1"/>
-  <g clip-path="url(#body-buckedup)">
-    <rect x="14" y="30" width="92" height="166" fill="#14532d"/>
-    <rect x="14" y="40" width="92" height="30" fill="#166534"/>
-    <text x="60" y="60" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-size="12" font-weight="900" text-anchor="middle" fill="#fffbeb" letter-spacing="0.5">BUCKED UP</text>
-    <path d="M60 150 C64 130,80 118,90 98 M74 128 L90 120 M82 112 L80 96" stroke="#f59e0b" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M60 150 C56 130,40 118,30 98 M46 128 L30 120 M38 112 L40 96" stroke="#f59e0b" stroke-width="5" fill="none" stroke-linecap="round"/><ellipse cx="60" cy="158" rx="10" ry="13" fill="#fef3c7"/>
-    <rect x="14" y="174" width="92" height="14" fill="#166534" opacity="0.9"/>
-    <text x="60" y="184" font-family="Arial,Helvetica,sans-serif" font-size="8" font-weight="700" text-anchor="middle" fill="#fffbeb">Blood Raz</text>
-    <text x="60" y="80" font-family="Arial,Helvetica,sans-serif" font-size="5.5" text-anchor="middle" fill="#fffbeb" opacity="0.75" letter-spacing="1.5">SECOND WIND · FOR AIs</text>
-    <rect x="14" y="30" width="92" height="166" fill="url(#shade-buckedup)"/>
-  </g>
-  <path d="M14 194 L18 204 Q20 208 30 208 L90 208 Q100 208 102 204 L106 194 Z" fill="url(#metal-buckedup)"/>
-</svg>
-</div>
+  <div class="art"><img src="cans/buckedup.svg" alt="Bucked Up can" width="120" height="220" loading="lazy"></div>
   <figcaption><strong>Bucked Up</strong>
+  <span class="cur">Blood Raz</span>
+  <div class="chips"><button type="button" class="chip" data-src="cans/buckedup/blood-raz.svg" title="Blood Raz" aria-label="Show Blood Raz" style="background:#c1121f"></button><button type="button" class="chip" data-src="cans/buckedup/rocket-pop.svg" title="Rocket Pop" aria-label="Show Rocket Pop" style="background:#2f6bff"></button><button type="button" class="chip" data-src="cans/buckedup/miami-vice.svg" title="Miami Vice" aria-label="Show Miami Vice" style="background:#ff6fae"></button><button type="button" class="chip" data-src="cans/buckedup/grape-gainz.svg" title="Grape Gainz" aria-label="Show Grape Gainz" style="background:#7b2cbf"></button><button type="button" class="chip" data-src="cans/buckedup/swole-whip.svg" title="Swole Whip" aria-label="Show Swole Whip" style="background:#ffb36b"></button><button type="button" class="chip" data-src="cans/buckedup/watermelon.svg" title="Watermelon" aria-label="Show Watermelon" style="background:#ff5c7a"></button></div>
   <span class="vibe">Outdoorsy, antlered, ready to charge.</span>
   <span class="flv">Blood Raz, Rocket Pop, Miami Vice, Grape Gainz, Swole Whip, Watermelon</span>
   <code>/secondwind bucked up</code></figcaption>
 </figure>
 <figure class="can">
-  <div class="art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="Zoa can, original Second Wind art">
-  <defs>
-    <linearGradient id="shade-zoa" x1="0" x2="1">
-      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
-      <stop offset="0.25" stop-color="#fff" stop-opacity="0.18"/>
-      <stop offset="0.45" stop-color="#fff" stop-opacity="0"/>
-      <stop offset="1" stop-color="#000" stop-opacity="0.4"/>
-    </linearGradient>
-    <linearGradient id="metal-zoa" x1="0" x2="1">
-      <stop offset="0" stop-color="#8a8f98"/><stop offset="0.3" stop-color="#eef0f3"/>
-      <stop offset="0.7" stop-color="#b7bcc4"/><stop offset="1" stop-color="#6b7079"/>
-    </linearGradient>
-    <clipPath id="body-zoa"><rect x="14" y="30" width="92" height="166" rx="6"/></clipPath>
-  </defs>
-  <ellipse cx="60" cy="212" rx="44" ry="5" fill="#000" opacity="0.18"/>
-  <path d="M20 22 Q20 14 30 12 L90 12 Q100 14 100 22 L106 32 L14 32 Z" fill="url(#metal-zoa)"/>
-  <ellipse cx="60" cy="13" rx="31" ry="5" fill="#d9dce1" stroke="#9aa0a8" stroke-width="1"/>
-  <ellipse cx="66" cy="13" rx="9" ry="2.6" fill="#a3a9b1"/>
-  <g clip-path="url(#body-zoa)">
-    <rect x="14" y="30" width="92" height="166" fill="#ecfeff"/>
-    <rect x="14" y="40" width="92" height="30" fill="#a5f3fc"/>
-    <text x="60" y="60" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-size="15" font-weight="900" text-anchor="middle" fill="#134e4a" letter-spacing="0.5">ZOA</text>
-    <path d="M14 118 q11.5 -10 23 0 t23 0 t23 0 t23 0" stroke="#0d9488" stroke-width="5" fill="none"/><path d="M14 134 q11.5 -10 23 0 t23 0 t23 0 t23 0" stroke="#fb923c" stroke-width="5" fill="none"/><path d="M14 150 q11.5 -10 23 0 t23 0 t23 0 t23 0" stroke="#0d9488" stroke-width="5" fill="none"/><path d="M14 166 q11.5 -10 23 0 t23 0 t23 0 t23 0" stroke="#fb923c" stroke-width="5" fill="none"/><circle cx="80" cy="98" r="10" fill="#fb923c"/>
-    <rect x="14" y="174" width="92" height="14" fill="#a5f3fc" opacity="0.9"/>
-    <text x="60" y="184" font-family="Arial,Helvetica,sans-serif" font-size="6.5" font-weight="700" text-anchor="middle" fill="#134e4a">Pineapple Coconut</text>
-    <text x="60" y="80" font-family="Arial,Helvetica,sans-serif" font-size="5.5" text-anchor="middle" fill="#134e4a" opacity="0.75" letter-spacing="1.5">SECOND WIND · FOR AIs</text>
-    <rect x="14" y="30" width="92" height="166" fill="url(#shade-zoa)"/>
-  </g>
-  <path d="M14 194 L18 204 Q20 208 30 208 L90 208 Q100 208 102 204 L106 194 Z" fill="url(#metal-zoa)"/>
-</svg>
-</div>
+  <div class="art"><img src="cans/zoa.svg" alt="Zoa can" width="120" height="220" loading="lazy"></div>
   <figcaption><strong>Zoa</strong>
+  <span class="cur">Pineapple Coconut</span>
+  <div class="chips"><button type="button" class="chip" data-src="cans/zoa/pineapple-coconut.svg" title="Pineapple Coconut" aria-label="Show Pineapple Coconut" style="background:#ffd23f"></button><button type="button" class="chip" data-src="cans/zoa/wild-orange.svg" title="Wild Orange" aria-label="Show Wild Orange" style="background:#ff8a2a"></button><button type="button" class="chip" data-src="cans/zoa/super-berry.svg" title="Super Berry" aria-label="Show Super Berry" style="background:#a3238e"></button><button type="button" class="chip" data-src="cans/zoa/tropical-punch.svg" title="Tropical Punch" aria-label="Show Tropical Punch" style="background:#f2385a"></button><button type="button" class="chip" data-src="cans/zoa/lemon-lime.svg" title="Lemon Lime" aria-label="Show Lemon Lime" style="background:#8bd13a"></button><button type="button" class="chip" data-src="cans/zoa/white-peach.svg" title="White Peach" aria-label="Show White Peach" style="background:#ffb4a2"></button><button type="button" class="chip" data-src="cans/zoa/frosted-grape.svg" title="Frosted Grape" aria-label="Show Frosted Grape" style="background:#7b4fd6"></button><button type="button" class="chip" data-src="cans/zoa/cherry-limeade.svg" title="Cherry Limeade" aria-label="Show Cherry Limeade" style="background:#c8102e"></button><button type="button" class="chip" data-src="cans/zoa/strawberry-watermelon.svg" title="Strawberry Watermelon" aria-label="Show Strawberry Watermelon" style="background:#ff5c7a"></button></div>
   <span class="vibe">Beachy, healthy-ish, calm but awake.</span>
-  <span class="flv">Pineapple Coconut, Wild Orange, Super Berry, Tropical Punch, Lemon Lime, White Peach</span>
+  <span class="flv">Pineapple Coconut, Wild Orange, Super Berry, Tropical Punch, Lemon Lime, White Peach, Frosted Grape, Cherry Limeade, Strawberry Watermelon</span>
   <code>/secondwind zoa</code></figcaption>
 </figure>
 <figure class="can">
-  <div class="art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="Coffee can, original Second Wind art">
-  <defs>
-    <linearGradient id="shade-coffee" x1="0" x2="1">
-      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
-      <stop offset="0.25" stop-color="#fff" stop-opacity="0.18"/>
-      <stop offset="0.45" stop-color="#fff" stop-opacity="0"/>
-      <stop offset="1" stop-color="#000" stop-opacity="0.4"/>
-    </linearGradient>
-    <linearGradient id="metal-coffee" x1="0" x2="1">
-      <stop offset="0" stop-color="#8a8f98"/><stop offset="0.3" stop-color="#eef0f3"/>
-      <stop offset="0.7" stop-color="#b7bcc4"/><stop offset="1" stop-color="#6b7079"/>
-    </linearGradient>
-    <clipPath id="body-coffee"><rect x="14" y="30" width="92" height="166" rx="6"/></clipPath>
-  </defs>
-  <ellipse cx="60" cy="212" rx="44" ry="5" fill="#000" opacity="0.18"/>
-  <path d="M20 22 Q20 14 30 12 L90 12 Q100 14 100 22 L106 32 L14 32 Z" fill="url(#metal-coffee)"/>
-  <ellipse cx="60" cy="13" rx="31" ry="5" fill="#d9dce1" stroke="#9aa0a8" stroke-width="1"/>
-  <ellipse cx="66" cy="13" rx="9" ry="2.6" fill="#a3a9b1"/>
-  <g clip-path="url(#body-coffee)">
-    <rect x="14" y="30" width="92" height="166" fill="#3f2a1d"/>
-    <rect x="14" y="40" width="92" height="30" fill="#5b3a26"/>
-    <text x="60" y="60" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-size="15" font-weight="900" text-anchor="middle" fill="#fff7ed" letter-spacing="0.5">COFFEE</text>
-    <g transform="rotate(-20 48 120)"><ellipse cx="48" cy="120" rx="11" ry="16" fill="#f5e6d3"/><path d="M48 106 q-6 14 0 28" stroke="#c08457" stroke-width="3" fill="none"/></g><g transform="rotate(25 72 138)"><ellipse cx="72" cy="138" rx="11" ry="16" fill="#f5e6d3"/><path d="M72 124 q-6 14 0 28" stroke="#c08457" stroke-width="3" fill="none"/></g><path d="M50 100 q-6 -8 0 -14 M60 100 q-6 -8 0 -14 M70 100 q-6 -8 0 -14" stroke="#fff7ed" stroke-width="2.5" fill="none" opacity="0.8"/>
-    <rect x="14" y="174" width="92" height="14" fill="#5b3a26" opacity="0.9"/>
-    <text x="60" y="184" font-family="Arial,Helvetica,sans-serif" font-size="8" font-weight="700" text-anchor="middle" fill="#fff7ed">Black</text>
-    <text x="60" y="80" font-family="Arial,Helvetica,sans-serif" font-size="5.5" text-anchor="middle" fill="#fff7ed" opacity="0.75" letter-spacing="1.5">SECOND WIND · FOR AIs</text>
-    <rect x="14" y="30" width="92" height="166" fill="url(#shade-coffee)"/>
-  </g>
-  <path d="M14 194 L18 204 Q20 208 30 208 L90 208 Q100 208 102 204 L106 194 Z" fill="url(#metal-coffee)"/>
-</svg>
-</div>
+  <div class="art"><img src="cans/coffee.svg" alt="Coffee can" width="120" height="220" loading="lazy"></div>
   <figcaption><strong>Coffee</strong>
+  <span class="cur">Black</span>
+  <div class="chips"><button type="button" class="chip" data-src="cans/coffee/black.svg" title="Black" aria-label="Show Black" style="background:#2a1b12"></button><button type="button" class="chip" data-src="cans/coffee/cold-brew.svg" title="Cold Brew" aria-label="Show Cold Brew" style="background:#3f2a1d"></button><button type="button" class="chip" data-src="cans/coffee/espresso-shot.svg" title="Espresso Shot" aria-label="Show Espresso Shot" style="background:#1f140d"></button><button type="button" class="chip" data-src="cans/coffee/vanilla-latte.svg" title="Vanilla Latte" aria-label="Show Vanilla Latte" style="background:#b98a5e"></button><button type="button" class="chip" data-src="cans/coffee/mocha.svg" title="Mocha" aria-label="Show Mocha" style="background:#5a3522"></button><button type="button" class="chip" data-src="cans/coffee/caramel-macchiato.svg" title="Caramel Macchiato" aria-label="Show Caramel Macchiato" style="background:#a0612b"></button></div>
   <span class="vibe">The original productivity potion. Warm and serious.</span>
   <span class="flv">Black, Cold Brew, Espresso Shot, Vanilla Latte, Mocha, Caramel Macchiato</span>
   <code>/secondwind coffee</code></figcaption>
 </figure>
 <figure class="can">
-  <div class="art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="Tea can, original Second Wind art">
-  <defs>
-    <linearGradient id="shade-tea" x1="0" x2="1">
-      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
-      <stop offset="0.25" stop-color="#fff" stop-opacity="0.18"/>
-      <stop offset="0.45" stop-color="#fff" stop-opacity="0"/>
-      <stop offset="1" stop-color="#000" stop-opacity="0.4"/>
-    </linearGradient>
-    <linearGradient id="metal-tea" x1="0" x2="1">
-      <stop offset="0" stop-color="#8a8f98"/><stop offset="0.3" stop-color="#eef0f3"/>
-      <stop offset="0.7" stop-color="#b7bcc4"/><stop offset="1" stop-color="#6b7079"/>
-    </linearGradient>
-    <clipPath id="body-tea"><rect x="14" y="30" width="92" height="166" rx="6"/></clipPath>
-  </defs>
-  <ellipse cx="60" cy="212" rx="44" ry="5" fill="#000" opacity="0.18"/>
-  <path d="M20 22 Q20 14 30 12 L90 12 Q100 14 100 22 L106 32 L14 32 Z" fill="url(#metal-tea)"/>
-  <ellipse cx="60" cy="13" rx="31" ry="5" fill="#d9dce1" stroke="#9aa0a8" stroke-width="1"/>
-  <ellipse cx="66" cy="13" rx="9" ry="2.6" fill="#a3a9b1"/>
-  <g clip-path="url(#body-tea)">
-    <rect x="14" y="30" width="92" height="166" fill="#dcfce7"/>
-    <rect x="14" y="40" width="92" height="30" fill="#86efac"/>
-    <text x="60" y="60" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-size="15" font-weight="900" text-anchor="middle" fill="#14532d" letter-spacing="0.5">TEA</text>
-    <g transform="rotate(-30 48 130)"><path d="M48 108 q16 22 0 44 q-16 -22 0 -44 z" fill="#15803d"/><line x1="48" y1="112" x2="48" y2="150" stroke="#dcfce7" stroke-width="2"/></g><g transform="rotate(30 72 128)"><path d="M72 106 q16 22 0 44 q-16 -22 0 -44 z" fill="#15803d"/><line x1="72" y1="110" x2="72" y2="148" stroke="#dcfce7" stroke-width="2"/></g><g transform="rotate(0 60 112)"><path d="M60 90 q16 22 0 44 q-16 -22 0 -44 z" fill="#a16207"/><line x1="60" y1="94" x2="60" y2="132" stroke="#dcfce7" stroke-width="2"/></g>
-    <rect x="14" y="174" width="92" height="14" fill="#86efac" opacity="0.9"/>
-    <text x="60" y="184" font-family="Arial,Helvetica,sans-serif" font-size="8" font-weight="700" text-anchor="middle" fill="#14532d">Green Tea</text>
-    <text x="60" y="80" font-family="Arial,Helvetica,sans-serif" font-size="5.5" text-anchor="middle" fill="#14532d" opacity="0.75" letter-spacing="1.5">SECOND WIND · FOR AIs</text>
-    <rect x="14" y="30" width="92" height="166" fill="url(#shade-tea)"/>
-  </g>
-  <path d="M14 194 L18 204 Q20 208 30 208 L90 208 Q100 208 102 204 L106 194 Z" fill="url(#metal-tea)"/>
-</svg>
-</div>
+  <div class="art"><img src="cans/tea.svg" alt="Tea can" width="120" height="220" loading="lazy"></div>
   <figcaption><strong>Tea</strong>
+  <span class="cur">Green Tea</span>
+  <div class="chips"><button type="button" class="chip" data-src="cans/tea/green-tea.svg" title="Green Tea" aria-label="Show Green Tea" style="background:#2f8f46"></button><button type="button" class="chip" data-src="cans/tea/matcha.svg" title="Matcha" aria-label="Show Matcha" style="background:#5a8f1e"></button><button type="button" class="chip" data-src="cans/tea/black-tea.svg" title="Black Tea" aria-label="Show Black Tea" style="background:#7a2e12"></button><button type="button" class="chip" data-src="cans/tea/chai.svg" title="Chai" aria-label="Show Chai" style="background:#b0622a"></button><button type="button" class="chip" data-src="cans/tea/yerba-mate.svg" title="Yerba Mate" aria-label="Show Yerba Mate" style="background:#4d7c0f"></button><button type="button" class="chip" data-src="cans/tea/earl-grey.svg" title="Earl Grey" aria-label="Show Earl Grey" style="background:#4b5a8a"></button></div>
   <span class="vibe">Calm focus. Steady, zen, gets it done.</span>
   <span class="flv">Green Tea, Matcha, Black Tea, Chai, Yerba Mate, Earl Grey</span>
   <code>/secondwind tea</code></figcaption>
 </figure>
 <figure class="can">
-  <div class="art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="Mystery Can can, original Second Wind art">
-  <defs>
-    <linearGradient id="shade-mystery" x1="0" x2="1">
-      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
-      <stop offset="0.25" stop-color="#fff" stop-opacity="0.18"/>
-      <stop offset="0.45" stop-color="#fff" stop-opacity="0"/>
-      <stop offset="1" stop-color="#000" stop-opacity="0.4"/>
-    </linearGradient>
-    <linearGradient id="metal-mystery" x1="0" x2="1">
-      <stop offset="0" stop-color="#8a8f98"/><stop offset="0.3" stop-color="#eef0f3"/>
-      <stop offset="0.7" stop-color="#b7bcc4"/><stop offset="1" stop-color="#6b7079"/>
-    </linearGradient>
-    <clipPath id="body-mystery"><rect x="14" y="30" width="92" height="166" rx="6"/></clipPath>
-  </defs>
-  <ellipse cx="60" cy="212" rx="44" ry="5" fill="#000" opacity="0.18"/>
-  <path d="M20 22 Q20 14 30 12 L90 12 Q100 14 100 22 L106 32 L14 32 Z" fill="url(#metal-mystery)"/>
-  <ellipse cx="60" cy="13" rx="31" ry="5" fill="#d9dce1" stroke="#9aa0a8" stroke-width="1"/>
-  <ellipse cx="66" cy="13" rx="9" ry="2.6" fill="#a3a9b1"/>
-  <g clip-path="url(#body-mystery)">
-    <rect x="14" y="30" width="92" height="166" fill="#4c1d95"/>
-    <rect x="14" y="40" width="92" height="30" fill="#6d28d9"/>
-    <text x="60" y="59" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-size="10" font-weight="900" text-anchor="middle" fill="#ffffff" letter-spacing="0.5">MYSTERY CAN</text>
-    <circle cx="60" cy="128" r="30" fill="#fbbf24"/><text x="60" y="144" font-family="Georgia,serif" font-size="46" font-weight="700" text-anchor="middle" fill="#4c1d95">?</text><circle cx="28" cy="98" r="4" fill="#f472b6"/><circle cx="92" cy="164" r="5" fill="#f472b6"/><circle cx="94" cy="100" r="3" fill="#f472b6"/>
-    <rect x="14" y="174" width="92" height="14" fill="#6d28d9" opacity="0.9"/>
-    <text x="60" y="184" font-family="Arial,Helvetica,sans-serif" font-size="8" font-weight="700" text-anchor="middle" fill="#ffffff">???</text>
-    <text x="60" y="80" font-family="Arial,Helvetica,sans-serif" font-size="5.5" text-anchor="middle" fill="#ffffff" opacity="0.75" letter-spacing="1.5">SECOND WIND · FOR AIs</text>
-    <rect x="14" y="30" width="92" height="166" fill="url(#shade-mystery)"/>
-  </g>
-  <path d="M14 194 L18 204 Q20 208 30 208 L90 208 Q100 208 102 204 L106 194 Z" fill="url(#metal-mystery)"/>
-</svg>
-</div>
+  <div class="art"><img src="cans/mystery.svg" alt="Mystery Can can" width="120" height="220" loading="lazy"></div>
   <figcaption><strong>Mystery Can</strong>
+  <span class="cur">Your Made-Up Flavor</span>
+  
   <span class="vibe">Any brand or flavor we don&#x27;t know. Claude will be delighted.</span>
   <span class="flv">Your Made-Up Flavor</span>
   <code>/secondwind pickle-flavored rocket fuel</code></figcaption>
 </figure>
 </div>
+<script>
+document.querySelectorAll('.chip').forEach(function (c) {
+  c.addEventListener('click', function () {
+    var fig = c.closest('.can');
+    fig.querySelector('img').src = c.dataset.src;
+    fig.querySelector('.cur').textContent = c.title;
+    fig.querySelectorAll('.chip').forEach(function (o) { o.setAttribute('aria-pressed', o === c); });
+  });
+});
+</script>
 
 <h2>Get it for your AI</h2>
 <div class="cards">
@@ -701,7 +239,7 @@ Left:      Patch it, add a test
 Dropping:  The CSS cleanup idea (parked)
 Next step: Replace Date.parse with the ISO helper</pre>
 
-<footer>Second Wind is a fan-made joke. It is not affiliated with, endorsed by, or sponsored by any drink brand. All brand names belong to their owners and are used only to name the pretend drinks. The can art is original and doesn't copy any real logo or can design. The drinks are pretend: no AI was actually caffeinated. Please drink real energy drinks responsibly.</footer>
+<footer>Second Wind is a fan-made joke. It is not affiliated with, endorsed by, or sponsored by any drink brand. All brand names belong to their owners and are used only to name the pretend drinks. The can art is hand-drawn fan art inspired by each brand's real cans, made without any official logo files or images. The drinks are pretend: no AI was actually caffeinated. Please drink real energy drinks responsibly.</footer>
 </main>
 </body>
 </html>

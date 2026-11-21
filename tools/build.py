@@ -2,7 +2,8 @@
 """Second Wind build script.
 
 Reads data/brands.json and regenerates:
-  - docs/cans/<id>.svg            one original can illustration per brand
+  - docs/cans/<id>.svg            one can per brand (its first flavor)
+  - docs/cans/<id>/<flavor>.svg   one can per flavor, in that flavor's colors
   - docs/index.html               the download page
   - plugins/second-wind/commands/secondwind.md   the Claude Code slash command
   - prompts/*.md                  copy-paste versions for other AIs
@@ -20,152 +21,9 @@ REPO = "IordAIXL/energizer"
 
 # ---------------------------------------------------------------- can art
 
-def motif_svg(m, c):
-    a, b, t = c["accent"], c["accent2"], c["text"]
-    if m == "sun":
-        rays = "".join(
-            f'<rect x="58" y="88" width="4" height="14" fill="{b}" transform="rotate({i*30} 60 128)"/>'
-            for i in range(12))
-        return rays + f'<circle cx="60" cy="128" r="17" fill="{b}"/><circle cx="60" cy="128" r="11" fill="{a}"/>'
-    if m == "scratch":
-        return "".join(
-            f'<path d="M{40+i*14} 95 C{36+i*14} 125,{46+i*14} 140,{38+i*14} 168" stroke="{a}" '
-            f'stroke-width="7" fill="none" stroke-linecap="round"/>' for i in range(3))
-    if m == "thermo":
-        return (f'<rect x="54" y="90" width="12" height="62" rx="6" fill="none" stroke="{t}" stroke-width="3"/>'
-                f'<rect x="57" y="112" width="6" height="40" fill="{a}"/>'
-                f'<circle cx="60" cy="158" r="11" fill="{a}" stroke="{t}" stroke-width="3"/>'
-                f'<path d="M28 100 q8 -8 16 0 t16 0" stroke="{b}" stroke-width="3" fill="none"/>'
-                f'<path d="M64 170 q8 -8 16 0 t16 0" stroke="{b}" stroke-width="3" fill="none"/>')
-    if m == "chevrons":
-        return "".join(
-            f'<path d="M34 {160-i*20} L60 {140-i*20} L86 {160-i*20}" stroke="{a if i%2==0 else b}" '
-            f'stroke-width="8" fill="none" stroke-linejoin="round"/>' for i in range(4))
-    if m == "ghost":
-        return (f'<path d="M40 165 V122 a20 20 0 0 1 40 0 V165 l-7 -7 -6 7 -7 -7 -7 7 -6 -7 z" fill="{t}"/>'
-                f'<circle cx="52" cy="124" r="4" fill="{b}"/><circle cx="68" cy="124" r="4" fill="{b}"/>'
-                f'<ellipse cx="60" cy="140" rx="5" ry="7" fill="{b}"/>')
-    if m == "burst":
-        pts = []
-        import math
-        for i in range(16):
-            r = 34 if i % 2 == 0 else 16
-            ang = math.pi * 2 * i / 16
-            pts.append(f"{60+r*math.cos(ang):.1f},{128+r*math.sin(ang):.1f}")
-        return (f'<polygon points="{" ".join(pts)}" fill="{a}"/>'
-                f'<circle cx="60" cy="128" r="10" fill="{b}"/>')
-    if m == "crown":
-        return (f'<path d="M34 150 L34 110 L47 128 L60 102 L73 128 L86 110 L86 150 Z" fill="{a}"/>'
-                f'<rect x="34" y="150" width="52" height="8" fill="{a}"/>'
-                f'<circle cx="60" cy="138" r="5" fill="{b}"/><circle cx="45" cy="142" r="3" fill="{b}"/>'
-                f'<circle cx="75" cy="142" r="3" fill="{b}"/>')
-    if m == "hazard":
-        stripes = "".join(
-            f'<polygon points="{18+i*16},180 {26+i*16},180 {42+i*16},164 {34+i*16},164" fill="{a}"/>'
-            for i in range(6))
-        return (f'<polygon points="60,96 88,148 32,148" fill="{a}"/>'
-                f'<polygon points="60,108 79,142 41,142" fill="{c["body"]}"/>'
-                f'<rect x="57" y="116" width="6" height="16" fill="{b}"/><circle cx="60" cy="137" r="3" fill="{b}"/>'
-                + stripes)
-    if m == "hearts":
-        def heart(x, y, s, col):
-            return (f'<path transform="translate({x} {y}) scale({s})" d="M0 6 C0 -2 12 -2 12 6 '
-                    f'C12 -2 24 -2 24 6 C24 14 12 20 12 24 C12 20 0 14 0 6 Z" fill="{col}"/>')
-        return heart(38, 112, 1.8, a) + heart(26, 96, 0.8, b) + heart(78, 150, 0.9, b) + heart(80, 98, 0.6, a)
-    if m == "diamond":
-        return (f'<polygon points="60,96 86,122 60,162 34,122" fill="{a}"/>'
-                f'<polygon points="60,96 72,122 60,162 48,122" fill="{b}" opacity="0.9"/>'
-                f'<line x1="34" y1="122" x2="86" y2="122" stroke="{t}" stroke-width="2"/>'
-                f'<path d="M24 100 l4 -8 l4 8 l-4 8 z M90 150 l3 -6 l3 6 l-3 6 z" fill="{t}"/>')
-    if m == "prism":
-        return (f'<polygon points="60,98 84,152 36,152" fill="none" stroke="{t}" stroke-width="3"/>'
-                f'<line x1="18" y1="128" x2="48" y2="126" stroke="{t}" stroke-width="3"/>'
-                f'<polygon points="70,124 104,112 104,120" fill="{a}"/>'
-                f'<polygon points="70,126 104,122 104,130" fill="{b}"/>'
-                f'<polygon points="70,128 104,132 104,140" fill="#facc15"/>')
-    if m == "stars":
-        def star(x, y, r, col):
-            import math
-            p = []
-            for i in range(10):
-                rr = r if i % 2 == 0 else r * 0.45
-                ang = -math.pi / 2 + math.pi * i / 5
-                p.append(f"{x+rr*math.cos(ang):.1f},{y+rr*math.sin(ang):.1f}")
-            return f'<polygon points="{" ".join(p)}" fill="{col}"/>'
-        return star(60, 128, 24, a) + star(32, 100, 9, b) + star(88, 160, 10, b) + star(86, 100, 6, a)
-    if m == "cube":
-        return (f'<polygon points="60,98 88,112 60,126 32,112" fill="{a}"/>'
-                f'<polygon points="32,112 60,126 60,158 32,144" fill="{b}"/>'
-                f'<polygon points="88,112 60,126 60,158 88,144" fill="{t}" opacity="0.85"/>')
-    if m == "antlers":
-        side = lambda s: (f'<path d="M60 150 C{60+s*4} 130,{60+s*20} 118,{60+s*30} 98 '
-                          f'M{60+s*14} 128 L{60+s*30} 120 M{60+s*22} 112 L{60+s*20} 96" '
-                          f'stroke="{a}" stroke-width="5" fill="none" stroke-linecap="round"/>')
-        return side(1) + side(-1) + f'<ellipse cx="60" cy="158" rx="10" ry="13" fill="{b}"/>'
-    if m == "waves":
-        return "".join(
-            f'<path d="M14 {118+i*16} q11.5 -10 23 0 t23 0 t23 0 t23 0" stroke="{a if i%2==0 else b}" '
-            f'stroke-width="5" fill="none"/>' for i in range(4)) + f'<circle cx="80" cy="98" r="10" fill="{b}"/>'
-    if m == "beans":
-        def bean(x, y, rot):
-            return (f'<g transform="rotate({rot} {x} {y})"><ellipse cx="{x}" cy="{y}" rx="11" ry="16" fill="{a}"/>'
-                    f'<path d="M{x} {y-14} q-6 14 0 28" stroke="{b}" stroke-width="3" fill="none"/></g>')
-        return (bean(48, 120, -20) + bean(72, 138, 25) +
-                f'<path d="M50 100 q-6 -8 0 -14 M60 100 q-6 -8 0 -14 M70 100 q-6 -8 0 -14" stroke="{t}" '
-                f'stroke-width="2.5" fill="none" opacity="0.8"/>')
-    if m == "leaves":
-        def leaf(x, y, rot, col):
-            return (f'<g transform="rotate({rot} {x} {y})"><path d="M{x} {y-22} q16 22 0 44 q-16 -22 0 -44 z" '
-                    f'fill="{col}"/><line x1="{x}" y1="{y-18}" x2="{x}" y2="{y+20}" stroke="{c["body"]}" '
-                    f'stroke-width="2"/></g>')
-        return leaf(48, 130, -30, a) + leaf(72, 128, 30, a) + leaf(60, 112, 0, b)
-    if m == "question":
-        return (f'<circle cx="60" cy="128" r="30" fill="{a}"/>'
-                f'<text x="60" y="144" font-family="Georgia,serif" font-size="46" font-weight="700" '
-                f'text-anchor="middle" fill="{c["body"]}">?</text>'
-                f'<circle cx="28" cy="98" r="4" fill="{b}"/><circle cx="92" cy="164" r="5" fill="{b}"/>'
-                f'<circle cx="94" cy="100" r="3" fill="{b}"/>')
-    return ""
-
-
-def can_svg(brand, flavor=None):
-    c = brand["colors"]
-    bid = brand["id"]
-    name = html.escape(brand["name"].upper())
-    fs = 15 if len(name) <= 7 else (12 if len(name) <= 10 else 10)
-    flav = html.escape(flavor or brand.get("flavors", ["?"])[0])
-    ffs = 8 if len(flav) <= 16 else 6.5
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="{html.escape(brand['name'])} can, original Second Wind art">
-  <defs>
-    <linearGradient id="shade-{bid}" x1="0" x2="1">
-      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
-      <stop offset="0.25" stop-color="#fff" stop-opacity="0.18"/>
-      <stop offset="0.45" stop-color="#fff" stop-opacity="0"/>
-      <stop offset="1" stop-color="#000" stop-opacity="0.4"/>
-    </linearGradient>
-    <linearGradient id="metal-{bid}" x1="0" x2="1">
-      <stop offset="0" stop-color="#8a8f98"/><stop offset="0.3" stop-color="#eef0f3"/>
-      <stop offset="0.7" stop-color="#b7bcc4"/><stop offset="1" stop-color="#6b7079"/>
-    </linearGradient>
-    <clipPath id="body-{bid}"><rect x="14" y="30" width="92" height="166" rx="6"/></clipPath>
-  </defs>
-  <ellipse cx="60" cy="212" rx="44" ry="5" fill="#000" opacity="0.18"/>
-  <path d="M20 22 Q20 14 30 12 L90 12 Q100 14 100 22 L106 32 L14 32 Z" fill="url(#metal-{bid})"/>
-  <ellipse cx="60" cy="13" rx="31" ry="5" fill="#d9dce1" stroke="#9aa0a8" stroke-width="1"/>
-  <ellipse cx="66" cy="13" rx="9" ry="2.6" fill="#a3a9b1"/>
-  <g clip-path="url(#body-{bid})">
-    <rect x="14" y="30" width="92" height="166" fill="{c['body']}"/>
-    <rect x="14" y="40" width="92" height="30" fill="{c['band']}"/>
-    <text x="60" y="{60 if fs>=12 else 59}" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-size="{fs}" font-weight="900" text-anchor="middle" fill="{c['text'] if c['band']!=c['text'] else c['body']}" letter-spacing="0.5">{name}</text>
-    {motif_svg(brand['motif'], c)}
-    <rect x="14" y="174" width="92" height="14" fill="{c['band']}" opacity="0.9"/>
-    <text x="60" y="184" font-family="Arial,Helvetica,sans-serif" font-size="{ffs}" font-weight="700" text-anchor="middle" fill="{c['text'] if c['band']!=c['text'] else c['body']}">{flav}</text>
-    <text x="60" y="80" font-family="Arial,Helvetica,sans-serif" font-size="5.5" text-anchor="middle" fill="{c['text']}" opacity="0.75" letter-spacing="1.5">SECOND WIND · FOR AIs</text>
-    <rect x="14" y="30" width="92" height="166" fill="url(#shade-{bid})"/>
-  </g>
-  <path d="M14 194 L18 204 Q20 208 30 208 L90 208 Q100 208 102 204 L106 194 Z" fill="url(#metal-{bid})"/>
-</svg>
-'''
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from cans import can_svg, slug  # noqa: E402  (can art lives in tools/cans.py)
 
 # ---------------------------------------------------------------- shared text
 
@@ -343,16 +201,32 @@ def build_prompts():
 
 # ---------------------------------------------------------------- download page
 
+def chip_color(b, f):
+    fc = b.get("flavor_colors", {}).get(f)
+    if isinstance(fc, str):
+        return fc
+    if isinstance(fc, dict):
+        return fc.get("accent") if b["id"] not in ("redbull", "coffee") and "accent" in fc else fc.get("body", b["colors"]["accent"])
+    return b["colors"]["body"] if b["id"] in ("redbull", "coffee") else b["colors"]["accent"]
+
+
 def build_page():
     cans_html = []
     for b in DATA["brands"] + [dict(DATA["mystery"], flavors=["Your Made-Up Flavor"], vibe="Any brand or flavor we don't know. Claude will be delighted.")]:
-        svg = open(os.path.join(ROOT, "docs", "cans", f"{b['id']}.svg"), encoding="utf-8").read()
         flv = ", ".join(b["flavors"])
         cmd = "/secondwind" if b["id"] == "redbull" else (
             "/secondwind pickle-flavored rocket fuel" if b["id"] == "mystery" else f"/secondwind {b['aliases'][0]}")
+        chips = ""
+        if b["id"] != "mystery":
+            chips = '<div class="chips">' + "".join(
+                f'<button type="button" class="chip" data-src="cans/{b["id"]}/{slug(f)}.svg" '
+                f'title="{html.escape(f)}" aria-label="Show {html.escape(f)}" '
+                f'style="background:{html.escape(chip_color(b, f))}"></button>' for f in b["flavors"]) + "</div>"
         cans_html.append(f'''<figure class="can">
-  <div class="art">{svg}</div>
+  <div class="art"><img src="cans/{b["id"]}.svg" alt="{html.escape(b["name"])} can" width="120" height="220" loading="lazy"></div>
   <figcaption><strong>{html.escape(b["name"])}</strong>
+  <span class="cur">{html.escape(b["flavors"][0])}</span>
+  {chips}
   <span class="vibe">{html.escape(b["vibe"])}</span>
   <span class="flv">{html.escape(flv)}</span>
   <code>{html.escape(cmd)}</code></figcaption>
@@ -379,7 +253,11 @@ h2 {{ margin-top:56px; font-size:1.5rem; }}
 .grid {{ display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:16px; margin-top:20px; }}
 .can {{ margin:0; background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px 12px; text-align:center; transition:transform .15s; }}
 .can:hover {{ transform:translateY(-4px) rotate(-1deg); }}
-.art svg {{ width:100px; height:auto; }}
+.art img {{ width:110px; height:auto; display:block; margin:0 auto; }}
+.cur {{ font-size:.85rem; font-weight:600; }}
+.chips {{ display:flex; flex-wrap:wrap; justify-content:center; gap:5px; }}
+.chip {{ width:16px; height:16px; border-radius:50%; border:2px solid var(--line); padding:0; cursor:pointer; }}
+.chip[aria-pressed="true"] {{ border-color:var(--fg); }}
 figcaption {{ display:flex; flex-direction:column; gap:6px; margin-top:8px; }}
 .vibe {{ font-size:.85rem; color:var(--muted); }}
 .flv {{ font-size:.75rem; color:var(--muted); opacity:.85; }}
@@ -403,10 +281,20 @@ footer {{ margin-top:64px; color:var(--muted); font-size:.85rem; border-top:1px 
 <a class="btn alt" href="https://github.com/{REPO}">View on GitHub</a>
 
 <h2>The cooler</h2>
-<p class="lede">Every can is original art. Ask for any brand and flavor. Make one up and watch your AI get excited about it.</p>
+<p class="lede">Tap the dots under a can to see each flavor. Ask for any brand and flavor. Make one up and watch your AI get excited about it.</p>
 <div class="grid">
 {chr(10).join(cans_html)}
 </div>
+<script>
+document.querySelectorAll('.chip').forEach(function (c) {{
+  c.addEventListener('click', function () {{
+    var fig = c.closest('.can');
+    fig.querySelector('img').src = c.dataset.src;
+    fig.querySelector('.cur').textContent = c.title;
+    fig.querySelectorAll('.chip').forEach(function (o) {{ o.setAttribute('aria-pressed', o === c); }});
+  }});
+}});
+</script>
 
 <h2>Get it for your AI</h2>
 <div class="cards">
@@ -433,7 +321,7 @@ Left:      Patch it, add a test
 Dropping:  The CSS cleanup idea (parked)
 Next step: Replace Date.parse with the ISO helper</pre>
 
-<footer>Second Wind is a fan-made joke. It is not affiliated with, endorsed by, or sponsored by any drink brand. All brand names belong to their owners and are used only to name the pretend drinks. The can art is original and doesn't copy any real logo or can design. The drinks are pretend: no AI was actually caffeinated. Please drink real energy drinks responsibly.</footer>
+<footer>Second Wind is a fan-made joke. It is not affiliated with, endorsed by, or sponsored by any drink brand. All brand names belong to their owners and are used only to name the pretend drinks. The can art is hand-drawn fan art inspired by each brand's real cans, made without any official logo files or images. The drinks are pretend: no AI was actually caffeinated. Please drink real energy drinks responsibly.</footer>
 </main>
 </body>
 </html>
@@ -447,12 +335,16 @@ def main():
     os.makedirs(cans, exist_ok=True)
     for b in DATA["brands"]:
         open(os.path.join(cans, f"{b['id']}.svg"), "w", encoding="utf-8").write(can_svg(b))
+        d = os.path.join(cans, b["id"])
+        os.makedirs(d, exist_ok=True)
+        for f in b["flavors"]:
+            open(os.path.join(d, f"{slug(f)}.svg"), "w", encoding="utf-8").write(can_svg(b, f))
     m = DATA["mystery"]
-    open(os.path.join(cans, "mystery.svg"), "w", encoding="utf-8").write(can_svg(m, "???"))
+    open(os.path.join(cans, "mystery.svg"), "w", encoding="utf-8").write(can_svg(m, "Your Flavor Here"))
     build_command()
     build_prompts()
     build_page()
-    print(f"Built Second Wind v{VERSION}: {len(DATA['brands'])+1} cans, command, prompts, page.")
+    print(f"Built Second Wind v{VERSION}: {len(DATA['brands'])+1} brands, {sum(len(b['flavors']) for b in DATA['brands'])} flavor cans, command, prompts, page.")
 
 
 if __name__ == "__main__":

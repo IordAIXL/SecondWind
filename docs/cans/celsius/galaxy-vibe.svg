@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220" width="120" height="220" role="img" aria-label="Celsius Galaxy Vibe can, Second Wind art">
+  <defs>
+    <linearGradient id="shade-celsius-galaxy-vibe" x1="0" x2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0.38"/>
+      <stop offset="0.18" stop-color="#fff" stop-opacity="0.22"/>
+      <stop offset="0.32" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="0.75" stop-color="#000" stop-opacity="0.05"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.45"/>
+    </linearGradient>
+    <linearGradient id="metal-celsius-galaxy-vibe" x1="0" x2="1">
+      <stop offset="0" stop-color="#7c818a"/><stop offset="0.3" stop-color="#f1f3f5"/>
+      <stop offset="0.65" stop-color="#b9bec6"/><stop offset="1" stop-color="#5f646d"/>
+    </linearGradient>
+    <clipPath id="body-celsius-galaxy-vibe"><rect x="31" y="34" width="58" height="164"/></clipPath>
+  </defs>
+  <ellipse cx="60.0" cy="212" rx="31.0" ry="4" fill="#000" opacity="0.2"/>
+  <path d="M37 24 L83 24 L89 34 L31 34 Z" fill="url(#metal-celsius-galaxy-vibe)"/>
+  <ellipse cx="60.0" cy="24" rx="23.0" ry="4" fill="#dfe2e6" stroke="#8f959d" stroke-width="1"/>
+  <ellipse cx="60.0" cy="24" rx="20.0" ry="2.6" fill="none" stroke="#b3b8bf" stroke-width="0.8"/>
+  <path d="M57.0 22.5 h10 a2.2 2.2 0 0 1 0 4.4 h-10 z" fill="#a6abb3" stroke="#8a9098" stroke-width="0.6"/>
+  <g clip-path="url(#body-celsius-galaxy-vibe)">
+    <rect x="31" y="34" width="58" height="164" fill="#f8fafc"/><path d="M31 112.72 C50.0 102.88,70.0 125.84,89 116.0 L89 175.04 L31 175.04 Z" fill="#5b5fe0"/><rect x="31" y="83.19999999999999" width="58" height="2.2" fill="#0f172a"/><text x="60.0" y="70.1" font-family="'Arial Black','Inter Black','Helvetica Neue',Arial,sans-serif" font-size="14" font-weight="900" text-anchor="middle" fill="#e11d2e" textLength="48.0" lengthAdjust="spacingAndGlyphs"  font-style="italic">CELSIUS</text><text x="60.0" y="93.0" font-family="'Helvetica Neue',Arial,Inter,sans-serif" font-size="5" font-weight="800" text-anchor="middle" fill="#0f172a" letter-spacing="2">LIVE FIT</text><text x="60.0" y="101.2" font-family="'Helvetica Neue',Arial,Inter,sans-serif" font-size="3.8" font-weight="700" text-anchor="middle" fill="#0f172a" letter-spacing="1">ESSENTIAL ENERGY</text><circle cx="46.0" cy="142.2" r="8" fill="#fff" opacity="0.35"/><circle cx="46.0" cy="142.2" r="4.4" fill="#fff" opacity="0.35"/><circle cx="70.0" cy="135.7" r="6" fill="#fff" opacity="0.35"/><circle cx="70.0" cy="135.7" r="3.3" fill="#fff" opacity="0.35"/><circle cx="64.0" cy="157.0" r="4" fill="#fff" opacity="0.35"/><circle cx="64.0" cy="157.0" r="2.2" fill="#fff" opacity="0.35"/><text x="60.0" y="186.5" font-family="'Helvetica Neue',Arial,Inter,sans-serif" font-size="5.5" font-weight="900" text-anchor="middle" fill="#0f172a" >GALAXY VIBE</text>
+    <rect x="31" y="34" width="58" height="164" fill="url(#shade-celsius-galaxy-vibe)"/>
+  </g>
+  <path d="M31 198 L89 198 L84 207 Q60.0 211 36 207 Z" fill="url(#metal-celsius-galaxy-vibe)"/>
+</svg>
