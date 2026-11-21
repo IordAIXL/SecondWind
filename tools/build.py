@@ -210,6 +210,84 @@ def chip_color(b, f):
     return b["colors"]["body"] if b["id"] in ("redbull", "coffee") else b["colors"]["accent"]
 
 
+def install_section():
+    """The "Pick your AI" chooser: one panel of steps per AI."""
+    def prompt_text(fname):
+        txt = open(os.path.join(ROOT, "prompts", fname), encoding="utf-8").read()
+        return txt.split("\n---\n", 1)[1].strip() if "\n---\n" in txt else txt.strip()
+
+    def copy_btn(label, src):
+        return (f'<button type="button" class="btn copy big" data-copy-from="{src}">'
+                f'<span class="ic" aria-hidden="true">⧉</span> <span class="lbl">{label}</span></button>')
+
+    def cmd_btn(cmd):
+        return (f'<button type="button" class="cmd copy" data-copy="{html.escape(cmd)}"><code>{html.escape(cmd)}</code>'
+                f'<span class="ic" aria-hidden="true">⧉</span></button>')
+
+    raw = f"https://github.com/{REPO}/blob/main/prompts"
+    ais = [
+        ("claude", "Claude Code", "✳", "The full plugin: a real /secondwind command and a lifetime counter on your computer.", [
+            "Open Claude Code in any project.",
+            f"Add the Second Wind shop: {cmd_btn('/plugin marketplace add ' + REPO)}",
+            f"Install the plugin: {cmd_btn('/plugin install second-wind@energizer')}",
+            f"Hand it a drink: {cmd_btn('/secondwind')}",
+        ], None),
+        ("chatgpt", "ChatGPT", "◎", "Make a Custom GPT called Second Wind. Takes about a minute.", [
+            f"Copy the prompt: {copy_btn('Copy the ChatGPT prompt', 'p-chatgpt')}",
+            'In ChatGPT, open <b>Explore GPTs</b>, then <b>Create</b>, then the <b>Configure</b> tab.',
+            'Name it <b>Second Wind</b> and paste the prompt into <b>Instructions</b>.',
+            'Add conversation starters like <code>/secondwind</code> and <code>/secondwind menu</code>, then save.',
+            f"Open your new GPT and type {cmd_btn('/secondwind')}",
+        ], ("chatgpt.md", "p-chatgpt", "No Custom GPT? Paste it into Settings, then Personalization, then Custom instructions.")),
+        ("codex", "Codex", "❯", "A drop-in AGENTS.md. Also works with Cursor, Aider, Jules and Gemini CLI.", [
+            f"Copy the AGENTS.md text: {copy_btn('Copy AGENTS.md', 'p-codex')}",
+            'Paste it into <code>AGENTS.md</code> at the root of your project. For every project, use <code>~/.codex/AGENTS.md</code>.',
+            'Start Codex in that folder and say <code>second wind</code> or <code>/secondwind</code>.',
+        ], ("AGENTS.md", "p-codex", "Using Gemini CLI? Name the file GEMINI.md instead. Cursor reads .cursorrules too.")),
+        ("grok", "Grok", "✕", "Paste it into Grok's custom instructions.", [
+            f"Copy the prompt: {copy_btn('Copy the Grok prompt', 'p-grok')}",
+            'In Grok, open <b>Settings</b>, then <b>Customize</b>, and paste it into the custom instructions.',
+            f"Start a chat and type {cmd_btn('/secondwind')}",
+        ], ("grok.md", "p-grok", "No settings access? Paste the prompt as the first message of a chat.")),
+        ("gemini", "Gemini", "✦", "Make a Gem called Second Wind.", [
+            f"Copy the prompt: {copy_btn('Copy the Gemini prompt', 'p-gemini')}",
+            'In Gemini, open <b>Gems</b>, then <b>New Gem</b>.',
+            'Name it <b>Second Wind</b>, paste the prompt into the instructions and save.',
+            f"Open the Gem and type {cmd_btn('/secondwind')}",
+        ], ("gemini.md", "p-gemini", None)),
+        ("other", "Other AI", "＋", "Copilot, Claude.ai, Perplexity, local models: anything that takes instructions.", [
+            f"Copy the universal prompt: {copy_btn('Copy the prompt', 'p-other')}",
+            "Paste it into the AI's custom instructions, system prompt or project instructions. No settings? Paste it as the first message.",
+            f"Type {cmd_btn('/secondwind')} or just hand it a drink in plain words.",
+        ], ("any-ai.md", "p-other", None)),
+    ]
+    files = {"chatgpt.md": "chatgpt.md", "AGENTS.md": "AGENTS.md", "grok.md": "grok.md", "gemini.md": "gemini.md", "any-ai.md": "any-ai.md"}
+    tabs, panels, hidden = [], [], []
+    for i, (key, name, icon, blurb, steps, extra) in enumerate(ais):
+        sel = "true" if i == 0 else "false"
+        tabs.append(f'<button type="button" role="tab" id="t-{key}" class="ai" aria-selected="{sel}" aria-controls="panel-{key}" '
+                    f'data-ai="{key}"><span class="ai-ic" aria-hidden="true">{icon}</span>{html.escape(name)}</button>')
+        lis = "".join(f"<li>{s}</li>" for s in steps)
+        note = ""
+        if extra:
+            fname, pid, tip = extra
+            txt = prompt_text(fname) if fname != "AGENTS.md" else open(os.path.join(ROOT, "prompts", "AGENTS.md"), encoding="utf-8").read()
+            hidden.append(f'<script type="text/plain" id="{pid}">{txt.replace("</", "<\\/")}</script>')
+            note = (f'<p class="tip">{html.escape(tip) + " " if tip else ""}'
+                    f'<a href="{raw}/{files[fname]}">View the prompt on GitHub</a></p>')
+        panels.append(f'''<div class="panel" role="tabpanel" id="panel-{key}" aria-labelledby="t-{key}"{"" if i == 0 else " hidden"}>
+      <h3>{html.escape(name)}</h3><p class="sub">{html.escape(blurb)}</p>
+      <ol class="how">{lis}</ol>{note}
+    </div>''')
+    return f'''<section id="install">
+  <h2>Pick your AI</h2>
+  <p class="sub">Choose where you want Second Wind. You'll only see the steps for that one.</p>
+  <div class="picker" role="tablist" aria-label="Pick your AI">{"".join(tabs)}</div>
+  <div class="panels">{"".join(panels)}</div>
+  {"".join(hidden)}
+</section>'''
+
+
 def build_page():
     brands = DATA["brands"]
     n_flavors = sum(len(b["flavors"]) for b in brands)
@@ -279,6 +357,7 @@ h1 span {{ background:linear-gradient(90deg,var(--hot),var(--hot2)); -webkit-bac
 .btn:hover {{ filter:brightness(1.05); transform:translateY(-1px); }}
 .fan {{ position:relative; height:300px; }}
 .fan img {{ position:absolute; bottom:0; width:120px; height:auto; filter:drop-shadow(0 18px 18px rgba(0,0,0,.35)); transition:transform .3s; }}
+@media (max-width:520px) {{ .fan img {{ width:88px; }} .fan {{ height:230px; }} }}
 .fan .h0 {{ left:4%; transform:rotate(-14deg) translateY(12px); }}
 .fan .h1 {{ left:20%; transform:rotate(-6deg); }}
 .fan .h2 {{ left:39%; transform:translateY(-14px); z-index:2; }}
@@ -326,6 +405,25 @@ pre b {{ color:var(--hot); font-weight:700; }}
 .card a.go {{ margin-top:auto; color:var(--hot); font-weight:600; text-decoration:none; }}
 .card pre {{ margin:6px 0 0; position:relative; }}
 .card .copy.pre {{ align-self:flex-start; }}
+.picker {{ display:grid; grid-template-columns:repeat(6,1fr); gap:10px; margin:6px 0 18px; }}
+@media (max-width:820px) {{ .picker {{ grid-template-columns:repeat(3,1fr); }} }}
+.ai {{ display:flex; flex-direction:column; align-items:center; gap:6px; font:inherit; font-weight:700; color:var(--fg); background:var(--card); border:1px solid var(--line); border-radius:16px; padding:16px 8px; cursor:pointer; transition:transform .12s, border-color .12s; }}
+.ai:hover {{ transform:translateY(-2px); }}
+.ai[aria-selected="true"] {{ border-color:var(--hot); box-shadow:0 0 0 2px color-mix(in srgb, var(--hot) 45%, transparent); }}
+.ai:focus-visible {{ outline:2px solid var(--hot); outline-offset:2px; }}
+.ai-ic {{ display:grid; place-items:center; width:38px; height:38px; border-radius:12px; background:var(--bg2); font-size:1.2rem; }}
+.ai[aria-selected="true"] .ai-ic {{ background:var(--hot); color:#111; }}
+.panel {{ background:var(--card); border:1px solid var(--line); border-radius:18px; padding:22px 22px 18px; }}
+.panel h3 {{ margin:0 0 4px; font-size:1.3rem; }}
+.panel .sub {{ margin:0 0 14px; }}
+.how {{ margin:0; padding:0; list-style:none; counter-reset:h; display:grid; gap:12px; }}
+.how li {{ counter-increment:h; display:block; line-height:1.9; padding-left:40px; position:relative; min-height:28px; }}
+.how li > .btn, .how li > .cmd {{ margin:2px 6px 2px 0; vertical-align:middle; }}
+.how li::before {{ content:counter(h); position:absolute; left:0; top:0; width:28px; height:28px; border-radius:50%; display:grid; place-items:center; background:var(--bg2); border:1px solid var(--line); font-weight:800; font-size:.9rem; }}
+.btn.big {{ cursor:pointer; font:inherit; font-weight:700; }}
+.btn.done {{ background:var(--ok); color:#fff; }}
+.tip {{ margin:16px 0 0; font-size:.88rem; color:var(--muted); }}
+.tip a {{ color:var(--hot); }}
 footer {{ border-top:1px solid var(--line); padding:28px 0 56px; color:var(--muted); font-size:.85rem; }}
 footer p {{ max-width:780px; }}
 .empty {{ display:none; color:var(--muted); padding:24px 0; }}
@@ -334,7 +432,7 @@ footer p {{ max-width:780px; }}
 <body>
 <nav><div class="wrap">
   <a class="logo" href="#top">Second Wind ⚡</a>
-  <div class="links"><a href="#how" class="hide-sm">How it works</a><a href="#cooler">The cooler</a><a href="#install">Install</a><a href="https://github.com/{REPO}">GitHub</a></div>
+  <div class="links"><a href="#how" class="hide-sm">How it works</a><a href="#cooler">The cooler</a><a href="#install">Get it</a><a href="https://github.com/{REPO}">GitHub</a></div>
 </div></nav>
 <main class="wrap" id="top">
 <header class="hero">
@@ -343,7 +441,7 @@ footer p {{ max-width:780px; }}
     <p class="lede">It cracks one open, says something dumb about the flavor, counts it, then snaps back into focus on your actual task. Just for fun.</p>
     <ul class="stats"><li>v{VERSION}</li><li>{len(brands)} brands</li><li>{n_flavors} flavors</li><li>Claude Code, ChatGPT, Codex, Grok, Gemini</li></ul>
     <div class="btns">
-      <a class="btn" href="#install">Get it for your AI</a>
+      <a class="btn" href="#install">Pick your AI</a>
       <a class="btn alt" href="https://github.com/{REPO}/archive/refs/heads/main.zip">Download .zip</a>
     </div>
   </div>
@@ -381,21 +479,7 @@ Next step: Replace Date.parse with the ISO helper</pre>
   <p class="empty" id="empty">No can matches that. Make it up anyway: your AI will drink it.</p>
 </section>
 
-<section id="install">
-  <h2>Get it for your AI</h2>
-  <p class="sub">The Claude Code plugin is the full version. Everything else is a copy-paste prompt.</p>
-  <div class="cards">
-    <div class="card main"><h3>Claude Code</h3><p>A real plugin with the <code>/secondwind</code> command and a lifetime counter saved on your computer.</p>
-<pre>/plugin marketplace add {REPO}
-/plugin install second-wind@energizer</pre>
-      <button type="button" class="cmd copy pre" data-copy="/plugin marketplace add {REPO}&#10;/plugin install second-wind@energizer"><code>Copy both lines</code><span class="ic" aria-hidden="true">⧉</span></button></div>
-    <div class="card"><h3>ChatGPT</h3><p>Make a Custom GPT or paste it into Custom Instructions.</p><a class="go" href="{raw}/chatgpt.md">Get the ChatGPT prompt →</a></div>
-    <div class="card"><h3>Codex</h3><p>A drop-in <code>AGENTS.md</code>. Also works for Cursor, Aider and friends.</p><a class="go" href="{raw}/codex.md">Get the Codex setup →</a></div>
-    <div class="card"><h3>Grok</h3><p>Paste it into Grok's custom instructions.</p><a class="go" href="{raw}/grok.md">Get the Grok prompt →</a></div>
-    <div class="card"><h3>Gemini</h3><p>Make a Gem with it.</p><a class="go" href="{raw}/gemini.md">Get the Gemini prompt →</a></div>
-    <div class="card"><h3>Anything else</h3><p>Copilot, Claude.ai, Perplexity, local models.</p><a class="go" href="{raw}/any-ai.md">Get the universal prompt →</a></div>
-  </div>
-</section>
+{install_section()}
 </main>
 <footer><div class="wrap">
 <p>Second Wind is a fan-made joke. It is not affiliated with, endorsed by, or sponsored by any drink brand. Brand names belong to their owners and are used only to name the pretend drinks. The can art is hand-drawn fan art inspired by each brand's real cans, made without any official logo files or images. No AI was actually caffeinated. Please drink real energy drinks responsibly.</p>
@@ -404,10 +488,20 @@ Next step: Replace Date.parse with the ISO helper</pre>
 <script>
 (function () {{
   function copy(t, el) {{
-    var done = function () {{ el.classList.add('done'); var i = el.querySelector('.ic'); if (i) i.textContent = '✓'; setTimeout(function () {{ el.classList.remove('done'); if (i) i.textContent = '⧉'; }}, 1400); }};
+    var done = function () {{ el.classList.add('done'); var i = el.querySelector('.ic'), l = el.querySelector('.lbl'), lt = l && l.textContent; if (i) i.textContent = '✓'; if (l) l.textContent = 'Copied!'; setTimeout(function () {{ el.classList.remove('done'); if (i) i.textContent = '⧉'; if (l) l.textContent = lt; }}, 1600); }};
     if (navigator.clipboard && navigator.clipboard.writeText) {{ navigator.clipboard.writeText(t).then(done, function () {{}}); }}
     else {{ var a = document.createElement('textarea'); a.value = t; document.body.appendChild(a); a.select(); try {{ document.execCommand('copy'); done(); }} catch (e) {{}} a.remove(); }}
   }}
+  function choose(key, save) {{
+    var tab = document.getElementById('t-' + key); if (!tab) return;
+    document.querySelectorAll('.ai').forEach(function (t) {{ t.setAttribute('aria-selected', t === tab); }});
+    document.querySelectorAll('.panel').forEach(function (p) {{ p.hidden = p.id !== 'panel-' + key; }});
+    if (save) {{ try {{ localStorage.setItem('sw-ai', key); }} catch (e) {{}} if (history.replaceState) history.replaceState(null, '', '#get-' + key); }}
+  }}
+  var start = (location.hash.match(/^#get-(\\w+)/) || [])[1];
+  if (!start) {{ try {{ start = localStorage.getItem('sw-ai'); }} catch (e) {{}} }}
+  if (start) choose(start, false);
+  if (/^#get-/.test(location.hash)) document.getElementById('install').scrollIntoView();
   function pick(chip) {{
     var card = chip.closest('.can');
     card.querySelector('img').src = chip.dataset.src;
@@ -419,7 +513,9 @@ Next step: Replace Date.parse with the ISO helper</pre>
     var chip = e.target.closest('.chip');
     if (chip) {{ pick(chip); return; }}
     var c = e.target.closest('.copy');
-    if (c) copy(c.dataset.copy, c);
+    if (c) {{ var src = c.dataset.copyFrom ? document.getElementById(c.dataset.copyFrom).textContent : c.dataset.copy; copy(src, c); return; }}
+    var ai = e.target.closest('.ai');
+    if (ai) {{ choose(ai.dataset.ai, true); }}
   }});
   var q = document.getElementById('q'), cards = [].slice.call(document.querySelectorAll('.can')), n = document.getElementById('n'), empty = document.getElementById('empty');
   function filter() {{

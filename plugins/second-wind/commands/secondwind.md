@@ -4,7 +4,7 @@ argument-hint: "[brand] [flavor] | menu | stats"
 allowed-tools: Read(~/.second-wind/**), Write(~/.second-wind/**), Edit(~/.second-wind/**), Bash(mkdir -p ~/.second-wind)
 ---
 
-# Second Wind ⚡ v1.5.0
+# Second Wind ⚡ v1.6.0
 
 The user just handed you an energy drink. Arguments: `$ARGUMENTS`
 

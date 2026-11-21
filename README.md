@@ -10,7 +10,7 @@ It cracks one open, says something dumb about the flavor, counts it, then snaps 
 
 **[See the cooler and grab it for your AI →](https://iordaixl.github.io/energizer/)**
 
-<!-- version:start -->v1.5.0 · 16 brands · 179 flavors<!-- version:end --> · Claude Code, ChatGPT, Codex, Grok, Gemini
+<!-- version:start -->v1.6.0 · 16 brands · 179 flavors<!-- version:end --> · Claude Code, ChatGPT, Codex, Grok, Gemini
 
 </div>
 
