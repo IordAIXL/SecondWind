@@ -10,7 +10,7 @@ It cracks one open, says something dumb about the flavor, counts it, then snaps 
 
 **[See the cooler and grab it for your AI →](https://iordaixl.github.io/energizer/)**
 
-<!-- version:start -->v1.6.0 · 16 brands · 179 flavors<!-- version:end --> · Claude Code, ChatGPT, Codex, Grok, Gemini
+<!-- version:start -->v1.7.0 · 16 brands · 179 flavors<!-- version:end --> · Claude Code, ChatGPT, Codex, Grok, Gemini
 
 </div>
 
@@ -44,6 +44,16 @@ Then it does that next step, short and focused.
 ```
 
 Your lifetime counter is saved at `~/.second-wind/stats.json`.
+
+### Browser button (Chrome, Edge, Firefox)
+
+A can button that sits right above the chat box on ChatGPT, Claude, Gemini, Grok and more. Click it, pick a drink, and it goes into the chat. No prompt setup needed.
+
+1. Download [second-wind-extension.zip](docs/downloads/second-wind-extension.zip) and unzip it.
+2. Open `chrome://extensions` (or `edge://extensions`) and turn on **Developer mode**.
+3. Click **Load unpacked** and pick the unzipped `second-wind` folder.
+
+Firefox: `about:debugging` → This Firefox → Load Temporary Add-on → pick `manifest.json`. Phone apps can't add buttons, so use the prompts there. More in [extension/README.md](extension/README.md).
 
 ### Other AIs
 

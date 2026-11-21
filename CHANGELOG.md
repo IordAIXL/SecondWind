@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.7.0 (2026-11-21)
+
+- New browser button (a Chrome, Edge and Firefox extension in `extension/`). It puts a can button right above the chat box on ChatGPT, Claude, Gemini, Grok, Copilot, Perplexity, DeepSeek, Mistral, Meta AI, Poe and Google AI Studio.
+- Click the can to open a picker with every brand and flavor can. Pick one (or make up a flavor, or hit Surprise me) and a drink message with the "dialed in" block goes into the chat box. No prompt setup needed on the AI's side.
+- Optional "Send right away", a lifetime can counter, the button shows your last can, and "Hide here" for any site.
+- Download page: new "Browser button" tab in Pick your AI with a one-click download and install steps. The zip lives at `docs/downloads/second-wind-extension.zip`.
+- `tools/build.py` now also builds the extension and its zip.
+
 ## 1.6.0 (2026-11-21)
 
 - New "Pick your AI" chooser on the download page. Tap Claude Code, ChatGPT, Codex, Grok, Gemini or Other AI to see only the steps for that one.
