@@ -144,6 +144,8 @@ Second Wind is a fan-made joke. It is **not affiliated with, endorsed by, or spo
 
 If there is a problem, that means something went right, and the mission was a success. This was built as a joke (I literally laughed when I had the concept. Reach out and I'll update according to any requests. Life's short, be happy.
 
+Questions? Compliments? Want to collab? Shoot me an email- niordaixl@gmail.com
+
 The drinks are pretend. No AI was actually caffeinated. Please drink real energy drinks responsibly.
 
 ## License
