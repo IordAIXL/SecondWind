@@ -44,10 +44,10 @@ AI, ChatGPT, Claude, Copilot, energy drink, focus, productivity
 Productivity (or Entertainment)
 
 ## Privacy policy URL
-https://iordaixl.github.io/energizer/privacy.html
+https://iordaixl.github.io/SecondWind/privacy.html
 
 ## Website
-https://iordaixl.github.io/energizer/
+https://iordaixl.github.io/SecondWind/
 
 ## Screenshots (Desktop, 1920x1080)
 screenshot-1-pick.png, screenshot-2-dialed.png, screenshot-3-flavors.png, screenshot-4-usual.png

@@ -629,8 +629,8 @@ function Update-Float {
 }
 
 # ---------------------------------------------------------------- updates (from GitHub)
-$VersionUrl = 'https://raw.githubusercontent.com/IordAIXL/energizer/main/VERSION'
-$ZipUrl = 'https://github.com/IordAIXL/energizer/raw/main/docs/downloads/second-wind-desktop.zip'
+$VersionUrl = 'https://raw.githubusercontent.com/IordAIXL/SecondWind/main/VERSION'
+$ZipUrl = 'https://github.com/IordAIXL/SecondWind/raw/main/docs/downloads/second-wind-desktop.zip'
 $script:NewVersion = $null
 try { [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12 } catch { }
 

@@ -1,7 +1,7 @@
 // Checks GitHub twice a day for a newer Second Wind and flags it.
 // Unpacked extensions can't update themselves, so we tell people when (and how) to grab the new zip.
 var api = typeof browser !== "undefined" ? browser : chrome;
-var VERSION_URL = "https://raw.githubusercontent.com/IordAIXL/energizer/main/VERSION";
+var VERSION_URL = "https://raw.githubusercontent.com/IordAIXL/SecondWind/main/VERSION";
 
 function newer(a, b) { // is a newer than b?
   var x = String(a).trim().split("."), y = String(b).trim().split(".");
