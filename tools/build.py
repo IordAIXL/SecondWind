@@ -13,6 +13,7 @@ Run:  python3 tools/build.py
 import json
 import os
 import html
+import subprocess
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = json.load(open(os.path.join(ROOT, "data", "brands.json"), encoding="utf-8"))
@@ -377,8 +378,7 @@ def build_page():
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Second Wind</title>
 <meta name="description" content="Give your AI an energy drink. A just-for-fun Claude Code plugin plus prompts for ChatGPT, Codex, Grok, Gemini and more.">
-<meta property="og:title" content="Second Wind: give your AI an energy drink">
-<meta property="og:description" content="{len(brands)} brands, {n_flavors} flavors, one lifetime counter. Then your AI gets dialed in on the task.">
+{social_meta(SITE + "/", "Second Wind: give your AI an energy drink", f"Free download. {len(brands)} brands, {n_flavors} flavors. Hand ChatGPT, Claude, Gemini or Grok a pretend energy drink and it gets dialed in on your task.")}
 <link rel="icon" href="cans/redbull.svg">
 <style>
 :root {{ --bg:#0a0c11; --bg2:#10131a; --fg:#f4f5f7; --muted:#9aa3b2; --card:#141821; --line:#232937; --hot:#facc15; --hot2:#f43f5e; --ok:#22c55e; }}
@@ -495,8 +495,9 @@ footer p {{ max-width:780px; }}
     <p class="lede">It cracks one open, says something dumb about the flavor, counts it, then snaps back into focus on your actual task. Just for fun.</p>
     <ul class="stats"><li>v{VERSION}</li><li>{len(brands)} brands</li><li>{n_flavors} flavors</li><li>Claude Code, ChatGPT, Codex, Grok, Gemini</li></ul>
     <div class="btns">
-      <a class="btn" href="#install">Pick your AI</a>
-      <a class="btn alt" href="https://github.com/{REPO}/archive/refs/heads/main.zip">Download .zip</a>
+      <a class="btn" href="get/">⬇ Download free</a>
+      <a class="btn alt" href="#install">Pick your AI</a>
+      <a class="btn alt" href="{share_url()}" target="_blank" rel="noopener">Share on 𝕏</a>
     </div>
   </div>
   <div class="fan" aria-hidden="true">{hero}</div>
@@ -588,6 +589,157 @@ Next step: Replace Date.parse with the ISO helper</pre>
     open(os.path.join(ROOT, "docs", "index.html"), "w", encoding="utf-8").write(page)
 
 
+# ---------------------------------------------------------------- social card + /get landing page
+
+SITE = "https://iordaixl.github.io/energizer"
+
+
+def share_url():
+    import urllib.parse
+    text = "I just handed my AI an energy drink and it actually got back on task ⚡ Free:"
+    return "https://x.com/intent/post?" + urllib.parse.urlencode({"text": text, "url": SITE + "/get/"})
+
+
+def social_meta(url, title, desc):
+    t, d = html.escape(title), html.escape(desc)
+    img = SITE + "/og-card.png"
+    return f"""<link rel="canonical" href="{url}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Second Wind">
+<meta property="og:url" content="{url}">
+<meta property="og:title" content="{t}">
+<meta property="og:description" content="{d}">
+<meta property="og:image" content="{img}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="675">
+<meta property="og:image:alt" content="Energy drink cans next to the words: Give your AI an energy drink. Download free.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{t}">
+<meta name="twitter:description" content="{d}">
+<meta name="twitter:image" content="{img}">
+<meta name="twitter:image:alt" content="Energy drink cans next to the words: Give your AI an energy drink. Download free.">"""
+
+
+def build_card():
+    """docs/og-card.png: the big picture X and other sites show for a link (1200x675)."""
+    brands = DATA["brands"]
+    n_flavors = sum(len(b["flavors"]) for b in brands)
+    cans = "".join(f'<img src="cans/{i}.svg" class="c{n}">' for n, i in enumerate(["celsius", "monster", "redbull", "ghost", "alani"]))
+    card = f"""<!doctype html><html><head><meta charset="utf-8"><style>
+*{{box-sizing:border-box}}
+body{{margin:0;width:1200px;height:675px;overflow:hidden;font-family:"Segoe UI",system-ui,sans-serif;color:#f4f5f7;
+background:radial-gradient(900px 600px at 78% 40%,#3a1c74 0%,#141024 55%,#0a0c11 100%);position:relative}}
+.t{{position:absolute;left:72px;top:92px;width:600px}}
+.k{{display:inline-block;font-size:24px;font-weight:700;letter-spacing:.06em;color:#facc15;margin-bottom:18px}}
+h1{{font-size:84px;line-height:1;margin:0 0 26px;letter-spacing:-.03em;font-weight:800}}
+h1 span{{color:#facc15}}
+p{{font-size:28px;line-height:1.35;color:#c7cbe0;margin:0 0 40px}}
+.b{{display:inline-block;background:#facc15;color:#111;font-weight:800;font-size:34px;padding:20px 40px;border-radius:999px;box-shadow:0 12px 40px rgba(250,204,21,.35)}}
+.u{{position:absolute;left:72px;bottom:40px;font-size:22px;color:#8b93a7}}
+.fan{{position:absolute;right:40px;bottom:70px;width:500px;height:470px}}
+.fan img{{position:absolute;bottom:0;width:170px;filter:drop-shadow(0 24px 24px rgba(0,0,0,.5))}}
+.c0{{left:0;transform:rotate(-14deg) translateY(18px)}}
+.c1{{left:80px;transform:rotate(-6deg)}}
+.c2{{left:165px;transform:translateY(-24px);z-index:2}}
+.c3{{left:250px;transform:rotate(6deg)}}
+.c4{{left:330px;transform:rotate(14deg) translateY(18px)}}
+</style></head><body>
+<div class="t"><div class="k">⚡ SECOND WIND</div><h1>Give your AI an <span>energy drink.</span></h1>
+<p>{len(brands)} brands · {n_flavors} flavors. Works with ChatGPT, Claude, Gemini, Grok and more.</p>
+<div class="b">⬇ Download free</div></div>
+<div class="fan">{cans}</div>
+<div class="u">iordaixl.github.io/energizer</div>
+</body></html>"""
+    tmp = os.path.join(ROOT, "docs", "_card.html")
+    open(tmp, "w", encoding="utf-8").write(card)
+    try:
+        subprocess.run(["node", os.path.join(ROOT, "tools", "render_card.js"), tmp,
+                        os.path.join(ROOT, "docs", "og-card.png")], check=True)
+    finally:
+        os.remove(tmp)
+
+
+def build_get_page():
+    """docs/get/index.html: short link for posts. One big Download button that fits the visitor's setup."""
+    brands = DATA["brands"]
+    n_flavors = sum(len(b["flavors"]) for b in brands)
+    page = f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Get Second Wind</title>
+<meta name="description" content="Download Second Wind free: hand your AI a pretend energy drink and it gets dialed in.">
+{social_meta(SITE + "/get/", "Second Wind: give your AI an energy drink", f"Free download. {len(brands)} brands, {n_flavors} flavors. Hand ChatGPT, Claude, Gemini or Grok a pretend energy drink and it gets dialed in on your task.")}
+<link rel="icon" href="../cans/redbull.svg">
+<style>
+:root {{ --bg:#0a0c11; --fg:#f4f5f7; --muted:#9aa3b2; --card:#141821; --line:#232937; --hot:#facc15; }}
+@media (prefers-color-scheme: light) {{ :root {{ --bg:#f6f6f3; --fg:#12151c; --muted:#525b6b; --card:#ffffff; --line:#e2e4e9; --hot:#e0a800; }} }}
+* {{ box-sizing:border-box; }}
+body {{ margin:0; min-height:100vh; background:var(--bg); color:var(--fg); font:17px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; display:flex; align-items:center; justify-content:center; }}
+main {{ width:100%; max-width:560px; padding:40px 16px; text-align:center; }}
+.cans {{ height:150px; position:relative; margin:0 auto 18px; width:260px; }}
+.cans img {{ position:absolute; bottom:0; width:72px; filter:drop-shadow(0 12px 12px rgba(0,0,0,.35)); }}
+.cans .a {{ left:20px; transform:rotate(-12deg); }} .cans .b {{ left:94px; transform:translateY(-12px); z-index:2; }} .cans .c {{ left:168px; transform:rotate(12deg); }}
+h1 {{ font-size:clamp(2rem,8vw,2.8rem); line-height:1.05; letter-spacing:-.03em; margin:0 0 10px; }}
+h1 span {{ color:var(--hot); }}
+.lede {{ color:var(--muted); margin:0 0 28px; }}
+.go {{ display:block; width:100%; background:var(--hot); color:#111; font-weight:800; font-size:1.3rem; padding:18px 24px; border-radius:16px; text-decoration:none; box-shadow:0 10px 30px rgba(250,204,21,.25); }}
+.go:hover {{ filter:brightness(1.05); }}
+.for {{ color:var(--muted); font-size:.92rem; margin:10px 0 0; }}
+.steps {{ text-align:left; background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px 20px 16px 40px; margin:22px 0 0; }}
+.steps li {{ margin:4px 0; }}
+.other {{ margin:30px 0 0; text-align:left; }}
+.other h2 {{ font-size:.85rem; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin:0 0 8px; }}
+.other a {{ display:flex; justify-content:space-between; gap:12px; padding:12px 14px; border:1px solid var(--line); border-radius:12px; text-decoration:none; color:inherit; margin:0 0 8px; background:var(--card); }}
+.other a span {{ color:var(--muted); font-size:.9rem; }}
+.share {{ display:inline-block; margin:26px 0 0; color:var(--fg); border:1px solid var(--line); border-radius:999px; padding:9px 18px; text-decoration:none; font-weight:600; }}
+.foot {{ margin:20px 0 0; font-size:.85rem; color:var(--muted); }} .foot a {{ color:inherit; }}
+</style>
+</head>
+<body>
+<main>
+  <div class="cans" aria-hidden="true"><img class="a" src="../cans/celsius.svg" alt=""><img class="b" src="../cans/redbull.svg" alt=""><img class="c" src="../cans/monster.svg" alt=""></div>
+  <h1>Give your AI an <span>energy drink.</span></h1>
+  <p class="lede">It cracks one open, jokes about the flavor, then gets dialed in on your task. Free, just for fun.</p>
+  <a class="go" id="go" href="../downloads/second-wind-extension.zip" download>⬇ Download free</a>
+  <p class="for" id="for">Browser button for ChatGPT, Claude, Gemini, Grok and more. Chrome, Edge or Firefox.</p>
+  <ol class="steps" id="steps">
+    <li>Unzip the download.</li>
+    <li>Open <b>chrome://extensions</b> (or <b>edge://extensions</b>), turn on <b>Developer mode</b>.</li>
+    <li>Click <b>Load unpacked</b> and pick the folder with <b>manifest.json</b> inside.</li>
+  </ol>
+  <div class="other">
+    <h2>Other ways to get it</h2>
+    <a href="../#get-browser">Browser button <span>Chrome, Edge, Firefox</span></a>
+    <a href="../#get-claude">Claude Code plugin <span>one command</span></a>
+    <a href="../#get-chatgpt">ChatGPT, Gemini, Grok apps <span>copy one prompt, works on phones</span></a>
+    <a href="../#get-desktop">Desktop apps <span>Windows</span></a>
+  </div>
+  <a class="share" href="{html.escape(share_url())}" target="_blank" rel="noopener">Share on 𝕏</a>
+  <p class="foot">v{VERSION} · <a href="../">See all {len(brands)} brands and {n_flavors} flavors</a> · <a href="../privacy.html">Privacy</a></p>
+</main>
+<script>
+(function () {{
+  var ua = navigator.userAgent, go = document.getElementById('go'), f = document.getElementById('for'), steps = document.getElementById('steps');
+  var phone = /Android|iPhone|iPad|iPod|Mobile/i.test(ua);
+  var firefox = /Firefox\\//.test(ua);
+  var chromium = /Chrome\\/|Edg\\//.test(ua) && !/OPR\\//.test(ua);
+  var safari = /Safari\\//.test(ua) && !chromium && !firefox;
+  function to(href, label, note) {{ go.href = href; go.removeAttribute('download'); go.textContent = label; f.textContent = note; steps.hidden = true; }}
+  if (phone) to('../#get-chatgpt', '⚡ Get it for your AI app', 'On a phone? Copy one prompt into ChatGPT, Gemini, Grok or Claude. The browser button is for computers.');
+  else if (safari) to('../#install', '⚡ Pick your AI', 'Safari isn\\'t supported for the button yet. Pick your AI for the Claude Code plugin or a copy-paste prompt.');
+  else if (firefox) {{ f.textContent = 'Browser button for ChatGPT, Claude, Gemini, Grok and more. Firefox: see the full steps after downloading.'; steps.innerHTML = '<li>Unzip the download.</li><li>Open <b>about:debugging#/runtime/this-firefox</b>.</li><li>Click <b>Load Temporary Add-on</b> and pick <b>manifest.json</b>.</li>'; }}
+}})();
+</script>
+</body>
+</html>
+"""
+    d = os.path.join(ROOT, "docs", "get")
+    os.makedirs(d, exist_ok=True)
+    open(os.path.join(d, "index.html"), "w", encoding="utf-8").write(page)
+
+
 # ---------------------------------------------------------------- README (generated parts)
 
 def build_readme():
@@ -620,6 +772,8 @@ def main():
     build_command()
     build_prompts()
     build_page()
+    build_get_page()
+    build_card()
     build_readme()
     import build_extension
     build_extension.main()

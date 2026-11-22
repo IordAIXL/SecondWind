@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.1.0 (2026-11-22)
+
+- Share-ready links: posting the site on X (or anywhere) now shows a big picture card with the cans and "Download free".
+- New short link `/get/` with one big Download button that fits your setup (browser button on Chrome, Edge and Firefox; the copy-paste prompt on phones; "Pick your AI" on Safari).
+- "Download free" and "Share on X" buttons at the top of the main page.
+
 ## 3.0.0 (2026-11-21)
 
 A big release, so it gets a new major number.
