@@ -8,9 +8,9 @@ It cracks one open, says something dumb about the flavor, counts it, then snaps 
 
 <img src="docs/previews/cooler.png" alt="All the Second Wind cans" width="100%">
 
-**[See the cooler and grab it for your AI →](https://iordaixl.github.io/energizer/)**
+**[See the cooler and grab it for your AI →](https://iordaixl.github.io/SecondWind/)**
 
-<!-- version:start -->v3.1.0 · 16 brands · 179 flavors<!-- version:end --> · Claude Code, ChatGPT, Codex, Grok, Gemini
+<!-- version:start -->v3.1.1 · 16 brands · 179 flavors<!-- version:end --> · Claude Code, ChatGPT, Codex, Grok, Gemini
 
 </div>
 
@@ -41,7 +41,7 @@ Then it does that next step, short and focused.
 Type these into Claude Code (the terminal app), one at a time:
 
 ```
-/plugin marketplace add IordAIXL/energizer
+/plugin marketplace add IordAIXL/SecondWind
 /plugin install second-wind@energizer
 /reload-plugins
 /secondwind

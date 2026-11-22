@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.1.1 (2026-11-22)
+
+- The project is now called SecondWind on GitHub. All links point to the new home: https://iordaixl.github.io/SecondWind/ (short link: https://iordaixl.github.io/SecondWind/get/).
+- New Claude Code install: `/plugin marketplace add IordAIXL/SecondWind`. The plugin is still `second-wind@energizer`, so older installs keep updating.
+- Browser button and desktop helper now check the new address for updates. Older copies still find updates too, because GitHub forwards the old address.
+- The X link card shows the new address.
+
 ## 3.1.0 (2026-11-22)
 
 - Share-ready links: posting the site on X (or anywhere) now shows a big picture card with the cans and "Download free".

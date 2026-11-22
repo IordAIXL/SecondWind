@@ -18,7 +18,7 @@ import subprocess
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = json.load(open(os.path.join(ROOT, "data", "brands.json"), encoding="utf-8"))
 VERSION = open(os.path.join(ROOT, "VERSION"), encoding="utf-8").read().strip()
-REPO = "IordAIXL/energizer"
+REPO = "IordAIXL/SecondWind"
 
 # ---------------------------------------------------------------- can art
 
@@ -591,7 +591,7 @@ Next step: Replace Date.parse with the ISO helper</pre>
 
 # ---------------------------------------------------------------- social card + /get landing page
 
-SITE = "https://iordaixl.github.io/energizer"
+SITE = "https://iordaixl.github.io/SecondWind"
 
 
 def share_url():
@@ -648,7 +648,7 @@ p{{font-size:28px;line-height:1.35;color:#c7cbe0;margin:0 0 40px}}
 <p>{len(brands)} brands · {n_flavors} flavors. Works with ChatGPT, Claude, Gemini, Grok and more.</p>
 <div class="b">⬇ Download free</div></div>
 <div class="fan">{cans}</div>
-<div class="u">iordaixl.github.io/energizer</div>
+<div class="u">iordaixl.github.io/SecondWind</div>
 </body></html>"""
     tmp = os.path.join(ROOT, "docs", "_card.html")
     open(tmp, "w", encoding="utf-8").write(card)

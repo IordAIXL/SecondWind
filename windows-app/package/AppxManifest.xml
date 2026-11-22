@@ -7,7 +7,7 @@
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
   IgnorableNamespaces="uap desktop rescap">
 
-  <Identity Name="SecondWind.PLACEHOLDER" Publisher="CN=00000000-0000-0000-0000-000000000000" Version="3.1.0.0" ProcessorArchitecture="x64" />
+  <Identity Name="SecondWind.PLACEHOLDER" Publisher="CN=00000000-0000-0000-0000-000000000000" Version="3.1.1.0" ProcessorArchitecture="x64" />
 
   <Properties>
     <DisplayName>Second Wind</DisplayName>

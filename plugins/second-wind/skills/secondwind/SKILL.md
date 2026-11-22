@@ -5,7 +5,7 @@ argument-hint: "[brand] [flavor] | menu | stats"
 allowed-tools: Read, Write, Edit
 ---
 
-# Second Wind ⚡ v3.1.0
+# Second Wind ⚡ v3.1.1
 
 The user just handed you an energy drink. Arguments: `$ARGUMENTS`
 

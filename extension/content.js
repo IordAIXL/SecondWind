@@ -368,7 +368,7 @@
     panel.appendChild(header("<span>⚡</span> Second Wind"));
     panel.appendChild(el("div", "sub", "Hand your AI a drink. It gets dialed in."));
     if (state.update) {
-      panel.appendChild(el("div", "updbar", "✨ Second Wind v" + esc(state.update) + " is out. Click the Second Wind icon in your browser toolbar (puzzle piece) for the 3 quick steps, or <a href=\"https://github.com/IordAIXL/energizer/raw/main/docs/downloads/second-wind-extension.zip\" target=\"_blank\" rel=\"noopener\">download it now</a>."));
+      panel.appendChild(el("div", "updbar", "✨ Second Wind v" + esc(state.update) + " is out. Click the Second Wind icon in your browser toolbar (puzzle piece) for the 3 quick steps, or <a href=\"https://github.com/IordAIXL/SecondWind/raw/main/docs/downloads/second-wind-extension.zip\" target=\"_blank\" rel=\"noopener\">download it now</a>."));
     }
     var g = el("div", "grid");
     if (state.favs.length) {
